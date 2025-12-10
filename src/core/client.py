@@ -20,7 +20,7 @@ class Sender(Node):
         # Traffic Config
         self.rate = config['traffic']['rate_packets_per_sec']
         self.duration = config['traffic']['duration_sec']
-        self.receivers = [n for n in network_map if n.startswith('h_recv')]
+        self.receivers = [n for n in network_map if n.startswith('r')]
 
     def start_sending(self):
         self.sending = True

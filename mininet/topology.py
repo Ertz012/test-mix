@@ -27,23 +27,23 @@ class StratifiedTopo(Topo):
         
         # Create Hosts
         for i in range(1, num_senders + 1):
-            h = self.addHost(f'h_sender_{i}')
+            h = self.addHost(f's{i}')
             senders.append(h)
             
         for i in range(1, layer_size + 1):
-            h = self.addHost(f'h_entry_{i}')
+            h = self.addHost(f'e{i}')
             entries.append(h)
             
         for i in range(1, layer_size + 1):
-            h = self.addHost(f'h_inter_{i}')
+            h = self.addHost(f'i{i}')
             inters.append(h)
             
         for i in range(1, layer_size + 1):
-            h = self.addHost(f'h_exit_{i}')
+            h = self.addHost(f'x{i}')
             exits.append(h)
             
         for i in range(1, num_receivers + 1):
-            h = self.addHost(f'h_recv_{i}')
+            h = self.addHost(f'r{i}')
             receivers.append(h)
             
         # Create Links (Fully Connected between layers)

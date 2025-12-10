@@ -7,9 +7,9 @@ class Routing:
         self.nodes_per_layer = self.config['topology']['nodes_per_layer']
         
         # Categorize nodes
-        self.entries = [n for n in network_map if n.startswith('h_entry')]
-        self.intermediates = [n for n in network_map if n.startswith('h_inter')]
-        self.exits = [n for n in network_map if n.startswith('h_exit')]
+        self.entries = [n for n in network_map if n.startswith('e')]
+        self.intermediates = [n for n in network_map if n.startswith('i')]
+        self.exits = [n for n in network_map if n.startswith('x')]
         
         # Sort for deterministic testing if needed
         self.entries.sort()

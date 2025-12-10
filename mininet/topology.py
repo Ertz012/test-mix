@@ -1,8 +1,8 @@
 from mininet.topo import Topo
 from mininet.net import Mininet
-from mininet.node import CPULimitedHost
+from mininet.node import Host
 from mininet.link import TCLink
-from mininet.util import dumpNodeConnections
+from mininet.util import dumpNodeConnectionsit
 from mininet.log import setLogLevel, info
 from mininet.cli import CLI
 
@@ -70,7 +70,7 @@ class StratifiedTopo(Topo):
 
 def run_experiment():
     topo = StratifiedTopo()
-    net = Mininet(topo=topo, host=CPULimitedHost, link=TCLink)
+    net = Mininet(topo=topo, host=Host, link=TCLink)
     net.start()
     
     info("Dumping host connections\n")

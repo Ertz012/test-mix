@@ -4,6 +4,9 @@ import time
 import sys
 import os
 
+# Add current directory to path so we can import src modules
+sys.path.append(os.getcwd())
+
 from src.core.mix import MixNode
 from src.core.client import Sender, Receiver
 

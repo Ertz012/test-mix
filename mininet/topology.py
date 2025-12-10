@@ -6,6 +6,7 @@ from mininet.util import dumpNodeConnections
 from mininet.log import setLogLevel, info
 from mininet.cli import CLI
 
+import datetime
 import time
 import json
 import os
@@ -94,19 +95,34 @@ def run_experiment():
     # Create logs directory
     os.makedirs("logs", exist_ok=True)
     
+    # Generate Run ID
+    run_id = f"Testrun_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    run_dir = os.path.join("logs", run_id)
+    os.makedirs(run_dir, exist_ok=True)
+    info(f"Logging to {run_dir}\n")
+    
     # Start Agents
     info("Starting MixNet Agents...\n")
     
     # Define roles
     for host in net.hosts:
         role = "mix"
-        if "sender" in host.name:
+        if "s" in host.name and "sender" not in host.name: # Short names: s1, s2...
             role = "sender"
-        elif "recv" in host.name:
+        elif "r" in host.name and "recv" not in host.name: # Short names: r1...
             role = "receiver"
+        # Also handle original long names just in case? No, we switched.
+        # But wait, logic above: "s" in host.name is broad.
+        # host.name is "s1", "e1", "i1", "x1", "r1".
+        
+        if host.name.startswith('s'): role = 'sender'
+        elif host.name.startswith('r'): role = 'receiver'
+        else: role = 'mix'
         
         # Cmd
-        cmd = f"python3 src/run.py --role {role} --config config/config.json --hostname {host.name} --network-map network_map.json > logs/{host.name}.log 2>&1 &"
+        # Pass TESTRUN_ID as env var
+        # Redirect stdout/stderr to the run_dir
+        cmd = f"TESTRUN_ID={run_id} python3 src/run.py --role {role} --config config/config.json --hostname {host.name} --network-map network_map.json > {run_dir}/{host.name}.out 2>&1 &"
         host.cmd(cmd)
         
     info(f"Agents running. Traffic generation will be handled by config.\n")

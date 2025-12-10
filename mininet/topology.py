@@ -2,7 +2,7 @@ from mininet.topo import Topo
 from mininet.net import Mininet
 from mininet.node import Host
 from mininet.link import TCLink
-from mininet.util import dumpNodeConnectionsit
+from mininet.util import dumpNodeConnections
 from mininet.log import setLogLevel, info
 from mininet.cli import CLI
 

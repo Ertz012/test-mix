@@ -28,8 +28,11 @@ class MixNode(Node):
         with open(f"keys/{hostname}.pem", "wb") as f:
             f.write(self.public_key_pem)
         
+    def start(self):
+        super().start()
         # Start mixing loop
         threading.Thread(target=self._mixing_loop, daemon=True).start()
+        self.logger.log("Mixing loop started")
 
     def handle_packet(self, packet):
         self.logger.log_traffic("RECEIVED", packet)

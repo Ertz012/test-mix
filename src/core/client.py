@@ -1,12 +1,13 @@
 import time
 import threading
 import random
+import os
 from src.core.node import Node
 from src.modules.routing import Routing
 from src.core.packet import Packet
+from src.core.crypto import CryptoManager
 
 from src.modules.reliability import Reliability
-
 from src.modules.crypto import SURB
 
 class Sender(Node):
@@ -21,14 +22,38 @@ class Sender(Node):
         self.rate = config['traffic']['rate_packets_per_sec']
         self.duration = config['traffic']['duration_sec']
         self.receivers = [n for n in network_map if n.startswith('r')]
+        
+        # Crypto
+        self.crypto = CryptoManager()
 
     def start_sending(self):
         self.sending = True
         threading.Thread(target=self._sender_loop, daemon=True).start()
 
+    def _load_node_keys(self, nodes):
+        """Helper to load public keys for nodes in the route from disk."""
+        keys = {}
+        # Assuming keys are stored in 'keys/<hostname>.pem' by MixNodes
+        # This requires MixNodes to write them on startup.
+        # Check if keys dir exists
+        if not os.path.exists("keys"):
+            return {}
+            
+        for node in nodes:
+            try:
+                with open(f"keys/{node}.pem", "rb") as f:
+                    keys[node] = f.read()
+            except FileNotFoundError:
+                # In simulation, if key missing, maybe skip encryption or fail?
+                # For robustness, we might log warning.
+                pass
+        return keys
+
     def _sender_loop(self):
         start_time = time.time()
         self.logger.log("Starting traffic generation loop...")
+        
+        use_encryption = self.config.get('features', {}).get('layered_encryption', False)
         
         while self.sending and (time.time() - start_time < self.duration):
             receiver = random.choice(self.receivers)
@@ -37,30 +62,29 @@ class Sender(Node):
             packets_to_send = []
             
             # Anonymous Return Address (SURB)
+            # ... (omitted logic for brevity if unchanged, but need to keep it)
+            # To keep replacement clean, I'll copy the logic but respect the block limit.
+            # Wait, I am replacing the whole file content or block? The tool is replace_file_content.
+            # I must reproduce the logic correctly.
+            
             surb_data = None
             if self.config['features'].get('anonymous_return_addresses', False):
-                # Return Path: Entry -> Inter -> Exit -> Me
-                # Route from Receiver perspective
-                # Receiver -> [Entry, Inter, Exit, Me]
-                # get_path generates [Entry, Inter, Exit, Dst]
                 return_route = self.routing.get_path(receiver, self.hostname)
                 surb = SURB(self.hostname, return_route)
                 surb_data = surb.to_dict()
 
             if self.config['features'].get('parallel_paths', False):
-                # Parallel Paths
                 k = 2
                 paths = self.routing.get_disjoint_paths(self.hostname, receiver, k)
                 if not paths:
                     self.logger.log("No disjoint paths found", "WARNING")
                     paths = [self.routing.get_path(self.hostname, receiver)]
                 
-                # Create multiple packets with SAME ID
                 base_id = None
                 base_ts = time.time()
                 for route in paths:
                     pkt = Packet(payload, receiver, route)
-                    pkt.timestamp = base_ts # Sync timestamp
+                    pkt.timestamp = base_ts
                     if base_id is None:
                         base_id = pkt.packet_id
                     else:
@@ -71,7 +95,6 @@ class Sender(Node):
                         
                     packets_to_send.append(pkt)
             else:
-                # Single Path
                 route = self.routing.get_path(self.hostname, receiver)
                 packet = Packet(payload, receiver, route)
                 
@@ -80,21 +103,54 @@ class Sender(Node):
                     
                 packets_to_send.append(packet)
 
+            # Process Packets (Encryption & Sending)
             for packet in packets_to_send:
+                # Encryption Logic
+                final_packet = packet
+                if use_encryption:
+                    # We encrypt the serialized inner packet
+                    inner_bytes = packet.to_json().encode('utf-8')
+                    # Route for encryption: [Mix1, Mix2, ..., Receiver] or just Mixes?
+                    # The route in packet.route contains [Mix1, Mix2, Receiver] usually.
+                    # We need keys for all except maybe Receiver if we don't encrypt for it?
+                    # Usually Receiver also has a key.
+                    
+                    # Ensure we have keys
+                    route_nodes = packet.route
+                    # We filter out nodes that might not have keys (like client itself if in route?)
+                    # Usually route is strict.
+                    
+                    keys_map = self._load_node_keys(route_nodes)
+                    if len(keys_map) == len(route_nodes):
+                        try:
+                            onion_blob = self.crypto.create_onion_packet(
+                                route_nodes, 
+                                packet.destination, 
+                                inner_bytes, 
+                                keys_map
+                            )
+                            # Create outer packet
+                            # Route strictly needs to point to first hop
+                            first_hop = packet.route[0]
+                            final_packet = Packet(onion_blob, packet.destination, route=[first_hop], type="ONION")
+                            # Preserve ID? No, outer packet ID is different usually.
+                            # But for tracking? We track 'packet' (inner).
+                            # The network sees final_packet.
+                            
+                        except Exception as e:
+                            self.logger.log(f"Encryption failed: {e}. Sending PLAIN.", "ERROR")
+                    else:
+                        self.logger.log("Missing keys for onion routing. Sending PLAIN.", "WARNING")
+
                 # Track for retransmission (if enabled)
-                # Note: If parallel, tracking same ID multiple times? 
-                # Reliability module uses dict by ID. 
-                # If we track same ID twice, it just updates timestamp/entry.
-                # If ANY copy arrives and sends ACK, we stop retransmitting.
-                # This is desired behavior for redundancy.
-                self.reliability.track_packet(packet)
+                self.reliability.track_packet(packet) # Track the ORIGINAL packet (inner ID)
                 
-                # Send to first hop
-                first_hop = packet.route[0]
+                # Send
+                first_hop = final_packet.route[0]
                 if first_hop in self.network_map:
                     ip, port = self.network_map[first_hop]
-                    self.send_packet(packet, ip, port)
-                    self.logger.log_traffic("CREATED", packet)
+                    self.send_packet(final_packet, ip, port)
+                    self.logger.log_traffic("CREATED", final_packet)
                 else:
                     self.logger.log(f"First hop {first_hop} unknown", "ERROR")
 
@@ -117,10 +173,39 @@ class Receiver(Node):
         super().__init__(hostname, port, config)
         self.network_map = network_map
         self.routing = Routing(config, network_map) # Receiver needs routing for ACKs
+        
+        # Crypto
+        self.crypto = CryptoManager()
+        # Generate keys just like MixNode to receive encrypted stuff?
+        # Actually Receiver is the last hop.
+        # If Sender included Receiver in onion layers, Receiver needs to decrypt.
+        self.public_key_pem = self.crypto.generate_key_pair()
+        # Write key to disk
+        if not os.path.exists("keys"):
+            os.makedirs("keys")
+        with open(f"keys/{hostname}.pem", "wb") as f:
+            f.write(self.public_key_pem)
 
     def handle_packet(self, packet):
         self.logger.log_traffic("RECEIVED", packet)
         
+        # Handle Encrypted Packet
+        if packet.type == "ONION":
+            try:
+                # Decrypt the last layer
+                # For the last hop, 'next_hop' might be irrelevant or self.
+                _, inner_content = self.crypto.decrypt_onion_layer(packet.payload)
+                
+                # The inner content is the JSON of the original packet
+                if isinstance(inner_content, bytes):
+                    inner_content = inner_content.decode('utf-8')
+                
+                packet = Packet.from_json(inner_content)
+                self.logger.log(f"Decrypted onion packet. Inner ID: {packet.packet_id}")
+            except Exception as e:
+                self.logger.log(f"Failed to decrypt packet at receiver: {e}", "ERROR")
+                return
+
         # Calculate latency
         latency = time.time() - packet.timestamp
         self.logger.log(f"Received packet {packet.packet_id}. Latency: {latency:.4f}s")

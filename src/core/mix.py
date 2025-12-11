@@ -1,7 +1,10 @@
-import time
+import hashlib
+import os
 import threading
+import time
 import random
 from src.core.node import Node
+from src.core.crypto import CryptoManager
 
 class MixNode(Node):
     def __init__(self, hostname, port, config, network_map):
@@ -14,21 +17,43 @@ class MixNode(Node):
         self.pool_size = config['mix_settings']['pool_size']
         self.timeout = config['mix_settings']['timeout']
         
+        # Crypto & Security
+        self.crypto = CryptoManager()
+        self.public_key_pem = self.crypto.generate_key_pair()
+        self.replay_cache = set()
+
+        # Save Public Key
+        if not os.path.exists("keys"):
+            os.makedirs("keys")
+        with open(f"keys/{hostname}.pem", "wb") as f:
+            f.write(self.public_key_pem)
+        
         # Start mixing loop
         threading.Thread(target=self._mixing_loop, daemon=True).start()
 
     def handle_packet(self, packet):
         self.logger.log_traffic("RECEIVED", packet)
         
-        # In a real mix, we decrypt a layer here.
-        # onion_peel = packet.decrypt(...)
-        # next_hop = onion_peel.next_hop
+        # Replay Protection
+        packet_hash = hashlib.sha256(str(packet.packet_id).encode() + str(packet.payload).encode()).hexdigest()
+        if packet_hash in self.replay_cache:
+            self.logger.log(f"Replay detected for packet {packet.packet_id}. Dropping.", "WARNING")
+            return
+        self.replay_cache.add(packet_hash)
         
-        # For simplified Stratified Mix:
-        # Route is explicitly in packet.route list for simulation? 
-        # Or we determine next hop based on topology?
-        # Creating a specific "next_hop" extraction logic.
-        
+        # Decryption if Onion
+        if packet.type == "ONION":
+            try:
+                next_hop, inner_content = self.crypto.decrypt_onion_layer(packet.payload)
+                # Update packet for next hop
+                packet.payload = inner_content
+                # We need to store where to send this. 
+                # Since 'route' is hidden/empty in Onion packets, we store it temporarily.
+                packet.next_hop_temp = next_hop
+            except Exception as e:
+                self.logger.log(f"Decryption failed for packet {packet.packet_id}: {e}", "ERROR")
+                return
+
         with self.lock:
             self.pool.append(packet)
             self.logger.log(f"Packet added to pool. Size: {len(self.pool)}")
@@ -57,25 +82,39 @@ class MixNode(Node):
             self.logger.log(f"Simulating packet loss for {packet.packet_id}", "INFO")
             return
 
-        # Determine next hop
-        # Assuming packet.route contains [node_name_1, node_name_2, ...]
-        # And we are node_name_X. Next is X+1.
-        
-        if not packet.route:
-            self.logger.log("Packet has no route!", "ERROR")
-            return
+        next_hop_name = None
 
-        try:
-            current_index = packet.route.index(self.hostname)
-            if current_index < len(packet.route) - 1:
-                next_hop_name = packet.route[current_index + 1]
-                if next_hop_name in self.network_map:
-                    next_ip, next_port = self.network_map[next_hop_name]
-                    self.logger.log(f"Forwarding packet {packet.packet_id} to {next_hop_name}")
-                    self.send_packet(packet, next_ip, next_port)
-                else:
-                    self.logger.log(f"Next hop {next_hop_name} not in map", "ERROR")
+        if packet.type == "ONION":
+            if hasattr(packet, 'next_hop_temp'):
+                next_hop_name = packet.next_hop_temp
             else:
-                self.logger.log("Packet reached end of route at mix? Should be Receiver.", "WARNING")
-        except ValueError:
-             self.logger.log(f"Current node {self.hostname} not in packet route {packet.route}", "ERROR")
+                self.logger.log(f"Onion packet {packet.packet_id} has no next hop info!", "ERROR")
+                return
+        else:
+            # LEGACY / PLAIN MODE
+            if not packet.route:
+                self.logger.log("Packet has no route!", "ERROR")
+                return
+
+            try:
+                current_index = packet.route.index(self.hostname)
+                if current_index < len(packet.route) - 1:
+                    next_hop_name = packet.route[current_index + 1]
+                else:
+                    self.logger.log("Packet reached end of route at mix? Should be Receiver.", "WARNING")
+                    return
+            except ValueError:
+                 self.logger.log(f"Current node {self.hostname} not in packet route {packet.route}", "ERROR")
+                 return
+
+        if next_hop_name:
+            if next_hop_name in self.network_map:
+                next_ip, next_port = self.network_map[next_hop_name]
+                self.logger.log(f"Forwarding packet {packet.packet_id} to {next_hop_name}")
+                self.send_packet(packet, next_ip, next_port)
+            else:
+                # Is it the final destination?
+                # In Onion routing, the last mix might see "Receiver" as next hop.
+                self.logger.log(f"Next hop {next_hop_name} not in map. Assuming final destination or unknown.", "WARNING")
+                # If we had a mechanism to send to Client/Receiver directly, we would do it here.
+                # For now, let's just log.

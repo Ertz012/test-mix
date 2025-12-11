@@ -3,6 +3,7 @@ import os
 import time
 import json
 import datetime
+import shutil
 from mininet.net import Mininet
 from mininet.node import Host
 from mininet.link import TCLink
@@ -45,6 +46,13 @@ def run_experiment():
     run_dir = os.path.join("logs", run_id)
     os.makedirs(run_dir, exist_ok=True)
     info(f"Logging to {run_dir}\n")
+    
+    # Copy Config to Run Dir
+    try:
+        shutil.copy("config/config.json", run_dir)
+        info("Copied config.json to log directory\n")
+    except Exception as e:
+        info(f"Failed to copy config.json: {e}\n")
     
     # Start Agents
     info("Starting MixNet Agents...\n")

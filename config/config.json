@@ -24,7 +24,7 @@
         "layered_encryption": true
     },
     "traffic": {
-        "rate_packets_per_sec": 1.0,
+        "rate_packets_per_sec": 5.0,
         "duration_sec": 30,
         "mode": "random", 
         "precalc_file": "traffic_data.bin"

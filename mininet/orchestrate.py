@@ -53,6 +53,14 @@ def run_experiment():
         info("Copied config.json to log directory\n")
     except Exception as e:
         info(f"Failed to copy config.json: {e}\n")
+
+    # Copy Traffic Data (if exists)
+    if os.path.exists("traffic_data.bin"):
+        try:
+            shutil.copy("traffic_data.bin", run_dir)
+            info("Copied traffic_data.bin to log directory\n")
+        except Exception as e:
+            info(f"Failed to copy traffic_data.bin: {e}\n")
     
     # Start Agents
     info("Starting MixNet Agents...\n")

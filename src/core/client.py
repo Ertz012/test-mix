@@ -49,10 +49,64 @@ class Sender(Node):
                 pass
         return keys
 
+    
+    import pickle # Need to import pickle inside or at top level. Let's rely on top level import if possible, but I need to add it.
+    
     def _sender_loop(self):
         start_time = time.time()
         self.logger.log("Starting traffic generation loop...")
         
+        mode = self.config.get('traffic', {}).get('mode', 'random')
+        precalc_file = self.config.get('traffic', {}).get('precalc_file', 'traffic_data.bin')
+        
+        if mode == 'precalculated':
+            self.logger.log(f"Running in PRE-CALCULATED mode. Loading from {precalc_file}")
+            # Load traffic
+            try:
+                import pickle
+                with open(precalc_file, 'rb') as f:
+                    all_traffic = pickle.load(f)
+                    
+                my_packets = all_traffic.get(self.hostname, [])
+                self.logger.log(f"Loaded {len(my_packets)} packets for {self.hostname}")
+                
+                # Sort by timestamp just in case
+                my_packets.sort(key=lambda p: p.timestamp)
+                
+                for packet in my_packets:
+                    if not self.sending: break
+                    
+                    # Timing Control
+                    # packet.timestamp is strict relative time (0.0s, 0.5s...)
+                    target_time = start_time + packet.timestamp
+                    current_time = time.time()
+                    sleep_time = target_time - current_time
+                    
+                    if sleep_time > 0:
+                        time.sleep(sleep_time)
+                    else:
+                        # Falling behind
+                        pass
+                        
+                    # Send
+                    # Packet is already fully formed (and encrypted if generated so)
+                    first_hop = packet.route[0]
+                    if first_hop in self.network_map:
+                        ip, port = self.network_map[first_hop]
+                        self.send_packet(packet, ip, port)
+                        self.logger.log_traffic("SENT_PRECALC", packet)
+                    else:
+                        self.logger.log(f"First hop {first_hop} unknown", "ERROR")
+                        
+            except FileNotFoundError:
+                self.logger.log(f"Traffic file {precalc_file} not found. Aborting.", "ERROR")
+            except Exception as e:
+                 self.logger.log(f"Error in precalc playback: {e}", "ERROR")
+                 
+            self.logger.log("Pre-calculated traffic finished.")
+            return
+
+        # RANDOM MODE (Legacy/Default)
         use_encryption = self.config.get('features', {}).get('layered_encryption', False)
         
         while self.sending and (time.time() - start_time < self.duration):

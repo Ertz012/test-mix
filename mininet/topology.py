@@ -12,10 +12,6 @@ import json
 import os
 
 
-
-def run_experiment():
- 
-
 # I will replace the build() method entirely to use a single switch.
 class SingleSwitchTopo(Topo):
     "Single Switch Topology for MixNet Overlay"

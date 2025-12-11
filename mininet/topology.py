@@ -11,68 +11,46 @@ import time
 import json
 import os
 
-class StratifiedTopo(Topo):
-    "Stratified MixNet Topology"
-    
+
+
+def run_experiment():
+ 
+
+# I will replace the build() method entirely to use a single switch.
+class SingleSwitchTopo(Topo):
+    "Single Switch Topology for MixNet Overlay"
     def build(self):
-        # Config
+        switch = self.addSwitch('s1')
+        
+        # Config (Re-used)
         num_senders = 3
         num_receivers = 3
         layer_size = 12
         
-        senders = []
-        entries = []
-        inters = []
-        exits = []
-        receivers = []
+        # Hosts
+        host_idx = 1
         
-        # Create Hosts
-        for i in range(1, num_senders + 1):
-            h = self.addHost(f's{i}')
-            senders.append(h)
-            
-        for i in range(1, layer_size + 1):
-            h = self.addHost(f'e{i}')
-            entries.append(h)
-            
-        for i in range(1, layer_size + 1):
-            h = self.addHost(f'i{i}')
-            inters.append(h)
-            
-        for i in range(1, layer_size + 1):
-            h = self.addHost(f'x{i}')
-            exits.append(h)
-            
-        for i in range(1, num_receivers + 1):
-            h = self.addHost(f'r{i}')
-            receivers.append(h)
-            
-        # Create Links (Fully Connected between layers)
-        
-        # Sender -> Entry
-        for s in senders:
-            for e in entries:
-                self.addLink(s, e)
+        # Helper to add
+        def add_mix_node(prefix, count):
+            nonlocal host_idx
+            for i in range(1, count + 1):
+                h = self.addHost(f'{prefix}{i}', ip=f'10.0.0.{host_idx}/24')
+                self.addLink(h, switch)
+                host_idx += 1
                 
-        # Entry -> Inter
-        for e in entries:
-            for i in inters:
-                self.addLink(e, i)
-                
-        # Inter -> Exit
-        for i in inters:
-            for x in exits:
-                self.addLink(i, x)
-                
-        # Exit -> Receiver
-        for x in exits:
-            for r in receivers:
-                self.addLink(x, r)
+        add_mix_node('s', num_senders)
+        add_mix_node('e', layer_size)
+        add_mix_node('i', layer_size)
+        add_mix_node('x', layer_size)
+        add_mix_node('r', num_receivers)
 
 def run_experiment():
-    topo = StratifiedTopo()
+    topo = SingleSwitchTopo()
     net = Mininet(topo=topo, host=Host, link=TCLink)
     net.start()
+    
+    # net.staticArp() # Pre-populate ARP
+    # No, let's trust flooding for ARP or pingAll
     
     info("Dumping host connections\n")
     dumpNodeConnections(net.hosts)

@@ -1,0 +1,36 @@
+{
+    "topology": {
+        "layers": ["entry", "intermediate", "exit"],
+        "nodes_per_layer": 12,
+        "senders": 3,
+        "receivers": 3
+    },
+    "network": {
+        "base_port": 8000,
+        "host": "localhost"
+    },
+    "mix_settings": {
+        "strategy": "timed_pool",
+        "batch_size": 5,
+        "timeout": 2.0,
+        "pool_size": 10
+    },
+    "features": {
+        "dummy_traffic": false,
+        "retransmission": false,
+        "path_reestablishment": false,
+        "parallel_paths": false,
+        "anonymous_return_addresses": false,
+        "layered_encryption": true
+    },
+    "traffic": {
+        "rate_packets_per_sec": 1.0,
+        "duration_sec": 30,
+        "mode": "random", 
+        "precalc_file": "traffic_data.bin"
+    },
+    "logging": {
+        "level": "INFO",
+        "log_dir": "logs"
+    }
+}

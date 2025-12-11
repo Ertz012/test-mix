@@ -19,13 +19,27 @@ class MixNode(Node):
         
         # Crypto & Security
         self.crypto = CryptoManager()
-        self.public_key_pem = self.crypto.generate_key_pair()
-        self.replay_cache = set()
-
-        # Save Public Key
+        
+        # Check if keys exist
         if not os.path.exists("keys"):
             os.makedirs("keys")
-        with open(f"keys/{hostname}.pem", "wb") as f:
+            
+        priv_key_path = f"keys/{hostname}_private.pem"
+        pub_key_path = f"keys/{hostname}.pem"
+        
+        if os.path.exists(priv_key_path):
+            self.logger.log(f"Loading existing keys from {priv_key_path}")
+            self.crypto.load_private_key_from_file(priv_key_path)
+            self.public_key_pem = self.crypto.get_public_key_pem()
+        else:
+            self.logger.log(f"Generating new keys for {hostname}")
+            self.public_key_pem = self.crypto.generate_key_pair()
+            self.crypto.save_private_key_to_file(priv_key_path)
+            
+        self.replay_cache = set()
+
+        # Save Public Key (always overwrite/ensure existing)
+        with open(pub_key_path, "wb") as f:
             f.write(self.public_key_pem)
         
     def start(self):

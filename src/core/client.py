@@ -176,14 +176,25 @@ class Receiver(Node):
         
         # Crypto
         self.crypto = CryptoManager()
-        # Generate keys just like MixNode to receive encrypted stuff?
-        # Actually Receiver is the last hop.
-        # If Sender included Receiver in onion layers, Receiver needs to decrypt.
-        self.public_key_pem = self.crypto.generate_key_pair()
-        # Write key to disk
+        
+        # Check if keys exist
         if not os.path.exists("keys"):
             os.makedirs("keys")
-        with open(f"keys/{hostname}.pem", "wb") as f:
+            
+        priv_key_path = f"keys/{hostname}_private.pem"
+        pub_key_path = f"keys/{hostname}.pem"
+        
+        if os.path.exists(priv_key_path):
+            self.logger.log(f"Loading existing keys from {priv_key_path}")
+            self.crypto.load_private_key_from_file(priv_key_path)
+            self.public_key_pem = self.crypto.get_public_key_pem()
+        else:
+            self.logger.log(f"Generating new keys for {hostname}")
+            self.public_key_pem = self.crypto.generate_key_pair()
+            self.crypto.save_private_key_to_file(priv_key_path)
+            
+        # Write public key to disk
+        with open(pub_key_path, "wb") as f:
             f.write(self.public_key_pem)
 
     def handle_packet(self, packet):

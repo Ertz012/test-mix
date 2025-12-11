@@ -40,6 +40,25 @@ class CryptoManager:
         """Loads a public key from PEM data."""
         return serialization.load_pem_public_key(pem_data)
 
+    def save_private_key_to_file(self, path):
+        """Saves the private key to a file."""
+        if not self.private_key:
+            raise ValueError("No private key to save.")
+        
+        pem_data = self.private_key.private_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PrivateFormat.PKCS8,
+            encryption_algorithm=serialization.NoEncryption() # For simulation simplicity
+        )
+        with open(path, 'wb') as f:
+            f.write(pem_data)
+
+    def load_private_key_from_file(self, path):
+        """Loads the private key from a file."""
+        with open(path, 'rb') as f:
+            pem_data = f.read()
+            self.load_private_key(pem_data)
+
     def encrypt_onion_layer(self, content: bytes, next_hop_address: str, next_node_pub_key_pem: bytes) -> bytes:
         """
         Encrypts a layer for a specific mix node.

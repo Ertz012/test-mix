@@ -16,7 +16,7 @@ import os
 class SingleSwitchTopo(Topo):
     "Single Switch Topology for MixNet Overlay"
     def build(self):
-        switch = self.addSwitch('s1')
+        switch = self.addSwitch('sw1')
         
         # Config (Re-used)
         num_senders = 3

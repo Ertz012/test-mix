@@ -65,11 +65,12 @@ class Reliability:
             for pkt in to_resend:
                 # Path Re-establishment
                 if self.config['features'].get('path_reestablishment', False):
-                    # Destination is pkt.destination?
-                    # Packet object has .destination attribute
-                    new_route = self.sender.routing.get_path(self.sender.hostname, pkt.destination)
+                    # Smart Re-establishment: Avoid nodes from the failed path ("Ersatzmixe" behavior)
+                    failed_route_nodes = pkt.route[:-1] # Exclude destination
+                    
+                    new_route = self.sender.routing.get_path(self.sender.hostname, pkt.destination, exclude_nodes=failed_route_nodes)
                     pkt.route = new_route
-                    self.sender.logger.log(f"Re-established path for {pkt.packet_id}: {new_route}")
+                    self.sender.logger.log(f"Re-established path for {pkt.packet_id} (avoiding {failed_route_nodes}): {new_route}")
 
                 # Resend using sender's mechanism
                 # We need to find the first hop again? 

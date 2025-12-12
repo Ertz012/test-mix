@@ -80,7 +80,14 @@ def run_experiment():
     info(f"Agents running. Traffic generation will be handled by config.\n")
     
     # CLI for manual interaction
-    CLI(net)
+    # Wait for traffic duration
+    with open("config/config.json", "r") as f:
+        conf = json.load(f)
+    duration = conf.get('traffic', {}).get('duration_sec', 30)
+    info(f"Running experiment for {duration} seconds (plus 10s buffer)...\n")
+    time.sleep(duration + 10)
+    
+    # CLI(net)
     
     net.stop()
 

@@ -16,19 +16,30 @@ class Routing:
         self.intermediates.sort()
         self.exits.sort()
 
-    def get_path(self, src, dst):
+    def get_path(self, src, dst, exclude_nodes=None):
         """
         Generates a stratified path: Sender -> Entry -> Intermediate -> Exit -> Receiver
+        Optionally excludes specific nodes (e.g. for re-establishment around failures).
         """
+        if exclude_nodes is None:
+            exclude_nodes = []
+            
+        # Filter available nodes
+        avail_entries = [n for n in self.entries if n not in exclude_nodes]
+        avail_inters = [n for n in self.intermediates if n not in exclude_nodes]
+        avail_exits = [n for n in self.exits if n not in exclude_nodes]
+        
+        # Fallback if exclusion leads to empty layers
+        if not avail_entries: avail_entries = self.entries
+        if not avail_inters: avail_inters = self.intermediates
+        if not avail_exits: avail_exits = self.exits
+
         # Select one random node from each layer
-        entry_node = random.choice(self.entries)
-        inter_node = random.choice(self.intermediates)
-        exit_node = random.choice(self.exits)
+        entry_node = random.choice(avail_entries)
+        inter_node = random.choice(avail_inters)
+        exit_node = random.choice(avail_exits)
         
         # Full route: src (implicitly known) -> Entry -> Inter -> Exit -> dst
-        # The packet route field usually contains the full path or at least the hops.
-        # Let's include all Hops + Destination.
-        
         route = [entry_node, inter_node, exit_node, dst]
         return route
 

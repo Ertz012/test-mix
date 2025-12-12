@@ -1,0 +1,90 @@
+[
+    {
+        "name": "01_baseline_no_errors",
+        "description": "Baseline measurement of the mixnet without any simulated failures.",
+        "config_overrides": {
+            "features": {
+                "dummy_traffic": false,
+                "retransmission": false,
+                "path_reestablishment": false,
+                "parallel_paths": false,
+                "anonymous_return_addresses": false,
+                "layered_encryption": true
+            },
+            "traffic": {
+                "mode": "precalculated"
+            }
+        },
+        "error_injection": null
+    },
+    {
+        "name": "02_baseline_errors",
+        "description": "Baseline mixnet subjected to node failures (should demonstrate high loss).",
+        "config_overrides": {
+            "features": {
+                "dummy_traffic": false,
+                "retransmission": false,
+                "path_reestablishment": false,
+                "parallel_paths": false,
+                "anonymous_return_addresses": false,
+                "layered_encryption": true
+            },
+            "traffic": {
+                "mode": "precalculated"
+            }
+        },
+        "error_injection": {
+            "mode": "random_kill",
+            "count": 2,
+            "delay": 10
+        }
+    },
+    {
+        "name": "03_retransmission",
+        "description": "Testing Ref. 1: Retransmission enabled under failure.",
+        "config_overrides": {
+            "features": {
+                "retransmission": true,
+                "path_reestablishment": false,
+                "parallel_paths": false
+            }
+        },
+        "error_injection": {
+            "mode": "random_kill",
+            "count": 2,
+            "delay": 10
+        }
+    },
+    {
+        "name": "04_path_reestablishment",
+        "description": "Testing Ref. 2: Path Re-establishment (Substitute Mixes) enabled under failure.",
+        "config_overrides": {
+            "features": {
+                "retransmission": true,
+                "path_reestablishment": true,
+                "parallel_paths": false
+            }
+        },
+        "error_injection": {
+            "mode": "random_kill",
+            "count": 2,
+            "delay": 10
+        }
+    },
+    {
+        "name": "05_parallel_paths",
+        "description": "Testing Ref. 3: Parallel Paths (redundancy) enabled under failure.",
+        "config_overrides": {
+            "features": {
+                "retransmission": false,
+                "path_reestablishment": false,
+                "parallel_paths": true
+            }
+        },
+        "error_injection": {
+            "mode": "random_kill",
+            "count": 2,
+            "delay": 10
+        }
+    }
+]

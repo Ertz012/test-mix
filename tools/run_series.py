@@ -107,7 +107,11 @@ def main():
     if not os.path.exists(RESULTS_DIR):
         os.makedirs(RESULTS_DIR)
 
-    experiments = load_json(EXPERIMENTS_FILE)
+    parser = argparse.ArgumentParser(description="Run Experiment Series")
+    parser.add_argument("--experiments", default=EXPERIMENTS_FILE, help="Path to experiments JSON file")
+    args = parser.parse_args()
+
+    experiments = load_json(args.experiments)
     
     for exp in experiments:
         update_config(exp['config_overrides'])

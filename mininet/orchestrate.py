@@ -67,8 +67,10 @@ def run_experiment():
     
     for host in net.hosts:
         role = "mix"
-        if host.name.startswith('s'): role = 'sender'
-        elif host.name.startswith('r'): role = 'receiver'
+        if host.name.startswith('s'): role = 'sender' # Legacy
+        elif host.name.startswith('r'): role = 'receiver' # Legacy
+        elif host.name.startswith('c'): role = 'client'
+        elif host.name.startswith('p'): role = 'provider'
         else: role = 'mix'
         
         # Cmd

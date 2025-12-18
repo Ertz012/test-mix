@@ -14,12 +14,43 @@ def parse_logs(log_dir):
         mix_df: DataFrame with mix node operations (x*)
     """
     # --- End-to-End Traffic ---
+    # --- End-to-End Traffic ---
+    # Try to find Client logs (Loopix style)
+    client_files = glob.glob(os.path.join(log_dir, "c*_traffic.csv"))
+    
+    # Fallback to legacy Sender/Receiver logs
     sent_files = glob.glob(os.path.join(log_dir, "s*_traffic.csv"))
     recv_files = glob.glob(os.path.join(log_dir, "r*_traffic.csv"))
 
-    print(f"Found {len(sent_files)} sender logs and {len(recv_files)} receiver logs.")
+    print(f"Found {len(client_files)} client logs, {len(sent_files)} sender logs, {len(recv_files)} receiver logs.")
 
     sent_dfs = []
+    recv_dfs = []
+    
+    # Process Client Logs (Both Sent and Received)
+    for f in client_files:
+        try:
+            df = pd.read_csv(f)
+            # SENT events
+            sent_part = df[df['event_type'].isin(['SENT', 'SENT_PRECALC', 'CREATED'])] 
+            # Note: CREATED is usually the event for generating the packet. SENT might be lower level.
+            # In Client.py I logged "CREATED" for the inner packet and "SENT_PRECALC" for precalc.
+            # And send_packet logs? Node.send_packet usually logs something?
+            # Src/run.py logger checks.
+            # Let's assume CREATED is the start.
+            # But wait, if I use CREATED, I need to match IDs.
+            # If I look at Client.py, I explicitly log "CREATED" for generated traffic.
+            if not sent_part.empty:
+                sent_dfs.append(sent_part)
+                
+            # RECEIVED events
+            recv_part = df[df['event_type'] == 'RECEIVED']
+            if not recv_part.empty:
+                recv_dfs.append(recv_part)
+        except Exception as e:
+            print(f"Error reading {f}: {e}")
+
+    # Process Legacy Logs
     for f in sent_files:
         try:
             df = pd.read_csv(f)
@@ -28,7 +59,6 @@ def parse_logs(log_dir):
         except Exception as e:
             print(f"Error reading {f}: {e}")
 
-    recv_dfs = []
     for f in recv_files:
         try:
             df = pd.read_csv(f)

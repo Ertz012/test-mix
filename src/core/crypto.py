@@ -59,12 +59,12 @@ class CryptoManager:
             pem_data = f.read()
             self.load_private_key(pem_data)
 
-    def encrypt_onion_layer(self, content: bytes, next_hop_address: str, next_node_pub_key_pem: bytes) -> bytes:
+    def encrypt_onion_layer(self, content: bytes, next_hop_address: str, next_node_pub_key_pem: bytes, delay: float = 0.0) -> bytes:
         """
         Encrypts a layer for a specific mix node.
         Logic:
         1. Generate a symmetric key (Fernet).
-        2. Encrypt the content (next_hop + inner_packet) with the symmetric key.
+        2. Encrypt the content (next_hop + delay + inner_packet) with the symmetric key.
         3. Encrypt the symmetric key with the node's Public RSA Key.
         4. Return: EncryptedSymKey (fixed size) + EncryptedContent
         """
@@ -72,9 +72,10 @@ class CryptoManager:
         sym_key = Fernet.generate_key()
         f = Fernet(sym_key)
 
-        # 2. Payload Structure: JSON containing next hop and the inner encrypted blob
+        # 2. Payload Structure: JSON containing next hop, delay, and the inner encrypted blob
         payload = {
             "next_hop": next_hop_address, # "IP:Port" or "NodeName"
+            "delay": delay, # Delay in seconds to hold packet
             "content": base64.b64encode(content).decode('utf-8') # Inner onion
         }
         payload_bytes = json.dumps(payload).encode('utf-8')
@@ -92,8 +93,6 @@ class CryptoManager:
         )
 
         # 4. Combine (Length of RSA 2048 encrypted key is 256 bytes)
-        # We prepend the length of the encrypted sym key just to be safe, though it's constant for 2048 bit keys.
-        # Actually, let's just create a structured container
         layer_data = {
             "esk": base64.b64encode(encrypted_sym_key).decode('utf-8'),
             "ep": base64.b64encode(encrypted_payload).decode('utf-8')
@@ -103,7 +102,7 @@ class CryptoManager:
     def decrypt_onion_layer(self, packet_data: bytes):
         """
         Peels one layer of the onion.
-        Returns: (next_hop, inner_content)
+        Returns: (next_hop, delay, inner_content)
         """
         if not self.private_key:
             raise ValueError("Private key not set.")
@@ -129,36 +128,30 @@ class CryptoManager:
             payload = json.loads(payload_bytes.decode('utf-8'))
 
             next_hop = payload['next_hop']
+            delay = payload.get('delay', 0.0)
             inner_content = base64.b64decode(payload['content'])
 
-            return next_hop, inner_content
+            return next_hop, delay, inner_content
         except Exception as e:
             # Integrity check failed or decryption error
             raise ValueError(f"Decryption failed: {e}")
 
     @staticmethod
-    def create_onion_packet(path_nodes: list, destination_node: str, final_payload: bytes, keys_map: dict) -> bytes:
+    def create_onion_packet(path_nodes: list, destination_node: str, final_payload: bytes, keys_map: dict, delays: dict = None) -> bytes:
         """
         Constructs the full onion packet.
         path_nodes: List of node names/IDs in order [Mix1, Mix2, ...]
         destination_node: The final target ID.
         keys_map: Dict {node_name: public_key_pem}
+        delays: Dict {node_name: delay_seconds} (Optional)
         """
         crypto = CryptoManager() # Helper instance
-
-        # Start from the innermost layer (Destination)
-        # The payload for the final mix node is the actual message and the Final Destination
-        # Or does the Mixnet assume the last Mix delivers to the receiver directly?
-        # Let's assume the route list includes the destination as the last item?
-        # Standard: Client -> Mix1 -> Mix2 -> Mix3 -> Receiver
-        # Inner most layer is for Mix3. It should see "next_hop = Receiver" and "content = Message"
-
-        # Let's adjust inputs.
-        # path includes intermediate mixes. 
-        # We assume the last hop in route delivers to destination.
         
         current_blob = final_payload
         next_hop = destination_node
+        
+        if delays is None:
+            delays = {}
 
         # Iterate backwards through the path
         for node_name in reversed(path_nodes):
@@ -166,8 +159,10 @@ class CryptoManager:
                 raise ValueError(f"Missing public key for {node_name}")
             
             pub_key = keys_map[node_name]
-            # Encrypt current blob for this node, instructing it to send to 'next_hop'
-            current_blob = crypto.encrypt_onion_layer(current_blob, next_hop, pub_key)
+            delay = delays.get(node_name, 0.0)
+            
+            # Encrypt current blob for this node, instructing it to send to 'next_hop' after 'delay'
+            current_blob = crypto.encrypt_onion_layer(current_blob, next_hop, pub_key, delay)
             next_hop = node_name # The current node becomes the next hop for the previous one
 
         return current_blob

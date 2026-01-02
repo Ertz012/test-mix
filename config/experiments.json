@@ -9,7 +9,8 @@
                 "path_reestablishment": false,
                 "parallel_paths": false,
                 "anonymous_return_addresses": false,
-                "layered_encryption": true
+                "layered_encryption": true,
+                "mock_encryption": true
             },
             "traffic": {
                 "mode": "precalculated"
@@ -27,7 +28,8 @@
                 "path_reestablishment": false,
                 "parallel_paths": false,
                 "anonymous_return_addresses": false,
-                "layered_encryption": true
+                "layered_encryption": true,
+                "mock_encryption": true
             },
             "traffic": {
                 "mode": "precalculated"

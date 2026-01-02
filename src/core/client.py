@@ -28,7 +28,8 @@ class Client(Node):
         self.duration = self.traffic_config.get('duration_sec', 30)
         
         # Crypto
-        self.crypto = CryptoManager()
+        self.mock_crypto = config['features'].get('mock_encryption', False)
+        self.crypto = CryptoManager(mock_mode=self.mock_crypto)
         self._setup_keys()
         
         self.sending = False

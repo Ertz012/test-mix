@@ -20,7 +20,8 @@
         "path_reestablishment": false,
         "parallel_paths": false,
         "anonymous_return_addresses": false,
-        "layered_encryption": true
+        "layered_encryption": true,
+        "mock_encryption": true
     },
     "traffic": {
         "rate_packets_per_sec": 5.0,

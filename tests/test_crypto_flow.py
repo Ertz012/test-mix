@@ -24,7 +24,7 @@ class MockMix(MixNode):
         # Simulate handle_packet logic mainly for crypto
         if packet.type == "ONION":
             try:
-                next_hop, inner_content = self.crypto.decrypt_onion_layer(packet.payload)
+                next_hop, delay, inner_content = self.crypto.decrypt_onion_layer(packet.payload)
                 packet.payload = inner_content
                 packet.next_hop_temp = next_hop
                 return packet, next_hop
@@ -84,7 +84,7 @@ class TestCryptoFlow(unittest.TestCase):
 
         # 4. Receiver Processing
         print("Receiver receiving...")
-        next_hop, final_content = self.receiver_crypto.decrypt_onion_layer(packet.payload)
+        next_hop, delay, final_content = self.receiver_crypto.decrypt_onion_layer(packet.payload)
         
         # Interpret final content
         if isinstance(final_content, bytes):

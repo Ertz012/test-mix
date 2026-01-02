@@ -29,7 +29,8 @@ class MixNode(Node):
         self.timeout = config.get('mix_settings', {}).get('timeout', 1.0)
         
         # Crypto & Security
-        self.crypto = CryptoManager()
+        self.mock_crypto = config['features'].get('mock_encryption', False)
+        self.crypto = CryptoManager(mock_mode=self.mock_crypto)
         
         # Check if keys exist
         if not os.path.exists("keys"):

@@ -105,92 +105,67 @@ def parse_logs(log_dir):
 
     return traffic_df, mix_df
 
-def calculate_mix_metrics(mix_df):
+def calculate_global_metrics(traffic_df):
     """
-    Calculates residence time and anonymity set size (entropy) for mix nodes.
+    Calculates Global Shannon Entropy.
+    For each packet P (recv), we count how many other packets P' (sent) 
+    were active (overlap) during P's lifetime [t_sent_P, t_recv_P].
+    
+    H(P) = log2(N_overlap)
     """
-    if mix_df.empty:
+    if traffic_df.empty:
         return {}, pd.DataFrame()
 
-    # Separate SENT and RECEIVED events at mixers
-    # RECEIVED at mix = Ingress
-    # SENT at mix = Egress
-    # We allow tracking by packet_id assuming it doesn't change OR we track by correlation if needed.
-    # In this simulation, packet_id seems preserved.
+    received_df = traffic_df.dropna(subset=['t_received']).copy()
     
-    mix_in = mix_df[mix_df['event_type'] == 'RECEIVED'].rename(columns={'timestamp': 't_in'})
-    mix_out = mix_df[mix_df['event_type'] == 'SENT'].rename(columns={'timestamp': 't_out'})
-    
-    # Merge on packet_id AND mix_id to match specific visits
-    mix_events = pd.merge(mix_in[['packet_id', 'mix_id', 't_in']], 
-                          mix_out[['packet_id', 'mix_id', 't_out']], 
-                          on=['packet_id', 'mix_id'], 
-                          how='inner')
-    
-    mix_events['residence_time'] = mix_events['t_out'] - mix_events['t_in']
-    
-    # --- Entropy / Anonymity Set Calculation ---
-    # For each 'SENT' (egress) event from a mix, how many packets were currently in the pool?
-    # Pool = Packets satisfying: t_in < t_current_out AND t_out >= t_current_out
-    # (i.e., inside the mix at the moment of emission)
-    
-    # This calculation can be slow O(N^2) if not optimized. We'll do a per-mix-node sort.
-    anonymity_metrics = []
-    
-    for mix_id, group in mix_events.groupby('mix_id'):
-        # Sort events by time to simulate state
-        # Create a timeline of events: (time, type, packet_id)
-        # Type: +1 for IN, -1 for OUT (but we care about the moment BEFORE the OUT)
-        
-        # Simpler approach for moderate dataset:
-        # Iterate through each egress event, count ingress events < t_out and egress events > t_out
-        # wait, egress events > t_out means they are STILL in the mix.
-        # But we also need to exclude packets that ALREADY left.
-        # Packets in Mix = (All Ingress < t) - (All Egress < t)
-        
-        group = group.sort_values('t_out')
-        
-        # We can just iterate the sorted output and check the pool size
-        # Or simpler:
-        # For row i (egress at t_out_i):
-        #   count rows j where t_in_j < t_out_i AND t_out_j >= t_out_i
-        #   (t_out_j >= t_out_i includes the packet itself, so min size is 1)
-        
-        # Vectorized approach:
-        t_outs = group['t_out'].values
-        t_ins = group['t_in'].values
-        
-        # For each t_out, sum(1 if t_in < t_out and t_out_j >= t_out)
-        # Broadercasting:
-        # Mask: (t_ins[:, None] < t_outs) & (t_outs_all[:, None] >= t_outs) -- wait, no.
-        
-        # Let's iterate, 450 packets is small enough.
-        for idx, row in group.iterrows():
-            t_current = row['t_out']
-            # Pool size = count of packets that arrived before valid current outgoing time
-            # AND haven't left before current outgoing time.
-            pool_size = ((group['t_in'] < t_current) & (group['t_out'] >= t_current)).sum()
-            
-            entropy = np.log2(pool_size) if pool_size > 0 else 0
-            anonymity_metrics.append({
-                'mix_id': mix_id,
-                'packet_id': row['packet_id'],
-                't_out': row['t_out'],
-                'pool_size': pool_size,
-                'entropy': entropy
-            })
-            
+    if received_df.empty:
+        return {}, pd.DataFrame()
 
-    mix_stats_df = pd.DataFrame(anonymity_metrics)
+    sent_df = traffic_df[['packet_id', 't_sent', 't_received']].copy() # Includes all packets (even lost ones contributed to anonymity until lost?)
+    # Strictly speaking, only packets IN the network contribute to the crowd.
+    # Lost packets left the network at some point, but we don't know when.
+    # We will assume lost packets contribute until 'max latency' or just ignore them for overlap?
+    # Conservative: Only consider successfully received packets for the anonymity set.
+    # Aggressive: Consider all sent packets, assuming lost ones lived for a while.
+    # Let's stick to received packets for the "proven" anonymity set.
+    
+    # Vectorized overlap check is O(N^2), might be heavy for very large logs but fine for typical 10k experiments.
+    # Optimization: Sort by start time.
+    
+    t_starts = received_df['t_sent'].values
+    t_ends = received_df['t_received'].values
+    
+    # Broadcating approach:
+    # Overlap Matrix: Start_i <= End_j AND End_i >= Start_j
+    # Here we want to know for each packet i, how many j overlap.
+    # The set includes itself, so min 1.
+    
+    # Memory efficient implementation for larger N: Loop with numpy
+    entropy_values = []
+    pool_sizes = []
+    
+    for i in range(len(received_df)):
+        s_i = t_starts[i]
+        e_i = t_ends[i]
+        
+        # Count j where (s_j <= e_i) AND (e_j >= s_i)
+        # i.e., interval j started before i ended, and ended after i started.
+        overlaps = np.sum((t_starts <= e_i) & (t_ends >= s_i))
+        
+        pool_sizes.append(overlaps)
+        entropy_values.append(np.log2(overlaps))
+        
+    received_df['global_pool_size'] = pool_sizes
+    received_df['global_entropy'] = entropy_values
     
     metrics = {
-        'avg_residence_time': mix_events['residence_time'].mean(),
-        'max_residence_time': mix_events['residence_time'].max(),
-        'avg_pool_size': mix_stats_df['pool_size'].mean() if not mix_stats_df.empty else 0,
-        'avg_entropy': mix_stats_df['entropy'].mean() if not mix_stats_df.empty else 0 
+        'avg_global_entropy': np.mean(entropy_values),
+        'min_global_entropy': np.min(entropy_values),
+        'max_global_entropy': np.max(entropy_values),
+        'avg_global_pool_size': np.mean(pool_sizes)
     }
     
-    return metrics, mix_stats_df
+    return metrics, received_df
 
 def calculate_overhead(traffic_df, mix_df):
     """
@@ -273,12 +248,12 @@ def plot_latency_histogram(df, output_path):
     plt.savefig(output_path)
     plt.close()
 
-def plot_entropy_distribution(mix_stats_df, output_path):
-    if mix_stats_df.empty:
+def plot_entropy_distribution(entropy_series, output_path):
+    if entropy_series.empty:
         return
     plt.figure(figsize=(10, 6))
-    plt.hist(mix_stats_df['entropy'], bins=20, alpha=0.7, color='green', edgecolor='black')
-    plt.title('Mix Entropy (Anonymity) Distribution')
+    plt.hist(entropy_series, bins=20, alpha=0.7, color='purple', edgecolor='black')
+    plt.title('Global Entropy (Anonymity Set) Distribution')
     plt.xlabel('Entropy (bits)')
     plt.ylabel('Frequency')
     plt.grid(True, alpha=0.3)
@@ -328,7 +303,8 @@ def analyze_single_run(log_dir):
         return
 
     metrics = calculate_metrics(traffic_df)
-    mix_metrics, mix_stats_df = calculate_mix_metrics(mix_df)
+    global_metrics, entropy_df = calculate_global_metrics(traffic_df)
+    # mix_metrics, mix_stats_df = calculate_mix_metrics(mix_df) # REMOVED in favor of global
     overhead_ratio = calculate_overhead(traffic_df, mix_df)
     
     print("-" * 30)
@@ -344,8 +320,8 @@ def analyze_single_run(log_dir):
         plot_latency_histogram(received_df, os.path.join(output_dir, "latency_histogram.png"))
         plot_throughput(received_df, os.path.join(output_dir, "throughput_timeseries.png"))
         
-        if mix_stats_df is not None and not mix_stats_df.empty:
-            plot_entropy_distribution(mix_stats_df, os.path.join(output_dir, "entropy_distribution.png"))
+        if entropy_df is not None and not entropy_df.empty:
+            plot_entropy_distribution(entropy_df['global_entropy'], os.path.join(output_dir, "global_entropy_distribution.png"))
 
         print(f"Plots saved to {output_dir}")
         
@@ -360,10 +336,10 @@ def analyze_single_run(log_dir):
             f.write(f"Max Latency: {metrics['max_latency']:.4f} s\n")
             f.write(f"Min Latency: {metrics['min_latency']:.4f} s\n")
             f.write(f"Jitter (Std Dev): {metrics['jitter']:.4f} s\n")
-            if mix_stats_df is not None and not mix_stats_df.empty:
-                f.write(f"Avg Mix Residence Time: {mix_metrics['avg_residence_time']:.4f} s\n")
-                f.write(f"Avg Anonymity Set Size: {mix_metrics['avg_pool_size']:.2f} packets\n")
-                f.write(f"Avg Mix Entropy: {mix_metrics['avg_entropy']:.4f} bits\n")
+            if entropy_df is not None and not entropy_df.empty:
+                f.write(f"Avg Global Anonymity Set: {global_metrics['avg_global_pool_size']:.2f} packets\n")
+                f.write(f"Avg Global Entropy: {global_metrics['avg_global_entropy']:.4f} bits\n")
+                f.write(f"Max Global Entropy: {global_metrics['max_global_entropy']:.4f} bits\n")
 
     else:
         print("No packets received, cannot calculate latency or throughput.")

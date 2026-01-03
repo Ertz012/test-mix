@@ -41,6 +41,14 @@ def parse_logs(log_dir):
             # But wait, if I use CREATED, I need to match IDs.
             # If I look at Client.py, I explicitly log "CREATED" for generated traffic.
             if not sent_part.empty:
+                # If we have CREATED events, those represent the application-level messages (End-to-End).
+                # SENT events are link-layer onion packets with different IDs.
+                # We should ONLY use CREATED if available to correct loss rate.
+                if 'CREATED' in sent_part['event_type'].values:
+                    sent_part = sent_part[sent_part['event_type'] == 'CREATED']
+                
+                # Check for duplicates just in case
+                sent_part = sent_part.sort_values('timestamp').drop_duplicates(subset=['packet_id'], keep='first')
                 sent_dfs.append(sent_part)
                 
             # RECEIVED events
@@ -356,8 +364,10 @@ def main():
         return
 
     # Check if this is a single run (contains a csv file directly?) OR check directory name format?
-    # Heuristic: If it contains 's*_traffic.csv', it's a run.
-    is_single_run = len(glob.glob(os.path.join(target_path, "s*_traffic.csv"))) > 0
+    # Heuristic: If it contains 's*_traffic.csv' or 'c*_traffic.csv', it's a run.
+    has_legacy = len(glob.glob(os.path.join(target_path, "s*_traffic.csv"))) > 0
+    has_client = len(glob.glob(os.path.join(target_path, "c*_traffic.csv"))) > 0
+    is_single_run = has_legacy or has_client
     
     if is_single_run:
         analyze_single_run(target_path)

@@ -304,7 +304,7 @@ class Client(Node):
             self._send_onion_packet(payload, path, dest)
 
     def handle_packet(self, packet):
-        self.logger.log_traffic("RECEIVED", packet)
+        # self.logger.log_traffic("RECEIVED", packet) # Moved below to log decrypted ID
         
         if packet.type == "ONION":
             try:
@@ -315,6 +315,8 @@ class Client(Node):
             except Exception as e:
                 self.logger.log(f"Decrypt error: {e}", "ERROR")
                 return
+
+        self.logger.log_traffic("RECEIVED", packet) # Log the decrypted/final packet
 
         latency = time.time() - packet.timestamp
         self.logger.log(f"Received msg: {packet.payload[:20]}... Latency: {latency:.4f}s")

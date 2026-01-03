@@ -26,14 +26,14 @@ def load_network_map(path='network_map.json'):
 
 def load_node_keys(nodes):
     keys = {}
-    crypto = CryptoManager()
+    # If mock mode is likely used, keys might not exist or be needed in the same way, 
+    # but we load if available.
     for node in nodes:
         key_path = f"keys/{node}.pem"
         if os.path.exists(key_path):
             with open(key_path, 'rb') as f:
                 keys[node] = f.read()
-        else:
-            print(f"Warning: Key for {node} not found at {key_path}")
+    # Return empty dict if no keys found, which is fine for mock mode usually
     return keys
 
 def generate_traffic(config_path='config/config.json', output_file='traffic_data.bin'):
@@ -42,19 +42,25 @@ def generate_traffic(config_path='config/config.json', output_file='traffic_data
     
     # Setup Routing
     routing = Routing(config, network_map)
-    crypto = CryptoManager() # Helper
-    
     # Parameters
     rate = config['traffic']['rate_packets_per_sec']
     duration = config['traffic']['duration_sec']
-    senders = [n for n in network_map if n.startswith('s')]
-    receivers = [n for n in network_map if n.startswith('r')]
+    
+    # Identify senders/receivers (support both legacy s/r and Loopix c/c)
+    senders = [n for n in network_map if n.startswith('s') or n.startswith('c')]
+    receivers = [n for n in network_map if n.startswith('r') or n.startswith('c')]
+    
+    # Use mock encryption if configured
+    mock_mode = config['features'].get('mock_encryption', False)
+    crypto = CryptoManager(mock_mode=mock_mode)
+
     
     if not senders or not receivers:
         print("Error: No senders or receivers found.")
         return
 
-    print(f"Generating traffic for {len(senders)} senders over {duration} seconds at {rate} pkt/s...")
+    print(f"Generating traffic for {len(senders)} senders over {duration} seconds at {rate} pkt/s (MockMode={mock_mode})...")
+
     
     # Data Storage: {sender_name: [Packet, ...]}
     traffic_data = {s: [] for s in senders}

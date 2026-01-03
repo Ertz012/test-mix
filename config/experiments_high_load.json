@@ -1,0 +1,110 @@
+[
+    {
+        "name": "11_long_baseline_no_errors",
+        "description": "High Load Baseline: 120s duration, 0.1s interval.",
+        "config_overrides": {
+            "features": {
+                "dummy_traffic": false,
+                "retransmission": false,
+                "path_reestablishment": false,
+                "parallel_paths": false,
+                "mock_encryption": true
+            },
+            "traffic": {
+                "mode": "random",
+                "duration_sec": 120,
+                "interval_sec": 0.1
+            }
+        },
+        "error_injection": null
+    },
+    {
+        "name": "12_long_baseline_errors",
+        "description": "High Load with Failures.",
+        "config_overrides": {
+            "features": {
+                "dummy_traffic": false,
+                "retransmission": false,
+                "path_reestablishment": false,
+                "parallel_paths": false,
+                "mock_encryption": true
+            },
+            "traffic": {
+                "mode": "random",
+                "duration_sec": 120,
+                "interval_sec": 0.1
+            }
+        },
+        "error_injection": {
+            "mode": "random_kill",
+            "count": 2,
+            "delay": 30
+        }
+    },
+    {
+        "name": "13_long_retransmission",
+        "description": "High Load Retransmission.",
+        "config_overrides": {
+            "features": {
+                "retransmission": true,
+                "path_reestablishment": false,
+                "parallel_paths": false,
+                "mock_encryption": true
+            },
+            "traffic": {
+                "mode": "random",
+                "duration_sec": 120,
+                "interval_sec": 0.1
+            }
+        },
+        "error_injection": {
+            "mode": "random_kill",
+            "count": 2,
+            "delay": 30
+        }
+    },
+    {
+        "name": "14_long_path_reestablishment",
+        "description": "High Load Path Re-establishment.",
+        "config_overrides": {
+            "features": {
+                "retransmission": true,
+                "path_reestablishment": true,
+                "parallel_paths": false,
+                "mock_encryption": true
+            },
+            "traffic": {
+                "mode": "random",
+                "duration_sec": 120,
+                "interval_sec": 0.1
+            }
+        },
+        "error_injection": {
+            "mode": "random_kill",
+            "count": 2,
+            "delay": 30
+        }
+    },
+    {
+        "name": "15_long_parallel_paths",
+        "description": "High Load Parallel Paths.",
+        "config_overrides": {
+            "features": {
+                "retransmission": false,
+                "path_reestablishment": false,
+                "parallel_paths": true,
+                "mock_encryption": true
+            },
+            "traffic": {
+                "mode": "random",
+                "duration_sec": 120,
+                "interval_sec": 0.1
+            }
+        },
+        "error_injection": {
+            "mode": "random_kill",
+            "count": 2,
+            "delay": 30
+        }
+    }
+]

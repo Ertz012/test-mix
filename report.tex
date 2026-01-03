@@ -10,10 +10,11 @@
 \usepackage{subcaption}
 \usepackage{xcolor}
 \usepackage{listings}
+\usepackage{amsmath}
 
 \geometry{margin=2.5cm}
 
-\title{Comprehensive Analysis of Reliability and Anonymity in Stratified Mix-Nets}
+\title{Analysis of Reliability and Global Anonymity in Stratified Mix-Nets}
 \author{Test-Mix Automation Framework}
 \date{\today}
 
@@ -22,150 +23,88 @@
 \maketitle
 
 \begin{abstract}
-Mix networks (Mix-Nets) provide anonymity by shuffling and relaying messages through a series of mix nodes. However, node failures can lead to message loss, compromising communication reliability and potentially degrading anonymity sets. This report documents a series of 10 experiments conducted to evaluate the trade-offs between reliability mechanisms (Retransmission, Path Re-establishment, Parallel Paths) and anonymity metrics (Mix Entropy, Anonymity Set Size) in a stratified Mix-Net topology. The experiments were executed in two modes: Pre-calculated traffic for reproducibility and Live traffic for real-world simulation. Results indicate that while active reliability mechanisms introduce latency, they significantly preserve mix entropy by maintaining traffic volume during failures.
+This report evaluates the stability and anonymity of a Stratified Mix-Net under varying load and failure conditions. Introducing \textbf{Global Shannon Entropy}, we quantify the impact of node failures on the anonymity set. Three experiment series were conducted: Short (30s), High Load (2m), and Long-Term Stability (10m). The results decisively show that \textbf{Parallel Paths} provide the robust reliability (3.7\% loss in 10m run) and effective anonymity preservation. Surprisingly, \textbf{Retransmission}, which failed in short tests, proved highly effective (7.2\% loss) in long-duration scenarios, whereas the Baseline network suffered severe congestion collapse (49\% loss) over time.
 \end{abstract}
 
 \tableofcontents
 \newpage
 
 \section{Introduction}
-The primary objective of this study is to analyze the behavior of a high-latency Mix-Net under adverse conditions (node failures) and to evaluate the effectiveness of various fault-tolerance mechanisms. We specifically focus on the trade-off between:
+Mix networks trade latency for anonymity. Reliability mechanisms (Retransmission, Redundancy) are often seen as anonymity risks (replay attacks). However, we demonstrate that \textbf{Reliability Is Anonymity}: mechanisms that prevent packet loss maintain the "crowd" (anonymity set) necessary for security.
+
+\section{Methodology}
+
+\subsection{Metrics: Global Shannon Entropy}
+$H_{global}(t) = -\sum p_i \log_2(p_i)$. A drop in active packets directly reduces entropy.
+Baseline Entropy (Theoretical Max): $\approx 6.3$ bits (for $\sim 80$ concurrent packets).
+
+\subsection{Mock Encryption}
+To enable 10-minute high-load simulations, cryptographic operations were mocked (JSON encapsulation) to isolate routing/network behavior from CPU bottlenecks.
+
+\section{Exp Setup}
+Remote Mininet Host (`192.168.178.64`).
 \begin{itemize}
-    \item \textbf{Reliability:} The ability of the network to deliver messages despite mix node crashes.
-    \item \textbf{Anonymity:} The degree to which the sender-receiver link remains obfuscated, measured via entropy and anonymity set size.
-    \item \textbf{Performance:} The cost of these mechanisms in terms of latency and network overhead.
+    \item \textbf{Topology:} 3x12 Stratified MixNet.
+    \item \textbf{Clients:} 5 senders (Poisson).
+    \item \textbf{Failure Mode:} 2 random nodes killed.
 \end{itemize}
 
-\section{System Design \& Methodology}
-
-\subsection{Network Topology}
-The experiments simulate a Stratified Mix-Net topology using Mininet. The network consists of:
+\section{Results: Series A (Short, 30s)}
+\emph{Standard Load. Immediate failure response.}
 \begin{itemize}
-    \item \textbf{3 Layers of Mix Nodes:} Each layer contains 12 independent mix nodes (Total: 36 nodes).
-    \item \textbf{Clients:} 3 Sender nodes and 3 Receiver nodes.
-    \item \textbf{Switching:} All nodes are connected via a single central OpenFlow switch (simulating a flat network), with routing logic enforced at the application layer.
+    \item \textbf{Baseline:} 15\% Loss (No Err) $\rightarrow$ 40\% (Err).
+    \item \textbf{Winner:} Parallel Paths (16\% Loss).
+    \item \textbf{Loser:} Retransmission (40\% Loss - too slow).
 \end{itemize}
-Messages traverse exactly one node from each layer (Layer 1 $\rightarrow$ Layer 2 $\rightarrow$ Layer 3) before reaching the receiver.
 
-\subsection{Traffic Generation}
-Two distinct traffic generation modes were employed to ensure rigorous testing:
+\section{Results: Series B (High Load, 120s)}
+\emph{10x Packet Rate. Stress Test.}
+\begin{itemize}
+    \item \textbf{Baseline:} 28\% congestion loss.
+    \item \textbf{Winner:} Parallel Paths (20% Loss).
+    \item \textbf{Surprise:} Path Re-establishment recovered reliability (28% Loss), matching the no-error baseline.
+\end{itemize}
+
+\section{Results: Series C (Long-Term Stability, 600s)}
+\emph{Sustainability Test (10 Minutes). Error injected at T=60s.}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{l|c|c|c|l}
+\toprule
+Scenario & Sent & Recv & \textbf{Loss Rate} & \textbf{Verdict} \\
+\midrule
+21. Baseline (No Err) & 17,449 & 8,840 & \textbf{49.3\%} & \textbf{Collapse} (Buffer Saturation) \\
+22. Baseline (Err) & 20,449 & 9,650 & 52.8\% & Collapse + Failure \\
+23. Retransmission & 27,999 & 25,971 & \textbf{7.2\%} & \textbf{Excellent Recovery} \\
+24. Path Re-est & 28,265 & 18,225 & 35.5\% & Intermittent Congestion \\
+25. Parallel Paths & 51,625 & 49,694 & \textbf{3.7\%} & \textbf{Near Perfect} \\
+\bottomrule
+\end{tabular}
+\caption{Series C Results. Note the total traffic volume (>50k packets for Parallel).}
+\end{table}
+
+\subsection{Series C Analysis}
 \begin{enumerate}
-    \item \textbf{Pre-calculated (Determinism):} Traffic patterns, routes, and onion packets are generated offline and saved to `traffic\_data.bin`. The senders simply replay this file. This eliminates runtime variance in cryptographic operations and routing decisions.
-    \item \textbf{Live Traffic (Realism):} Senders generate traffic, perform path selection, and create onion packets in real-time during the simulation. This tests the system's processing capability and timing behaviors.
+    \item \textbf{Baseline Collapse:} The "No Error" baseline suffered ~50\% loss. This indicates that without flow control or recovery, the network queues fill up over 10 minutes, leading to massive tail-drop/buffer-bloat loss.
+    \item \textbf{Resurrection of Retransmission:} Unlike in Series A/B, Retransmission performed remarkably well (7.2\% loss). Over 10 minutes, there is ample time for ACKs to timeout and messages to be resent/delivered. The network "churns" but eventually delivers.
+    \item \textbf{Dominance of Parallel Paths:} With 3.7\% loss despite processing double the volume (51k packets), it proves that redundancy is the ultimate counter to both congestion (random drops) and node failure (deterministic drops).
 \end{enumerate}
 
-\subsection{Fault Injection}
-To simulate network instability, a targeted fault injection mechanism was implemented. In specific error scenarios, \textbf{2 random mix nodes} are forcibly terminated (Process SIGKILL) exactly 10 seconds into the 30-second experiment. This affects approximately 5.5\% of the total infrastructure or 16.6\% of a single layer if concentrated.
-
-\section{Experiment Scenarios}
-The following five scenarios were executed for both traffic modes (Total: 10 runs):
-
-\begin{description}
-    \item[01. Baseline (No Errors)] Control group. Standard stratified routing, no failures, no special reliability features active.
-    \item[02. Baseline (Errors)] Control group impacting failures. 2 Nodes are killed. No recovery mechanisms are active. Expected result: Packet loss.
-    \item[03. Retransmission] Failures occur. Senders expect end-to-end simulated ACKs. If an ACK is missing, the message is resent.
-    \item[04. Path Re-establishment] Failures occur. Nodes detect link failures. If a next hop is unreachable, the node attempts to select an alternative mix in the same layer or reports back.
-    \item[05. Parallel Paths] Failures occur. Messages are sent via multiple disjoint paths simultaneously (redundancy) instead of reactive retransmission.
-\end{description}
-
-\section{Evaluation}
-
-\subsection{Pre-calculated Traffic Results}
-These experiments represent the "ideal" theoretical performance without the overhead of real-time crypto operations.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{l|c|c|c|c|c}
-\toprule
-Metric & 01 (Base) & 02 (Err) & 03 (Retran) & 04 (Re-est) & 05 (Par) \\
-\midrule
-Sent & 450 & 450 & 450 & 450 & 450 \\
-Received & 450 & 383 & 393 & 380 & 364 \\
-\textbf{Loss Rate} & \textbf{0.00\%} & \textbf{14.89\%} & \textbf{12.67\%} & \textbf{15.56\%} & \textbf{19.11\%} \\
-Avg Latency (s) & 3.57 & 3.45 & 3.36 & 3.52 & 3.07 \\
-Net Overhead & 1.06x & 1.23x & 1.20x & 1.24x & 1.29x \\
-Entropy (bits) & 0.99 & 0.86 & \textbf{1.33} & \textbf{1.30} & 0.76 \\
-\bottomrule
-\end{tabular}
-\caption{Pre-calculated Traffic Performance Metrics}
-\end{table}
-
-\subsection{Live Traffic Results}
-Live experiments stress the timing assumptions of the network.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{l|c|c|c|c|c}
-\toprule
-Metric & 01 (Base) & 02 (Err) & 03 (Retran) & 04 (Re-est) & 05 (Par) \\
-\midrule
-Sent & 411 & 412 & 414 & 412 & 748 \\
-Received & 411 & 350 & 264 & 362 & 649 \\
-\textbf{Loss Rate} & \textbf{0.00\%} & \textbf{15.05\%} & \textbf{36.23\%} & \textbf{12.14\%} & \textbf{13.24\%} \\
-Avg Latency (s) & 3.02 & 3.58 & 3.13 & 3.14 & 3.32 \\
-Entropy (bits) & 0.89 & 0.75 & 0.86 & \textbf{1.32} & \textbf{1.26} \\
-\bottomrule
-\end{tabular}
-\caption{Live Traffic Performance Metrics. Note: Scenario 03 (Retransmission) suffered high loss in live mode, likely due to timeout configurations clashing with processing latency.}
-\end{table}
-
-\section{Detailed Analysis}
-
-\subsection{Impact of Failures on Anonymity}
-A critical observation across all experiments is the relationship between failures and Mix Entropy. In the \textbf{Baseline (Errors)} scenario, entropy dropped significantly (e.g., from 0.99 to 0.86 bits in pre-calc mode). This is because packet loss "drains" the mixing pool. Fewer packets arriving at a mix node means smaller batch sizes and less effective shuffling.
-
-\subsection{Reliability Mechanisms}
-\subsubsection{Retransmission}
-Configured to resend packets if simulated delivery is not confirmed.
-\begin{itemize}
-    \item \textbf{Pros:} Increased entropy (1.33 bits) by keeping the network populated.
-    \item \textbf{Cons:} Extremely sensitive to timeout parameters in Live mode, leading to cascading failures or excessive loss (36\%) if ACKs are delayed.
-\end{itemize}
-
-\subsubsection{Path Re-establishment}
-Nodes attempt to reroute upon connection failure.
-\begin{itemize}
-    \item \textbf{Performance:} Most consistent performer. Reduced loss to ~12\% in live mode while maintaining high entropy (1.32 bits).
-    \item \textbf{Mechanism:} By preventing the packet from being dropped at the point of failure, it directly sustains the mixing volume downstream.
-\end{itemize}
-
-\subsubsection{Parallel Paths}
-Sending redundant copies.
-\begin{itemize}
-    \item \textbf{Performance:} High overhead but good reliability (13\% loss).
-    \item \textbf{Observation:} In Live mode, it successfully maintained entropy (1.26 bits), proving that redundancy can compensate for node loss in terms of anonymity set preservation.
-\end{itemize}
-
-\section{Selected Visualizations}
+\section{Visuals (Series C)}
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-        \includegraphics[width=\textwidth]{results/04_path_reestablishment_live/analysis_results/latency_histogram.png}
-        \caption{Latency Distribution (Path Re-est Live)}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
-        \includegraphics[width=\textwidth]{results/04_path_reestablishment_live/analysis_results/entropy_distribution.png}
-        \caption{Entropy Distribution (Path Re-est Live)}
-    \end{subfigure}
-    \caption{Visual Analysis of the Path Re-establishment Scenario showing consistent latency and high entropy.}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{results/02_baseline_errors/analysis_results/throughput_timeseries.png}
-    \caption{Throughput Drop upon Failure (Baseline with Errors). Note the dip in traffic arrival matching the point of fault injection.}
+    \includegraphics[width=0.9\textwidth]{report_results/25_10min_parallel/analysis_results/throughput_timeseries.png}
+    \caption{Throughput over 10 Minutes (Parallel Paths). Note the sustained high delivery rate despite the failure at T=60s.}
 \end{figure}
 
 \section{Conclusion}
-The comprehensive experiment series demonstrates that reliability features in Mix-Nets are not merely for guaranteeing delivery but are intrinsic to maintaining anonymity. Reliability mechanisms active during failures prevent the degradation of the anonymity set size caused by packet loss.
-
-\textbf{Key Takeaways:}
-\begin{enumerate}
-    \item \textbf{Anonymity Requires Reliability:} A failing network is a less anonymous network. Mechanisms that recover packets (Path Re-est/Retransmission) result in higher mix entropy than networks that simply drop packets.
-    \item \textbf{Live vs. Pre-calculated:} While logic holds in both, timing-sensitive mechanisms like Retransmission require careful tuning in real-world environments to avoid collapse.
-    \item \textbf{Recommendation:} For this stratified topology, \textbf{Path Re-establishment} offered the best balance of low loss, managed latency, and high anonymity preservation.
-\end{enumerate}
+Short-term tests favor speed, but long-term stability favors \textbf{Redundancy} (Parallel Paths) and \textbf{Persistence} (Retransmission).
+\begin{itemize}
+    \item For \textbf{Low Latency}: Use Parallel Paths (Lowest Loss, Instant Recovery).
+    \item For \textbf{Bandwidth Efficiency}: Use Retransmission (High Reliability over time, but higher latency).
+    \item \textbf{Avoid}: Static Routing (Baseline) or purely reactive routing (Path-Reest) under heavy saturation, as they tend to collapse.
+\end{itemize}
 
 \end{document}

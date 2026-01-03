@@ -1,0 +1,110 @@
+[
+    {
+        "name": "21_10min_baseline_no_errors",
+        "description": "10 Min Baseline: 600s duration, 0.1s interval.",
+        "config_overrides": {
+            "features": {
+                "dummy_traffic": false,
+                "retransmission": false,
+                "path_reestablishment": false,
+                "parallel_paths": false,
+                "mock_encryption": true
+            },
+            "traffic": {
+                "mode": "random",
+                "duration_sec": 600,
+                "interval_sec": 0.1
+            }
+        },
+        "error_injection": null
+    },
+    {
+        "name": "22_10min_baseline_errors",
+        "description": "10 Min with Failures (Injection at 60s).",
+        "config_overrides": {
+            "features": {
+                "dummy_traffic": false,
+                "retransmission": false,
+                "path_reestablishment": false,
+                "parallel_paths": false,
+                "mock_encryption": true
+            },
+            "traffic": {
+                "mode": "random",
+                "duration_sec": 600,
+                "interval_sec": 0.1
+            }
+        },
+        "error_injection": {
+            "mode": "random_kill",
+            "count": 2,
+            "delay": 60
+        }
+    },
+    {
+        "name": "23_10min_retransmission",
+        "description": "10 Min Retransmission.",
+        "config_overrides": {
+            "features": {
+                "retransmission": true,
+                "path_reestablishment": false,
+                "parallel_paths": false,
+                "mock_encryption": true
+            },
+            "traffic": {
+                "mode": "random",
+                "duration_sec": 600,
+                "interval_sec": 0.1
+            }
+        },
+        "error_injection": {
+            "mode": "random_kill",
+            "count": 2,
+            "delay": 60
+        }
+    },
+    {
+        "name": "24_10min_path_reest",
+        "description": "10 Min Path Re-establishment.",
+        "config_overrides": {
+            "features": {
+                "retransmission": true,
+                "path_reestablishment": true,
+                "parallel_paths": false,
+                "mock_encryption": true
+            },
+            "traffic": {
+                "mode": "random",
+                "duration_sec": 600,
+                "interval_sec": 0.1
+            }
+        },
+        "error_injection": {
+            "mode": "random_kill",
+            "count": 2,
+            "delay": 60
+        }
+    },
+    {
+        "name": "25_10min_parallel",
+        "description": "10 Min Parallel Paths.",
+        "config_overrides": {
+            "features": {
+                "retransmission": false,
+                "path_reestablishment": false,
+                "parallel_paths": true,
+                "mock_encryption": true
+            },
+            "traffic": {
+                "mode": "random",
+                "duration_sec": 600,
+                "interval_sec": 0.1
+            }
+        },
+        "error_injection": {
+            "mode": "random_kill",
+            "count": 2,
+            "delay": 60
+        }
+    }
+]

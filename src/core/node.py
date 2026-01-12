@@ -50,7 +50,7 @@ class Node:
             if data:
                 try:
                     packet = Packet.from_json(data.decode('utf-8'))
-                    self.handle_packet(packet)
+                    self.handle_packet(packet, addr)
                 except json.JSONDecodeError:
                     self.logger.log("Failed to decode packet JSON", "ERROR")
                     
@@ -59,7 +59,7 @@ class Node:
         finally:
             client_sock.close()
 
-    def handle_packet(self, packet):
+    def handle_packet(self, packet, source_address):
         raise NotImplementedError("Subclasses must implement handle_packet")
 
     def send_packet(self, packet, next_hop_ip, next_hop_port):

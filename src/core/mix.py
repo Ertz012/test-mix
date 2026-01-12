@@ -60,8 +60,16 @@ class MixNode(Node):
         threading.Thread(target=self._mixing_loop, daemon=True).start()
         self.logger.log("Mixing loop started")
 
-    def handle_packet(self, packet):
-        self.logger.log_traffic("RECEIVED", packet)
+    def _resolve_node_id(self, ip, port):
+        # Reverse lookup from network_map
+        for name, (node_ip, node_port) in self.network_map.items():
+            if node_ip == ip: # Port usually matches too, but let's check IP first for simplicity in mininet/docker
+                return name
+        return f"{ip}:{port}"
+
+    def handle_packet(self, packet, source_address):
+        prev_hop_id = self._resolve_node_id(source_address[0], source_address[1])
+        self.logger.log_traffic("RECEIVED", packet, prev_hop=prev_hop_id)
         
         # Replay Protection
         # Ideally, we should check replay AFTER decryption to prevent tagging attacks,
@@ -146,7 +154,7 @@ class MixNode(Node):
         # Simulate Packet Loss
         loss_rate = self.config.get('network', {}).get('packet_loss_rate', 0.0)
         if random.random() < loss_rate:
-            self.logger.log_traffic("DROPPED_SIM", packet)
+            self.logger.log_traffic("DROPPED_SIM", packet, next_hop=next_hop_name)
             self.logger.log(f"Simulating packet loss for {packet.packet_id}", "INFO")
             return
 
@@ -155,5 +163,7 @@ class MixNode(Node):
                 next_ip, next_port = self.network_map[next_hop_name]
                 self.logger.log(f"Forwarding packet {packet.packet_id} to {next_hop_name}")
                 self.send_packet(packet, next_ip, next_port)
+                self.logger.log_traffic("FORWARDED", packet, next_hop=next_hop_name)
             else:
                 self.logger.log(f"Next hop {next_hop_name} not in map. Assuming final destination or unknown.", "WARNING")
+

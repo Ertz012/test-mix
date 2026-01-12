@@ -5,9 +5,10 @@ import base64
 
 class Packet:
 
-    def __init__(self, payload, destination, route=None, packet_id=None, timestamp=None, type="PLAIN"):
+    def __init__(self, payload, destination, src=None, route=None, packet_id=None, timestamp=None, type="PLAIN"):
         self.packet_id = packet_id or str(uuid.uuid4())
         self.timestamp = timestamp or time.time()
+        self.src = src or "unknown"
         self.destination = destination
         self.route = route or []  # List of hops
         self.payload = payload    # The actual data (bytes or string)
@@ -23,6 +24,7 @@ class Packet:
         return json.dumps({
             "id": self.packet_id,
             "ts": self.timestamp,
+            "src": self.src,
             "dst": self.destination,
             "route": self.route,
             "data": data_to_send,
@@ -47,6 +49,7 @@ class Packet:
         pkt = cls(
             payload=payload,
             destination=data["dst"],
+            src=data.get("src"),
             route=data.get("route", []),
             packet_id=data["id"],
             timestamp=data["ts"],

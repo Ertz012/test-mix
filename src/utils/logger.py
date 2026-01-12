@@ -45,14 +45,14 @@ class ExperimentLogger:
         logger = logging.getLogger(f"Traffic_{self.hostname}")
         logger.setLevel(logging.INFO)
         fh = logging.FileHandler(os.path.join(self.run_dir, f"{self.hostname}_traffic.csv"))
-        # Header: timestamp, event_type, packet_id, src, dst, size, metadata
+        # Header: timestamp, event_type, packet_id, src, dst, size, prev_hop, next_hop, metadata
         fh.setFormatter(logging.Formatter('%(message)s'))
         logger.addHandler(fh)
         logger.propagate = False
         
         # Write header if new file
         if os.stat(os.path.join(self.run_dir, f"{self.hostname}_traffic.csv")).st_size == 0:
-            logger.info("timestamp,event_type,packet_id,src,dst,size,flags")
+            logger.info("timestamp,event_type,packet_id,src,dst,size,prev_hop,next_hop,flags")
             
         return logger
 
@@ -64,10 +64,10 @@ class ExperimentLogger:
         elif level == "DEBUG":
             self.logger.debug(message)
 
-    def log_traffic(self, event_type, packet):
+    def log_traffic(self, event_type, packet, prev_hop="?", next_hop="?"):
         # event_type: SENT, RECEIVED, FORWARDED, DROPPED
         flags_str = ";".join([f"{k}={v}" for k, v in packet.flags.items()])
-        msg = f"{time.time()},{event_type},{packet.packet_id},?,?,{len(packet.payload)},{flags_str}"
+        msg = f"{time.time()},{event_type},{packet.packet_id},{packet.src},{packet.destination},{len(packet.payload)},{prev_hop},{next_hop},{flags_str}"
         self.traffic_logger.info(msg)
 
 # Singleton helper

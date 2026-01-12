@@ -109,7 +109,7 @@ class Client(Node):
         # If 'final_dest' is a client, it expects a Packet object (JSON) usually
         # to parse timestamp, id, etc.
         
-        inner_packet = Packet(payload, final_dest, route=path) # Route in inner packet is mostly metadata now
+        inner_packet = Packet(payload, final_dest, route=path, src=self.hostname) # Route in inner packet is mostly metadata now
         inner_bytes = inner_packet.to_json().encode('utf-8')
         
         try:
@@ -126,7 +126,7 @@ class Client(Node):
             if first_hop in self.network_map:
                 ip, port = self.network_map[first_hop]
                 # Outer packet
-                outer = Packet(onion_blob, final_dest, route=[first_hop], type="ONION")
+                outer = Packet(onion_blob, final_dest, route=[first_hop], type="ONION", src=self.hostname)
                 self.send_packet(outer, ip, port)
                 self.logger.log_traffic("CREATED", inner_packet) # Log the intent
             else:
@@ -207,7 +207,7 @@ class Client(Node):
             base_id = None
             for i, path in enumerate(paths):
                 # Create Inner Packet
-                packet = Packet(payload, dest, route=path)
+                packet = Packet(payload, dest, route=path, src=self.hostname)
                 
                 # Shared ID for parallel paths (so receiver knows they are copies)
                 if i == 0:
@@ -258,7 +258,7 @@ class Client(Node):
             first_hop = path[0]
             if first_hop in self.network_map:
                 ip, port = self.network_map[first_hop]
-                outer = Packet(onion_blob, packet.destination, route=[first_hop], type="ONION")
+                outer = Packet(onion_blob, packet.destination, route=[first_hop], type="ONION", src=self.hostname)
                 self.send_packet(outer, ip, port)
                 self.logger.log_traffic("CREATED", packet)
             else:
@@ -303,8 +303,16 @@ class Client(Node):
             payload = f"Drop Msg {time.time()}"
             self._send_onion_packet(payload, path, dest)
 
-    def handle_packet(self, packet):
+    def _resolve_node_id(self, ip, port):
+        # Reverse lookup from network_map
+        for name, (node_ip, node_port) in self.network_map.items():
+            if node_ip == ip: 
+                return name
+        return f"{ip}:{port}"
+
+    def handle_packet(self, packet, source_address):
         # self.logger.log_traffic("RECEIVED", packet) # Moved below to log decrypted ID
+        prev_hop_id = self._resolve_node_id(source_address[0], source_address[1])
         
         if packet.type == "ONION":
             try:
@@ -316,7 +324,7 @@ class Client(Node):
                 self.logger.log(f"Decrypt error: {e}", "ERROR")
                 return
 
-        self.logger.log_traffic("RECEIVED", packet) # Log the decrypted/final packet
+        self.logger.log_traffic("RECEIVED", packet, prev_hop=prev_hop_id) # Log the decrypted/final packet
 
         latency = time.time() - packet.timestamp
         self.logger.log(f"Received msg: {packet.payload[:20]}... Latency: {latency:.4f}s")

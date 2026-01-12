@@ -1,6 +1,10 @@
 {
     "topology": {
-        "layers": ["entry", "intermediate", "exit"],
+        "layers": [
+            "entry",
+            "intermediate",
+            "exit"
+        ],
         "nodes_per_layer": 3,
         "num_clients": 5,
         "num_providers": 3
@@ -18,7 +22,7 @@
         "dummy_traffic": false,
         "retransmission": false,
         "path_reestablishment": false,
-        "parallel_paths": false,
+        "parallel_paths": true,
         "anonymous_return_addresses": false,
         "layered_encryption": true,
         "mock_encryption": true
@@ -26,7 +30,7 @@
     "traffic": {
         "rate_packets_per_sec": 5.0,
         "duration_sec": 30,
-        "mode": "random", 
+        "mode": "precalculated",
         "precalc_file": "traffic_data.bin",
         "loop_rate_packets_per_sec": 1.0,
         "drop_rate_packets_per_sec": 1.0

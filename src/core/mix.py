@@ -181,7 +181,7 @@ class MixNode(Node):
                 # The method `send_packet` (in Node) does the socket work.
                 
                 self.logger.log(f"Forwarding packet {packet.packet_id} to {next_hop_name}")
-                success = self.send_packet(packet, next_ip, next_port)
+                success = self.send_packet(packet, next_ip, next_port, next_hop_name=next_hop_name)
                 
                 if not success and self.config['features'].get('backup_mixes', False):
                      # Retry with backup
@@ -196,7 +196,7 @@ class MixNode(Node):
                      if backup_node and backup_node in self.network_map:
                          b_ip, b_port = self.network_map[backup_node]
                          self.logger.log(f"Redirecting to backup node {backup_node}")
-                         self.send_packet(packet, b_ip, b_port)
+                         self.send_packet(packet, b_ip, b_port, next_hop_name=backup_node)
                          self.logger.log_traffic("REDIRECTED", packet, next_hop=backup_node)
                      else:
                          self.logger.log("No backup node found or backup also failed.", "ERROR")

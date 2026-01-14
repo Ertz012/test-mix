@@ -126,8 +126,9 @@ class Client(Node):
             if first_hop in self.network_map:
                 ip, port = self.network_map[first_hop]
                 # Outer packet
+                # Outer packet
                 outer = Packet(onion_blob, final_dest, route=[first_hop], type="ONION", src=self.hostname)
-                self.send_packet(outer, ip, port)
+                self.send_packet(outer, ip, port, next_hop_name=first_hop)
                 self.logger.log_traffic("CREATED", inner_packet) # Log the intent
             else:
                 self.logger.log(f"First hop {first_hop} unknown", "ERROR")
@@ -259,7 +260,7 @@ class Client(Node):
             if first_hop in self.network_map:
                 ip, port = self.network_map[first_hop]
                 outer = Packet(onion_blob, packet.destination, route=[first_hop], type="ONION", src=self.hostname)
-                self.send_packet(outer, ip, port)
+                self.send_packet(outer, ip, port, next_hop_name=first_hop)
                 self.logger.log_traffic("CREATED", packet)
             else:
                 self.logger.log(f"First hop {first_hop} unknown", "ERROR")

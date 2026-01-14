@@ -5,7 +5,7 @@
             "intermediate",
             "exit"
         ],
-        "nodes_per_layer": 3,
+        "nodes_per_layer": 12,
         "num_clients": 5,
         "num_providers": 3
     },
@@ -22,6 +22,7 @@
         "dummy_traffic": false,
         "retransmission": true,
         "path_reestablishment": false,
+        "backup_mixes": true,
         "parallel_paths": false,
         "anonymous_return_addresses": false,
         "layered_encryption": true,

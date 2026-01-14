@@ -95,12 +95,12 @@ def run_experiment(exp_name, error_injection_config):
     logger.info("Running Analysis...")
     run_command(["python3", ANALYSIS_SCRIPT, latest_log_dir])
     
-    # 5. Archive Results
-    exp_results_dir = os.path.join(RESULTS_DIR, exp_name)
-    if os.path.exists(exp_results_dir):
-        shutil.rmtree(exp_results_dir)
-    shutil.copytree(latest_log_dir, exp_results_dir)
-    logger.info(f"Saved results to {exp_results_dir}")
+    # 5. Archive Results (Disabled as per user request - logs stay in logs/ folder)
+    # exp_results_dir = os.path.join(RESULTS_DIR, exp_name)
+    # if os.path.exists(exp_results_dir):
+    #     shutil.rmtree(exp_results_dir)
+    # shutil.copytree(latest_log_dir, exp_results_dir)
+    # logger.info(f"Saved results to {exp_results_dir}")
     print(f"DONE: {exp_name}")
 
 def main():

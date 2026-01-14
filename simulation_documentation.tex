@@ -1,0 +1,122 @@
+\chapter{Simulation}
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+
+% -----------------------------------------------------------------------------
+%\subsection{Zielsetzung}
+% Eine Simulation eines grundlegenden Mix-Netzes mit Re-Etablierungen von Pfaden, erneutes Übertragen von Nachrichten, parallelen disjunkten Pfaden, anonymen Rückadressen und Ersatzmixen implementiert werden.
+% Der Einfluss der verschiedenen Mechanismen auf den Grad der Anonymität im Mix-Netz evaluiert werden.
+Um den Einfluss verschiedener Fehlertoleranzmechanismen auf die Anonymität und die Zuverlässigkeit eines Mix-Netzes zu untersuchen, soll eine Simulation implementiert werden die die verschiedenen Mechanismen implementiert und alle notwendigen Daten liefert, die zur Analyse der Anonymität notwendig sind.
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Angreifermodell} %TODO vielleicht als subsec unter systementwurf
+In dieser Simulation wird von einem externen Angreifer ausgegangen, der den Eingangs- und Ausgangsverkehr des Mixnetzes beobachten, jedoch nicht aktiv verändern kann. Er hat keine Kontrolle über die Komponenten des Mixnetzes. Die Rechenkapazität des Angreifers ist begrenzt, die kryptografisch gesicherten Daten können vom Angreifer nicht entschlüsselt werden. Die möglichkeiten des Angreifers besieren daher hauptsächlich auf statistischen Analysen und Schnittmengenangriffen. \cite{berthold2000disadvantages, raymond2001traffic, Danezis2003SDA}
+Ziel des Angreifers ist es, Kommunikationsbeziehungen zwischen Sendern und Empfängern zu aufzudecken.
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Evaluationsmetriken}
+Um die Annonymität des Netzes unter einfluss verschiedener Fehlertoleranzmechanismen zu untersuchen, werden verschiedene Herangehensweisen gewählt. Für jedes Szenario wird die Shannon Entropie berechnet \cite{Shannon1948}.
+Weiterhin werden für die Szenarien eine \textit{Traffic Analysis} und eine \textit{Statistical Disclosure Attack} durchgeführt. Anhand dieser Angriffe kann ermittelt werden, wie leicht es einem Angreifer fällt, Kommunikationsbeziehungen zwischen Sendern und Empfängern zu aufzudecken.
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\subsection{Systementwurf}
+%grundlegendes Netz
+Das System soll die Grundlegenden Eigenschaften eines modernen Mixnetzes implementieren. Das bedeutet es soll den Nachrichtenverkehr zwischen Sendern und Empfängern so verschleiern, dass eine Zuordnung der Kommunikationsbeziehungen durch Dritte nicht möglich ist. Besonderer Fokus liegt auf Ausfallsicherheit durch Fehlertoleranzmechanismen.
+Das System unterscheidet die primären Akteure:
+\begin{itemize}
+    \item \textbf{Sender (Initiator):} Die Partei, die eine anonyme Nachricht in das Netz einspeist.
+    \item \textbf{Empfänger:} Die Partei, für die die Nachricht bestimmt ist.
+    \item \textbf{Mixknoten:} Server, die Nachrichten empfangen, kryptographisch verarbeiten, verzögern und weitersenden.
+\end{itemize}
+
+Das Mixnetz ist als free routing Netz mit einer stratified topologie konzipiert. Nachrichten durchlaufen das Mixnetz zwingend in einer festgelegten Reihenfolge von 3 Schichten. Entry-Layer, Intermediate-Layer und Exit-Layer. Jede der drei Schichten verfügt über einen Pool von $12$ verfügbaren Mixknoten. Der Sender kann eine multiple Pfadwahl treffen. Für jede Nachricht oder Sitzung wählt der Sender pro Schicht einen der 12 Knoten aus, um einen individuellen Pfad durch die Kaskade zu definieren.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pic/systems/testmix.png}
+    \caption{Testmix}
+    \label{fig:testmix}
+\end{figure}
+
+Um eine zeitliche Korrelation von Ein- und Ausgangsnachrichten zu verhindern, wird Continuous Time Mixing basierend auf einer Poisson-Verteilung verwendet. \cite{SGMIX}
+Das System muss Single-Use Reply Blocks (SURBs) unterstützen, die es dem Empfänger ermöglichen, dem Sender zu antworten, ohne dessen Identität zu kennen. \cite{Danezis2003}
+
+%mockup encryption
+Zur Untersuchung des Einflusses verschiedener Fehlertoleranzmechanismen auf die Anonymität, ist eine sichere Verschlüsselung der Pakete nicht notwendig. Um die Performanz zu erhöhen, wird daher auf eine sichere Verschlüsselung verzichtet. Die Pakete werden jedoch von den Mixen verarbeitet, als seien sie verschlüsselt. Diese \textit{mockup encryption} sorgt dafür, dass die Simulation auch auf leistungsschwächerer Hardware laufen kann.
+
+%Fehlertoleranzmechanismen
+Es werden modular verschiedene Fehlertoleranzmechanismen implementiert. Jeder Mechanismus kann unabhängig von den anderen aktiviert werden, um die Auswirkungen auf die Anonymität des Netzes zu untersuchen. Es sollen insgesamt $4$ verschiedene Fehlertoleranzmechanismen implementiert werden, die eine Paketzustellung ermöglichen wenn ein Knoten im Mixnetz ausfällt.
+\begin{itemize}
+    \item \textbf{Paket Retransmission:} Die Mixnetzuspezifische Variante der Fehlertoleranz. Geht ein Paket verloren, bemerkt das der Sender auf erst auf Anwendungsebene und sendet es erneut. Das Mixnetz selbst ist an diesem Vorgang nicht beteiligt.
+    \item \textbf{Path Reestablishment:} Bei Ausfall eines Knoten bricht der gesamte Pfad ab und es wird ein neuer Pfad etabliert der versucht die Problemstelle im Mixnetz zu umgehen.
+    \item \textbf{Multiple Paths:} Jedes Paket wird redundant über mehrere Pfade übertragen. Die Anzahl der Pfade kann variieren. Je mehr Pfade verwendet werden, desto höher ist die Redundanz, jedoch auch der Overhead sowie die Menge an Metadaten die dabei entstehen.
+    \item \textbf{Backup Mixes:} Jeder Mixknoten wird durch einen anderen Mixknoten ersetzt, sollte er ausfallen. Durch die \textit{mockup encryption} wird das Problem der Schlüsselverteilung, das komplexe Ansätze notwendig macht, umgangen. Jedoch ist dies 
+\end{itemize}
+
+
+%logging
+Um den Angreifer zu Simulieren, wird der Traffic an den Entry und Exit Knoten erfasst und abgespeichert. Auf diesen Daten können später die Angriffe durchgeführt werden.
+
+%Umgebung (vielleicht verschieben nach implementation)
+Das Gesamte System ist in Mininet eingebettet, um die Simulationsumgebung enheitlich zu halten \cite{Lantz2010}.
+Für jede Instanz, also jeden Sender, jeden Receiver und jeden Mixknoten läuft ein eigener Mininet Server.
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\subsection{Implementation}
+Die Umsetzung des Simulationssystems erfolgt in Python und basiert auf einer objektorientierten Architektur, die in eine Mininet-Umgebung eingebettet ist. Dies ermöglicht die realitätsnahe Emulation eines Netzwerkes, in dem jeder Akteur (Client, Mix, Provider) als eigenständiger Prozess mit eigenem Netzwerk-Stack operiert.
+
+\subsubsection{Systemarchitektur}
+Das System folgt einem modularen Ansatz, wobei die Kernlogik von der Netzwerkinfrastruktur abstrahiert ist.
+\begin{itemize}
+    \item \textbf{Core Layer:} Beinhaltet die abstrakten Basisklassen (\texttt{Node}) sowie die konkreten Implementierungen für \texttt{MixNode} und \texttt{Client}. Diese Klassen implementieren die Anwendungslogik, das Routing und das kryptographische Handling.
+    \item \textbf{Network Layer:} Die physische Übertragung der Nachrichten erfolgt über TCP/IP-Sockets. Die Netzwerktopologie wird durch Mininet definiert, welches virtuelle Hosts und Switches erstellt.
+    \item \textbf{Support Modules:} Separierte Module für \texttt{Routing}, \texttt{Reliability}, und \texttt{Crypto} stellen wiederverwendbare Funktionalitäten bereit.
+\end{itemize}
+
+\subsubsection{Datenstrukturen und Nachrichtenformat}
+Die Kommunikation zwischen den Knoten basiert auf diskreten Nachrichtenpaketen. Das zentrale Datenobjekt ist die Klasse \texttt{Packet}, welche als JSON-Objekt serialisiert über das Netzwerk übertragen wird.
+Ein Paket besteht aus folgenden Feldern:
+\begin{itemize}
+    \item \texttt{id}: Eine universell eindeutige Identifikationsnummer (UUID version 4) zur Nachverfolgung und Deduplizierung.
+    \item \texttt{timestamp}: Ein Unix-Zeitstempel der Erstellung, genutzt für Latenzmessungen.
+    \item \texttt{type}: Unterscheidet zwischen \texttt{PLAIN} (Klartext für Debugging) und \texttt{ONION} (verschachtelte Verschlüsselung).
+    \item \texttt{route}: Enthält im Simulationsmodus Metadaten über den geplanten Pfad (primär für Debugging und Mockup-Analysen).
+    \item \texttt{payload}: Die eigentliche Nutzlast. Im Falle von \texttt{ONION}-Paketen enthält dieses Feld den verschlüsselten Zwiebel-Container (\textit{onion blob}).
+    \item \texttt{flags}: Ein flexibles Dictionary für Zusatzinformationen wie \texttt{ACK}-Typen oder \textit{Single Use Reply Blocks} (SURBs).
+\end{itemize}
+Um die Netzwerklast realistisch zu halten, werden Binärdaten im Payload mittels Base64 kodiert.
+
+\subsubsection{Mix-Knoten und Mixing-Strategie}
+Die Klasse \texttt{MixNode} realisiert die Funktionalität eines Mixes. Das Verhalten wird durch eine ereignisbasierte Verarbeitungsschleife (\textit{Event Loop}) und einen Scheduler gesteuert.
+\paragraph{Continuous Time Mixing:}
+Zur Implementierung des \textit{Continuous Time Mixing} verwendet jeder Knoten einen internen Scheduler, der auf einer Priority Queue (Min-Heap) basiert. Eingehende Nachrichten werden nicht sofort weitergeleitet, sondern mit einer künstlichen Verzögerung versehen. Diese Verzögerung $\delta$ folgt einer Exponentialverteilung $P(t) = \lambda e^{-\lambda t}$, wobei $\lambda$ (implementiert als Variable \texttt{mu}) den Kehrwert der mittleren Verzögerung darstellt. Dies entspricht einem Poisson-Prozess, der zeitliche Korrelationen zwischen Ein- und Ausgangsnachrichten verschleiert.
+
+\subsubsection{Kryptographie-Simulation (Mockup Encryption)}
+Um die Skalierbarkeit der Simulation auf Standard-Hardware zu gewährleisten, wird ein \textit{Mockup Encryption}-Verfahren eingesetzt (\texttt{CryptoManager}). Anstatt rechenintensive asymmetrische Operationen für jede Schicht durchzuführen, simuliert das System die Zwiebelverschlüsselung strukturell:
+Das Paket wird in JSON-Container verpackt, die die Metadaten der jeweiligen Schicht (Next Hop, Delay) enthalten. Ein spezieller Flag \texttt{mock\_marker} validiert die Integrität. Obwohl der Inhalt nicht kryptographisch stark verschlüsselt ist, behandelt die Anwendungslogik die Pakete als \textit{opaque blobs}, die nur vom jeweils adressierten Mix "entschlüsselt" (d.h. ausgepackt) werden können. Dies erhält die kausale Struktur des Mixnetzes ohne den Rechenaufwand.
+
+\subsubsection{Implementierung der Fehlertoleranzmechanismen}
+Die Fehlertoleranz wird durch vier dedizierte Mechanismen realisiert, die modular konfigurierbar sind:
+
+\paragraph{1. Paket Retransmission (End-to-End)}
+Die Zuverlässigkeitsschicht (\texttt{Reliability}-Modul) im Client überwacht alle ausgesendeten Pakete. Jedes Paket wird in einer Tabelle (\texttt{sent\_packets}) mit Sendezeitstempel registriert.
+Der Empfänger (Receiver) extrahiert beim Erhalt einer Nachricht die Quelladresse und sendet ein explizites Bestätigungspaket (\texttt{ACK}) zurück.
+Das \texttt{Reliability}-Modul prüft periodisch auf Zeitüberschreitungen (\textit{Timeouts}). Bleibt ein ACK aus, wird das Paket erneut in das Netzwerk eingespeist. Ein exponentielles Backoff oder Limitierung der Versuche verhindert Netzüberlastung.
+
+\paragraph{2. Path Reestablishment}
+Dieser Mechanismus greift, wenn ein Pfad als defekt erkannt wird (z.B. nach wiederholten Timeouts). Das \texttt{Routing}-Modul berechnet einen neuen Pfad für die betroffene Nachricht. Dabei werden optional die Knoten des fehlgeschlagenen Pfades temporär als "unzuverlässig" markiert und bei der Neuberechnung ausgeschlossen, um denselben Fehler zu vermeiden.
+
+\paragraph{3. Backup Mixes (Local Repair)}
+Im Gegensatz zur End-to-End-Wiederherstellung agiert dieser Mechanismus lokal auf den Mix-Knoten. Erkennt ein Mix, dass der gewählte Nachfolgeknoten (\textit{Next Hop}) nicht erreichbar ist (simuliert durch \textit{Packet Loss Rate} oder Verbindungsfehler), konsultiert er die Routing-Tabelle für einen definierten Backup-Knoten.
+Die Implementierung nutzt eine Ring-Topologie innerhalb einer Schicht: Der Backup-Knoten ist definiert als der logische Nachfolger im selben Layer ($ID_{backup} = (ID_{current} + 1) \mod N$). Das Paket wird dynamisch umgeleitet, ohne dass der Sender involviert werden muss.
+
+\paragraph{4. Multiple (Parallel) Paths}
+Der Sender generiert für eine logische Nachricht $k$ redundante Pakete (konfigurierbar via \texttt{parallel\_paths}, typischerweise $k=2$). Diese Pakete werden über disjunkte Pfade geroutet, die durch das \texttt{Routing}-Modul mittels Mengenoperationen (\texttt{exclude\_nodes}) bestimmt werden. Der Empfänger filtert Duplikate anhand der Paket-ID.
+
+\subsubsection{Single Use Reply Blocks (SURBs)}
+Für anonyme Rückantworten erstellt der Sender ein SURB-Objekt, welches die Route vom Empfänger zurück zum Sender kapselt. In der Simulation wird dieses Objekt als Dictionary serialisiert und im \texttt{flags}-Feld des Pakets übertragen. Der Empfänger extrahiert dieses SURB, instanziiert daraus ein neues Paket und verwendet die enthaltene Route für die Antwort, ohne die Identität des ursprünglichen Senders kennen zu müssen.

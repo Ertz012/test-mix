@@ -41,8 +41,13 @@ def run_experiment():
     # Create logs directory
     os.makedirs("logs", exist_ok=True)
     
+    # Parse Experiment Name Suffix
+    exp_suffix = ""
+    if len(sys.argv) > 1:
+        exp_suffix = f"_{sys.argv[1]}"
+
     # Generate Run ID
-    run_id = f"Testrun_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    run_id = f"Testrun_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}{exp_suffix}"
     run_dir = os.path.join("logs", run_id)
     os.makedirs(run_dir, exist_ok=True)
     info(f"Logging to {run_dir}\n")

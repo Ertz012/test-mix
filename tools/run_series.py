@@ -60,7 +60,7 @@ def run_experiment(exp_name, error_injection_config):
     # 2. Start Orchestration (in background or blocking? Blocking generally, but orchestrate handles the duration)
     # However, we need to run error injector in parallel if it exists.
     
-    orchestrator_proc = subprocess.Popen(["sudo", "python3", ORCHESTRATE_SCRIPT])
+    orchestrator_proc = subprocess.Popen(["sudo", "python3", ORCHESTRATE_SCRIPT, exp_name])
     
     injector_proc = None
     if error_injection_config:

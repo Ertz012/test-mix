@@ -161,8 +161,47 @@ class MixNode(Node):
         if next_hop_name:
             if next_hop_name in self.network_map:
                 next_ip, next_port = self.network_map[next_hop_name]
+                
+                # Check for Backup Mix feature
+                # In simulation, we check if the next hop is "down" (simulated via packet_loss_rate check mostly, 
+                # but physically it's checking if we SHOULD act as if it's down).
+                # Here we simulate the *decision* to use a backup. 
+                # Realistically, this happens if connection fails. 
+                # We can simulate failure probabilistically here too if needed, or rely on the global packet loss.
+                # BUT, if global packet loss logic above triggers, we drop.
+                # To simulate Backup Mixes EFFECTIVELY, we need a separate "node failure" chance vs "link loss".
+                # For now, we'll try to send. If a connection error occurs (real socket), we'd catch it.
+                # Since this is Mininet/Python sockets, let's wrap send_packet in try/except or assume we need to simulate the trigger.
+                
+                # Let's say we assume 'packet_loss_rate' effectively models 'node/link failure'.
+                # But the earlier block DROPS it. 
+                # We need to change the logic: IF loss is simulated, AND backup is enabled -> Redirect. ELSE -> Drop.
+                
+                # Re-integrate the loss check here for clarity:
+                # The method `send_packet` (in Node) does the socket work.
+                
                 self.logger.log(f"Forwarding packet {packet.packet_id} to {next_hop_name}")
-                self.send_packet(packet, next_ip, next_port)
+                success = self.send_packet(packet, next_ip, next_port)
+                
+                if not success and self.config['features'].get('backup_mixes', False):
+                     # Retry with backup
+                     self.logger.log(f"Primary hop {next_hop_name} failed. Attempting backup...", "WARNING")
+                     # We need routing instance or logic to find backup.
+                     # MixNode doesn't have Routing instance by default in this code, but we can quick-calculate or instantiate?
+                     # Instantiating Routing is cheap.
+                     from src.modules.routing import Routing
+                     routing_helper = Routing(self.config, self.network_map) # Hacky to init every time, but safe.
+                     
+                     backup_node = routing_helper.get_backup_node(next_hop_name)
+                     if backup_node and backup_node in self.network_map:
+                         b_ip, b_port = self.network_map[backup_node]
+                         self.logger.log(f"Redirecting to backup node {backup_node}")
+                         self.send_packet(packet, b_ip, b_port)
+                         self.logger.log_traffic("REDIRECTED", packet, next_hop=backup_node)
+                     else:
+                         self.logger.log("No backup node found or backup also failed.", "ERROR")
+                         return
+
                 self.logger.log_traffic("FORWARDED", packet, next_hop=next_hop_name)
             else:
                 self.logger.log(f"Next hop {next_hop_name} not in map. Assuming final destination or unknown.", "WARNING")

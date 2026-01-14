@@ -88,5 +88,22 @@
             "count": 2,
             "delay": 10
         }
+    },
+    {
+        "name": "06_backup_mixes",
+        "description": "Testing Ref. 4: Backup Mixes (Local Repair) enabled under failure.",
+        "config_overrides": {
+            "features": {
+                "retransmission": false,
+                "path_reestablishment": false,
+                "parallel_paths": false,
+                "backup_mixes": true
+            }
+        },
+        "error_injection": {
+            "mode": "random_kill",
+            "count": 2,
+            "delay": 10
+        }
     }
 ]

@@ -335,8 +335,69 @@ class Client(Node):
                 self.reliability.receive_ack(packet.flags.get('ack_id'))
             else:
                 # Send ACK
-                # ... (Simplified ACK logic: send back to src)
-                pass
+                ack_dest = packet.src
+                if ack_dest and ack_dest != "unknown":
+                    # Simple ACK: Reverse path or direct?
+                    # In mixnet, we usually need a fresh path or SURB.
+                    # If SURB exists, use it. Else, try routing if we know the src name.
+                    
+                    if 'surb' in packet.flags:
+                        # Use SURB to send ACK
+                        self._send_surb_reply("ACK_PAYLOAD", packet.flags['surb'], ack_id=packet.packet_id, is_ack=True)
+                    else:
+                        # Try standard routing to src
+                        try:
+                            path = self.routing.get_path(self.hostname, ack_dest)
+                            # Create ACK packet
+                            ack_pkt = Packet("ACK", ack_dest, route=path, src=self.hostname)
+                            ack_pkt.flags['type'] = 'ACK'
+                            ack_pkt.flags['ack_id'] = packet.packet_id
+                            self._send_prepared_project(ack_pkt, path)
+                            self.logger.log(f"Sent ACK for {packet.packet_id} to {ack_dest}")
+                        except Exception as e:
+                           self.logger.log(f"Could not send ACK: {e}", "WARNING")
+
+        # Reply via SURB if requested (and not just an ACK)
+        if 'surb' in packet.flags and packet.flags.get('type') != 'ACK':
+             # Simulate application response (independent of ACK)
+             # Only if we want to reply to data strings
+             if "Real Msg" in str(packet.payload):
+                 self._send_surb_reply(f"RE: {packet.payload}", packet.flags['surb'])
+
+    def _send_surb_reply(self, payload_str, surb_dict, ack_id=None, is_ack=False):
+        """
+        Send a reply using a Single Use Reply Block.
+        """
+        try:
+            surb = SURB.from_dict(surb_dict)
+            # Route provided by SURB (Sender->...->Client) is reversed? 
+            # No, SURB contains the route FROM Receiver TO Sender. 
+            # So we just use it.
+            
+            # The SURB route endpoints:
+            # surb.route[0] should be the first hop (Entry for me)
+            # surb.route[-1] is the Final Dest (The original Sender)
+            
+            # Note: Loopix SURB is pre-encrypted headers. Here we mock it by just taking the route.
+            path = surb.route
+            destination = surb.sender # OR path[-1]? In SURB, path usually includes dest?
+            
+            # Reliability: Check if we strictly follow the route or if destination is separate?
+            # In our SURB mockup, 'route' is [Entry, ... , Sender].
+            # So final dest is indeed the end of that list or 'surb.sender'.
+            # Let's trust surb.sender as final dest.
+            
+            packet = Packet(payload_str, destination, route=path, src=self.hostname)
+            
+            if is_ack:
+                 packet.flags['type'] = 'ACK'
+                 packet.flags['ack_id'] = ack_id
+            
+            self._send_prepared_project(packet, path)
+            self.logger.log(f"Sent SURB reply to {destination}")
+            
+        except Exception as e:
+            self.logger.log(f"SURB reply failed: {e}", "ERROR")
 
 # Alias for compatibility if needed, but we try to use Client everywhere
 Sender = Client

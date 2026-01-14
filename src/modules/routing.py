@@ -80,6 +80,29 @@ class Routing:
 
         return mix_path
 
+    def get_backup_node(self, node_name):
+        """
+        Returns a designated backup node for the given node_name.
+        Strategy: Next node in the same layer layer list (circular).
+        """
+        layer_list = None
+        if node_name in self.entries:
+            layer_list = self.entries
+        elif node_name in self.intermediates:
+            layer_list = self.intermediates
+        elif node_name in self.exits:
+            layer_list = self.exits
+        
+        if not layer_list or len(layer_list) < 2:
+            return None
+            
+        try:
+            current_idx = layer_list.index(node_name)
+            next_idx = (current_idx + 1) % len(layer_list)
+            return layer_list[next_idx]
+        except ValueError:
+            return None
+
     def get_disjoint_paths(self, src, dst, k=2):
         """
         Naive disjoint path generation. 

@@ -1,12 +1,20 @@
-Analysis Results:
-Total Packets Sent: 604
-Total Packets Received: 334
-Loss Rate: 44.70%
-Network Overhead Ratio: 26.59x
-Average Latency: 2.4715 s
-Max Latency: 7.1660 s
-Min Latency: 0.5955 s
-Jitter (Std Dev): 1.0532 s
-Avg Global Anonymity Set: 51.99 packets
-Avg Global Entropy: 5.6564 bits
-Max Global Entropy: 6.7814 bits
+Analysis Metrics:
+packets sent: 604
+packets arrived: 334
+packet loss: 270
+loss rate: 44.70%
+
+individual packets sent: 592
+individual packets arrived: 334
+individual packet loss: 258
+individual loss rate: 43.58%
+
+highest latency: 7.1660s
+lowest latency: 0.5955s
+average latency: 2.4715s
+
+Mechanisms:
+packets retransmitted: 0
+backup events: 0
+parallel k: 1 (disabled)
+paths reestablished: N/A

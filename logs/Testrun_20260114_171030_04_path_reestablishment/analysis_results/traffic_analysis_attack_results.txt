@@ -1,0 +1,49 @@
+{
+    "target_src": "c3",
+    "true_receiver": "p3",
+    "detected_receiver": "p1",
+    "likelihood_score": 3342.7971011693016,
+    "success": false,
+    "all_scores": [
+        {
+            "receiver": "p1",
+            "log_likelihood_score": 3342.7971011693016,
+            "total_packets_received": 788
+        },
+        {
+            "receiver": "p2",
+            "log_likelihood_score": 3285.5519780699065,
+            "total_packets_received": 769
+        },
+        {
+            "receiver": "p3",
+            "log_likelihood_score": 2268.9600317570353,
+            "total_packets_received": 474
+        },
+        {
+            "receiver": "c3",
+            "log_likelihood_score": 1236.7546702510556,
+            "total_packets_received": 222
+        },
+        {
+            "receiver": "c1",
+            "log_likelihood_score": 1039.0474020278625,
+            "total_packets_received": 187
+        },
+        {
+            "receiver": "c5",
+            "log_likelihood_score": 1036.4206211807207,
+            "total_packets_received": 187
+        },
+        {
+            "receiver": "c4",
+            "log_likelihood_score": 965.1799141234736,
+            "total_packets_received": 175
+        },
+        {
+            "receiver": "c2",
+            "log_likelihood_score": 927.9970352398739,
+            "total_packets_received": 169
+        }
+    ]
+}

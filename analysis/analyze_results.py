@@ -4,302 +4,426 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import glob
 import numpy as np
-
+import networkx as nx
+from collections import defaultdict
+import math
 
 def parse_logs(log_dir):
     """
     Parses sender, receiver, and mix node logs.
     Returns:
-        traffic_df: DataFrame with end-to-end traffic (s* -> r*)
-        mix_df: DataFrame with mix node operations (x*)
+        traffic_df: DataFrame with all client events
+        mix_df: DataFrame with all mix node events
     """
-    # --- End-to-End Traffic ---
-    # --- End-to-End Traffic ---
-    # Try to find Client logs (Loopix style)
+    traffic_dfs = []
+    mix_dfs = []
+
+    # --- Client Logs ---
     client_files = glob.glob(os.path.join(log_dir, "c*_traffic.csv"))
-    
-    # Fallback to legacy Sender/Receiver logs
-    sent_files = glob.glob(os.path.join(log_dir, "s*_traffic.csv"))
-    recv_files = glob.glob(os.path.join(log_dir, "r*_traffic.csv"))
-
-    print(f"Found {len(client_files)} client logs, {len(sent_files)} sender logs, {len(recv_files)} receiver logs.")
-
-    sent_dfs = []
-    recv_dfs = []
-    
-    # Process Client Logs (Both Sent and Received)
     for f in client_files:
         try:
             df = pd.read_csv(f)
-            # SENT events
-            sent_part = df[df['event_type'].isin(['SENT', 'SENT_PRECALC', 'CREATED'])] 
-            # Note: CREATED is usually the event for generating the packet. SENT might be lower level.
-            # In Client.py I logged "CREATED" for the inner packet and "SENT_PRECALC" for precalc.
-            # And send_packet logs? Node.send_packet usually logs something?
-            # Src/run.py logger checks.
-            # Let's assume CREATED is the start.
-            # But wait, if I use CREATED, I need to match IDs.
-            # If I look at Client.py, I explicitly log "CREATED" for generated traffic.
-            if not sent_part.empty:
-                # If we have CREATED events, those represent the application-level messages (End-to-End).
-                # SENT events are link-layer onion packets with different IDs.
-                # We should ONLY use CREATED if available to correct loss rate.
-                if 'CREATED' in sent_part['event_type'].values:
-                    sent_part = sent_part[sent_part['event_type'] == 'CREATED']
-                
-                # Check for duplicates just in case
-                sent_part = sent_part.sort_values('timestamp').drop_duplicates(subset=['packet_id'], keep='first')
-                sent_dfs.append(sent_part)
-                
-            # RECEIVED events
-            recv_part = df[df['event_type'] == 'RECEIVED']
-            if not recv_part.empty:
-                recv_dfs.append(recv_part)
+            df['node_id'] = os.path.basename(f).split('_')[0]
+            traffic_dfs.append(df)
         except Exception as e:
             print(f"Error reading {f}: {e}")
-
-    # Process Legacy Logs
-    for f in sent_files:
-        try:
-            df = pd.read_csv(f)
-            df = df[df['event_type'] == 'SENT']
-            sent_dfs.append(df)
-        except Exception as e:
-            print(f"Error reading {f}: {e}")
-
-    for f in recv_files:
-        try:
-            df = pd.read_csv(f)
-            df = df[df['event_type'] == 'RECEIVED']
-            recv_dfs.append(df)
-        except Exception as e:
-            print(f"Error reading {f}: {e}")
-
-    if sent_dfs:
-        sent_df = pd.concat(sent_dfs, ignore_index=True)
-        if recv_dfs:
-            recv_df = pd.concat(recv_dfs, ignore_index=True)
-        else:
-            recv_df = pd.DataFrame(columns=sent_df.columns)
-
-        sent_df = sent_df.rename(columns={'timestamp': 't_sent'})
-        recv_df = recv_df.rename(columns={'timestamp': 't_received'})
-
-        traffic_df = pd.merge(sent_df[['packet_id', 't_sent', 'src', 'dst', 'size']], 
-                              recv_df[['packet_id', 't_received']], 
-                              on='packet_id', 
-                              how='left')
-    else:
-        print("No sender data found.")
-        traffic_df = pd.DataFrame()
 
     # --- Mix Node Logs ---
-    mix_files = glob.glob(os.path.join(log_dir, "x*_traffic.csv"))
-    print(f"Found {len(mix_files)} mix node logs.")
+    mix_files = glob.glob(os.path.join(log_dir, "x*_traffic.csv")) # Assuming x* for mix nodes? Or m*?
+    # In codebase it seemed to be 'x' for mix sometimes, or 'm'. 
+    # Let's check typical mix filenames. In 'run_series.py' or 'vm_manager', logs are pulled.
+    # The file list earlier showed 'x*_traffic.csv' pattern logic in original script.
+    # But usually mixes are m1, m2... or e1, i1...
+    # The original script looked for "x*_traffic.csv". 
+    # Let's expand to look for anything ending in _traffic.csv that is NOT client/sender/receiver?
+    # Or just look for specific prefixes based on config?
+    # Let's stick to a broader glob and filter.
     
-    mix_dfs = []
-    for f in mix_files:
+    all_traffic_files = glob.glob(os.path.join(log_dir, "*_traffic.csv"))
+    for f in all_traffic_files:
+        filename = os.path.basename(f)
+        if filename.startswith('c') or filename.startswith('s') or filename.startswith('r'):
+            continue # Already handled or legacy
+        
+        # Assume it's a mix/node log
         try:
             df = pd.read_csv(f)
-            df['mix_id'] = os.path.basename(f).split('_')[0] # e.g., 'x1' from 'x1_traffic.csv'
+            df['node_id'] = filename.split('_')[0]
             mix_dfs.append(df)
         except Exception as e:
             print(f"Error reading {f}: {e}")
-            
-    if mix_dfs:
-        mix_df = pd.concat(mix_dfs, ignore_index=True)
-    else:
-        mix_df = pd.DataFrame()
+
+    traffic_df = pd.concat(traffic_dfs, ignore_index=True) if traffic_dfs else pd.DataFrame()
+    mix_df = pd.concat(mix_dfs, ignore_index=True) if mix_dfs else pd.DataFrame()
 
     return traffic_df, mix_df
 
-def calculate_global_metrics(traffic_df):
+def generate_trace_report(traffic_df, mix_df, output_path):
     """
-    Calculates Global Shannon Entropy.
-    For each packet P (recv), we count how many other packets P' (sent) 
-    were active (overlap) during P's lifetime [t_sent_P, t_recv_P].
-    
-    H(P) = log2(N_overlap)
+    Generates a human-readable trace of packets through the network.
     """
-    if traffic_df.empty:
-        return {}, pd.DataFrame()
+    if traffic_df.empty and mix_df.empty:
+        return
 
-    received_df = traffic_df.dropna(subset=['t_received']).copy()
+    # Combine all events
+    all_events = pd.concat([traffic_df, mix_df], ignore_index=True)
     
-    if received_df.empty:
-        return {}, pd.DataFrame()
+    # Filter relevant columns
+    cols = ['timestamp', 'packet_id', 'event_type', 'node_id', 'src', 'dst', 'next_hop', 'size']
+    # Ensure columns exist
+    for c in cols:
+        if c not in all_events.columns:
+            all_events[c] = None
+            
+    all_events = all_events[cols]
+    all_events = all_events.sort_values('timestamp')
 
-    sent_df = traffic_df[['packet_id', 't_sent', 't_received']].copy() # Includes all packets (even lost ones contributed to anonymity until lost?)
-    # Strictly speaking, only packets IN the network contribute to the crowd.
-    # Lost packets left the network at some point, but we don't know when.
-    # We will assume lost packets contribute until 'max latency' or just ignore them for overlap?
-    # Conservative: Only consider successfully received packets for the anonymity set.
-    # Aggressive: Consider all sent packets, assuming lost ones lived for a while.
-    # Let's stick to received packets for the "proven" anonymity set.
+    # Group by Packet ID
+    grouped = all_events.groupby('packet_id')
     
-    # Vectorized overlap check is O(N^2), might be heavy for very large logs but fine for typical 10k experiments.
-    # Optimization: Sort by start time.
-    
-    t_starts = received_df['t_sent'].values
-    t_ends = received_df['t_received'].values
-    
-    # Broadcating approach:
-    # Overlap Matrix: Start_i <= End_j AND End_i >= Start_j
-    # Here we want to know for each packet i, how many j overlap.
-    # The set includes itself, so min 1.
-    
-    # Memory efficient implementation for larger N: Loop with numpy
-    entropy_values = []
-    pool_sizes = []
-    
-    for i in range(len(received_df)):
-        s_i = t_starts[i]
-        e_i = t_ends[i]
+    with open(output_path, 'w') as f:
+        f.write("Packet Trace Report\n")
+        f.write("===================\n\n")
         
-        # Count j where (s_j <= e_i) AND (e_j >= s_i)
-        # i.e., interval j started before i ended, and ended after i started.
-        overlaps = np.sum((t_starts <= e_i) & (t_ends >= s_i))
+        loss_count = 0
+        retransmit_count = 0
+        redirect_count = 0
+        success_count = 0
         
-        pool_sizes.append(overlaps)
-        entropy_values.append(np.log2(overlaps))
-        
-    received_df['global_pool_size'] = pool_sizes
-    received_df['global_entropy'] = entropy_values
-    
-    metrics = {
-        'avg_global_entropy': np.mean(entropy_values),
-        'min_global_entropy': np.min(entropy_values),
-        'max_global_entropy': np.max(entropy_values),
-        'avg_global_pool_size': np.mean(pool_sizes)
-    }
-    
-    return metrics, received_df
+        for pid, group in grouped:
+            if pd.isna(pid) or pid == "packet_id": continue
+            
+            group = group.sort_values('timestamp')
+            events = group.to_dict('records')
+            
+            # Summary Status
+            is_delivered = any(e['event_type'] == 'RECEIVED' and str(e['node_id']).startswith('c') for e in events)
+            has_loss = any(e['event_type'] == 'DROPPED_SIM' for e in events)
+            has_retransmit = any(e['event_type'] == 'RESENT' for e in events)
+            has_redirect = any(e['event_type'] == 'REDIRECTED' for e in events)
+            
+            if is_delivered: success_count += 1
+            if has_retransmit: retransmit_count += 1
+            if has_redirect: redirect_count += 1
+            
+            # Determine End State
+            status = "DELIVERED" if is_delivered else "LOST"
+            if has_loss: status += " (SIMULATED DROP)"
+            
+            f.write(f"Packet: {pid} [{status}]\n")
+            
+            for e in events:
+                t = f"{e['timestamp']:.4f}"
+                node = e['node_id']
+                evt = e['event_type']
+                details = ""
+                
+                if evt == "CREATED":
+                    details = f"Src: {e['src']} -> Dst: {e['dst']}"
+                elif evt == "FORWARDED":
+                     details = f"-> {e['next_hop']}"
+                elif evt == "RECEIVED":
+                     if str(node).startswith('m') or str(node).startswith('e') or str(node).startswith('i') or str(node).startswith('x'):
+                        details = "(Mix Processing)"
+                     else:
+                        details = "FINAL DELIVERY"
+                elif evt == "DROPPED_SIM":
+                     details = "!!! ARTIFICIAL LOSS !!!"
+                elif evt == "REDIRECTED":
+                     details = f"!!! BACKUP ACTIVATED !!! -> {e['next_hop']}"
+                elif evt == "RESENT":
+                     details = "!!! RETRANSMISSION !!!"
+                
+                f.write(f"  [{t}] {node}: {evt} {details}\n")
+                
+            if not is_delivered and not has_loss:
+                # Infer loss location
+                last_event = events[-1]
+                f.write(f"  --> TRACE ENDED: Last seen at {last_event['node_id']} ({last_event['event_type']})\n")
+                if last_event['event_type'] == 'FORWARDED':
+                    f.write(f"      Potential Link Loss: {last_event['node_id']} -> {last_event['next_hop']}\n")
+                loss_count += 1
+            
+            f.write("\n")
+            
+        f.write("-" * 30 + "\n")
+        f.write("Summary Statistics:\n")
+        f.write(f"Total Traced: {len(grouped)}\n")
+        f.write(f"Delivered: {success_count}\n")
+        f.write(f"Losses (inferred + simulated): {len(grouped) - success_count}\n")
+        f.write(f"Retransmissions: {retransmit_count}\n")
+        f.write(f"Backup Redirects: {redirect_count}\n")
 
-def calculate_overhead(traffic_df, mix_df):
+def generate_network_graph(traffic_df, mix_df, output_path):
     """
-    Calculates network overhead.
-    Overhead Ratio = (Total Bytes Sent by Clients + Total Bytes Sent by Mixes) / Total Bytes Received by Receivers
+    Generates a network graph visualizing traffic flow, loss, and redirects.
     """
-    if traffic_df.empty:
-        return 0
-        
-    # Bytes sent by clients
-    client_sent_bytes = traffic_df['size_x'].sum() if 'size_x' in traffic_df.columns else 0
-    # Note: merge renamed 'size' to 'size_x' (from sent_df) or 'size_y' (from received_df)
-    # Let's check parse_logs merge again. 
-    # merged_df = pd.merge(sent_df[['packet_id', 't_sent', 'src', 'dst', 'size']], ...)
-    # So 'size' is in traffic_df.
-    if 'size' in traffic_df.columns:
-        client_sent_bytes = traffic_df['size'].sum()
-    
-    # Bytes sent by mixes (Egress)
-    mix_sent_bytes = 0
-    if not mix_df.empty:
-        # Assuming 'size' column exists in x logs. Let's check x1_traffic.csv from earlier view.
-        # It has 'size'.
-        mix_sent_df = mix_df[mix_df['event_type'] == 'SENT']
-        mix_sent_bytes = mix_sent_df['size'].sum()
-        
-    total_transmitted = client_sent_bytes + mix_sent_bytes
-    
-    # Payload bytes received
-    # We use 'size' from confirmed received packets
-    received_packets = traffic_df.dropna(subset=['t_received'])
-    payload_received_bytes = received_packets['size'].sum() if 'size' in received_packets.columns else 0
-    
-    if payload_received_bytes == 0:
-        return 0
-        
-    overhead_ratio = total_transmitted / payload_received_bytes
-    return overhead_ratio
+    if traffic_df.empty and mix_df.empty:
+        return
 
-def calculate_metrics(df):
+    # Combine events
+    df = pd.concat([traffic_df, mix_df], ignore_index=True)
+    
+    # 1. Build Edge Data (Counts)
+    # Forwarding: Node -> NextHop
+    # Redirect: Node -> NextHop (Colored differently)
+    # Loss: Node -> NextHop (Inferred?) - Harder to confirm specific link for loss without exact next hop known at drop time.
+    # But we can assume if 'FORWARDED' -> next_hop and no 'RECEIVED' at next_hop, it's a loss on that link.
+    
+    G = nx.DiGraph()
+    
+    # Track edges: (u, v) -> {'attempts': 0, 'success': 0, 'redirects': 0}
+    edges = defaultdict(lambda: {'attempts': 0, 'success': 0, 'redirects': 0})
+    
+    # We need to link FORWARDED events to subsequent RECEIVED events for the SAME packet.
+    # Group by packet_id
+    grouped = df.groupby('packet_id')
+    
+    for pid, group in grouped:
+        if pd.isna(pid) or pid == "packet_id": continue
+        events = group.sort_values('timestamp').to_dict('records')
+        
+        for i, e in enumerate(events):
+            src_node = str(e['node_id'])
+            
+            if e['event_type'] == 'FORWARDED' or e['event_type'] == 'CREATED':
+                target = e.get('next_hop')
+                # If CREATED and no next_hop explicit? Client usually logs 'CREATED' then 'send_packet' which might log?
+                # In trace, Client logs CREATED... wait, look at trace.
+                # c1: CREATED Src: c1 -> Dst: c3
+                # But trace also says: c1: SENT ... c1: FORWARDED -> p1?
+                # Wait, trace output shows:
+                # [1768407135.8014] c2: SENT 
+                # [1768407135.8042] p2: RECEIVED FINAL DELIVERY
+                # It seems Clients log SENT, but maybe not FORWARDED?
+                # Let's fix loop to handle 'next_hop' field.
+                
+                if not target or pd.isna(target):
+                    # Check if event has 'dst' and it's a direct send?
+                    # Usually FORWARDED has next_hop.
+                    continue
+                    
+                target = str(target)
+                edge_key = (src_node, target)
+                
+                edges[edge_key]['attempts'] += 1
+                
+                # Check if Redirected (Only exists on same node?)
+                # Trace says: e1: REDIRECTED ... -> i4, then e1: FORWARDED -> i2? No.
+                # Trace: e1: REDIRECTED ... -> i3 ; e1: FORWARDED -> i2? 
+                # Wait, look at trace log: 'e1: REDIRECTED ... -> i3' then 'e1: FORWARDED -> i2' ... wait line 384/385 in trace.
+                # [time] e1: REDIRECTED ... -> i3
+                # [time] e1: FORWARDED -> i2
+                # That looks weird. Did I log both?
+                # MixNode code: 
+                # if not success and backup: log REDIRECTED... then send_packet(backup).
+                # send_packet might log FORWARDED if successful?
+                # Ah, if redirected, the 'next_hop' in the log message of REDIRECTED is the backup.
+                
+                is_redirect = False
+                if e['event_type'] == 'REDIRECTED':
+                    edges[edge_key]['redirects'] += 1
+                    is_redirect = True
+                
+                # Check for success (RECEIVED at target)
+                # Look ahead in events
+                found_recv = False
+                for j in range(i+1, len(events)):
+                    next_e = events[j]
+                    if str(next_e['node_id']) == target and \
+                       (next_e['event_type'] == 'RECEIVED' or next_e['event_type'] == 'RECEIVED FINAL DELIVERY'):
+                        found_recv = True
+                        break
+                
+                if found_recv:
+                    edges[edge_key]['success'] += 1
+                    
+    # 2. Construct Graph
+    for (u, v), stats in edges.items():
+        if u == 'nan' or v == 'nan' or u == 'None' or v == 'None': continue
+        
+        success_rate = stats['success'] / stats['attempts'] if stats['attempts'] > 0 else 0
+        loss_rate = 1.0 - success_rate
+        
+        # Color: Green -> Red based on loss
+        # Or: Blue for normal, Orange for Redirects
+        
+        color = 'black' # default
+        if stats['redirects'] > 0:
+            color = 'orange'
+        elif loss_rate > 0.0:
+            # Gradient from Green to Red? Or just Red if significant loss?
+            if loss_rate > 0.2: color = 'red'
+            elif loss_rate > 0.05: color = '#CC9900' # Gold
+            else: color = 'green'
+        else:
+            color = 'green'
+            
+        width = 1.0 + math.log(stats['attempts'] + 1) * 0.5
+        
+        G.add_edge(u, v, weight=stats['attempts'], color=color, 
+                   label=f"{stats['attempts']} (L:{loss_rate:.1%})",
+                   penwidth=width)
+
+    # 3. Draw
+    if len(G.nodes) == 0: return
+
+    plt.figure(figsize=(12, 12))
+    
+    # Layout - Layered if possible
+    # Detect layers by name heuristic
+    # c* -> Layer 0
+    # p* -> Layer 1
+    # e* -> Layer 2
+    # i* -> Layer 3
+    # x* -> Layer 4
+    # (recipients also c*, handled by layer 0 or 5?)
+    
+    layers = {}
+    for node in G.nodes():
+        if node.startswith('c'): layers[node] = 0
+        elif node.startswith('p'): layers[node] = 1
+        elif node.startswith('e'): layers[node] = 2
+        elif node.startswith('i'): layers[node] = 3
+        elif node.startswith('x'): layers[node] = 4
+        else: layers[node] = 5
+        
+    # Organize into shells
+    shells = [[], [], [], [], [], []]
+    for node, layer in layers.items():
+        if layer < len(shells):
+            shells[layer].append(node)
+            
+    # Remove empty shells
+    shells = [s for s in shells if s]
+    
+    try:
+        pos = nx.shell_layout(G, nlist=shells)
+    except:
+        pos = nx.spring_layout(G)
+        
+    edges = G.edges(data=True)
+    colors = [d['color'] for u, v, d in edges]
+    widths = [d.get('penwidth', 1) for u, v, d in edges]
+    
+    # Nodes
+    nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=500, alpha=0.9)
+    # Edges
+    nx.draw_networkx_edges(G, pos, edge_color=colors, width=widths, arrowstyle='->', arrowsize=15, connectionstyle='arc3,rad=0.1')
+    # Labels
+    nx.draw_networkx_labels(G, pos, font_size=8, font_family='sans-serif')
+    
+    # Edge Labels (only for heavy traffic or high loss to avoid clutter)
+    # edge_labels = { (u,v): d['label'] for u,v,d in edges if d['weight'] > 5 }
+    # nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=6)
+    
+    plt.title("Network Traffic Flow & Anomalies (Red=Loss, Orange=Redirect)")
+    plt.axis('off')
+    
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    plt.close()
+
+# --- Original Analysis Functions (Kept for compatibility/metrics) ---
+
+def calculate_metrics(df, config=None):
     """
-    Calculates latency, loss, and other metrics.
+    Calculates metrics including:
+    - Packet Loss Rate (Network Level)
+    - Message Delivery Rate (Application Level - Heuristic Grouping)
+    - Latency statistics
+    - Fault Tolerance counts (Retransmissions, Redirects)
     """
     if df.empty:
-        return {}
+        return None
 
-    total_sent = len(df)
-    received_df = df.dropna(subset=['t_received'])
-    total_received = len(received_df)
+    # 1. Network Level Metrics (Raw Packets)
+    # Sent: CREATED events (Source Intent)
+    sent_df = df[df['event_type'] == 'CREATED'].drop_duplicates(subset=['packet_id'])
+    # Received: RECEIVED events at Clients (Final Delivery)
+    # Using 'RECEIVED FINAL DELIVERY' if available (added in Trace logic?) or just RECEIVED at Client
+    # Trace logic relies on raw logs. Let's see what parse_logs does.
+    # Assuming 'RECEIVED' at client is final.
+    recv_df = df[(df['event_type'] == 'RECEIVED') & (df['node_id'].str.startswith(('c', 'Client')))].drop_duplicates(subset=['packet_id'])
     
-    loss_rate = (total_sent - total_received) / total_sent if total_sent > 0 else 0
+    total_sent = len(sent_df)
+    total_received = len(recv_df)
     
-    # Suppress SettingWithCopyWarning
-    received_df = received_df.copy()
-    received_df.loc[:, 'latency'] = received_df['t_received'] - received_df['t_sent']
-    
-    avg_latency = received_df['latency'].mean()
-    max_latency = received_df['latency'].max()
-    min_latency = received_df['latency'].min()
-    jitter = received_df['latency'].std()
+    # Packet Loss
+    loss_rate = 1.0 - (total_received / total_sent) if total_sent > 0 else 0.0
 
-    return {
+    # Latency (Raw)
+    merged = pd.merge(sent_df[['packet_id', 'timestamp']], recv_df[['packet_id', 'timestamp']], on='packet_id', suffixes=('_sent', '_recv'))
+    merged['latency'] = merged['timestamp_recv'] - merged['timestamp_sent']
+    
+    packet_metrics = {
         'total_sent': total_sent,
         'total_received': total_received,
         'loss_rate': loss_rate,
-        'avg_latency': avg_latency,
-        'max_latency': max_latency,
-        'min_latency': min_latency,
-        'jitter': jitter,
-        'received_df': received_df
+        'avg_latency': merged['latency'].mean() if not merged.empty else 0,
+        'max_latency': merged['latency'].max() if not merged.empty else 0,
+        'min_latency': merged['latency'].min() if not merged.empty else 0,
     }
 
-def plot_latency_histogram(df, output_path):
-    plt.figure(figsize=(10, 6))
-    plt.hist(df['latency'], bins=50, alpha=0.7, color='blue', edgecolor='black')
-    plt.title('Message Latency Distribution')
-    plt.xlabel('Latency (s)')
-    plt.ylabel('Frequency')
-    plt.grid(True, alpha=0.3)
-    plt.savefig(output_path)
-    plt.close()
-
-def plot_entropy_distribution(entropy_series, output_path):
-    if entropy_series.empty:
-        return
-    plt.figure(figsize=(10, 6))
-    plt.hist(entropy_series, bins=20, alpha=0.7, color='purple', edgecolor='black')
-    plt.title('Global Entropy (Anonymity Set) Distribution')
-    plt.xlabel('Entropy (bits)')
-    plt.ylabel('Frequency')
-    plt.grid(True, alpha=0.3)
-    plt.savefig(output_path)
-    plt.close()
-
-def plot_throughput(received_df, output_path, bin_size=1.0):
-    if received_df.empty:
-        return
+    # 2. Application Level Metrics (Messages)
+    # Heuristic: Group SENT/CREATED packets from same Src->Dst within small time window (e.g. 100ms)
+    
+    # Use sent_df which has CREATED events
+    train = sent_df.sort_values(['src', 'dst', 'timestamp'])
+    
+    unique_messages = 0
+    messages_delivered = 0
+    
+    if len(train) > 0:
+        values = train.to_dict('records')
+        current_group = [values[0]]
         
-    start_time = received_df['t_received'].min()
-    end_time = received_df['t_received'].max()
-    
-    if pd.isna(start_time) or pd.isna(end_time):
-        return
+        # Helper set of delivered packet IDs
+        delivered_ids = set(recv_df['packet_id'])
+        
+        for i in range(1, len(values)):
+            prev = current_group[-1]
+            curr = values[i]
+            
+            # Condition: Same Src, Same Dst, Time Diff < 0.1s
+            is_same_msg = (curr['src'] == prev['src']) and \
+                          (curr['dst'] == prev['dst']) and \
+                          (curr['timestamp'] - prev['timestamp'] < 0.1)
+                          
+            if is_same_msg:
+                current_group.append(curr)
+            else:
+                # Process finished group
+                unique_messages += 1
+                if any(p['packet_id'] in delivered_ids for p in current_group):
+                    messages_delivered += 1
+                current_group = [curr]
+        
+        # Last group
+        unique_messages += 1
+        if any(p['packet_id'] in delivered_ids for p in current_group):
+            messages_delivered += 1
 
-    bins = np.arange(start_time, end_time + bin_size, bin_size)
+    msg_loss_rate = 1.0 - (messages_delivered / unique_messages) if unique_messages > 0 else 0.0
+        
+    packet_metrics.update({
+        'msgs_sent': unique_messages,
+        'msgs_received': messages_delivered,
+        'msg_loss_rate': msg_loss_rate
+    })
     
-    # Count packets per bin
-    counts, _ = np.histogram(received_df['t_received'], bins=bins)
+    # 3. Fault Tolerance Counts
+    packet_metrics['redirect_count'] = len(df[df['event_type'] == 'REDIRECTED'])
     
-    # Convert bin edges to relative time
-    relative_time = bins[:-1] - start_time
-    
-    plt.figure(figsize=(10, 6))
-    plt.plot(relative_time, counts, marker='o', linestyle='-')
-    plt.title('Throughput over Time')
-    plt.xlabel('Time (s)')
-    plt.ylabel('Packets Received / sec')
-    plt.grid(True, alpha=0.3)
-    plt.savefig(output_path)
-    plt.close()
+    if 'flags' in df.columns:
+        resent_mask = df['flags'].astype(str).str.contains('retransmission', case=False, na=False)
+        packet_metrics['retrans_count'] = resent_mask.sum()
+    else:
+        packet_metrics['retrans_count'] = 0
+
+    return packet_metrics
 
 def analyze_single_run(log_dir):
-    """Analyzes a single test run directory."""
     print(f"\nAnalyzing logs in: {log_dir}")
-    
-    # Create analysis_results subdirectory
     output_dir = os.path.join(log_dir, "analysis_results")
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -307,89 +431,94 @@ def analyze_single_run(log_dir):
     traffic_df, mix_df = parse_logs(log_dir)
     
     if traffic_df.empty:
-        print("No traffic data found to analyze.")
+        print("No traffic data found.")
         return
 
-    metrics = calculate_metrics(traffic_df)
-    global_metrics, entropy_df = calculate_global_metrics(traffic_df)
-    # mix_metrics, mix_stats_df = calculate_mix_metrics(mix_df) # REMOVED in favor of global
-    overhead_ratio = calculate_overhead(traffic_df, mix_df)
-    
-    print("-" * 30)
-    print("Analysis Results:")
-    print(f"Total Packets Sent: {metrics['total_sent']}")
-    print(f"Total Packets Received: {metrics['total_received']}")
-    print(f"Loss Rate: {metrics['loss_rate']:.2%}")
-    print(f"Network Overhead Ratio: {overhead_ratio:.2f}x")
-    
-    if metrics['total_received'] > 0:
-        # Plots
-        received_df = metrics['received_df']
-        plot_latency_histogram(received_df, os.path.join(output_dir, "latency_histogram.png"))
-        plot_throughput(received_df, os.path.join(output_dir, "throughput_timeseries.png"))
-        
-        if entropy_df is not None and not entropy_df.empty:
-            plot_entropy_distribution(entropy_df['global_entropy'], os.path.join(output_dir, "global_entropy_distribution.png"))
+    # 1. Trace Report (The new feature)
+    trace_path = os.path.join(output_dir, "packet_trace.txt")
+    generate_trace_report(traffic_df, mix_df, trace_path)
+    print(f"Trace report generated at {trace_path}")
 
-        print(f"Plots saved to {output_dir}")
+    # 2. Network Graph (The requested visualization)
+    graph_path = os.path.join(output_dir, "traffic_graph.png")
+    try:
+        generate_network_graph(traffic_df, mix_df, graph_path)
+        print(f"Graph generated at {graph_path}")
+    except Exception as e:
+        print(f"Graph generation failed: {e}")
+
+    # 3. Standard Metrics
+    # Load config to check for parallel_paths k
+    config_path = os.path.join(log_dir, "config.json")
+    config = {}
+    if os.path.exists(config_path):
+        import json
+        try:
+             with open(config_path, 'r') as f:
+                config = json.load(f)
+        except: pass
         
-        # Save summary to text file
+    metrics = calculate_metrics(traffic_df, config)
+    
+    if metrics:
+        print("-" * 30)
+        print(f"Packets Sent: {metrics['total_sent']}")
+        print(f"Packets Arrived: {metrics['total_received']}")
+        print(f"Loss Rate: {metrics['loss_rate']:.2%}")
+        print(f"Messages Sent: {metrics['msgs_sent']}")
+        print(f"Messages Arrived: {metrics['msgs_received']}")
+        print(f"Msg Loss Rate: {metrics['msg_loss_rate']:.2%}")
+        
         with open(os.path.join(output_dir, "analysis_summary.txt"), "w") as f:
-            f.write("Analysis Results:\n")
-            f.write(f"Total Packets Sent: {metrics['total_sent']}\n")
-            f.write(f"Total Packets Received: {metrics['total_received']}\n")
-            f.write(f"Loss Rate: {metrics['loss_rate']:.2%}\n")
-            f.write(f"Network Overhead Ratio: {overhead_ratio:.2f}x\n")
-            f.write(f"Average Latency: {metrics['avg_latency']:.4f} s\n")
-            f.write(f"Max Latency: {metrics['max_latency']:.4f} s\n")
-            f.write(f"Min Latency: {metrics['min_latency']:.4f} s\n")
-            f.write(f"Jitter (Std Dev): {metrics['jitter']:.4f} s\n")
-            if entropy_df is not None and not entropy_df.empty:
-                f.write(f"Avg Global Anonymity Set: {global_metrics['avg_global_pool_size']:.2f} packets\n")
-                f.write(f"Avg Global Entropy: {global_metrics['avg_global_entropy']:.4f} bits\n")
-                f.write(f"Max Global Entropy: {global_metrics['max_global_entropy']:.4f} bits\n")
-
-    else:
-        print("No packets received, cannot calculate latency or throughput.")
+            f.write("Analysis Metrics:\n")
+            f.write(f"packets sent: {metrics['total_sent']}\n")
+            f.write(f"packets arrived: {metrics['total_received']}\n")
+            f.write(f"packet loss: {metrics['total_sent'] - metrics['total_received']}\n")
+            f.write(f"loss rate: {metrics['loss_rate']:.2%}\n\n")
+            
+            f.write(f"individual packets sent: {metrics['msgs_sent']}\n")
+            f.write(f"individual packets arrived: {metrics['msgs_received']}\n")
+            f.write(f"individual packet loss: {metrics['msgs_sent'] - metrics['msgs_received']}\n")
+            f.write(f"individual loss rate: {metrics['msg_loss_rate']:.2%}\n\n")
+            
+            f.write(f"highest latency: {metrics['max_latency']:.4f}s\n")
+            f.write(f"lowest latency: {metrics['min_latency']:.4f}s\n")
+            f.write(f"average latency: {metrics['avg_latency']:.4f}s\n\n")
+            
+            f.write("Mechanisms:\n")
+            f.write(f"packets retransmitted: {metrics.get('retrans_count', 0)}\n")
+            f.write(f"backup events: {metrics.get('redirect_count', 0)}\n")
+            
+            # Config info
+            parallel = 1
+            if config.get('features', {}).get('parallel_paths', False):
+                # How to guess k if not in config? Assuming 2 or 3.
+                # Or calculate avg packets per msg?
+                avg_copies = metrics['total_sent'] / metrics['msgs_sent'] if metrics['msgs_sent'] > 0 else 0
+                f.write(f"parallel k (inferred): {avg_copies:.2f}\n")
+            else:
+                f.write("parallel k: 1 (disabled)\n")
+                
+            f.write(f"paths reestablished: N/A\n") # Placeholder as requested if not tracking
 
 def main():
-    parser = argparse.ArgumentParser(description="Analyze Mixnet Test Run Logs")
-    parser.add_argument("path", help="Path to a single test run or a base logs directory containing multiple runs")
-    parser.add_argument("--force", action="store_true", help="Re-analyze even if analysis_results exists")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("path", help="Path to logs")
     args = parser.parse_args()
-
-    target_path = args.path
-    if not os.path.exists(target_path):
-        print(f"Path not found: {target_path}")
-        return
-
-    # Check if this is a single run (contains a csv file directly?) OR check directory name format?
-    # Heuristic: If it contains 's*_traffic.csv' or 'c*_traffic.csv', it's a run.
-    has_legacy = len(glob.glob(os.path.join(target_path, "s*_traffic.csv"))) > 0
-    has_client = len(glob.glob(os.path.join(target_path, "c*_traffic.csv"))) > 0
-    is_single_run = has_legacy or has_client
     
-    if is_single_run:
-        analyze_single_run(target_path)
-    else:
-        # Assume it's a base directory containing 'Testrun_...' subdirs
-        print(f"Scanning {target_path} for Testrun directories...")
-        processed_count = 0
-        
-        # List subdirectories that look like Timestamps or start with Testrun
-        for entry in os.scandir(target_path):
-            if entry.is_dir() and "Testrun" in entry.name:
-                run_dir = entry.path
-                analysis_path = os.path.join(run_dir, "analysis_results")
-                
-                if os.path.exists(analysis_path) and not args.force:
-                    print(f"Skipping {entry.name} (Already analyzed)")
-                    continue
-                    
-                analyze_single_run(run_dir)
-                processed_count += 1
-                
-        print(f"\nBatch analysis complete. Analyzed {processed_count} runs.")
+    target = args.path
+    
+    # Logic to handle single run or directory of runs
+    if os.path.isdir(target):
+        # Check if it's a single run (has csvs)
+        if glob.glob(os.path.join(target, "*_traffic.csv")):
+            analyze_single_run(target)
+        else:
+            # Recursive / Batch
+            print(f"Scanning {target}...")
+            for entry in os.scandir(target):
+                if entry.is_dir() and "Testrun" in entry.name:
+                    analyze_single_run(entry.path)
 
 if __name__ == "__main__":
     main()

@@ -5,8 +5,9 @@ import base64
 
 class Packet:
 
-    def __init__(self, payload, destination, src=None, route=None, packet_id=None, timestamp=None, type="PLAIN"):
+    def __init__(self, payload, destination, src=None, route=None, packet_id=None, timestamp=None, type="PLAIN", message_id=None):
         self.packet_id = packet_id or str(uuid.uuid4())
+        self.message_id = message_id or str(uuid.uuid4()) # Logical Message ID
         self.timestamp = timestamp or time.time()
         self.src = src or "unknown"
         self.destination = destination
@@ -23,6 +24,7 @@ class Packet:
             
         return json.dumps({
             "id": self.packet_id,
+            "mid": self.message_id,
             "ts": self.timestamp,
             "src": self.src,
             "dst": self.destination,
@@ -52,6 +54,7 @@ class Packet:
             src=data.get("src"),
             route=data.get("route", []),
             packet_id=data["id"],
+            message_id=data.get("mid"), # Load logical ID
             timestamp=data["ts"],
             type=pkt_type
         )

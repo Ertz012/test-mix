@@ -205,37 +205,24 @@ class Client(Node):
                 surb = SURB(self.hostname, return_route)
                 surb_data = surb.to_dict()
 
-            base_id = None
+            # Generate a specific Message ID for this logical message
+            msg_uuid = str(uuid.uuid4())
+            
             for i, path in enumerate(paths):
                 # Create Inner Packet
-                packet = Packet(payload, dest, route=path, src=self.hostname)
-                
-                # Shared ID for parallel paths (so receiver knows they are copies)
-                if i == 0:
-                    base_id = packet.packet_id
-                else:
-                    packet.packet_id = base_id
+                # Each packet gets a unique packet_id (physical), but shares message_id (logical)
+                packet = Packet(payload, dest, route=path, src=self.hostname, message_id=msg_uuid)
                 
                 if surb_data:
                     packet.flags['surb'] = surb_data
 
                 # --- FEATURE: Reliability ---
-                # Track the ORIGINAL inner packet
+                # Track the packet for retransmission (using message_id?)
                 if self.config['features'].get('retransmission', False):
                     self.reliability.track_packet(packet)
                 
                 # Send (Wrap in Onion)
-                self._send_onion_packet(packet.payload, path, dest)
-                # Note: _send_onion_packet creates a new inner packet internally in current impl.
-                # We need to pass the FULL inner packet logic to _send_onion_packet or refactor it.
-                # _send_onion_packet currently takes (payload, path, final_dest).
-                # It creates a new Packet(payload...).
-                # This breaks ID tracking and SURB attachment.
-                
-                # REFACTORING ON THE FLY:
-                # We should use a lower-level helper that takes the PRE-BUILT inner packet.
-                # self._send_onion_packet is too high level.
-                
+                # Use helper that accepts the pre-built packet
                 self._send_prepared_project(packet, path)
 
     def _send_prepared_project(self, packet, path):

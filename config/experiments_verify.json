@@ -1,0 +1,19 @@
+[
+  {
+    "name": "verify_parallel_paths",
+    "description": "Verification of message_id tracking with parallel paths",
+    "error_injection": "none",
+    "config_overrides": {
+        "traffic": {
+            "mode": "random",
+            "duration_sec": 15,
+            "interval_sec": 0.1
+        },
+        "features": {
+            "parallel_paths": true,
+            "dummy_traffic": false, 
+            "retransmission": false
+        }
+    }
+  }
+]

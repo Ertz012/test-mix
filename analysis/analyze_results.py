@@ -186,21 +186,14 @@ def generate_network_graph(traffic_df, mix_df, output_path):
         for i, e in enumerate(events):
             src_node = str(e['node_id'])
             
-            if e['event_type'] == 'FORWARDED' or e['event_type'] == 'CREATED':
+            if e['event_type'] == 'FORWARDED' or e['event_type'] == 'CREATED' or e['event_type'] == 'REDIRECTED' or e['event_type'] == 'SENT':
                 target = e.get('next_hop')
-                # If CREATED and no next_hop explicit? Client usually logs 'CREATED' then 'send_packet' which might log?
-                # In trace, Client logs CREATED... wait, look at trace.
-                # c1: CREATED Src: c1 -> Dst: c3
-                # But trace also says: c1: SENT ... c1: FORWARDED -> p1?
-                # Wait, trace output shows:
-                # [1768407135.8014] c2: SENT 
-                # [1768407135.8042] p2: RECEIVED FINAL DELIVERY
-                # It seems Clients log SENT, but maybe not FORWARDED?
-                # Let's fix loop to handle 'next_hop' field.
+                
+                # Handle direct sends if PREV hop is missing?
+                # But here we focus on FROM node -> TO node.
+                # If SENT, next_hop is usually First Hop.
                 
                 if not target or pd.isna(target):
-                    # Check if event has 'dst' and it's a direct send?
-                    # Usually FORWARDED has next_hop.
                     continue
                     
                 target = str(target)
@@ -208,22 +201,8 @@ def generate_network_graph(traffic_df, mix_df, output_path):
                 
                 edges[edge_key]['attempts'] += 1
                 
-                # Check if Redirected (Only exists on same node?)
-                # Trace says: e1: REDIRECTED ... -> i4, then e1: FORWARDED -> i2? No.
-                # Trace: e1: REDIRECTED ... -> i3 ; e1: FORWARDED -> i2? 
-                # Wait, look at trace log: 'e1: REDIRECTED ... -> i3' then 'e1: FORWARDED -> i2' ... wait line 384/385 in trace.
-                # [time] e1: REDIRECTED ... -> i3
-                # [time] e1: FORWARDED -> i2
-                # That looks weird. Did I log both?
-                # MixNode code: 
-                # if not success and backup: log REDIRECTED... then send_packet(backup).
-                # send_packet might log FORWARDED if successful?
-                # Ah, if redirected, the 'next_hop' in the log message of REDIRECTED is the backup.
-                
-                is_redirect = False
                 if e['event_type'] == 'REDIRECTED':
                     edges[edge_key]['redirects'] += 1
-                    is_redirect = True
                 
                 # Check for success (RECEIVED at target)
                 # Look ahead in events
@@ -246,15 +225,14 @@ def generate_network_graph(traffic_df, mix_df, output_path):
         loss_rate = 1.0 - success_rate
         
         # Color: Green -> Red based on loss
-        # Or: Blue for normal, Orange for Redirects
+        # Orange for Redirects
         
         color = 'black' # default
         if stats['redirects'] > 0:
             color = 'orange'
         elif loss_rate > 0.0:
-            # Gradient from Green to Red? Or just Red if significant loss?
             if loss_rate > 0.2: color = 'red'
-            elif loss_rate > 0.05: color = '#CC9900' # Gold
+            elif loss_rate > 0.05: color = '#CC9900' # Gold (Moderate Loss)
             else: color = 'green'
         else:
             color = 'green'
@@ -365,43 +343,68 @@ def calculate_metrics(df, config=None):
     }
 
     # 2. Application Level Metrics (Messages)
-    # Heuristic: Group SENT/CREATED packets from same Src->Dst within small time window (e.g. 100ms)
-    
-    # Use sent_df which has CREATED events
-    train = sent_df.sort_values(['src', 'dst', 'timestamp'])
-    
-    unique_messages = 0
-    messages_delivered = 0
-    
-    if len(train) > 0:
-        values = train.to_dict('records')
-        current_group = [values[0]]
-        
-        # Helper set of delivered packet IDs
-        delivered_ids = set(recv_df['packet_id'])
-        
-        for i in range(1, len(values)):
-            prev = current_group[-1]
-            curr = values[i]
+    # If message_id is available, use it for exact counting
+    if 'message_id' in sent_df.columns and not sent_df['message_id'].isna().all():
+        # Precise Counting
+        unique_msgs_sent = sent_df['message_id'].nunique()
+        # Delivered? Check if ANY packet with that message_id arrived
+        # Received DF needs message_id too. Merging?
+        # Received events usually have the same fields as Created if parsed correctly.
+        # Check recv_df
+        if 'message_id' in recv_df.columns:
+            delivered_msg_ids = set(recv_df['message_id'])
+            unique_msgs_delivered = len(set(sent_df['message_id']).intersection(delivered_msg_ids))
+        else:
+            # Fallback: Link by packet_id
+            # Mapping packet_id -> message_id from sent_df
+            pid_to_mid = pd.Series(sent_df.message_id.values, index=sent_df.packet_id).to_dict()
+            delivered_pids = set(recv_df['packet_id'])
+            delivered_mids = set()
+            for pid in delivered_pids:
+                if pid in pid_to_mid:
+                    delivered_mids.add(pid_to_mid[pid])
+            unique_msgs_delivered = len(delivered_mids)
+
+        unique_messages = unique_msgs_sent
+        messages_delivered = unique_msgs_delivered
             
-            # Condition: Same Src, Same Dst, Time Diff < 0.1s
-            is_same_msg = (curr['src'] == prev['src']) and \
-                          (curr['dst'] == prev['dst']) and \
-                          (curr['timestamp'] - prev['timestamp'] < 0.1)
-                          
-            if is_same_msg:
-                current_group.append(curr)
-            else:
-                # Process finished group
-                unique_messages += 1
-                if any(p['packet_id'] in delivered_ids for p in current_group):
-                    messages_delivered += 1
-                current_group = [curr]
+    else:
+        # Heuristic: Group SENT/CREATED packets from same Src->Dst within small time window (e.g. 100ms)
+        # Use sent_df which has CREATED events
+        train = sent_df.sort_values(['src', 'dst', 'timestamp'])
         
-        # Last group
-        unique_messages += 1
-        if any(p['packet_id'] in delivered_ids for p in current_group):
-            messages_delivered += 1
+        unique_messages = 0
+        messages_delivered = 0
+        
+        if len(train) > 0:
+            values = train.to_dict('records')
+            current_group = [values[0]]
+            
+            # Helper set of delivered packet IDs
+            delivered_ids = set(recv_df['packet_id'])
+            
+            for i in range(1, len(values)):
+                prev = current_group[-1]
+                curr = values[i]
+                
+                # Condition: Same Src, Same Dst, Time Diff < 0.1s
+                is_same_msg = (curr['src'] == prev['src']) and \
+                              (curr['dst'] == prev['dst']) and \
+                              (curr['timestamp'] - prev['timestamp'] < 0.1)
+                              
+                if is_same_msg:
+                    current_group.append(curr)
+                else:
+                    # Process finished group
+                    unique_messages += 1
+                    if any(p['packet_id'] in delivered_ids for p in current_group):
+                        messages_delivered += 1
+                    current_group = [curr]
+            
+            # Last group
+            unique_messages += 1
+            if any(p['packet_id'] in delivered_ids for p in current_group):
+                messages_delivered += 1
 
     msg_loss_rate = 1.0 - (messages_delivered / unique_messages) if unique_messages > 0 else 0.0
         

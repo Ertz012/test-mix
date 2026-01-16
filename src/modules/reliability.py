@@ -73,10 +73,14 @@ class Reliability:
                     self.sender.logger.log(f"Re-established path for {pkt.packet_id} (avoiding {failed_route_nodes}): {new_route}")
 
                 # Resend using sender's mechanism
-                # We need to find the first hop again? 
-                # Packet route is preserved or updated.
-                first_hop = pkt.route[0]
-                if first_hop in self.sender.network_map:
-                    ip, port = self.sender.network_map[first_hop]
-                    self.sender.send_packet(pkt, ip, port)
+                # We need to re-wrap the packet in onion layers (encryption)
+                # and generate a new physical packet ID for this attempt, preserving message_id.
+                pkt.flags['retransmission'] = True
+                pkt.packet_id = str(uuid.uuid4()) # New physical ID for the retry
+                
+                # Use _send_prepared_project if available (Client/Sender)
+                if hasattr(self.sender, '_send_prepared_project'):
+                    self.sender._send_prepared_project(pkt, pkt.route)
                     self.sender.logger.log_traffic("RESENT", pkt)
+                else:
+                    self.sender.logger.log("Sender usually has _send_prepared_project. Fallback?", "ERROR")

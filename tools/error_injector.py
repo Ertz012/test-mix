@@ -81,8 +81,8 @@ def main():
 
     elif args.mode == 'random_kill':
         # Hardcoded set of candidates if config not provided, or better logic?
-        # Let's target intermediate nodes mostly.
-        candidates = [f"i{n}" for n in range(1, 13)] # i1..i12
+        # Targeted nodes are x1..x36 (12 per layer * 3 layers)
+        candidates = [f"x{n}" for n in range(1, 37)]
         
         targets = random.sample(candidates, min(args.count, len(candidates)))
         for t in targets:

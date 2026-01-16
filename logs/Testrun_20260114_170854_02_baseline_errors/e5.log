@@ -1,0 +1,42 @@
+2026-01-14 17:08:55,564 - Node_e5 - INFO - Loading existing keys from keys/e5_private.pem
+2026-01-14 17:08:55,585 - Node_e5 - INFO - Started node on port 8000
+2026-01-14 17:08:55,600 - Node_e5 - INFO - Mixing loop started
+2026-01-14 17:08:59,056 - Node_e5 - INFO - Packet scheduled for +0.1028s. Queue size: 1
+2026-01-14 17:08:59,159 - Node_e5 - INFO - Forwarding packet 97cd69b5-09d7-4d07-9884-ce3ac10011d8 to i9
+2026-01-14 17:08:59,165 - Node_e5 - INFO - Sent packet 97cd69b5-09d7-4d07-9884-ce3ac10011d8 to i9 (10.0.0.29:8000)
+2026-01-14 17:09:03,418 - Node_e5 - INFO - Packet scheduled for +0.2252s. Queue size: 1
+2026-01-14 17:09:03,644 - Node_e5 - INFO - Forwarding packet 284bde47-f947-4f22-be9b-47a7d45cb0d8 to i3
+2026-01-14 17:09:03,650 - Node_e5 - ERROR - Failed to send to 10.0.0.23:8000: [Errno 111] Connection refused
+2026-01-14 17:09:03,651 - Node_e5 - INFO - Redirecting to backup node i4
+2026-01-14 17:09:03,658 - Node_e5 - INFO - Sent packet 284bde47-f947-4f22-be9b-47a7d45cb0d8 to i4 (10.0.0.24:8000)
+2026-01-14 17:09:06,884 - Node_e5 - INFO - Packet scheduled for +0.2352s. Queue size: 1
+2026-01-14 17:09:08,326 - Node_e5 - INFO - Packet scheduled for +0.9696s. Queue size: 1
+2026-01-14 17:09:08,714 - Node_e5 - INFO - Packet scheduled for +0.0413s. Queue size: 2
+2026-01-14 17:09:08,756 - Node_e5 - INFO - Forwarding packet 674424b2-ae65-4d95-ad7d-fb8b1c0dc0ff to i11
+2026-01-14 17:09:08,761 - Node_e5 - INFO - Sent packet 674424b2-ae65-4d95-ad7d-fb8b1c0dc0ff to i11 (10.0.0.31:8000)
+2026-01-14 17:09:09,296 - Node_e5 - INFO - Forwarding packet f80538e2-e5c6-4596-b3d5-a40b0d07ed39 to i9
+2026-01-14 17:09:09,300 - Node_e5 - INFO - Sent packet f80538e2-e5c6-4596-b3d5-a40b0d07ed39 to i9 (10.0.0.29:8000)
+2026-01-14 17:09:11,365 - Node_e5 - INFO - Packet scheduled for +0.4929s. Queue size: 1
+2026-01-14 17:09:12,201 - Node_e5 - INFO - Packet scheduled for +0.8922s. Queue size: 1
+2026-01-14 17:09:13,094 - Node_e5 - INFO - Forwarding packet 7395dfb0-8cd3-4556-870e-98c7acdb1f74 to i6
+2026-01-14 17:09:13,101 - Node_e5 - INFO - Sent packet 7395dfb0-8cd3-4556-870e-98c7acdb1f74 to i6 (10.0.0.26:8000)
+2026-01-14 17:09:15,103 - Node_e5 - INFO - Packet scheduled for +0.2323s. Queue size: 1
+2026-01-14 17:09:15,186 - Node_e5 - INFO - Packet scheduled for +1.3058s. Queue size: 2
+2026-01-14 17:09:15,336 - Node_e5 - INFO - Forwarding packet c9d1f787-aeae-4d53-a9ec-3fbd6f9c3f6a to i6
+2026-01-14 17:09:15,339 - Node_e5 - INFO - Sent packet c9d1f787-aeae-4d53-a9ec-3fbd6f9c3f6a to i6 (10.0.0.26:8000)
+2026-01-14 17:09:16,275 - Node_e5 - INFO - Packet scheduled for +0.2804s. Queue size: 2
+2026-01-14 17:09:19,142 - Node_e5 - INFO - Packet scheduled for +0.2818s. Queue size: 1
+2026-01-14 17:09:19,424 - Node_e5 - INFO - Forwarding packet 98f0b79f-3fd1-48a2-9c4f-118bed3224be to i11
+2026-01-14 17:09:19,427 - Node_e5 - INFO - Sent packet 98f0b79f-3fd1-48a2-9c4f-118bed3224be to i11 (10.0.0.31:8000)
+2026-01-14 17:09:19,498 - Node_e5 - INFO - Packet scheduled for +1.3982s. Queue size: 1
+2026-01-14 17:09:20,897 - Node_e5 - INFO - Forwarding packet 7cb61345-7f01-41c8-9c9e-1aaef5a694ba to i9
+2026-01-14 17:09:20,900 - Node_e5 - INFO - Sent packet 7cb61345-7f01-41c8-9c9e-1aaef5a694ba to i9 (10.0.0.29:8000)
+2026-01-14 17:09:21,011 - Node_e5 - INFO - Packet scheduled for +2.0229s. Queue size: 1
+2026-01-14 17:09:21,442 - Node_e5 - INFO - Packet scheduled for +0.0916s. Queue size: 2
+2026-01-14 17:09:21,534 - Node_e5 - INFO - Forwarding packet 3da4b8c1-74e2-43f8-9015-ebc85b3ef22b to i8
+2026-01-14 17:09:21,538 - Node_e5 - INFO - Sent packet 3da4b8c1-74e2-43f8-9015-ebc85b3ef22b to i8 (10.0.0.28:8000)
+2026-01-14 17:09:23,034 - Node_e5 - INFO - Forwarding packet 067c506d-5b34-4a98-853e-93d9a819aff4 to i6
+2026-01-14 17:09:23,037 - Node_e5 - INFO - Sent packet 067c506d-5b34-4a98-853e-93d9a819aff4 to i6 (10.0.0.26:8000)
+2026-01-14 17:09:26,529 - Node_e5 - INFO - Packet scheduled for +0.5448s. Queue size: 1
+2026-01-14 17:09:27,074 - Node_e5 - INFO - Forwarding packet 66968f10-cbd3-40f6-a8ab-7d3324b1f993 to i9
+2026-01-14 17:09:27,077 - Node_e5 - INFO - Sent packet 66968f10-cbd3-40f6-a8ab-7d3324b1f993 to i9 (10.0.0.29:8000)

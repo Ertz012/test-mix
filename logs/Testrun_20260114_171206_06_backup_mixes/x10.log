@@ -1,0 +1,41 @@
+2026-01-14 17:12:07,410 - Node_x10 - INFO - Loading existing keys from keys/x10_private.pem
+2026-01-14 17:12:07,411 - Node_x10 - INFO - Started node on port 8000
+2026-01-14 17:12:07,416 - Node_x10 - INFO - Mixing loop started
+2026-01-14 17:12:14,818 - Node_x10 - INFO - Packet scheduled for +0.4617s. Queue size: 1
+2026-01-14 17:12:23,667 - Node_x10 - INFO - Packet scheduled for +2.3984s. Queue size: 1
+2026-01-14 17:12:25,906 - Node_x10 - INFO - Packet scheduled for +0.1709s. Queue size: 2
+2026-01-14 17:12:26,009 - Node_x10 - INFO - Packet scheduled for +0.0033s. Queue size: 3
+2026-01-14 17:12:26,066 - Node_x10 - INFO - Forwarding packet 996363ee-76c6-4979-a53b-b7d6449e7250 to x3
+2026-01-14 17:12:26,073 - Node_x10 - INFO - Sent packet 996363ee-76c6-4979-a53b-b7d6449e7250 to x3 (10.0.0.35:8000)
+2026-01-14 17:12:26,073 - Node_x10 - INFO - Forwarding packet 872ab106-812e-4b73-8667-4f9cf3211fa6 to e9
+2026-01-14 17:12:26,083 - Node_x10 - INFO - Sent packet 872ab106-812e-4b73-8667-4f9cf3211fa6 to e9 (10.0.0.17:8000)
+2026-01-14 17:12:26,279 - Node_x10 - INFO - Packet scheduled for +2.0401s. Queue size: 1
+2026-01-14 17:12:28,319 - Node_x10 - INFO - Forwarding packet 363f2a16-2b62-4aa7-ba77-a8997560666a to i4
+2026-01-14 17:12:28,330 - Node_x10 - INFO - Sent packet 363f2a16-2b62-4aa7-ba77-a8997560666a to i4 (10.0.0.24:8000)
+2026-01-14 17:12:30,560 - Node_x10 - INFO - Packet scheduled for +0.0427s. Queue size: 1
+2026-01-14 17:12:30,603 - Node_x10 - INFO - Forwarding packet 6162614e-375d-4145-b61e-88e907c10169 to e3
+2026-01-14 17:12:30,613 - Node_x10 - INFO - Sent packet 6162614e-375d-4145-b61e-88e907c10169 to e3 (10.0.0.11:8000)
+2026-01-14 17:12:32,748 - Node_x10 - INFO - Packet scheduled for +0.1898s. Queue size: 1
+2026-01-14 17:12:32,938 - Node_x10 - INFO - Forwarding packet 3c3afac3-7166-4e1f-95c0-1b26df75e88e to i9
+2026-01-14 17:12:32,943 - Node_x10 - INFO - Sent packet 3c3afac3-7166-4e1f-95c0-1b26df75e88e to i9 (10.0.0.29:8000)
+2026-01-14 17:12:33,759 - Node_x10 - INFO - Packet scheduled for +1.6147s. Queue size: 1
+2026-01-14 17:12:34,775 - Node_x10 - INFO - Packet scheduled for +0.0623s. Queue size: 2
+2026-01-14 17:12:34,865 - Node_x10 - INFO - Forwarding packet 5eced1b5-95cc-40f6-bf69-8668acb486da to x11
+2026-01-14 17:12:34,870 - Node_x10 - INFO - Sent packet 5eced1b5-95cc-40f6-bf69-8668acb486da to x11 (10.0.0.43:8000)
+2026-01-14 17:12:35,374 - Node_x10 - INFO - Forwarding packet 78dc32aa-48c7-44fe-8a37-8dbe43e1c05d to i5
+2026-01-14 17:12:35,378 - Node_x10 - ERROR - Failed to send to 10.0.0.25:8000: [Errno 111] Connection refused
+2026-01-14 17:12:35,379 - Node_x10 - INFO - Redirecting to backup node i6
+2026-01-14 17:12:35,381 - Node_x10 - INFO - Sent packet 78dc32aa-48c7-44fe-8a37-8dbe43e1c05d to i6 (10.0.0.26:8000)
+2026-01-14 17:12:35,949 - Node_x10 - INFO - Packet scheduled for +0.6299s. Queue size: 1
+2026-01-14 17:12:36,222 - Node_x10 - INFO - Packet scheduled for +0.7299s. Queue size: 2
+2026-01-14 17:12:36,390 - Node_x10 - INFO - Packet scheduled for +1.2160s. Queue size: 3
+2026-01-14 17:12:36,579 - Node_x10 - INFO - Forwarding packet 1624c8d1-35d9-429d-a387-293ca1f12c57 to x3
+2026-01-14 17:12:36,586 - Node_x10 - INFO - Sent packet 1624c8d1-35d9-429d-a387-293ca1f12c57 to x3 (10.0.0.35:8000)
+2026-01-14 17:12:36,952 - Node_x10 - INFO - Forwarding packet b4711fcf-672c-412f-a16a-79f4203f9280 to e3
+2026-01-14 17:12:36,962 - Node_x10 - INFO - Sent packet b4711fcf-672c-412f-a16a-79f4203f9280 to e3 (10.0.0.11:8000)
+2026-01-14 17:12:37,606 - Node_x10 - INFO - Forwarding packet 301ec7a6-e619-4d33-a601-72cf4d3754ea to i11
+2026-01-14 17:12:37,607 - Node_x10 - INFO - Sent packet 301ec7a6-e619-4d33-a601-72cf4d3754ea to i11 (10.0.0.31:8000)
+2026-01-14 17:12:38,733 - Node_x10 - INFO - Packet scheduled for +0.2881s. Queue size: 1
+2026-01-14 17:12:39,022 - Node_x10 - INFO - Forwarding packet 7bfda70c-8824-4fce-aa4c-7af30c7199ef to x7
+2026-01-14 17:12:39,025 - Node_x10 - INFO - Sent packet 7bfda70c-8824-4fce-aa4c-7af30c7199ef to x7 (10.0.0.39:8000)
+2026-01-14 17:12:40,725 - Node_x10 - INFO - Packet scheduled for +0.5431s. Queue size: 1

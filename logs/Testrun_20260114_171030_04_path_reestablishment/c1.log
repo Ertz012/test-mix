@@ -1,0 +1,499 @@
+2026-01-14 17:10:31,065 - Node_c1 - INFO - Started node on port 8000
+2026-01-14 17:10:33,066 - Node_c1 - INFO - Starting traffic generation threads...
+2026-01-14 17:10:33,342 - Node_c1 - INFO - Sent packet 9ba9729e-e514-4b04-9281-6395f1d7c88a to p1 (10.0.0.6:8000)
+2026-01-14 17:10:33,476 - Node_c1 - INFO - Sent packet 26df4a72-9de9-4654-8433-1a202b794c20 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:33,880 - Node_c1 - INFO - Sent packet 9db1c34b-ef33-4993-83f8-fdc62156e0e8 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:33,898 - Node_c1 - INFO - Sent packet 96caf62c-842d-42d5-85b0-512d900a9001 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:34,025 - Node_c1 - INFO - Sent packet 4e32abea-95ad-42f9-9042-ad52fc47cef7 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:34,072 - Node_c1 - INFO - Sent packet 0cb5fe45-6505-4ccb-bbe3-5b32b4c9ba48 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:34,446 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 1.4457s
+2026-01-14 17:10:34,450 - Node_c1 - INFO - Sent packet e46234bf-f6e4-41b0-b5c9-71605d538515 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:34,451 - Node_c1 - INFO - Sent ACK for 734d85da-e4aa-4f17-b472-55e8a23328ae to c2
+2026-01-14 17:10:34,478 - Node_c1 - INFO - Sent packet a6df0271-d67d-48d7-a2a6-f8499d57d79c to p1 (10.0.0.6:8000)
+2026-01-14 17:10:34,485 - Node_c1 - INFO - Sent packet 5de504ee-8843-435b-b37e-3de9716704a2 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:34,582 - Node_c1 - INFO - Sent packet 28f5e7a5-a848-4945-8114-92720473f36d to p1 (10.0.0.6:8000)
+2026-01-14 17:10:34,673 - Node_c1 - INFO - Sent packet bc1a9a5c-43cc-4c5e-9247-5b79694723b8 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:34,751 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 0.8285s
+2026-01-14 17:10:34,755 - Node_c1 - INFO - Sent packet be7a56bb-a383-4bac-93de-d2b10a71c966 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:34,755 - Node_c1 - INFO - Sent ACK for 262fe12b-ead7-48a7-a71c-073ec83067c6 to c5
+2026-01-14 17:10:35,071 - Node_c1 - INFO - Sent packet faa4e35a-3d7c-44f3-b155-ef3fe089f339 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:35,136 - Node_c1 - INFO - Sent packet 155536f3-024a-4474-b60b-f168851e87fe to p1 (10.0.0.6:8000)
+2026-01-14 17:10:35,275 - Node_c1 - INFO - Sent packet be44537d-d3dc-4738-b8fc-558273a16422 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:35,474 - Node_c1 - INFO - Sent packet f2492e8c-9ef8-46ae-b7f2-72da5ff5129e to p1 (10.0.0.6:8000)
+2026-01-14 17:10:35,534 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.8065s
+2026-01-14 17:10:35,538 - Node_c1 - INFO - Sent packet c23f4eab-e252-451f-aa85-9ff4d6af3b32 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:35,539 - Node_c1 - INFO - Sent ACK for e908e871-58a4-412b-887f-b38eda76c6bb to c5
+2026-01-14 17:10:35,676 - Node_c1 - INFO - Sent packet aaaa1e95-2f29-4383-9874-def6d100ee38 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:35,854 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 1.2663s
+2026-01-14 17:10:35,858 - Node_c1 - INFO - Sent packet b11d9479-6030-4ef0-b472-b56f31581787 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:35,858 - Node_c1 - INFO - Sent ACK for 54bb3ea9-42d0-4847-9398-6577d7a21daa to c2
+2026-01-14 17:10:35,879 - Node_c1 - INFO - Sent packet 8cdd3aad-d6fe-4a57-8f49-1a869e612a4e to p1 (10.0.0.6:8000)
+2026-01-14 17:10:35,941 - Node_c1 - INFO - Sent packet f5a50ef7-96ed-4851-b0fc-8b5febaf2305 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:36,271 - Node_c1 - INFO - Sent packet f3af85ec-e5f9-408d-a05e-ad8ff74b1014 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:36,677 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 2.6902s
+2026-01-14 17:10:36,681 - Node_c1 - INFO - Sent packet 5e920df2-0cc4-44af-9bc3-96ea67ae4b0c to p1 (10.0.0.6:8000)
+2026-01-14 17:10:36,682 - Node_c1 - INFO - Sent packet 65b87f00-da91-45f0-95c8-6fb5e846c381 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:36,683 - Node_c1 - INFO - Sent ACK for 0bdc9b7b-cfc7-4a10-a00b-132e5001c33c to c2
+2026-01-14 17:10:37,079 - Node_c1 - INFO - Sent packet d06e5ec4-0b94-44b9-9a11-bd308f6800c1 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:37,198 - Node_c1 - INFO - Received msg: ACK... Latency: 1.4994s
+2026-01-14 17:10:37,279 - Node_c1 - INFO - Sent packet af6b8987-c7ec-4d2e-ab82-22fc19b94363 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:37,386 - Node_c1 - INFO - Received msg: ACK... Latency: 1.6171s
+2026-01-14 17:10:37,478 - Node_c1 - INFO - Sent packet 66f6c0a0-b3fa-40a9-b832-5b485af95c6c to p1 (10.0.0.6:8000)
+2026-01-14 17:10:37,674 - Node_c1 - INFO - Sent packet 9a84b9e5-6a61-4292-92fd-78356928bc8d to p1 (10.0.0.6:8000)
+2026-01-14 17:10:37,833 - Node_c1 - INFO - Received msg: ACK... Latency: 1.7256s
+2026-01-14 17:10:38,142 - Node_c1 - INFO - Sent packet f1bb1e11-5cc2-435e-ab6a-12869a3762bc to p1 (10.0.0.6:8000)
+2026-01-14 17:10:38,177 - Node_c1 - INFO - Sent packet eb98a0b6-2b06-4db1-9235-03b8f1c950ea to p1 (10.0.0.6:8000)
+2026-01-14 17:10:38,179 - Node_c1 - INFO - Received msg: ACK... Latency: 2.3066s
+2026-01-14 17:10:38,540 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 2.5509s
+2026-01-14 17:10:38,546 - Node_c1 - INFO - Sent packet ed747f05-d96f-4712-a217-fde102a7e9e5 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:38,546 - Node_c1 - INFO - Sent ACK for 95612e15-5053-4afe-9b17-8f3b34d745b7 to c2
+2026-01-14 17:10:38,921 - Node_c1 - INFO - Received msg: ACK... Latency: 1.2323s
+2026-01-14 17:10:39,113 - Node_c1 - INFO - Sent packet 90b02d9d-144a-4455-8780-810826336239 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:39,348 - Node_c1 - INFO - Sent packet 552ed7d8-1307-4761-98a7-0339719f765a to p1 (10.0.0.6:8000)
+2026-01-14 17:10:39,570 - Node_c1 - INFO - Sent packet 3282f6ff-e368-44b9-9ff6-14da77f012ef to p1 (10.0.0.6:8000)
+2026-01-14 17:10:39,671 - Node_c1 - INFO - Sent packet 85008023-4a67-4f40-b443-9d3b10efe840 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:39,871 - Node_c1 - INFO - Received msg: ACK... Latency: 1.8999s
+2026-01-14 17:10:39,871 - Node_c1 - INFO - Sent packet 264b437c-63f0-431b-8387-e0e9e12a2572 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:40,078 - Node_c1 - INFO - Sent packet 184e47e7-af89-498b-b475-6308d8179498 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:40,176 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 1.3816s
+2026-01-14 17:10:40,176 - Node_c1 - INFO - Sent packet 4579539d-1796-47c4-8981-58913b55151a to p1 (10.0.0.6:8000)
+2026-01-14 17:10:40,179 - Node_c1 - INFO - Sent packet 6a597c69-3174-4a4f-badc-e17d6702fd5f to p1 (10.0.0.6:8000)
+2026-01-14 17:10:40,179 - Node_c1 - INFO - Sent ACK for 9c28197f-562d-45c4-a8e8-37dd7c6c5b8b to c2
+2026-01-14 17:10:40,236 - Node_c1 - INFO - Received msg: ACK... Latency: 1.1862s
+2026-01-14 17:10:40,250 - Node_c1 - INFO - Sent packet 00942725-9adc-4bd9-8322-533916090b85 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:40,270 - Node_c1 - INFO - Sent packet 2f65a927-7136-4cb3-ac0b-9e409ee03901 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:40,305 - Node_c1 - INFO - Received msg: ACK... Latency: 3.2460s
+2026-01-14 17:10:40,474 - Node_c1 - INFO - Received msg: ACK... Latency: 4.5753s
+2026-01-14 17:10:40,501 - Node_c1 - INFO - Received msg: ACK... Latency: 3.2264s
+2026-01-14 17:10:40,628 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 4.0974s
+2026-01-14 17:10:40,630 - Node_c1 - INFO - Sent packet e87e3b4b-ab25-4f80-9565-f9cc617cb0b8 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:40,631 - Node_c1 - INFO - Sent ACK for a3be7253-be55-4007-ac3f-83c717b9fc7e to c5
+2026-01-14 17:10:40,675 - Node_c1 - INFO - Sent packet b68d3f3b-626b-4b77-b304-288c98b53f20 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:40,880 - Node_c1 - INFO - Sent packet cb3f96af-773c-41ed-84db-cfc98fedf92a to p1 (10.0.0.6:8000)
+2026-01-14 17:10:40,913 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.5891s
+2026-01-14 17:10:40,917 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.1941s
+2026-01-14 17:10:40,919 - Node_c1 - INFO - Sent packet 74fd2f1c-c30e-41d7-96b9-8dc0901aea5c to p1 (10.0.0.6:8000)
+2026-01-14 17:10:40,919 - Node_c1 - INFO - Sent ACK for c9927418-3a50-4156-a79d-3db364e626dd to c5
+2026-01-14 17:10:40,920 - Node_c1 - INFO - Sent packet ed2a11a2-c759-4d97-aaac-d7cb4c7a3937 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:40,920 - Node_c1 - INFO - Sent ACK for e6c1f9f7-b712-44f9-8976-89c4d5860f23 to c5
+2026-01-14 17:10:41,076 - Node_c1 - INFO - Sent packet 1c9c1220-e736-447a-be9a-2b49bebf3221 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:41,277 - Node_c1 - INFO - Sent packet 0ef5d7de-003d-4372-b268-45aca4a018b4 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:41,474 - Node_c1 - INFO - Sent packet 3d5282b8-4b6a-4233-86f5-2379f7788a0e to p1 (10.0.0.6:8000)
+2026-01-14 17:10:41,969 - Node_c1 - INFO - Received msg: ACK... Latency: 3.5330s
+2026-01-14 17:10:42,015 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 2.1219s
+2026-01-14 17:10:42,018 - Node_c1 - INFO - Sent packet 70c86724-166c-4b6b-b01f-d88bd3bb671e to p1 (10.0.0.6:8000)
+2026-01-14 17:10:42,018 - Node_c1 - INFO - Sent ACK for 2cc3c96d-64e6-4aee-ace1-c8ffdfeede7c to c3
+2026-01-14 17:10:42,056 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 3.7344s
+2026-01-14 17:10:42,057 - Node_c1 - INFO - Sent packet fbebf446-6a3d-4728-917b-d6484cac4d91 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:42,057 - Node_c1 - INFO - Sent ACK for a9f1abbf-f13a-4853-8492-d1003ae42296 to c5
+2026-01-14 17:10:42,077 - Node_c1 - INFO - Sent packet db3361be-4b89-4700-a59c-7142343b814b to p1 (10.0.0.6:8000)
+2026-01-14 17:10:42,099 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.3699s
+2026-01-14 17:10:42,101 - Node_c1 - INFO - Sent packet 1df3e3de-faee-4c5e-a1de-0aeec8bcbff1 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:42,101 - Node_c1 - INFO - Sent ACK for 27bf2504-3094-42a1-926f-974c81621d05 to c5
+2026-01-14 17:10:42,136 - Node_c1 - INFO - Received msg: ACK... Latency: 2.3969s
+2026-01-14 17:10:42,277 - Node_c1 - INFO - Sent packet a930dac7-e788-42b4-8cda-aa64b5e3cb92 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:42,474 - Node_c1 - INFO - Sent packet 4b91497c-5c64-4635-bcf6-ca34452ae770 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:42,673 - Node_c1 - INFO - Sent packet 73895877-ad3a-4670-8150-6ce9c5f4f8cb to p1 (10.0.0.6:8000)
+2026-01-14 17:10:42,906 - Node_c1 - INFO - Received msg: ACK... Latency: 1.3876s
+2026-01-14 17:10:43,007 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 2.4191s
+2026-01-14 17:10:43,009 - Node_c1 - INFO - Sent packet e043a945-8a9a-4046-aa7f-145efb234be7 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:43,009 - Node_c1 - INFO - Sent ACK for 484d6ef6-7fa2-48ed-b3c0-67c13bc41288 to c2
+2026-01-14 17:10:43,077 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 4.3885s
+2026-01-14 17:10:43,078 - Node_c1 - INFO - Sent packet 8f093947-e818-46b4-85b2-c71af5c46e7b to p1 (10.0.0.6:8000)
+2026-01-14 17:10:43,079 - Node_c1 - INFO - Sent packet 0f77a225-e440-44e1-88e5-62190f0d3cf0 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:43,079 - Node_c1 - INFO - Sent ACK for 94ac6187-7095-45d2-b21f-2578cc0990d2 to c3
+2026-01-14 17:10:43,232 - Node_c1 - INFO - Received msg: ACK... Latency: 3.1817s
+2026-01-14 17:10:43,273 - Node_c1 - INFO - Sent packet 8308c3a8-ecad-42b1-addc-18336c96e620 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:43,386 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 2.8639s
+2026-01-14 17:10:43,388 - Node_c1 - INFO - Sent packet 08dd2603-52b7-4cc5-88b5-58368b1317bf to p1 (10.0.0.6:8000)
+2026-01-14 17:10:43,388 - Node_c1 - INFO - Sent ACK for e6f3fde1-4c4a-4158-8a05-a539903d583e to c5
+2026-01-14 17:10:43,527 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 3.9959s
+2026-01-14 17:10:43,529 - Node_c1 - INFO - Sent packet 6599f314-3328-4422-bda1-344eecc503f5 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:43,530 - Node_c1 - INFO - Sent ACK for 47d9460d-6733-4682-843d-b327714aafe0 to c5
+2026-01-14 17:10:43,568 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 3.9736s
+2026-01-14 17:10:43,569 - Node_c1 - INFO - Sent packet 1db24178-5f32-4c4a-adcd-01b9726c9ae6 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:43,569 - Node_c1 - INFO - Sent ACK for 9a3f5fe4-0ea7-46e3-8194-10c9af5503a0 to c2
+2026-01-14 17:10:43,572 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 2.6864s
+2026-01-14 17:10:43,574 - Node_c1 - INFO - Sent packet 423ad826-867a-4243-8a7f-ff45405889c1 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:43,574 - Node_c1 - INFO - Sent ACK for b00f22e5-169e-45de-a59b-1c578d884cb3 to c3
+2026-01-14 17:10:43,678 - Node_c1 - INFO - Sent packet b79c4439-116c-41b3-9546-c810f01dac6c to p1 (10.0.0.6:8000)
+2026-01-14 17:10:43,706 - Node_c1 - INFO - Received msg: ACK... Latency: 0.7745s
+2026-01-14 17:10:43,876 - Node_c1 - INFO - Sent packet a1f9dee1-8e50-4c30-b75e-5f4d7bbbb660 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:44,085 - Node_c1 - INFO - Sent packet 1598ca0e-c974-4a25-8b2c-d815d8994217 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:44,478 - Node_c1 - INFO - Sent packet d913f78d-1844-4aee-9799-477248b12176 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:44,608 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 2.8201s
+2026-01-14 17:10:44,609 - Node_c1 - INFO - Sent packet aed61c18-6c57-4b2e-9043-396f1b272cfb to p1 (10.0.0.6:8000)
+2026-01-14 17:10:44,610 - Node_c1 - INFO - Sent ACK for a2322779-5694-4280-ac3b-7856744af369 to c2
+2026-01-14 17:10:44,620 - Node_c1 - INFO - Received msg: ACK... Latency: 1.2112s
+2026-01-14 17:10:44,777 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 2.6860s
+2026-01-14 17:10:44,782 - Node_c1 - INFO - Sent packet 44e45da5-bf5c-45b9-a114-d39a8ed898e5 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:44,782 - Node_c1 - INFO - Sent ACK for 58404c1b-420a-482c-a060-9404a3208428 to c3
+2026-01-14 17:10:44,811 - Node_c1 - INFO - Received msg: ACK... Latency: 4.0015s
+2026-01-14 17:10:44,880 - Node_c1 - INFO - Received msg: ACK... Latency: 3.9090s
+2026-01-14 17:10:44,946 - Node_c1 - INFO - Received msg: ACK... Latency: 0.6537s
+2026-01-14 17:10:44,957 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 2.2674s
+2026-01-14 17:10:44,961 - Node_c1 - INFO - Sent packet c88fe8df-f99a-4e1d-b0f9-fa016201815c to p1 (10.0.0.6:8000)
+2026-01-14 17:10:44,961 - Node_c1 - INFO - Sent ACK for 9bc47bc8-93bb-453b-ae45-991698cfa81a to c3
+2026-01-14 17:10:45,029 - Node_c1 - INFO - Sent packet 9eb70a59-80da-49a0-96c7-7770070e5847 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:45,040 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.9130s
+2026-01-14 17:10:45,042 - Node_c1 - INFO - Sent packet 97655732-f876-4960-b671-95a6b4f3b7b3 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:45,042 - Node_c1 - INFO - Sent ACK for 998ca884-3734-45cb-a657-468b5a339e06 to c5
+2026-01-14 17:10:45,078 - Node_c1 - INFO - Sent packet a21822f3-0a47-45ea-8f52-efd5de0701cc to p1 (10.0.0.6:8000)
+2026-01-14 17:10:45,138 - Node_c1 - INFO - Received msg: ACK... Latency: 4.6305s
+2026-01-14 17:10:45,272 - Node_c1 - INFO - Sent packet acd439e4-4395-48ed-85fc-52ab068f4522 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:45,344 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.6149s
+2026-01-14 17:10:45,346 - Node_c1 - INFO - Sent packet b593297d-d7d0-4f08-ac63-7e7df7b7f084 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:45,346 - Node_c1 - INFO - Sent ACK for dab0c1e6-8518-4a0f-a3ed-d55b95a718dc to c5
+2026-01-14 17:10:45,398 - Node_c1 - INFO - Received msg: ACK... Latency: 1.6097s
+2026-01-14 17:10:45,469 - Node_c1 - INFO - Received msg: ACK... Latency: 1.3652s
+2026-01-14 17:10:45,523 - Node_c1 - INFO - Received msg: ACK... Latency: 2.4972s
+2026-01-14 17:10:45,578 - Node_c1 - INFO - Received msg: ACK... Latency: 4.5506s
+2026-01-14 17:10:45,677 - Node_c1 - INFO - Sent packet b9322e9e-37e9-43fc-ade3-6627e3cc3d82 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:45,877 - Node_c1 - INFO - Sent packet 6056bd10-cc3f-42bf-bfeb-bc93720bc602 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:46,280 - Node_c1 - INFO - Sent packet 1139fcdd-954f-4838-9b0c-b70626ac0e68 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:46,380 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 4.2561s
+2026-01-14 17:10:46,382 - Node_c1 - INFO - Sent packet deaec1a7-3684-4bcb-874b-7b33e1c270f1 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:46,382 - Node_c1 - INFO - Sent ACK for c0488f15-bcdb-4958-9e84-7865f04fe3f5 to c5
+2026-01-14 17:10:46,471 - Node_c1 - INFO - Sent packet 3e38f717-c1ba-4a9d-a5f5-7f68676ab92f to p1 (10.0.0.6:8000)
+2026-01-14 17:10:46,505 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 3.0156s
+2026-01-14 17:10:46,507 - Node_c1 - INFO - Sent packet a2dbe8c0-612e-4f95-83d7-f32d3f78ab4e to p1 (10.0.0.6:8000)
+2026-01-14 17:10:46,507 - Node_c1 - INFO - Sent ACK for 907240f0-325a-4c72-8ec3-767ee77a9375 to c3
+2026-01-14 17:10:46,654 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 3.0625s
+2026-01-14 17:10:46,657 - Node_c1 - INFO - Sent packet 34fb932d-2416-4fb8-80dd-f3e124d2fcc3 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:46,658 - Node_c1 - INFO - Sent ACK for 0aedb7bd-ffff-4faa-a50f-97926c787a59 to c2
+2026-01-14 17:10:46,770 - Node_c1 - INFO - Received msg: ACK... Latency: 2.7907s
+2026-01-14 17:10:46,808 - Node_c1 - INFO - Received msg: ACK... Latency: 1.9079s
+2026-01-14 17:10:46,875 - Node_c1 - INFO - Sent packet 78701da4-7c95-4f38-9bfe-dcc1d5eaf26a to p1 (10.0.0.6:8000)
+2026-01-14 17:10:47,033 - Node_c1 - INFO - Received msg: ACK... Latency: 2.0687s
+2026-01-14 17:10:47,073 - Node_c1 - INFO - Sent packet 78085863-90b8-43a9-9729-e28ad7acb52a to p1 (10.0.0.6:8000)
+2026-01-14 17:10:47,085 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 1.7913s
+2026-01-14 17:10:47,087 - Node_c1 - INFO - Sent packet 09b9f16f-45c4-4051-abd5-8a53890a1724 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:47,087 - Node_c1 - INFO - Sent ACK for 5dd68a49-444a-4d67-ba1c-a8564db29fee to c3
+2026-01-14 17:10:47,149 - Node_c1 - INFO - Received msg: ACK... Latency: 2.2805s
+2026-01-14 17:10:47,274 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.7498s
+2026-01-14 17:10:47,280 - Node_c1 - INFO - Sent packet 60541e88-c201-416e-852f-2b6226081378 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:47,280 - Node_c1 - INFO - Sent ACK for 8e3d9fcf-8333-4de3-a592-cff3cfc8102b to c5
+2026-01-14 17:10:47,329 - Node_c1 - INFO - Received msg: ACK... Latency: 4.4281s
+2026-01-14 17:10:47,481 - Node_c1 - INFO - Sent packet 2d146b2b-19f5-4e38-91f6-bf2c6a6a93ce to p1 (10.0.0.6:8000)
+2026-01-14 17:10:47,526 - Node_c1 - INFO - Received msg: ACK... Latency: 2.2113s
+2026-01-14 17:10:47,563 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 1.7727s
+2026-01-14 17:10:47,566 - Node_c1 - INFO - Sent packet ef453464-27e4-4dd5-9f94-05724c6dc69a to p1 (10.0.0.6:8000)
+2026-01-14 17:10:47,566 - Node_c1 - INFO - Sent ACK for 28c584a0-eb32-4c35-b376-d37e80e31b70 to c2
+2026-01-14 17:10:47,629 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 1.9425s
+2026-01-14 17:10:47,636 - Node_c1 - INFO - Sent packet f393c161-0698-4fc7-b2fc-3679e0089b3d to p1 (10.0.0.6:8000)
+2026-01-14 17:10:47,636 - Node_c1 - INFO - Sent ACK for 2c341e35-8018-47d0-a346-3f18cdea84bf to c3
+2026-01-14 17:10:47,944 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 2.5563s
+2026-01-14 17:10:47,957 - Node_c1 - INFO - Sent packet cd94c59c-8354-4f09-b82c-5aec3b03f6f1 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:47,958 - Node_c1 - INFO - Sent ACK for e9a2e9d7-ec71-4648-a0a1-cbe29c8bd9d7 to c2
+2026-01-14 17:10:48,070 - Node_c1 - INFO - Sent packet d65aa283-386d-4edd-88f6-df497ee48a66 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:48,226 - Node_c1 - INFO - Received msg: ACK... Latency: 2.6630s
+2026-01-14 17:10:48,300 - Node_c1 - INFO - Received msg: ACK... Latency: 2.5140s
+2026-01-14 17:10:48,324 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.9946s
+2026-01-14 17:10:48,326 - Node_c1 - INFO - Sent packet b04d340a-a122-48a9-bcab-358e62323a5a to p1 (10.0.0.6:8000)
+2026-01-14 17:10:48,326 - Node_c1 - INFO - Sent ACK for fe0c827e-4507-4e99-8c70-c68ec207c28c to c5
+2026-01-14 17:10:48,342 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 1.6483s
+2026-01-14 17:10:48,345 - Node_c1 - INFO - Sent packet a34b8a41-3149-4230-b392-e16a4eb13b38 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:48,346 - Node_c1 - INFO - Sent ACK for 7b3988be-8235-41c8-9dc8-7fcc42fa3378 to c3
+2026-01-14 17:10:48,405 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 2.8139s
+2026-01-14 17:10:48,407 - Node_c1 - INFO - Sent packet eb365a9b-6215-4c95-bdaa-75159b1b955d to p1 (10.0.0.6:8000)
+2026-01-14 17:10:48,408 - Node_c1 - INFO - Sent ACK for 466d6ba8-00fc-432c-8800-4a292db6c5c8 to c2
+2026-01-14 17:10:48,470 - Node_c1 - INFO - Sent packet 2d2e9b76-a723-4657-88b5-9feec7808642 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:48,672 - Node_c1 - INFO - Sent packet 9f3815b2-9a2f-4787-a102-3e6de458c905 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:48,718 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 1.7241s
+2026-01-14 17:10:48,720 - Node_c1 - INFO - Sent packet f91e9d31-97fc-4d52-929a-006bd98a158e to p1 (10.0.0.6:8000)
+2026-01-14 17:10:48,720 - Node_c1 - INFO - Sent ACK for 23e91580-f0ed-43cf-bab3-5368bc3b7772 to c2
+2026-01-14 17:10:48,752 - Node_c1 - INFO - Received msg: ACK... Latency: 3.2337s
+2026-01-14 17:10:48,857 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 2.3347s
+2026-01-14 17:10:48,862 - Node_c1 - INFO - Sent packet 4755e0ff-218b-4275-b813-9b243abdc8e9 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:48,862 - Node_c1 - INFO - Sent ACK for 75b3db76-fe7c-43f3-92cb-46896049e2b8 to c5
+2026-01-14 17:10:49,078 - Node_c1 - INFO - Sent packet fec7d024-e9c5-49ee-8121-86bf788f8bff to p1 (10.0.0.6:8000)
+2026-01-14 17:10:49,192 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 3.1973s
+2026-01-14 17:10:49,195 - Node_c1 - INFO - Sent packet ab41e081-dc64-4b03-8d79-55ac641122b9 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:49,195 - Node_c1 - INFO - Sent ACK for e82b5dea-241b-497d-9d14-6d1b9fec605b to c2
+2026-01-14 17:10:49,231 - Node_c1 - INFO - Received msg: ACK... Latency: 2.1590s
+2026-01-14 17:10:49,284 - Node_c1 - INFO - Sent packet 4c659d5c-bc5c-435e-b1bb-bdd9896f622e to p1 (10.0.0.6:8000)
+2026-01-14 17:10:49,470 - Node_c1 - INFO - Sent packet 8ce87dfd-dbc4-4b33-8eff-8102a8b418ac to p1 (10.0.0.6:8000)
+2026-01-14 17:10:49,493 - Node_c1 - INFO - Received msg: ACK... Latency: 1.2205s
+2026-01-14 17:10:49,503 - Node_c1 - INFO - Sent packet 59fbbb07-ec62-46fc-b780-020518a2f4ca to p1 (10.0.0.6:8000)
+2026-01-14 17:10:49,867 - Node_c1 - INFO - Received msg: ACK... Latency: 1.8941s
+2026-01-14 17:10:50,073 - Node_c1 - INFO - Sent packet 138d2119-a2ae-4c82-bdfa-a3409263d093 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:50,207 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 3.7131s
+2026-01-14 17:10:50,209 - Node_c1 - INFO - Sent packet fdf8f62b-4012-48fa-afb1-7f7b0f55a096 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:50,209 - Node_c1 - INFO - Sent ACK for 08af5852-d15f-4ef3-9a4d-fb1cb48fc863 to c3
+2026-01-14 17:10:50,277 - Node_c1 - INFO - Sent packet e80b0a56-0f30-416b-9a4e-eb804f1d2c04 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:50,474 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 1.5810s
+2026-01-14 17:10:50,486 - Node_c1 - INFO - Sent packet e572f762-68bd-49bd-9d48-19e13450a3a3 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:50,486 - Node_c1 - INFO - Sent ACK for 84421891-9c5d-4f75-8929-17c40351cb00 to c3
+2026-01-14 17:10:50,872 - Node_c1 - INFO - Sent packet 489924db-aa8c-4640-898b-30e5a75b4f02 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:51,077 - Node_c1 - INFO - Sent packet 20d6ef81-787c-484e-a25d-861dd9b318a2 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:51,279 - Node_c1 - INFO - Received msg: ACK... Latency: 2.8348s
+2026-01-14 17:10:51,469 - Node_c1 - INFO - Sent packet 3fba3ebe-0b9b-446f-b506-191e455847c7 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:51,529 - Node_c1 - INFO - Received msg: ACK... Latency: 1.5910s
+2026-01-14 17:10:51,620 - Node_c1 - INFO - Received msg: ACK... Latency: 1.1761s
+2026-01-14 17:10:51,671 - Node_c1 - INFO - Sent packet 503a7892-dd8e-4d0e-ba52-f4714bf44779 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:51,747 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.0246s
+2026-01-14 17:10:51,749 - Node_c1 - INFO - Sent packet f8d87ba7-fd2f-4eb6-b25d-26dbb7c039ef to p1 (10.0.0.6:8000)
+2026-01-14 17:10:51,749 - Node_c1 - INFO - Sent ACK for 3bcd92c1-aac1-4abd-b9f3-5967beb1138c to c5
+2026-01-14 17:10:51,788 - Node_c1 - INFO - Received msg: ACK... Latency: 2.8151s
+2026-01-14 17:10:51,823 - Node_c1 - INFO - Sent packet 99b1ea54-177d-4eeb-83e8-f2eb9260ae65 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:51,868 - Node_c1 - INFO - Sent packet 5a5e23cf-f243-48b1-83fd-d286f68c8f75 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:51,955 - Node_c1 - INFO - Received msg: ACK... Latency: 1.0496s
+2026-01-14 17:10:52,047 - Node_c1 - INFO - Received msg: ACK... Latency: 2.2151s
+2026-01-14 17:10:52,049 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 3.4607s
+2026-01-14 17:10:52,051 - Node_c1 - INFO - Sent packet 8c50be06-c043-43a6-9e43-51fc31bff6d4 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:52,051 - Node_c1 - INFO - Sent ACK for f0598280-5fbd-4370-bc99-7efa40d9dd7d to c2
+2026-01-14 17:10:52,148 - Node_c1 - INFO - Sent packet 78e8bac2-50ee-493f-8a25-1aa00fa91cb0 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:52,187 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.0591s
+2026-01-14 17:10:52,190 - Node_c1 - INFO - Sent packet bf655e90-29a7-420c-a4ec-01b80a0cf412 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:52,190 - Node_c1 - INFO - Sent ACK for 09aa4b4f-b22a-421c-8efd-0e951dacc1fe to c5
+2026-01-14 17:10:52,276 - Node_c1 - INFO - Sent packet 22b16fea-a850-44f0-a73a-c9b98baa4077 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:52,443 - Node_c1 - INFO - Received msg: ACK... Latency: 2.1085s
+2026-01-14 17:10:52,471 - Node_c1 - INFO - Sent packet 5b58e5de-f35d-4aea-b964-df0d19912989 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:52,512 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 1.6202s
+2026-01-14 17:10:52,513 - Node_c1 - INFO - Sent packet 9989cf33-075b-4a3e-b7ec-e9a7dcbdccb6 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:52,513 - Node_c1 - INFO - Sent ACK for 008db511-e4f7-4d8e-be35-21b3284786cb to c3
+2026-01-14 17:10:52,590 - Node_c1 - INFO - Received msg: ACK... Latency: 3.2045s
+2026-01-14 17:10:52,677 - Node_c1 - INFO - Sent packet 1e338b40-62d6-499b-bb06-db60c55c5bbe to p1 (10.0.0.6:8000)
+2026-01-14 17:10:52,742 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 3.2140s
+2026-01-14 17:10:52,750 - Node_c1 - INFO - Sent packet 596089be-f76d-4669-bc3e-a5e0b1c9def6 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:52,750 - Node_c1 - INFO - Sent ACK for 604a1af6-6dab-41b4-a5c1-645455ddf1cf to c5
+2026-01-14 17:10:52,801 - Node_c1 - INFO - Received msg: ACK... Latency: 1.8409s
+2026-01-14 17:10:52,818 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 2.6256s
+2026-01-14 17:10:52,824 - Node_c1 - INFO - Sent packet 29a20eb1-4875-4714-a5ed-e92b65a9c8a5 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:52,824 - Node_c1 - INFO - Sent ACK for 71b4fae8-d3b3-4020-8753-a6000ec6e1f9 to c2
+2026-01-14 17:10:52,828 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 2.2404s
+2026-01-14 17:10:52,830 - Node_c1 - INFO - Sent packet 1d8f748e-d523-4217-8bc6-c9aa9361ff48 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:52,831 - Node_c1 - INFO - Sent ACK for 0d47d8ac-f76a-4636-99e8-e3d96acd0481 to c2
+2026-01-14 17:10:52,874 - Node_c1 - INFO - Sent packet b0f52de0-8e19-48ce-96fa-7757f2adf01c to p1 (10.0.0.6:8000)
+2026-01-14 17:10:52,928 - Node_c1 - INFO - Received msg: ACK... Latency: 2.9955s
+2026-01-14 17:10:53,043 - Node_c1 - INFO - Sent packet 8f89eb72-c579-40f6-ab13-07f2cc9bdb49 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:53,076 - Node_c1 - INFO - Sent packet a0c5198b-d9e4-4e0a-a5d8-ff0c1af72964 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:53,277 - Node_c1 - INFO - Sent packet e4646a5c-5888-4cd6-9848-47df5e17692f to p1 (10.0.0.6:8000)
+2026-01-14 17:10:53,361 - Node_c1 - INFO - Received msg: ACK... Latency: 2.7393s
+2026-01-14 17:10:53,477 - Node_c1 - INFO - Sent packet 115fbf05-cac2-4282-bd44-e18c6ceed798 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:53,496 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 2.0040s
+2026-01-14 17:10:53,498 - Node_c1 - INFO - Sent packet 41c23141-3a20-43de-8d20-6f26cbf5e1ca to p1 (10.0.0.6:8000)
+2026-01-14 17:10:53,498 - Node_c1 - INFO - Sent ACK for d245075b-3eaf-447b-8525-d4b819d98d35 to c3
+2026-01-14 17:10:53,618 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 4.1312s
+2026-01-14 17:10:53,620 - Node_c1 - INFO - Sent packet ce5a9ee7-d6b9-4120-8870-e96a9af86c34 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:53,620 - Node_c1 - INFO - Sent ACK for 59485438-a62d-46e8-b078-80580d867936 to c3
+2026-01-14 17:10:53,654 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.3293s
+2026-01-14 17:10:53,655 - Node_c1 - INFO - Sent packet 791639be-0d08-43a5-a048-b32db994613a to p1 (10.0.0.6:8000)
+2026-01-14 17:10:53,655 - Node_c1 - INFO - Sent ACK for 5f5e6d39-acdd-437e-b306-4d2ca0a9bb0c to c5
+2026-01-14 17:10:53,684 - Node_c1 - INFO - Sent packet 54b252d5-9b76-4bf2-b381-1115fbdb7fc4 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:53,725 - Node_c1 - INFO - Received msg: ACK... Latency: 2.1579s
+2026-01-14 17:10:53,750 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 2.0278s
+2026-01-14 17:10:53,752 - Node_c1 - INFO - Sent packet 760a7d9d-80f8-41c7-8551-1ee3ab70eddc to p1 (10.0.0.6:8000)
+2026-01-14 17:10:53,752 - Node_c1 - INFO - Sent ACK for 08f6194e-8b4e-4b7f-94ac-ce6dcfdd0daf to c5
+2026-01-14 17:10:53,858 - Node_c1 - INFO - Received msg: ACK... Latency: 3.3850s
+2026-01-14 17:10:53,873 - Node_c1 - INFO - Sent packet 0c53877f-22a2-44b3-9a40-4574db1a0a51 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:54,069 - Node_c1 - INFO - Sent packet 65623fb2-9faf-4cd8-9278-ecda56f6c50f to p1 (10.0.0.6:8000)
+2026-01-14 17:10:54,082 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.5549s
+2026-01-14 17:10:54,083 - Node_c1 - INFO - Sent packet 7d34ce15-8b29-4f0d-a059-5cf21a209ba3 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:54,083 - Node_c1 - INFO - Sent ACK for ab475002-ae20-491c-9465-887c99010aa5 to c5
+2026-01-14 17:10:54,275 - Node_c1 - INFO - Sent packet e1dccc4e-0462-40b6-a10e-6d2522556db6 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:54,291 - Node_c1 - INFO - Sent packet 9c80d72f-25a4-45e7-ba51-730bbb4ea28f to p1 (10.0.0.6:8000)
+2026-01-14 17:10:54,339 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 1.6465s
+2026-01-14 17:10:54,341 - Node_c1 - INFO - Sent packet 90382811-8c3d-44eb-ad7f-0a8edcd32a14 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:54,342 - Node_c1 - INFO - Sent ACK for f528af8b-7abd-4b4b-b4e0-1e310af7c70d to c3
+2026-01-14 17:10:54,410 - Node_c1 - INFO - Received msg: ACK... Latency: 2.8789s
+2026-01-14 17:10:54,424 - Node_c1 - INFO - Received msg: ACK... Latency: 1.2478s
+2026-01-14 17:10:54,538 - Node_c1 - INFO - Received msg: ACK... Latency: 1.6222s
+2026-01-14 17:10:54,568 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 3.2744s
+2026-01-14 17:10:54,570 - Node_c1 - INFO - Sent packet d47de197-6950-47ab-a366-b1d962f0170b to p1 (10.0.0.6:8000)
+2026-01-14 17:10:54,570 - Node_c1 - INFO - Sent ACK for 4124da2a-fe89-4676-9fec-8d0d121e31d6 to c3
+2026-01-14 17:10:54,640 - Node_c1 - INFO - Sent packet 0da7ea8e-9163-4c0f-b6a0-f5c9bbad7666 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:54,669 - Node_c1 - INFO - Sent packet 7d88833d-43cd-44f1-b735-948f35c642b8 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:54,883 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 3.7929s
+2026-01-14 17:10:54,885 - Node_c1 - INFO - Sent packet 7c68a222-b128-4e9d-9f18-59c39ec93dc7 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:54,885 - Node_c1 - INFO - Sent ACK for 90b41f78-20dc-40fe-9609-65703c3899c9 to c3
+2026-01-14 17:10:54,909 - Node_c1 - INFO - Received msg: ACK... Latency: 2.2714s
+2026-01-14 17:10:55,081 - Node_c1 - INFO - Sent packet 624afba5-66e5-406c-bf10-d53f566d4287 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:55,144 - Node_c1 - INFO - Received msg: ACK... Latency: 1.8543s
+2026-01-14 17:10:55,155 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 3.3666s
+2026-01-14 17:10:55,158 - Node_c1 - INFO - Sent packet b01b3ec0-ade2-4737-9120-2f6080bdd62b to p1 (10.0.0.6:8000)
+2026-01-14 17:10:55,159 - Node_c1 - INFO - Sent ACK for 9c71ce08-e4e5-42e4-a02a-de287dfdf7ac to c2
+2026-01-14 17:10:55,275 - Node_c1 - INFO - Sent packet 5cf76d48-6c58-4a3f-9eb9-491751364c99 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:55,617 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 2.1308s
+2026-01-14 17:10:55,621 - Node_c1 - INFO - Sent packet cc0ce8e5-2aa7-40a6-99b4-093ef522a3d2 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:55,621 - Node_c1 - INFO - Sent ACK for 78163a41-bbb4-4025-9a7c-092206f736d4 to c3
+2026-01-14 17:10:55,867 - Node_c1 - INFO - Received msg: ACK... Latency: 1.8470s
+2026-01-14 17:10:55,871 - Node_c1 - INFO - Sent packet b11f4cc2-6799-418f-91e4-e3267801c8d1 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:56,010 - Node_c1 - INFO - Received msg: ACK... Latency: 2.8114s
+2026-01-14 17:10:56,013 - Node_c1 - INFO - Sent packet 21b89673-ab17-45cc-b23c-bc1c1ee6d455 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:56,072 - Node_c1 - INFO - Sent packet 11413e48-dad8-46ae-a139-52e37ca35d4f to p1 (10.0.0.6:8000)
+2026-01-14 17:10:56,074 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 3.6822s
+2026-01-14 17:10:56,076 - Node_c1 - INFO - Sent packet 38b6b266-2cc6-41a6-97a3-bd35c2f037b5 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:56,077 - Node_c1 - INFO - Sent ACK for 2006f923-27ec-43d8-9795-ec082d07bfa4 to c2
+2026-01-14 17:10:56,269 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.7404s
+2026-01-14 17:10:56,271 - Node_c1 - INFO - Sent packet 8c47c169-24bb-4962-8beb-fbdeaa4cc685 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:56,271 - Node_c1 - INFO - Sent ACK for 83683254-1fe0-4905-a038-2458fe813252 to c5
+2026-01-14 17:10:56,275 - Node_c1 - INFO - Sent packet 2c8930c2-c005-4baf-a347-a94d61007140 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:56,521 - Node_c1 - INFO - Received msg: ACK... Latency: 0.7744s
+2026-01-14 17:10:56,532 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 2.9415s
+2026-01-14 17:10:56,534 - Node_c1 - INFO - Sent packet fa0a217c-6522-46ea-95c1-a4e79373cc8c to p1 (10.0.0.6:8000)
+2026-01-14 17:10:56,534 - Node_c1 - INFO - Sent ACK for a7673fe0-c8de-4efb-a866-d224a8535b0c to c2
+2026-01-14 17:10:56,670 - Node_c1 - INFO - Sent packet b56793d8-65df-474b-ad70-5818e52d43be to p1 (10.0.0.6:8000)
+2026-01-14 17:10:56,714 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.5891s
+2026-01-14 17:10:56,716 - Node_c1 - INFO - Sent packet 02552d6d-4668-4241-b22c-7d52fa471d5f to p1 (10.0.0.6:8000)
+2026-01-14 17:10:56,716 - Node_c1 - INFO - Sent ACK for 706c9bc6-f4f1-4b7d-ad24-b8cc47141b3d to c5
+2026-01-14 17:10:56,793 - Node_c1 - INFO - Sent packet 412d65da-ca31-4f13-86b4-b19ac9b520bf to p1 (10.0.0.6:8000)
+2026-01-14 17:10:56,843 - Node_c1 - INFO - Sent packet 10eda9d9-1b13-42e7-9c2e-2da16da5eb60 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:56,877 - Node_c1 - INFO - Sent packet 7a48a156-7018-4ca7-bd11-f8d357be3092 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:57,026 - Node_c1 - INFO - Received msg: ACK... Latency: 1.1965s
+2026-01-14 17:10:57,073 - Node_c1 - INFO - Sent packet caf8c960-08de-4b0e-afdd-d9c7053357cb to p1 (10.0.0.6:8000)
+2026-01-14 17:10:57,230 - Node_c1 - INFO - Received msg: ACK... Latency: 4.1790s
+2026-01-14 17:10:57,243 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 4.6537s
+2026-01-14 17:10:57,244 - Node_c1 - INFO - Sent packet 1eb111f1-cfab-4d47-987b-48f64b5027d6 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:57,244 - Node_c1 - INFO - Sent ACK for 5c9a02dc-2894-406c-a618-d01c78718632 to c2
+2026-01-14 17:10:57,279 - Node_c1 - INFO - Sent packet d34565eb-01c0-4a67-bbd4-d5f83f7f01b5 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:57,395 - Node_c1 - INFO - Received msg: ACK... Latency: 3.2645s
+2026-01-14 17:10:57,511 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 4.2198s
+2026-01-14 17:10:57,514 - Node_c1 - INFO - Sent packet a3b805d8-b9f1-4e2b-a20e-04f0e1e9fde2 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:57,514 - Node_c1 - INFO - Sent ACK for 45ea4df2-35fe-424b-b5e1-b185346e96b3 to c3
+2026-01-14 17:10:57,605 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 5.3114s
+2026-01-14 17:10:57,608 - Node_c1 - INFO - Sent packet 55aec56c-0174-467b-8ead-ddb1308eb39e to p1 (10.0.0.6:8000)
+2026-01-14 17:10:57,609 - Node_c1 - INFO - Sent ACK for a16636c6-b716-4832-8b51-2413c12467ca to c3
+2026-01-14 17:10:57,620 - Node_c1 - INFO - Received msg: ACK... Latency: 3.9251s
+2026-01-14 17:10:57,671 - Node_c1 - INFO - Sent packet 59378838-b247-4d0c-9ae6-b738ac9955e1 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:57,682 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 2.6869s
+2026-01-14 17:10:57,686 - Node_c1 - INFO - Sent packet df7a8597-8407-4fbe-90f5-2ae835a095ea to p1 (10.0.0.6:8000)
+2026-01-14 17:10:57,686 - Node_c1 - INFO - Sent ACK for f1146b03-8ada-433c-bed2-5d5fd932078b to c2
+2026-01-14 17:10:57,835 - Node_c1 - INFO - Received msg: ACK... Latency: 4.5242s
+2026-01-14 17:10:57,874 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 2.1518s
+2026-01-14 17:10:57,876 - Node_c1 - INFO - Sent packet 8241c862-f915-4a01-b23e-38d9bde385b8 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:57,876 - Node_c1 - INFO - Sent ACK for 585676c8-3425-444e-96dd-43dede9bc1ee to c5
+2026-01-14 17:10:57,886 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 3.7984s
+2026-01-14 17:10:57,891 - Node_c1 - INFO - Sent packet 81f0ed0b-36a8-4508-9d20-147096c3ae4a to p1 (10.0.0.6:8000)
+2026-01-14 17:10:57,891 - Node_c1 - INFO - Sent ACK for 15d58419-5de3-41c8-8d92-f180a0c299fa to c3
+2026-01-14 17:10:58,088 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 2.7608s
+2026-01-14 17:10:58,091 - Node_c1 - INFO - Sent packet fe186780-c84d-4c1e-91a6-c86fec9e85cc to p1 (10.0.0.6:8000)
+2026-01-14 17:10:58,091 - Node_c1 - INFO - Sent ACK for 88bcb5db-40c0-4ddd-aaed-693d971ae91f to c5
+2026-01-14 17:10:58,273 - Node_c1 - INFO - Sent packet 4282141c-b41b-4eba-9056-0b2d78a3d02e to p1 (10.0.0.6:8000)
+2026-01-14 17:10:58,373 - Node_c1 - INFO - Received msg: ACK... Latency: 3.3310s
+2026-01-14 17:10:58,584 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 1.4901s
+2026-01-14 17:10:58,590 - Node_c1 - INFO - Sent packet c01ddd89-b2cd-4a04-96f7-c6bbd78db099 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:58,590 - Node_c1 - INFO - Sent ACK for c53e5b41-bead-4f74-baff-2a17047bae63 to c3
+2026-01-14 17:10:58,740 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 3.3446s
+2026-01-14 17:10:58,741 - Node_c1 - INFO - Sent packet 69c0e98c-eff2-4e55-8eb5-f39ab8124ab3 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:58,741 - Node_c1 - INFO - Sent ACK for 22db1c3a-cf7b-4781-9fd6-1482dcece056 to c2
+2026-01-14 17:10:58,757 - Node_c1 - INFO - Sent packet e60c760b-22f4-4068-ba71-3b7e3636cad8 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:58,817 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 3.5285s
+2026-01-14 17:10:58,819 - Node_c1 - INFO - Sent packet c8f804ac-d9f3-43e8-bbcc-816663c57396 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:58,819 - Node_c1 - INFO - Sent ACK for 423e0dc2-4512-4863-b52a-e457e6d4563c to c3
+2026-01-14 17:10:58,868 - Node_c1 - INFO - Sent packet 9c941497-ab9c-458f-9b43-6b98c11c0ec6 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:58,901 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 4.5127s
+2026-01-14 17:10:58,902 - Node_c1 - INFO - Sent packet 89bac2c8-cc68-472d-8c2f-b699e76147b8 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:58,902 - Node_c1 - INFO - Sent ACK for aff1c649-9b97-4bd8-a457-f96b4ebcff9b to c2
+2026-01-14 17:10:59,029 - Node_c1 - INFO - Received msg: ACK... Latency: 2.7957s
+2026-01-14 17:10:59,193 - Node_c1 - INFO - Received msg: ACK... Latency: 2.8512s
+2026-01-14 17:10:59,269 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 2.0819s
+2026-01-14 17:10:59,271 - Node_c1 - INFO - Sent packet cc0c4294-7a00-4ebd-b740-063f8151f0bc to p1 (10.0.0.6:8000)
+2026-01-14 17:10:59,272 - Node_c1 - INFO - Sent ACK for 79150cd9-8229-45ad-aca6-38f44cd128f5 to c2
+2026-01-14 17:10:59,272 - Node_c1 - INFO - Sent packet dfa6a39f-cae9-4297-9061-5b570b814016 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:59,317 - Node_c1 - INFO - Received msg: ACK... Latency: 2.2852s
+2026-01-14 17:10:59,402 - Node_c1 - INFO - Received msg: ACK... Latency: 1.3914s
+2026-01-14 17:10:59,448 - Node_c1 - INFO - Sent packet d5470c45-4cbb-4533-bbc6-4198ad77b89c to p1 (10.0.0.6:8000)
+2026-01-14 17:10:59,485 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 1.3961s
+2026-01-14 17:10:59,489 - Node_c1 - INFO - Sent packet 112fe623-09e4-442a-ad5b-bbad10a16b64 to p1 (10.0.0.6:8000)
+2026-01-14 17:10:59,490 - Node_c1 - INFO - Sent ACK for 814e4fd8-99b3-4d39-96fc-97bfe62529ac to c3
+2026-01-14 17:10:59,673 - Node_c1 - INFO - Received msg: ACK... Latency: 1.4873s
+2026-01-14 17:10:59,676 - Node_c1 - INFO - Sent packet 9ce23af8-6d7f-441b-a74f-2717ecf0db9e to p1 (10.0.0.6:8000)
+2026-01-14 17:10:59,741 - Node_c1 - INFO - Received msg: ACK... Latency: 3.2998s
+2026-01-14 17:10:59,857 - Node_c1 - INFO - Received msg: ACK... Latency: 2.2253s
+2026-01-14 17:10:59,877 - Node_c1 - INFO - Sent packet 5232404b-42a5-4302-8eb5-5a368b877a34 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:00,029 - Node_c1 - INFO - Received msg: ACK... Latency: 1.3332s
+2026-01-14 17:11:00,070 - Node_c1 - INFO - Sent packet 9a69a40f-4932-48db-97f9-b162937444f7 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:00,087 - Node_c1 - INFO - Received msg: ACK... Latency: 1.8196s
+2026-01-14 17:11:00,296 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 3.6104s
+2026-01-14 17:11:00,302 - Node_c1 - INFO - Sent packet c397a4a1-67c8-499f-852b-1164182db835 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:00,303 - Node_c1 - INFO - Sent ACK for 9404e193-0912-4e9b-9843-de58155afe50 to c3
+2026-01-14 17:11:00,481 - Node_c1 - INFO - Sent packet dc7537c7-02c8-4ed0-bb6c-e7c5835a5e71 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:00,509 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 3.7824s
+2026-01-14 17:11:00,514 - Node_c1 - INFO - Sent packet 9c772e70-c7df-4093-a5ca-3c39a05d0b1f to p1 (10.0.0.6:8000)
+2026-01-14 17:11:00,515 - Node_c1 - INFO - Sent ACK for dc3275c0-cfcf-46bb-8172-4648ee305496 to c5
+2026-01-14 17:11:00,612 - Node_c1 - INFO - Received msg: ACK... Latency: 3.5738s
+2026-01-14 17:11:00,676 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 3.0871s
+2026-01-14 17:11:00,680 - Node_c1 - INFO - Sent packet 868f2492-eb10-4afe-993d-b8d6606b988c to p1 (10.0.0.6:8000)
+2026-01-14 17:11:00,683 - Node_c1 - INFO - Sent packet 6a148cdb-14fb-409d-87b0-69c9f95e4f37 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:00,684 - Node_c1 - INFO - Sent ACK for 2c6d3fc1-ec84-4b46-bf49-0bde5e0ad61c to c2
+2026-01-14 17:11:00,761 - Node_c1 - INFO - Received msg: ACK... Latency: 2.2120s
+2026-01-14 17:11:00,779 - Node_c1 - INFO - Sent packet 7e3cefb6-3022-41b3-bf9e-5d0b53e6518b to p1 (10.0.0.6:8000)
+2026-01-14 17:11:00,855 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 1.5267s
+2026-01-14 17:11:00,857 - Node_c1 - INFO - Sent packet 8dba4da5-046c-4397-8232-e33f1dfa8891 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:00,857 - Node_c1 - INFO - Sent ACK for 545321b0-b271-4805-b685-3953776e2675 to c5
+2026-01-14 17:11:00,974 - Node_c1 - INFO - Received msg: ACK... Latency: 1.6668s
+2026-01-14 17:11:01,021 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 1.8301s
+2026-01-14 17:11:01,023 - Node_c1 - INFO - Sent packet 02637556-577b-4dd1-b861-f662c904eb1d to p1 (10.0.0.6:8000)
+2026-01-14 17:11:01,023 - Node_c1 - INFO - Sent ACK for ed171d11-61d7-45e4-86e7-163ad88c38a3 to c2
+2026-01-14 17:11:01,273 - Node_c1 - INFO - Sent packet 62ba8cac-7da7-4cb0-bc10-46d3f83b236a to p1 (10.0.0.6:8000)
+2026-01-14 17:11:01,353 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 4.3616s
+2026-01-14 17:11:01,361 - Node_c1 - INFO - Sent packet caa347d8-5c46-4c31-89dc-f6ec38b9b7d5 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:01,362 - Node_c1 - INFO - Sent ACK for 426187f7-c63e-4f49-8a75-0b95568a1a8b to c2
+2026-01-14 17:11:01,395 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 3.2717s
+2026-01-14 17:11:01,400 - Node_c1 - INFO - Sent packet a39c0e47-19e9-4e7f-aada-56e687528bd9 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:01,401 - Node_c1 - INFO - Sent ACK for 5323c5d4-1451-4857-88f3-b806196adfa1 to c5
+2026-01-14 17:11:01,669 - Node_c1 - INFO - Sent packet 295c564a-ffdc-441f-a62d-c84dd92b30f7 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:01,726 - Node_c1 - INFO - Received msg: ACK... Latency: 3.3684s
+2026-01-14 17:11:01,874 - Node_c1 - INFO - Sent packet 144b2e96-f74e-4c5a-8106-01a833976738 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:01,953 - Node_c1 - INFO - Received msg: ACK... Latency: 1.6157s
+2026-01-14 17:11:02,002 - Node_c1 - INFO - Received msg: ACK... Latency: 1.6839s
+2026-01-14 17:11:02,042 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 2.3185s
+2026-01-14 17:11:02,043 - Node_c1 - INFO - Sent packet b3e47a82-6f07-4a46-92d5-02f47fd7c583 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:02,044 - Node_c1 - INFO - Sent ACK for e2c8f9b7-24a8-4135-a6bd-d41d1924192e to c5
+2026-01-14 17:11:02,069 - Node_c1 - INFO - Sent packet 2fbe259f-47fb-4829-8374-257cb3bbd992 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:02,139 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 1.1500s
+2026-01-14 17:11:02,141 - Node_c1 - INFO - Sent packet e890abf8-82d7-43bb-8748-3f6024344d53 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:02,141 - Node_c1 - INFO - Sent ACK for a024c8a8-f480-4f10-981c-6005673b8b8a to c2
+2026-01-14 17:11:02,188 - Node_c1 - INFO - Received msg: ACK... Latency: 1.1751s
+2026-01-14 17:11:02,274 - Node_c1 - INFO - Sent packet ddb2f538-b13f-4c8c-9311-aaad851e5049 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:02,290 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 2.1592s
+2026-01-14 17:11:02,291 - Node_c1 - INFO - Sent packet 0b021781-9ed7-406c-bfd7-f32ed9761ea4 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:02,291 - Node_c1 - INFO - Sent ACK for 723dfc08-dcd9-4184-b66d-c5f74e8fc486 to c5
+2026-01-14 17:11:02,469 - Node_c1 - INFO - Sent packet 26a7bae5-81b3-4899-98fa-259191a8a38c to p1 (10.0.0.6:8000)
+2026-01-14 17:11:02,610 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 1.5165s
+2026-01-14 17:11:02,618 - Node_c1 - INFO - Sent packet f71b5f6e-deee-41b1-b9f3-c21bcef7a146 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:02,618 - Node_c1 - INFO - Sent ACK for 015597cb-4ee3-470a-a470-7884538293fa to c3
+2026-01-14 17:11:02,640 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 2.0510s
+2026-01-14 17:11:02,651 - Node_c1 - INFO - Sent packet 2eb3d8b0-c92a-4c91-8d0c-f27844dcab7a to p1 (10.0.0.6:8000)
+2026-01-14 17:11:02,651 - Node_c1 - INFO - Sent ACK for ab8b8ff1-167b-438d-be8e-15a5f85eaedf to c2
+2026-01-14 17:11:02,676 - Node_c1 - INFO - Sent packet 3597e197-ae04-46a8-a660-17fef41641c3 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:02,876 - Node_c1 - INFO - Sent packet e3ff1cb2-5f90-4aa5-a382-e45bb8cb4efa to p1 (10.0.0.6:8000)
+2026-01-14 17:11:02,945 - Node_c1 - INFO - Sent packet 1038b4bf-ceeb-4871-a613-64146596525f to p1 (10.0.0.6:8000)
+2026-01-14 17:11:02,976 - Node_c1 - INFO - Received msg: Msg from c2 to c1 [P... Latency: 4.5807s
+2026-01-14 17:11:02,978 - Node_c1 - INFO - Sent packet 43e22b7a-2fe9-4dd7-a4f9-57efb5165b02 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:02,978 - Node_c1 - INFO - Sent ACK for 88a0476a-e980-48f1-bc21-7f91db313bd3 to c2
+2026-01-14 17:11:03,414 - Node_c1 - INFO - Received msg: ACK... Latency: 2.6449s
+2026-01-14 17:11:03,512 - Node_c1 - INFO - Received msg: ACK... Latency: 1.5050s
+2026-01-14 17:11:03,954 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 2.4317s
+2026-01-14 17:11:03,955 - Node_c1 - INFO - Sent packet e89b4da3-4f5f-408d-a57d-9d936126366f to p1 (10.0.0.6:8000)
+2026-01-14 17:11:03,955 - Node_c1 - INFO - Sent ACK for a9b8c86e-4bce-4f57-b211-06c57ea51ffd to c5
+2026-01-14 17:11:04,073 - Node_c1 - INFO - Received msg: ACK... Latency: 4.4339s
+2026-01-14 17:11:04,350 - Node_c1 - INFO - Received msg: ACK... Latency: 3.2887s
+2026-01-14 17:11:04,524 - Node_c1 - INFO - Sent packet 76a7967c-7a61-4c7e-ba4a-e9eed4144cef to p1 (10.0.0.6:8000)
+2026-01-14 17:11:04,727 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 4.8396s
+2026-01-14 17:11:04,729 - Node_c1 - INFO - Sent packet 9d2b0627-8c3a-4f62-b9d5-a6d652a84f74 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:04,730 - Node_c1 - INFO - Sent ACK for 5ad263d1-b31e-409a-bdc6-eda0d5c37b10 to c3
+2026-01-14 17:11:04,773 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 3.4881s
+2026-01-14 17:11:04,777 - Node_c1 - INFO - Sent packet a27dba6d-3db3-4d55-812a-a5f0162219e7 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:04,778 - Node_c1 - INFO - Sent ACK for 06b20c64-8c92-464b-bb40-4330383c1861 to c3
+2026-01-14 17:11:05,026 - Node_c1 - INFO - Received msg: ACK... Latency: 0.7880s
+2026-01-14 17:11:05,423 - Node_c1 - INFO - Received msg: ACK... Latency: 2.1601s
+2026-01-14 17:11:05,526 - Node_c1 - INFO - Received msg: Msg from c3 to c1 [P... Latency: 2.6330s
+2026-01-14 17:11:05,534 - Node_c1 - INFO - Sent packet c6778b3d-dd50-43e9-9b78-d055ba1c6d72 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:05,534 - Node_c1 - INFO - Sent ACK for fb6268c8-3ffd-4fee-9288-6266cfd0536c to c3
+2026-01-14 17:11:05,726 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 4.6037s
+2026-01-14 17:11:05,731 - Node_c1 - INFO - Sent packet 83610822-25a1-4cab-b865-7aeb5f5d820e to p1 (10.0.0.6:8000)
+2026-01-14 17:11:05,731 - Node_c1 - INFO - Sent ACK for 09ba4245-3121-4729-b379-df6f260d061c to c5
+2026-01-14 17:11:05,896 - Node_c1 - INFO - Received msg: ACK... Latency: 2.9939s
+2026-01-14 17:11:06,223 - Node_c1 - INFO - Received msg: ACK... Latency: 1.6804s
+2026-01-14 17:11:06,242 - Node_c1 - INFO - Received msg: ACK... Latency: 2.4998s
+2026-01-14 17:11:06,664 - Node_c1 - INFO - Received msg: ACK... Latency: 3.1859s
+2026-01-14 17:11:06,816 - Node_c1 - INFO - Received msg: ACK... Latency: 1.7671s
+2026-01-14 17:11:06,935 - Node_c1 - INFO - Received msg: Msg from c5 to c1 [P... Latency: 4.2141s
+2026-01-14 17:11:06,942 - Node_c1 - INFO - Sent packet 2185d794-97d4-4bcf-959a-d8072f33a1c2 to p1 (10.0.0.6:8000)
+2026-01-14 17:11:06,943 - Node_c1 - INFO - Sent ACK for eb10c8c0-0468-49c2-8275-8393f3a8da50 to c5
+2026-01-14 17:11:06,950 - Node_c1 - INFO - Received msg: ACK... Latency: 1.0850s
+2026-01-14 17:11:07,379 - Node_c1 - INFO - Received msg: ACK... Latency: 1.5347s
+2026-01-14 17:11:08,021 - Node_c1 - INFO - Received msg: ACK... Latency: 4.2831s
+2026-01-14 17:11:09,419 - Node_c1 - INFO - Received msg: ACK... Latency: 4.1780s

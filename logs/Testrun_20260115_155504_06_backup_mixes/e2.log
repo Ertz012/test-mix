@@ -1,0 +1,388 @@
+2026-01-15 15:55:05,183 - Node_e2 - INFO - Loading existing keys from keys/e2_private.pem
+2026-01-15 15:55:05,183 - Node_e2 - INFO - Started node on port 8000
+2026-01-15 15:55:05,212 - Node_e2 - INFO - Mixing loop started
+2026-01-15 15:55:07,630 - Node_e2 - INFO - Packet scheduled for +1.0685s. Queue size: 1
+2026-01-15 15:55:07,799 - Node_e2 - INFO - Packet scheduled for +0.9248s. Queue size: 2
+2026-01-15 15:55:08,113 - Node_e2 - INFO - Packet scheduled for +0.9316s. Queue size: 3
+2026-01-15 15:55:08,121 - Node_e2 - INFO - Packet scheduled for +0.1147s. Queue size: 4
+2026-01-15 15:55:08,165 - Node_e2 - INFO - Packet scheduled for +0.2759s. Queue size: 5
+2026-01-15 15:55:08,236 - Node_e2 - INFO - Forwarding packet 378b97d0-343b-44f2-9413-66faefe77dc9 to i10
+2026-01-15 15:55:08,242 - Node_e2 - INFO - Sent packet 378b97d0-343b-44f2-9413-66faefe77dc9 to i10 (10.0.0.30:8000)
+2026-01-15 15:55:08,259 - Node_e2 - INFO - Packet scheduled for +1.0511s. Queue size: 5
+2026-01-15 15:55:08,421 - Node_e2 - INFO - Packet scheduled for +0.1003s. Queue size: 6
+2026-01-15 15:55:08,441 - Node_e2 - INFO - Forwarding packet f3bfc2f3-d35c-4cd7-83f5-3a74900d7587 to i10
+2026-01-15 15:55:08,444 - Node_e2 - INFO - Sent packet f3bfc2f3-d35c-4cd7-83f5-3a74900d7587 to i10 (10.0.0.30:8000)
+2026-01-15 15:55:08,522 - Node_e2 - INFO - Forwarding packet 47ea52be-51bc-466b-ae91-22952997e262 to i2
+2026-01-15 15:55:08,527 - Node_e2 - INFO - Sent packet 47ea52be-51bc-466b-ae91-22952997e262 to i2 (10.0.0.22:8000)
+2026-01-15 15:55:08,699 - Node_e2 - INFO - Forwarding packet 3b58a29a-72a0-47d7-8ba2-e61f294e85b3 to i1
+2026-01-15 15:55:08,704 - Node_e2 - INFO - Sent packet 3b58a29a-72a0-47d7-8ba2-e61f294e85b3 to i1 (10.0.0.21:8000)
+2026-01-15 15:55:08,724 - Node_e2 - INFO - Forwarding packet 18b0a6bd-b9bd-438a-9827-3d6d33d750bc to i12
+2026-01-15 15:55:08,732 - Node_e2 - INFO - Sent packet 18b0a6bd-b9bd-438a-9827-3d6d33d750bc to i12 (10.0.0.32:8000)
+2026-01-15 15:55:08,798 - Node_e2 - INFO - Packet scheduled for +0.1528s. Queue size: 3
+2026-01-15 15:55:08,892 - Node_e2 - INFO - Packet scheduled for +0.2634s. Queue size: 4
+2026-01-15 15:55:08,931 - Node_e2 - INFO - Packet scheduled for +1.2837s. Queue size: 5
+2026-01-15 15:55:08,951 - Node_e2 - INFO - Forwarding packet 9d37b62d-6e45-4e63-83e8-afe08f61433f to i3
+2026-01-15 15:55:08,958 - Node_e2 - INFO - Sent packet 9d37b62d-6e45-4e63-83e8-afe08f61433f to i3 (10.0.0.23:8000)
+2026-01-15 15:55:08,959 - Node_e2 - INFO - Packet scheduled for +0.1972s. Queue size: 5
+2026-01-15 15:55:08,978 - Node_e2 - INFO - Packet scheduled for +0.6386s. Queue size: 6
+2026-01-15 15:55:08,990 - Node_e2 - INFO - Packet scheduled for +0.7557s. Queue size: 7
+2026-01-15 15:55:09,045 - Node_e2 - INFO - Forwarding packet 0cda1b57-a17f-4227-a5b2-f48e4739af33 to i3
+2026-01-15 15:55:09,050 - Node_e2 - INFO - Sent packet 0cda1b57-a17f-4227-a5b2-f48e4739af33 to i3 (10.0.0.23:8000)
+2026-01-15 15:55:09,105 - Node_e2 - INFO - Packet scheduled for +0.0628s. Queue size: 7
+2026-01-15 15:55:09,127 - Node_e2 - INFO - Packet scheduled for +0.4340s. Queue size: 8
+2026-01-15 15:55:09,156 - Node_e2 - INFO - Forwarding packet 98f10db4-1df9-4ef1-b051-8fe030103e19 to i10
+2026-01-15 15:55:09,161 - Node_e2 - INFO - Sent packet 98f10db4-1df9-4ef1-b051-8fe030103e19 to i10 (10.0.0.30:8000)
+2026-01-15 15:55:09,171 - Node_e2 - INFO - Forwarding packet 438552ae-7f88-4f08-800f-a010a3d75ef5 to i3
+2026-01-15 15:55:09,175 - Node_e2 - INFO - Sent packet 438552ae-7f88-4f08-800f-a010a3d75ef5 to i3 (10.0.0.23:8000)
+2026-01-15 15:55:09,176 - Node_e2 - INFO - Forwarding packet 1e89e4fa-dda8-4a0a-994c-b7a46fe3e635 to i4
+2026-01-15 15:55:09,185 - Node_e2 - INFO - Sent packet 1e89e4fa-dda8-4a0a-994c-b7a46fe3e635 to i4 (10.0.0.24:8000)
+2026-01-15 15:55:09,196 - Node_e2 - INFO - Packet scheduled for +0.4323s. Queue size: 6
+2026-01-15 15:55:09,310 - Node_e2 - INFO - Forwarding packet ebbfcf17-0ecc-4405-bef4-fdd4c13cb7b4 to i12
+2026-01-15 15:55:09,312 - Node_e2 - INFO - Sent packet ebbfcf17-0ecc-4405-bef4-fdd4c13cb7b4 to i12 (10.0.0.32:8000)
+2026-01-15 15:55:09,379 - Node_e2 - INFO - Packet scheduled for +0.5517s. Queue size: 6
+2026-01-15 15:55:09,562 - Node_e2 - INFO - Forwarding packet bb6be98d-1aec-4507-984a-e8a1a9bd32bc to i3
+2026-01-15 15:55:09,565 - Node_e2 - INFO - Sent packet bb6be98d-1aec-4507-984a-e8a1a9bd32bc to i3 (10.0.0.23:8000)
+2026-01-15 15:55:09,617 - Node_e2 - INFO - Forwarding packet bea638a3-34cb-4c2b-bd14-4f66687f9d51 to i1
+2026-01-15 15:55:09,622 - Node_e2 - INFO - Sent packet bea638a3-34cb-4c2b-bd14-4f66687f9d51 to i1 (10.0.0.21:8000)
+2026-01-15 15:55:09,629 - Node_e2 - INFO - Forwarding packet 0e22efa9-5e7f-43d3-86ea-2f23358b8691 to i12
+2026-01-15 15:55:09,634 - Node_e2 - INFO - Sent packet 0e22efa9-5e7f-43d3-86ea-2f23358b8691 to i12 (10.0.0.32:8000)
+2026-01-15 15:55:09,712 - Node_e2 - INFO - Packet scheduled for +0.3381s. Queue size: 4
+2026-01-15 15:55:09,745 - Node_e2 - INFO - Forwarding packet 9ed1d10d-d77e-4e7c-b3cf-1c0af25509c7 to i2
+2026-01-15 15:55:09,747 - Node_e2 - INFO - Sent packet 9ed1d10d-d77e-4e7c-b3cf-1c0af25509c7 to i2 (10.0.0.22:8000)
+2026-01-15 15:55:09,931 - Node_e2 - INFO - Forwarding packet 91368f09-e574-4624-b3de-a255ce87883a to i4
+2026-01-15 15:55:09,934 - Node_e2 - INFO - Sent packet 91368f09-e574-4624-b3de-a255ce87883a to i4 (10.0.0.24:8000)
+2026-01-15 15:55:10,050 - Node_e2 - INFO - Forwarding packet bbd32659-18d0-4f86-972b-18549844402d to i10
+2026-01-15 15:55:10,056 - Node_e2 - INFO - Sent packet bbd32659-18d0-4f86-972b-18549844402d to i10 (10.0.0.30:8000)
+2026-01-15 15:55:10,077 - Node_e2 - INFO - Packet scheduled for +0.0193s. Queue size: 2
+2026-01-15 15:55:10,156 - Node_e2 - INFO - Forwarding packet 0695d3a9-ec6f-4ffa-ac49-5e1f97ec7291 to i12
+2026-01-15 15:55:10,157 - Node_e2 - INFO - Sent packet 0695d3a9-ec6f-4ffa-ac49-5e1f97ec7291 to i12 (10.0.0.32:8000)
+2026-01-15 15:55:10,215 - Node_e2 - INFO - Forwarding packet f76952ff-dfe7-4ed2-9cc1-d578078d4303 to i3
+2026-01-15 15:55:10,217 - Node_e2 - INFO - Sent packet f76952ff-dfe7-4ed2-9cc1-d578078d4303 to i3 (10.0.0.23:8000)
+2026-01-15 15:55:11,790 - Node_e2 - INFO - Packet scheduled for +0.8803s. Queue size: 1
+2026-01-15 15:55:12,671 - Node_e2 - INFO - Forwarding packet 582c061c-792c-47ce-b0b5-2da3d965d406 to i1
+2026-01-15 15:55:12,673 - Node_e2 - ERROR - Failed to send to 10.0.0.21:8000: [Errno 111] Connection refused
+2026-01-15 15:55:12,673 - Node_e2 - INFO - Redirecting to backup node i10
+2026-01-15 15:55:12,676 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:12,773 - Node_e2 - INFO - Packet scheduled for +2.6886s. Queue size: 1
+2026-01-15 15:55:13,670 - Node_e2 - INFO - Packet scheduled for +0.6832s. Queue size: 2
+2026-01-15 15:55:14,174 - Node_e2 - INFO - Packet scheduled for +0.1279s. Queue size: 3
+2026-01-15 15:55:14,302 - Node_e2 - INFO - Forwarding packet 105271f6-3b71-46f8-aeb9-d1cb1009215c to i7
+2026-01-15 15:55:14,305 - Node_e2 - ERROR - Failed to send to 10.0.0.27:8000: [Errno 111] Connection refused
+2026-01-15 15:55:14,305 - Node_e2 - INFO - Redirecting to backup node i8
+2026-01-15 15:55:14,308 - Node_e2 - INFO - Sent packet 105271f6-3b71-46f8-aeb9-d1cb1009215c to i8 (10.0.0.28:8000)
+2026-01-15 15:55:14,353 - Node_e2 - INFO - Forwarding packet 1dc9be7f-f36f-4222-a0da-a5cb60eb5488 to i8
+2026-01-15 15:55:14,354 - Node_e2 - INFO - Sent packet 1dc9be7f-f36f-4222-a0da-a5cb60eb5488 to i8 (10.0.0.28:8000)
+2026-01-15 15:55:14,745 - Node_e2 - INFO - Packet scheduled for +0.1523s. Queue size: 2
+2026-01-15 15:55:14,897 - Node_e2 - INFO - Forwarding packet 5a19ed07-de63-488d-b505-4751a3bb7508 to i3
+2026-01-15 15:55:14,900 - Node_e2 - INFO - Sent packet 5a19ed07-de63-488d-b505-4751a3bb7508 to i3 (10.0.0.23:8000)
+2026-01-15 15:55:14,944 - Node_e2 - INFO - Packet scheduled for +1.4329s. Queue size: 2
+2026-01-15 15:55:15,126 - Node_e2 - INFO - Packet scheduled for +0.0648s. Queue size: 3
+2026-01-15 15:55:15,143 - Node_e2 - INFO - Packet scheduled for +0.0205s. Queue size: 4
+2026-01-15 15:55:15,201 - Node_e2 - INFO - Forwarding packet e8ded9ca-d949-4ca2-bdf8-c9b5a30a0c73 to i5
+2026-01-15 15:55:15,203 - Node_e2 - INFO - Sent packet e8ded9ca-d949-4ca2-bdf8-c9b5a30a0c73 to i5 (10.0.0.25:8000)
+2026-01-15 15:55:15,203 - Node_e2 - INFO - Forwarding packet 64930fd0-e879-4750-a954-8130602adfde to i5
+2026-01-15 15:55:15,205 - Node_e2 - INFO - Sent packet 64930fd0-e879-4750-a954-8130602adfde to i5 (10.0.0.25:8000)
+2026-01-15 15:55:15,462 - Node_e2 - INFO - Forwarding packet 30e262f2-9bda-43d6-a4d7-d37880a5029f to i7
+2026-01-15 15:55:15,463 - Node_e2 - ERROR - Failed to send to 10.0.0.27:8000: [Errno 111] Connection refused
+2026-01-15 15:55:15,463 - Node_e2 - INFO - Redirecting to backup node i8
+2026-01-15 15:55:15,464 - Node_e2 - INFO - Sent packet 30e262f2-9bda-43d6-a4d7-d37880a5029f to i8 (10.0.0.28:8000)
+2026-01-15 15:55:16,376 - Node_e2 - INFO - Forwarding packet 66f741ca-c438-4a30-8bb8-ceb254fbba0d to i3
+2026-01-15 15:55:16,379 - Node_e2 - INFO - Sent packet 66f741ca-c438-4a30-8bb8-ceb254fbba0d to i3 (10.0.0.23:8000)
+2026-01-15 15:55:16,447 - Node_e2 - INFO - Packet scheduled for +2.0621s. Queue size: 1
+2026-01-15 15:55:16,631 - Node_e2 - INFO - Packet scheduled for +0.0509s. Queue size: 2
+2026-01-15 15:55:16,682 - Node_e2 - INFO - Forwarding packet 2a57c919-5a35-41e1-ae59-130d7c92fcc9 to i5
+2026-01-15 15:55:16,684 - Node_e2 - INFO - Sent packet 2a57c919-5a35-41e1-ae59-130d7c92fcc9 to i5 (10.0.0.25:8000)
+2026-01-15 15:55:17,616 - Node_e2 - INFO - Packet scheduled for +0.4186s. Queue size: 2
+2026-01-15 15:55:17,646 - Node_e2 - INFO - Packet scheduled for +0.6044s. Queue size: 3
+2026-01-15 15:55:17,685 - Node_e2 - INFO - Packet scheduled for +0.0639s. Queue size: 4
+2026-01-15 15:55:17,749 - Node_e2 - INFO - Forwarding packet 957b7a19-5a88-450e-be50-3f9b213e61c0 to i2
+2026-01-15 15:55:17,751 - Node_e2 - INFO - Sent packet 957b7a19-5a88-450e-be50-3f9b213e61c0 to i2 (10.0.0.22:8000)
+2026-01-15 15:55:17,798 - Node_e2 - INFO - Packet scheduled for +0.1861s. Queue size: 4
+2026-01-15 15:55:17,984 - Node_e2 - INFO - Forwarding packet c73ace0a-5f4c-4b73-bc6e-8bb612423023 to i4
+2026-01-15 15:55:17,989 - Node_e2 - INFO - Sent packet c73ace0a-5f4c-4b73-bc6e-8bb612423023 to i4 (10.0.0.24:8000)
+2026-01-15 15:55:18,035 - Node_e2 - INFO - Forwarding packet 5b7976ef-2bde-4401-903c-94929292f975 to i2
+2026-01-15 15:55:18,039 - Node_e2 - INFO - Sent packet 5b7976ef-2bde-4401-903c-94929292f975 to i2 (10.0.0.22:8000)
+2026-01-15 15:55:18,056 - Node_e2 - INFO - Packet scheduled for +0.1748s. Queue size: 3
+2026-01-15 15:55:18,231 - Node_e2 - INFO - Forwarding packet d29fd141-31fa-4c80-8a2f-02335255da09 to i6
+2026-01-15 15:55:18,239 - Node_e2 - INFO - Sent packet d29fd141-31fa-4c80-8a2f-02335255da09 to i6 (10.0.0.26:8000)
+2026-01-15 15:55:18,251 - Node_e2 - INFO - Forwarding packet 7f16e832-130c-44ab-8449-addd4336e90b to i2
+2026-01-15 15:55:18,260 - Node_e2 - INFO - Sent packet 7f16e832-130c-44ab-8449-addd4336e90b to i2 (10.0.0.22:8000)
+2026-01-15 15:55:18,763 - Node_e2 - INFO - Packet scheduled for +0.8309s. Queue size: 1
+2026-01-15 15:55:18,832 - Node_e2 - INFO - Packet scheduled for +0.1038s. Queue size: 2
+2026-01-15 15:55:18,877 - Node_e2 - INFO - Packet scheduled for +0.0601s. Queue size: 3
+2026-01-15 15:55:18,936 - Node_e2 - INFO - Forwarding packet d67ba1b8-f55d-497c-8111-71ecfbd3a5b6 to i4
+2026-01-15 15:55:18,937 - Node_e2 - INFO - Sent packet d67ba1b8-f55d-497c-8111-71ecfbd3a5b6 to i4 (10.0.0.24:8000)
+2026-01-15 15:55:18,947 - Node_e2 - INFO - Forwarding packet 40378495-ee6a-4e80-a913-9ff1c40602bd to i6
+2026-01-15 15:55:18,948 - Node_e2 - INFO - Sent packet 40378495-ee6a-4e80-a913-9ff1c40602bd to i6 (10.0.0.26:8000)
+2026-01-15 15:55:19,349 - Node_e2 - INFO - Packet scheduled for +0.3709s. Queue size: 2
+2026-01-15 15:55:19,594 - Node_e2 - INFO - Forwarding packet 2641affd-72e8-4e30-bb3a-e407cc19c374 to i5
+2026-01-15 15:55:19,595 - Node_e2 - INFO - Sent packet 2641affd-72e8-4e30-bb3a-e407cc19c374 to i5 (10.0.0.25:8000)
+2026-01-15 15:55:19,697 - Node_e2 - INFO - Packet scheduled for +0.1922s. Queue size: 2
+2026-01-15 15:55:19,720 - Node_e2 - INFO - Forwarding packet 37201abd-215b-40ac-a749-f24619a84077 to i2
+2026-01-15 15:55:19,721 - Node_e2 - INFO - Sent packet 37201abd-215b-40ac-a749-f24619a84077 to i2 (10.0.0.22:8000)
+2026-01-15 15:55:19,753 - Node_e2 - INFO - Packet scheduled for +0.4038s. Queue size: 2
+2026-01-15 15:55:19,783 - Node_e2 - INFO - Packet scheduled for +0.1421s. Queue size: 3
+2026-01-15 15:55:19,821 - Node_e2 - INFO - Packet scheduled for +0.0964s. Queue size: 4
+2026-01-15 15:55:19,889 - Node_e2 - INFO - Forwarding packet a81df875-0aa9-44fc-80c2-509da8b7f412 to i2
+2026-01-15 15:55:19,890 - Node_e2 - INFO - Sent packet a81df875-0aa9-44fc-80c2-509da8b7f412 to i2 (10.0.0.22:8000)
+2026-01-15 15:55:19,900 - Node_e2 - INFO - Packet scheduled for +0.4291s. Queue size: 4
+2026-01-15 15:55:19,918 - Node_e2 - INFO - Forwarding packet 29f9bb98-7a49-40c8-a043-bd28913d8c89 to i5
+2026-01-15 15:55:19,920 - Node_e2 - INFO - Sent packet 29f9bb98-7a49-40c8-a043-bd28913d8c89 to i5 (10.0.0.25:8000)
+2026-01-15 15:55:19,925 - Node_e2 - INFO - Forwarding packet d09bb233-8590-467f-a391-51e0699ab952 to i3
+2026-01-15 15:55:19,926 - Node_e2 - INFO - Sent packet d09bb233-8590-467f-a391-51e0699ab952 to i3 (10.0.0.23:8000)
+2026-01-15 15:55:19,959 - Node_e2 - INFO - Packet scheduled for +0.2412s. Queue size: 3
+2026-01-15 15:55:20,128 - Node_e2 - INFO - Packet scheduled for +0.1416s. Queue size: 4
+2026-01-15 15:55:20,157 - Node_e2 - INFO - Forwarding packet dd3bf9b1-cb6a-4724-a945-f478d48be19d to i10
+2026-01-15 15:55:20,159 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:20,159 - Node_e2 - INFO - Redirecting to backup node i11
+2026-01-15 15:55:20,163 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:20,200 - Node_e2 - INFO - Forwarding packet 275dc784-7a35-474d-bbae-4643ca4ab52b to i3
+2026-01-15 15:55:20,201 - Node_e2 - INFO - Sent packet 275dc784-7a35-474d-bbae-4643ca4ab52b to i3 (10.0.0.23:8000)
+2026-01-15 15:55:20,270 - Node_e2 - INFO - Forwarding packet 99b2f794-1ff0-4494-855e-3e52871ac5b8 to i10
+2026-01-15 15:55:20,271 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:20,271 - Node_e2 - INFO - Redirecting to backup node i11
+2026-01-15 15:55:20,272 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:20,329 - Node_e2 - INFO - Forwarding packet 3a8188d1-8046-4185-b69d-0ebfe7f341fe to i5
+2026-01-15 15:55:20,333 - Node_e2 - INFO - Sent packet 3a8188d1-8046-4185-b69d-0ebfe7f341fe to i5 (10.0.0.25:8000)
+2026-01-15 15:55:20,374 - Node_e2 - INFO - Packet scheduled for +0.0457s. Queue size: 1
+2026-01-15 15:55:20,420 - Node_e2 - INFO - Forwarding packet bdee0147-2b8f-4c1f-b66e-465ed620ae04 to i10
+2026-01-15 15:55:20,421 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:20,421 - Node_e2 - INFO - Redirecting to backup node i11
+2026-01-15 15:55:20,422 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:20,798 - Node_e2 - INFO - Packet scheduled for +0.1788s. Queue size: 1
+2026-01-15 15:55:20,977 - Node_e2 - INFO - Forwarding packet 59d2167b-d7aa-4b5f-903b-2aad4e6f97f9 to i10
+2026-01-15 15:55:20,978 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:20,978 - Node_e2 - INFO - Redirecting to backup node i11
+2026-01-15 15:55:20,979 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:21,016 - Node_e2 - INFO - Packet scheduled for +0.2791s. Queue size: 1
+2026-01-15 15:55:21,097 - Node_e2 - INFO - Packet scheduled for +0.8705s. Queue size: 2
+2026-01-15 15:55:21,295 - Node_e2 - INFO - Forwarding packet a2cb3b3c-09f9-4ff0-b19c-1cd136201515 to i6
+2026-01-15 15:55:21,302 - Node_e2 - INFO - Sent packet a2cb3b3c-09f9-4ff0-b19c-1cd136201515 to i6 (10.0.0.26:8000)
+2026-01-15 15:55:21,378 - Node_e2 - INFO - Packet scheduled for +0.1597s. Queue size: 2
+2026-01-15 15:55:21,537 - Node_e2 - INFO - Forwarding packet 9711ad4f-7875-483d-bac5-1f576846b2ff to i6
+2026-01-15 15:55:21,539 - Node_e2 - INFO - Sent packet 9711ad4f-7875-483d-bac5-1f576846b2ff to i6 (10.0.0.26:8000)
+2026-01-15 15:55:21,590 - Node_e2 - INFO - Packet scheduled for +1.7612s. Queue size: 2
+2026-01-15 15:55:21,723 - Node_e2 - INFO - Packet scheduled for +0.2602s. Queue size: 3
+2026-01-15 15:55:21,891 - Node_e2 - INFO - Packet scheduled for +0.1076s. Queue size: 4
+2026-01-15 15:55:21,967 - Node_e2 - INFO - Forwarding packet 4f9fc9b4-5076-4ffb-83d2-0c1440db0004 to i11
+2026-01-15 15:55:21,971 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:21,971 - Node_e2 - INFO - Redirecting to backup node i12
+2026-01-15 15:55:21,973 - Node_e2 - ERROR - Failed to send to 10.0.0.32:8000: [Errno 111] Connection refused
+2026-01-15 15:55:21,984 - Node_e2 - INFO - Forwarding packet d9d59d87-9a7a-481c-9904-cdcbe3397add to i9
+2026-01-15 15:55:21,990 - Node_e2 - INFO - Sent packet d9d59d87-9a7a-481c-9904-cdcbe3397add to i9 (10.0.0.29:8000)
+2026-01-15 15:55:21,999 - Node_e2 - INFO - Forwarding packet 515059d3-4a2d-4f96-b9e1-329ae2f42862 to i9
+2026-01-15 15:55:22,000 - Node_e2 - INFO - Sent packet 515059d3-4a2d-4f96-b9e1-329ae2f42862 to i9 (10.0.0.29:8000)
+2026-01-15 15:55:22,108 - Node_e2 - INFO - Packet scheduled for +0.6717s. Queue size: 2
+2026-01-15 15:55:22,178 - Node_e2 - INFO - Packet scheduled for +0.3791s. Queue size: 3
+2026-01-15 15:55:22,557 - Node_e2 - INFO - Forwarding packet 0d65a3cb-cd32-41df-86b1-e0c0a4467a89 to i9
+2026-01-15 15:55:22,558 - Node_e2 - INFO - Sent packet 0d65a3cb-cd32-41df-86b1-e0c0a4467a89 to i9 (10.0.0.29:8000)
+2026-01-15 15:55:22,780 - Node_e2 - INFO - Forwarding packet 4dfdc01a-e953-4d74-825c-a11ff6ec7661 to i1
+2026-01-15 15:55:22,781 - Node_e2 - ERROR - Failed to send to 10.0.0.21:8000: [Errno 111] Connection refused
+2026-01-15 15:55:22,781 - Node_e2 - INFO - Redirecting to backup node i10
+2026-01-15 15:55:22,782 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:22,945 - Node_e2 - INFO - Packet scheduled for +0.2466s. Queue size: 2
+2026-01-15 15:55:23,192 - Node_e2 - INFO - Forwarding packet d97b1f2b-5a22-4bf2-9e98-6f8fb74b694f to i9
+2026-01-15 15:55:23,200 - Node_e2 - INFO - Sent packet d97b1f2b-5a22-4bf2-9e98-6f8fb74b694f to i9 (10.0.0.29:8000)
+2026-01-15 15:55:23,226 - Node_e2 - INFO - Packet scheduled for +0.7888s. Queue size: 2
+2026-01-15 15:55:23,351 - Node_e2 - INFO - Forwarding packet c5f4d557-6ce2-4f60-834c-400d7e171649 to i8
+2026-01-15 15:55:23,352 - Node_e2 - INFO - Sent packet c5f4d557-6ce2-4f60-834c-400d7e171649 to i8 (10.0.0.28:8000)
+2026-01-15 15:55:23,411 - Node_e2 - INFO - Packet scheduled for +0.2446s. Queue size: 2
+2026-01-15 15:55:23,541 - Node_e2 - INFO - Packet scheduled for +0.1444s. Queue size: 3
+2026-01-15 15:55:23,656 - Node_e2 - INFO - Forwarding packet 655fc64c-d365-4f74-a363-11ef75afa18a to i7
+2026-01-15 15:55:23,660 - Node_e2 - ERROR - Failed to send to 10.0.0.27:8000: [Errno 111] Connection refused
+2026-01-15 15:55:23,661 - Node_e2 - INFO - Redirecting to backup node i8
+2026-01-15 15:55:23,671 - Node_e2 - INFO - Sent packet 655fc64c-d365-4f74-a363-11ef75afa18a to i8 (10.0.0.28:8000)
+2026-01-15 15:55:23,681 - Node_e2 - INFO - Packet scheduled for +0.6860s. Queue size: 3
+2026-01-15 15:55:23,686 - Node_e2 - INFO - Forwarding packet fc0d8398-d9e7-4efd-9cd0-50df44e85c9c to i7
+2026-01-15 15:55:23,695 - Node_e2 - ERROR - Failed to send to 10.0.0.27:8000: [Errno 111] Connection refused
+2026-01-15 15:55:23,695 - Node_e2 - INFO - Redirecting to backup node i8
+2026-01-15 15:55:23,702 - Node_e2 - INFO - Sent packet fc0d8398-d9e7-4efd-9cd0-50df44e85c9c to i8 (10.0.0.28:8000)
+2026-01-15 15:55:23,711 - Node_e2 - INFO - Packet scheduled for +0.3931s. Queue size: 3
+2026-01-15 15:55:23,786 - Node_e2 - INFO - Packet scheduled for +0.3419s. Queue size: 4
+2026-01-15 15:55:23,898 - Node_e2 - INFO - Packet scheduled for +0.9608s. Queue size: 5
+2026-01-15 15:55:23,910 - Node_e2 - INFO - Packet scheduled for +0.6810s. Queue size: 6
+2026-01-15 15:55:24,015 - Node_e2 - INFO - Forwarding packet 485da146-ce21-442b-8682-e5a3ab437a40 to i9
+2026-01-15 15:55:24,017 - Node_e2 - INFO - Sent packet 485da146-ce21-442b-8682-e5a3ab437a40 to i9 (10.0.0.29:8000)
+2026-01-15 15:55:24,105 - Node_e2 - INFO - Forwarding packet 3c323506-8d9b-4a84-bba8-b42d5914faec to i3
+2026-01-15 15:55:24,106 - Node_e2 - INFO - Sent packet 3c323506-8d9b-4a84-bba8-b42d5914faec to i3 (10.0.0.23:8000)
+2026-01-15 15:55:24,128 - Node_e2 - INFO - Forwarding packet 0a8a4fae-6731-4824-b461-941b8ca62cf1 to i8
+2026-01-15 15:55:24,131 - Node_e2 - INFO - Sent packet 0a8a4fae-6731-4824-b461-941b8ca62cf1 to i8 (10.0.0.28:8000)
+2026-01-15 15:55:24,177 - Node_e2 - INFO - Packet scheduled for +0.3452s. Queue size: 4
+2026-01-15 15:55:24,288 - Node_e2 - INFO - Packet scheduled for +0.5692s. Queue size: 5
+2026-01-15 15:55:24,367 - Node_e2 - INFO - Forwarding packet 7d324f2e-c693-4e2d-b9f1-ef56988d1943 to i6
+2026-01-15 15:55:24,369 - Node_e2 - INFO - Sent packet 7d324f2e-c693-4e2d-b9f1-ef56988d1943 to i6 (10.0.0.26:8000)
+2026-01-15 15:55:24,522 - Node_e2 - INFO - Forwarding packet f5615444-a810-4fda-8667-824ed22ec69c to i6
+2026-01-15 15:55:24,527 - Node_e2 - INFO - Sent packet f5615444-a810-4fda-8667-824ed22ec69c to i6 (10.0.0.26:8000)
+2026-01-15 15:55:24,591 - Node_e2 - INFO - Forwarding packet 89c19cbc-94d1-49fc-aeaf-b789cf2a4f78 to i6
+2026-01-15 15:55:24,594 - Node_e2 - INFO - Sent packet 89c19cbc-94d1-49fc-aeaf-b789cf2a4f78 to i6 (10.0.0.26:8000)
+2026-01-15 15:55:24,857 - Node_e2 - INFO - Forwarding packet dbe14e33-fc88-4612-ba48-3d2d804f184f to i4
+2026-01-15 15:55:24,859 - Node_e2 - INFO - Sent packet dbe14e33-fc88-4612-ba48-3d2d804f184f to i4 (10.0.0.24:8000)
+2026-01-15 15:55:24,860 - Node_e2 - INFO - Forwarding packet 88ea6f3e-6ea9-476c-b843-2cacccff2ef3 to i8
+2026-01-15 15:55:24,861 - Node_e2 - INFO - Sent packet 88ea6f3e-6ea9-476c-b843-2cacccff2ef3 to i8 (10.0.0.28:8000)
+2026-01-15 15:55:24,893 - Node_e2 - INFO - Packet scheduled for +0.0479s. Queue size: 1
+2026-01-15 15:55:24,941 - Node_e2 - INFO - Forwarding packet 0815556e-ab41-4e1e-9016-6c6d11e3ca0b to i8
+2026-01-15 15:55:24,943 - Node_e2 - INFO - Sent packet 0815556e-ab41-4e1e-9016-6c6d11e3ca0b to i8 (10.0.0.28:8000)
+2026-01-15 15:55:24,985 - Node_e2 - INFO - Packet scheduled for +0.2656s. Queue size: 1
+2026-01-15 15:55:25,250 - Node_e2 - INFO - Forwarding packet fb927efe-3c56-4286-95eb-45a6a92f826d to i5
+2026-01-15 15:55:25,252 - Node_e2 - INFO - Sent packet fb927efe-3c56-4286-95eb-45a6a92f826d to i5 (10.0.0.25:8000)
+2026-01-15 15:55:25,353 - Node_e2 - INFO - Packet scheduled for +0.1996s. Queue size: 1
+2026-01-15 15:55:25,413 - Node_e2 - INFO - Packet scheduled for +0.2753s. Queue size: 2
+2026-01-15 15:55:25,466 - Node_e2 - INFO - Packet scheduled for +1.3166s. Queue size: 3
+2026-01-15 15:55:25,553 - Node_e2 - INFO - Forwarding packet 3b29187d-a08e-451d-b4ba-11a49ae8386a to i4
+2026-01-15 15:55:25,554 - Node_e2 - INFO - Sent packet 3b29187d-a08e-451d-b4ba-11a49ae8386a to i4 (10.0.0.24:8000)
+2026-01-15 15:55:25,568 - Node_e2 - INFO - Packet scheduled for +1.9665s. Queue size: 3
+2026-01-15 15:55:25,689 - Node_e2 - INFO - Forwarding packet d4c3368e-1088-4cd3-98af-41b4df38906b to i5
+2026-01-15 15:55:25,696 - Node_e2 - INFO - Sent packet d4c3368e-1088-4cd3-98af-41b4df38906b to i5 (10.0.0.25:8000)
+2026-01-15 15:55:25,815 - Node_e2 - INFO - Packet scheduled for +0.0522s. Queue size: 3
+2026-01-15 15:55:25,852 - Node_e2 - INFO - Packet scheduled for +0.4776s. Queue size: 4
+2026-01-15 15:55:25,897 - Node_e2 - INFO - Forwarding packet 451322c0-6fe7-4ff1-a6e2-47b3e00f8b63 to i6
+2026-01-15 15:55:25,905 - Node_e2 - INFO - Sent packet 451322c0-6fe7-4ff1-a6e2-47b3e00f8b63 to i6 (10.0.0.26:8000)
+2026-01-15 15:55:25,921 - Node_e2 - INFO - Packet scheduled for +0.8082s. Queue size: 4
+2026-01-15 15:55:26,243 - Node_e2 - INFO - Packet scheduled for +0.1485s. Queue size: 5
+2026-01-15 15:55:26,308 - Node_e2 - INFO - Packet scheduled for +1.3044s. Queue size: 6
+2026-01-15 15:55:26,330 - Node_e2 - INFO - Forwarding packet 2cd1e2ac-0e62-4794-94b5-a16be0b78558 to i5
+2026-01-15 15:55:26,332 - Node_e2 - INFO - Sent packet 2cd1e2ac-0e62-4794-94b5-a16be0b78558 to i5 (10.0.0.25:8000)
+2026-01-15 15:55:26,391 - Node_e2 - INFO - Forwarding packet 3782ccdb-368c-4ecd-8bcc-f3fd158ce439 to i6
+2026-01-15 15:55:26,392 - Node_e2 - INFO - Sent packet 3782ccdb-368c-4ecd-8bcc-f3fd158ce439 to i6 (10.0.0.26:8000)
+2026-01-15 15:55:26,730 - Node_e2 - INFO - Forwarding packet 3e494df6-d24a-45e4-b08e-a31c852d4c59 to i11
+2026-01-15 15:55:26,731 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:26,731 - Node_e2 - INFO - Redirecting to backup node i12
+2026-01-15 15:55:26,733 - Node_e2 - ERROR - Failed to send to 10.0.0.32:8000: [Errno 111] Connection refused
+2026-01-15 15:55:26,783 - Node_e2 - INFO - Forwarding packet 35f86caa-631b-4397-b031-94d0492ed579 to i11
+2026-01-15 15:55:26,785 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:26,785 - Node_e2 - INFO - Redirecting to backup node i12
+2026-01-15 15:55:26,786 - Node_e2 - ERROR - Failed to send to 10.0.0.32:8000: [Errno 111] Connection refused
+2026-01-15 15:55:26,930 - Node_e2 - INFO - Packet scheduled for +0.3216s. Queue size: 3
+2026-01-15 15:55:27,133 - Node_e2 - INFO - Packet scheduled for +0.1401s. Queue size: 4
+2026-01-15 15:55:27,252 - Node_e2 - INFO - Forwarding packet 0c9515ed-4a20-451c-af46-628d5b594dfd to i2
+2026-01-15 15:55:27,253 - Node_e2 - INFO - Sent packet 0c9515ed-4a20-451c-af46-628d5b594dfd to i2 (10.0.0.22:8000)
+2026-01-15 15:55:27,273 - Node_e2 - INFO - Forwarding packet 77447094-7594-4b8f-8886-a3179f2d2fa4 to i6
+2026-01-15 15:55:27,275 - Node_e2 - INFO - Sent packet 77447094-7594-4b8f-8886-a3179f2d2fa4 to i6 (10.0.0.26:8000)
+2026-01-15 15:55:27,281 - Node_e2 - INFO - Packet scheduled for +1.0010s. Queue size: 3
+2026-01-15 15:55:27,535 - Node_e2 - INFO - Forwarding packet 35efe772-34db-4c90-ad71-3ead39d4f7cb to i5
+2026-01-15 15:55:27,536 - Node_e2 - INFO - Sent packet 35efe772-34db-4c90-ad71-3ead39d4f7cb to i5 (10.0.0.25:8000)
+2026-01-15 15:55:27,612 - Node_e2 - INFO - Forwarding packet 5c964999-f459-4f00-aa21-4ca87cc7a67c to i2
+2026-01-15 15:55:27,613 - Node_e2 - INFO - Sent packet 5c964999-f459-4f00-aa21-4ca87cc7a67c to i2 (10.0.0.22:8000)
+2026-01-15 15:55:27,698 - Node_e2 - INFO - Packet scheduled for +0.4913s. Queue size: 2
+2026-01-15 15:55:27,791 - Node_e2 - INFO - Packet scheduled for +0.3991s. Queue size: 3
+2026-01-15 15:55:28,190 - Node_e2 - INFO - Forwarding packet 00b7c79b-cacb-4c8a-b2f6-1d0c552a2af1 to i11
+2026-01-15 15:55:28,191 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:28,192 - Node_e2 - INFO - Redirecting to backup node i12
+2026-01-15 15:55:28,193 - Node_e2 - ERROR - Failed to send to 10.0.0.32:8000: [Errno 111] Connection refused
+2026-01-15 15:55:28,203 - Node_e2 - INFO - Forwarding packet e781443c-5726-4e54-9729-4aeabba08498 to i3
+2026-01-15 15:55:28,204 - Node_e2 - INFO - Sent packet e781443c-5726-4e54-9729-4aeabba08498 to i3 (10.0.0.23:8000)
+2026-01-15 15:55:28,282 - Node_e2 - INFO - Forwarding packet 02667daa-bd76-446c-9886-1844c8a7b3af to i2
+2026-01-15 15:55:28,286 - Node_e2 - INFO - Sent packet 02667daa-bd76-446c-9886-1844c8a7b3af to i2 (10.0.0.22:8000)
+2026-01-15 15:55:28,317 - Node_e2 - INFO - Packet scheduled for +0.0943s. Queue size: 1
+2026-01-15 15:55:28,355 - Node_e2 - INFO - Packet scheduled for +1.0270s. Queue size: 2
+2026-01-15 15:55:28,412 - Node_e2 - INFO - Forwarding packet dfbbc897-acd5-4d6c-8a9c-3b1aa5cea7ec to i3
+2026-01-15 15:55:28,413 - Node_e2 - INFO - Sent packet dfbbc897-acd5-4d6c-8a9c-3b1aa5cea7ec to i3 (10.0.0.23:8000)
+2026-01-15 15:55:28,448 - Node_e2 - INFO - Packet scheduled for +0.8726s. Queue size: 2
+2026-01-15 15:55:28,452 - Node_e2 - INFO - Packet scheduled for +0.7825s. Queue size: 3
+2026-01-15 15:55:28,464 - Node_e2 - INFO - Packet scheduled for +1.0145s. Queue size: 4
+2026-01-15 15:55:28,871 - Node_e2 - INFO - Packet scheduled for +0.3265s. Queue size: 5
+2026-01-15 15:55:29,197 - Node_e2 - INFO - Forwarding packet 19c041b1-1931-4f85-add2-590bea87da7d to i11
+2026-01-15 15:55:29,198 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:29,198 - Node_e2 - INFO - Redirecting to backup node i12
+2026-01-15 15:55:29,199 - Node_e2 - ERROR - Failed to send to 10.0.0.32:8000: [Errno 111] Connection refused
+2026-01-15 15:55:29,235 - Node_e2 - INFO - Forwarding packet f67c2b8c-4387-4cc1-aa2b-d959ccfe8216 to i8
+2026-01-15 15:55:29,237 - Node_e2 - INFO - Sent packet f67c2b8c-4387-4cc1-aa2b-d959ccfe8216 to i8 (10.0.0.28:8000)
+2026-01-15 15:55:29,320 - Node_e2 - INFO - Forwarding packet 0b465059-8a15-41ca-abed-3a129f745425 to i8
+2026-01-15 15:55:29,327 - Node_e2 - INFO - Sent packet 0b465059-8a15-41ca-abed-3a129f745425 to i8 (10.0.0.28:8000)
+2026-01-15 15:55:29,382 - Node_e2 - INFO - Forwarding packet 178fd8f7-69be-4017-bb3a-c67d69f3e8ac to i6
+2026-01-15 15:55:29,384 - Node_e2 - INFO - Sent packet 178fd8f7-69be-4017-bb3a-c67d69f3e8ac to i6 (10.0.0.26:8000)
+2026-01-15 15:55:29,479 - Node_e2 - INFO - Forwarding packet 69cf8cac-3a83-413d-9335-54a7ecb8d6e1 to i6
+2026-01-15 15:55:29,480 - Node_e2 - INFO - Sent packet 69cf8cac-3a83-413d-9335-54a7ecb8d6e1 to i6 (10.0.0.26:8000)
+2026-01-15 15:55:30,092 - Node_e2 - INFO - Packet scheduled for +0.2161s. Queue size: 1
+2026-01-15 15:55:30,308 - Node_e2 - INFO - Forwarding packet 1d707f28-d347-46f2-bc3c-64a0632e046e to i10
+2026-01-15 15:55:30,310 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:30,310 - Node_e2 - INFO - Redirecting to backup node i11
+2026-01-15 15:55:30,311 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:30,357 - Node_e2 - INFO - Packet scheduled for +0.9975s. Queue size: 1
+2026-01-15 15:55:30,388 - Node_e2 - INFO - Packet scheduled for +0.0135s. Queue size: 2
+2026-01-15 15:55:30,411 - Node_e2 - INFO - Packet scheduled for +0.2573s. Queue size: 3
+2026-01-15 15:55:30,450 - Node_e2 - INFO - Packet scheduled for +1.5658s. Queue size: 4
+2026-01-15 15:55:30,462 - Node_e2 - INFO - Forwarding packet 909fef9b-dcac-4d74-8414-8d6dd3ca96b6 to i10
+2026-01-15 15:55:30,463 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:30,463 - Node_e2 - INFO - Redirecting to backup node i11
+2026-01-15 15:55:30,465 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:30,609 - Node_e2 - INFO - Packet scheduled for +0.0228s. Queue size: 4
+2026-01-15 15:55:30,650 - Node_e2 - INFO - Packet scheduled for +0.5952s. Queue size: 5
+2026-01-15 15:55:30,666 - Node_e2 - INFO - Forwarding packet 6fcd9613-3d28-47a3-b411-c1206524f688 to i12
+2026-01-15 15:55:30,669 - Node_e2 - ERROR - Failed to send to 10.0.0.32:8000: [Errno 111] Connection refused
+2026-01-15 15:55:30,670 - Node_e2 - INFO - Redirecting to backup node i2
+2026-01-15 15:55:30,677 - Node_e2 - INFO - Sent packet 6fcd9613-3d28-47a3-b411-c1206524f688 to i2 (10.0.0.22:8000)
+2026-01-15 15:55:30,688 - Node_e2 - INFO - Forwarding packet 53f6694d-f51c-4b90-b335-c7d838736662 to i10
+2026-01-15 15:55:30,692 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:30,692 - Node_e2 - INFO - Redirecting to backup node i11
+2026-01-15 15:55:30,697 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:30,741 - Node_e2 - INFO - Packet scheduled for +0.1561s. Queue size: 4
+2026-01-15 15:55:30,897 - Node_e2 - INFO - Forwarding packet 32a30345-46c5-4dc7-9b6d-968701833674 to i11
+2026-01-15 15:55:30,900 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:30,900 - Node_e2 - INFO - Redirecting to backup node i12
+2026-01-15 15:55:30,901 - Node_e2 - ERROR - Failed to send to 10.0.0.32:8000: [Errno 111] Connection refused
+2026-01-15 15:55:31,070 - Node_e2 - INFO - Packet scheduled for +0.4286s. Queue size: 4
+2026-01-15 15:55:31,246 - Node_e2 - INFO - Forwarding packet 22bc2a2f-ec9c-4fe6-827f-b8ad7c5ce695 to i12
+2026-01-15 15:55:31,247 - Node_e2 - ERROR - Failed to send to 10.0.0.32:8000: [Errno 111] Connection refused
+2026-01-15 15:55:31,248 - Node_e2 - INFO - Redirecting to backup node i2
+2026-01-15 15:55:31,249 - Node_e2 - INFO - Sent packet 22bc2a2f-ec9c-4fe6-827f-b8ad7c5ce695 to i2 (10.0.0.22:8000)
+2026-01-15 15:55:31,298 - Node_e2 - INFO - Packet scheduled for +1.0542s. Queue size: 4
+2026-01-15 15:55:31,350 - Node_e2 - INFO - Packet scheduled for +0.3810s. Queue size: 5
+2026-01-15 15:55:31,354 - Node_e2 - INFO - Forwarding packet 26b70b00-f4d4-44ec-83b6-169e255bdc2c to i10
+2026-01-15 15:55:31,355 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:31,356 - Node_e2 - INFO - Redirecting to backup node i11
+2026-01-15 15:55:31,358 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:31,466 - Node_e2 - INFO - Packet scheduled for +0.2916s. Queue size: 5
+2026-01-15 15:55:31,499 - Node_e2 - INFO - Forwarding packet 6a91f9f4-272b-4bcd-8b61-1f00597096c6 to i9
+2026-01-15 15:55:31,502 - Node_e2 - INFO - Sent packet 6a91f9f4-272b-4bcd-8b61-1f00597096c6 to i9 (10.0.0.29:8000)
+2026-01-15 15:55:31,565 - Node_e2 - INFO - Packet scheduled for +1.2417s. Queue size: 5
+2026-01-15 15:55:31,620 - Node_e2 - INFO - Packet scheduled for +1.5787s. Queue size: 6
+2026-01-15 15:55:31,731 - Node_e2 - INFO - Forwarding packet 64a821f5-95b7-44bb-be85-a07ab6ba0348 to i2
+2026-01-15 15:55:31,733 - Node_e2 - INFO - Sent packet 64a821f5-95b7-44bb-be85-a07ab6ba0348 to i2 (10.0.0.22:8000)
+2026-01-15 15:55:31,757 - Node_e2 - INFO - Forwarding packet 85bdbe6c-37b5-4211-b5dd-8b89e473b638 to i2
+2026-01-15 15:55:31,759 - Node_e2 - INFO - Sent packet 85bdbe6c-37b5-4211-b5dd-8b89e473b638 to i2 (10.0.0.22:8000)
+2026-01-15 15:55:32,016 - Node_e2 - INFO - Forwarding packet 5f14309b-edd8-44ad-ab16-75fcd15e87c4 to i11
+2026-01-15 15:55:32,017 - Node_e2 - ERROR - Failed to send to 10.0.0.31:8000: [Errno 111] Connection refused
+2026-01-15 15:55:32,017 - Node_e2 - INFO - Redirecting to backup node i12
+2026-01-15 15:55:32,018 - Node_e2 - ERROR - Failed to send to 10.0.0.32:8000: [Errno 111] Connection refused
+2026-01-15 15:55:32,352 - Node_e2 - INFO - Forwarding packet d8d5c962-362b-4ada-be06-0658e7a315c8 to i9
+2026-01-15 15:55:32,353 - Node_e2 - INFO - Sent packet d8d5c962-362b-4ada-be06-0658e7a315c8 to i9 (10.0.0.29:8000)
+2026-01-15 15:55:32,807 - Node_e2 - INFO - Forwarding packet 9e7eb87d-8d92-45e1-8f66-aa1bf34c523c to i1
+2026-01-15 15:55:32,808 - Node_e2 - ERROR - Failed to send to 10.0.0.21:8000: [Errno 111] Connection refused
+2026-01-15 15:55:32,808 - Node_e2 - INFO - Redirecting to backup node i10
+2026-01-15 15:55:32,810 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:32,887 - Node_e2 - INFO - Packet scheduled for +0.3462s. Queue size: 2
+2026-01-15 15:55:33,199 - Node_e2 - INFO - Forwarding packet 37a7ad82-19d0-4b7a-9bc5-a0c8a4307d41 to i1
+2026-01-15 15:55:33,200 - Node_e2 - ERROR - Failed to send to 10.0.0.21:8000: [Errno 111] Connection refused
+2026-01-15 15:55:33,200 - Node_e2 - INFO - Redirecting to backup node i10
+2026-01-15 15:55:33,201 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:33,233 - Node_e2 - INFO - Forwarding packet 7261aa2d-556e-47b4-9cbd-f49558f40231 to i1
+2026-01-15 15:55:33,235 - Node_e2 - ERROR - Failed to send to 10.0.0.21:8000: [Errno 111] Connection refused
+2026-01-15 15:55:33,235 - Node_e2 - INFO - Redirecting to backup node i10
+2026-01-15 15:55:33,235 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:35,309 - Node_e2 - INFO - Packet scheduled for +0.4795s. Queue size: 1
+2026-01-15 15:55:35,483 - Node_e2 - INFO - Packet scheduled for +0.1392s. Queue size: 2
+2026-01-15 15:55:35,622 - Node_e2 - INFO - Forwarding packet fca88b46-338d-4d84-9245-472bee7d7c3b to i1
+2026-01-15 15:55:35,623 - Node_e2 - ERROR - Failed to send to 10.0.0.21:8000: [Errno 111] Connection refused
+2026-01-15 15:55:35,623 - Node_e2 - INFO - Redirecting to backup node i10
+2026-01-15 15:55:35,627 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:35,788 - Node_e2 - INFO - Forwarding packet 323f34cc-2415-4b3d-a22a-0aa5301066ac to i1
+2026-01-15 15:55:35,793 - Node_e2 - ERROR - Failed to send to 10.0.0.21:8000: [Errno 111] Connection refused
+2026-01-15 15:55:35,793 - Node_e2 - INFO - Redirecting to backup node i10
+2026-01-15 15:55:35,794 - Node_e2 - ERROR - Failed to send to 10.0.0.30:8000: [Errno 111] Connection refused
+2026-01-15 15:55:36,380 - Node_e2 - INFO - Packet scheduled for +0.1210s. Queue size: 1
+2026-01-15 15:55:36,393 - Node_e2 - INFO - Packet scheduled for +1.4979s. Queue size: 2
+2026-01-15 15:55:36,501 - Node_e2 - INFO - Forwarding packet 5bccad40-fca3-44ee-bb03-3292ef9f26e2 to i7
+2026-01-15 15:55:36,504 - Node_e2 - ERROR - Failed to send to 10.0.0.27:8000: [Errno 111] Connection refused
+2026-01-15 15:55:36,504 - Node_e2 - INFO - Redirecting to backup node i8
+2026-01-15 15:55:36,505 - Node_e2 - INFO - Sent packet 5bccad40-fca3-44ee-bb03-3292ef9f26e2 to i8 (10.0.0.28:8000)
+2026-01-15 15:55:37,415 - Node_e2 - INFO - Packet scheduled for +0.5354s. Queue size: 2
+2026-01-15 15:55:37,891 - Node_e2 - INFO - Forwarding packet 7cfc9354-c5f3-462d-b40d-2c2c26c0b9a0 to i7
+2026-01-15 15:55:37,897 - Node_e2 - ERROR - Failed to send to 10.0.0.27:8000: [Errno 111] Connection refused
+2026-01-15 15:55:37,898 - Node_e2 - INFO - Redirecting to backup node i8
+2026-01-15 15:55:37,902 - Node_e2 - INFO - Sent packet 7cfc9354-c5f3-462d-b40d-2c2c26c0b9a0 to i8 (10.0.0.28:8000)
+2026-01-15 15:55:37,951 - Node_e2 - INFO - Forwarding packet e695fb4d-cb30-4a92-b43f-a366ac1af143 to i5
+2026-01-15 15:55:37,955 - Node_e2 - INFO - Sent packet e695fb4d-cb30-4a92-b43f-a366ac1af143 to i5 (10.0.0.25:8000)
+2026-01-15 15:55:40,016 - Node_e2 - INFO - Packet scheduled for +0.2529s. Queue size: 1
+2026-01-15 15:55:40,270 - Node_e2 - INFO - Forwarding packet c98a95b5-00e0-4641-a0e6-3f6163004491 to i2
+2026-01-15 15:55:40,274 - Node_e2 - INFO - Sent packet c98a95b5-00e0-4641-a0e6-3f6163004491 to i2 (10.0.0.22:8000)

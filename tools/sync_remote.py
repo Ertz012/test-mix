@@ -128,7 +128,7 @@ def main():
         remote_logs_path = f"{remote_repo_path}/logs"
         local_logs_path = os.path.join(os.getcwd(), "logs")
         
-        download_dir(sftp, remote_logs_path, local_logs_path)
+        # download_dir(sftp, remote_logs_path, local_logs_path) # Disabled: User requested Git Only sync
         
         # 3. Clean up and Sync Git
         print("Fixing permissions and resetting remote repository state...")
@@ -147,6 +147,41 @@ def main():
             "git clean -fd" 
         ]
         
+        # --- GIT SYNC FOR LOGS ---
+        print("Syncing logs via Git (User Request)...")
+        
+        # Placeholder for run_id, you might want to generate this dynamically
+        run_id = "latest_run" 
+        REMOTE_REPO = remote_repo_path # Define REMOTE_REPO for clarity
+        remote_log_path = "logs" # Relative path within the repo
+        
+        # 1. Trigger remote to add/commit/push logs
+        # We create a temporary script or just run commands via SSH
+        remote_cmds = [
+            f"cd {REMOTE_REPO}",
+            "git config user.name 'Remote Runner'",
+            "git config user.email 'remote@mixnet'",
+            f"git add -f {remote_log_path}", # Force add because logs/ is ignored
+            f"git commit -m 'Logs: {run_id}'",
+            "git push origin main"
+        ]
+        
+        cmd_str = " && ".join(remote_cmds)
+        stdin, stdout, stderr = client.exec_command(cmd_str)
+        exit_status = stdout.channel.recv_exit_status()
+        
+        if exit_status != 0:
+            print(f"Remote git push failed: {stderr.read().decode()}")
+            print("Note: Ensure remote has SSH keys for git push.")
+        else:
+            print("Remote logs pushed to origin.")
+            
+            # 2. Pull locally
+            print("Pulling logs locally...")
+            # Assuming we are in the local repo root
+            os.system("git pull origin main")
+            print("Logs synced.")
+
         # We execute permissions fix separately to ensure it completes before we try git
         print(f"Executing permission fix...")
         stdin, stdout, stderr = client.exec_command(fix_perms_cmd)
@@ -154,7 +189,7 @@ def main():
         if exit_status != 0:
             print(f"Warning: chown failed. Stderr: {stderr.read().decode()}")
         
-        # Now git commands
+        # Now git commands for repo reset
         git_cmds = " && ".join(commands[1:])
         print(f"Executing: {git_cmds}")
         

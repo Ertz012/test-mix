@@ -8,7 +8,7 @@ import math
 from scipy.stats import erlang
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger("DanezisAttack")
+logger = logging.getLogger("StrictDanezisAnalysis")
 
 def load_logs(log_dir):
     all_files = [os.path.join(log_dir, f) for f in os.listdir(log_dir) if f.endswith('_traffic.csv')]
@@ -38,146 +38,153 @@ def load_config(log_dir):
 
 def delay_pdf(t, k, mu):
     """
-    Die Verzögerungscharakteristik d(x).
-    Im Paper für einen Mix: Exponential (k=1).
-    Für ein Netzwerk aus k Mixen: Erlang-Verteilung (Summe von k Exponentialverteilungen).
+    Wahrscheinlichkeitsdichte der Verzögerung.
+    Gibt den Wert der PDF zurück (Integral über alle t ist 1.0).
     """
-    if t <= 0:
-        return 0.0
-    # Nutzung von scipy für numerische Stabilität bei der Gamma/Erlang Funktion
+    if t <= 0: return 0.0
     return erlang.pdf(t, k, loc=0, scale=1/mu)
 
-def calculate_convolution_value(t_check, input_timestamps, k, mu, max_lookback=None):
+def calculate_normalized_convolution(t_check, input_timestamps, k, mu, max_lookback=None):
     """
-    Implementiert (d * f)(t) - Equation 24.
-    Da f(t) eine Reihe von diskreten Impulsen (Paketen) ist, ist die Faltung 
-    die Summe der verschobenen Verzögerungsfunktionen.
+    Berechnet (d * f)(t) als echte Wahrscheinlichkeitsdichte.
+    
+    Korrektur zur vorherigen Version:
+    Wir summieren die PDFs der einzelnen Pakete, müssen aber durch die 
+    Gesamtanzahl der Input-Pakete (N_input) teilen, damit das Integral
+    über die Zeit wieder 1 ergibt (Eigenschaft einer Mischverteilung).
     """
     if max_lookback is None:
         max_lookback = 20.0 / mu if mu > 0 else 100.0
 
-    # Nur Input-Pakete betrachten, die vor t_check ankamen und im relevanten Fenster liegen
     relevant_inputs = [t_in for t_in in input_timestamps 
                        if 0 < (t_check - t_in) < max_lookback]
     
     if not relevant_inputs:
         return 0.0
     
-    # Summe der Wahrscheinlichkeitsdichten (Superposition)
-    val = sum(delay_pdf(t_check - t_in, k, mu) for t_in in relevant_inputs)
-    return val
-
-def perform_stream_attack(traffic_df, mu, k=3):
-    """
-    Setzt den Traffic Analysis Attack aus Kapitel 3 um.
-    Ziel: Für einen gegebenen Sender (Target Input) herausfinden, 
-    zu welchem Empfänger (Output Link) er gehört.
-    """
+    # Summe der PDF-Werte (Superposition)
+    sum_pdf = sum(delay_pdf(t_check - t_in, k, mu) for t_in in relevant_inputs)
     
-    # 1. Datenvorbereitung
-    # Inputs: Alle CREATED Events
+    # WICHTIG: Normalisierung durch Anzahl der Input-Pakete
+    # Damit wird (d*f)(t) zu einer gültigen PDF, wie im Paper gefordert.
+    n_input = len(input_timestamps)
+    return sum_pdf / n_input
+
+def perform_strict_math_attack(traffic_df, mu, k=3):
+    """
+    Implementiert die Gleichungen 23, 24, 25 und 28 unter strenger Beachtung der Normalisierung.
+    """
+    # Daten filtern
     inputs_df = traffic_df[traffic_df['event_type'] == 'CREATED']
+    # Wir betrachten hier Clients als Output (End-to-End Trace)
     outputs_df = traffic_df[(traffic_df['event_type'] == 'RECEIVED') & 
-                            (traffic_df['node_id'].str.startswith(('c', 'Client', 'p', 'Provider')))]
+                            (traffic_df['node_id'].str.startswith(('c', 'Client')))]
 
     if inputs_df.empty or outputs_df.empty:
-        logger.warning("Keine ausreichenden Daten für Analyse.")
         return {}
 
-    # Wir wählen den aktivsten Sender als "Target Stream f(t)"
+    # Target: Der aktivste Sender
     target_src = inputs_df['src'].value_counts().idxmax()
     target_input_timestamps = inputs_df[inputs_df['src'] == target_src]['timestamp'].values
-    
-    # Parameter für das Modell
-    T_duration = traffic_df['timestamp'].max() - traffic_df['timestamp'].min()
+    num_input_packets = len(target_input_timestamps)
+
+    # Simulationsdauer T für die Ratenberechnung
+    t_min = traffic_df['timestamp'].min()
+    t_max = traffic_df['timestamp'].max()
+    T_duration = t_max - t_min
     if T_duration <= 0: T_duration = 1.0
     
-    # lambda_f: Rate des Ziel-Streams (Equation 23 ff.)
-    lambda_f = len(target_input_timestamps) / T_duration
+    # Rate lambda_f (Input Rate)
+    lambda_f = num_input_packets / T_duration
     
-    # Wir testen jeden möglichen Empfänger (Outputs)
     potential_receivers = outputs_df['node_id'].unique()
-    
     results = []
     
-    logger.info(f"Starte Attacke auf Stream von {target_src} ({len(target_input_timestamps)} Pakete).")
-    logger.info(f"Vergleiche mit {len(potential_receivers)} möglichen Empfängern.")
+    # Uniform Noise Distribution u = 1/T (über das Intervall [0, T])
+    u = 1.0 / T_duration
+
+    logger.info(f"Target: {target_src} (Rate: {lambda_f:.4f} pkts/s)")
 
     for receiver in potential_receivers:
-        # Beobachtete Zeitstempel am Empfänger (X_i im Paper)
         receiver_data = outputs_df[outputs_df['node_id'] == receiver]
-        observed_timestamps = receiver_data['timestamp'].values
+        observed_timestamps = receiver_data['timestamp'].values # Das sind die X_i
         
-        n = len(observed_timestamps)
-        if n == 0: continue
+        n_obs = len(observed_timestamps)
+        lambda_X = n_obs / T_duration
         
-        # lambda_X: Rate am Ausgangskanal
-        lambda_X = n / T_duration
-        
-        # Uniform Distribution u (Noise Rate Annahme für den Rest)
-        # Im Paper: U(t) = u. Oft genähert als 1/T oder die Background-Rate.
-        u = 1.0 / T_duration 
+        # Strenge Prüfung: Wenn Output-Rate < Input-Rate, ist H0 physikalisch unmöglich
+        # (unter der Annahme "kein Paketverlust" im Modell des Papers)
+        if lambda_X < lambda_f:
+            results.append({
+                'receiver': receiver,
+                'log_likelihood_ratio': -float('inf'), # Unmöglich
+                'reason': 'Rate too low'
+            })
+            continue
 
-        # Berechnung der Log-Likelihood Ratio (Equation 28 )
-        # Log L = Sum(log Cx(Xi)) - Sum(log Cy(Yj)) ... 
-        # Hier vereinfacht: Wir berechnen den Score für Hypothese H0 (Target ist hier)
-        # Score = Sum( log( C_X(t) / u ) ) 
-        # Wenn Score > 0, spricht es für H0.
+        # Berechnung Log-Likelihood Ratio nach Gl. 28
+        # Wir vergleichen H0 (Signal ist in diesem Link X) gegen H1 (Signal ist NICHT in diesem Link).
+        # Wenn H1 gilt, nehmen wir an, der Link enthält nur Uniform Noise (wie im Paper Y_j ~ U).
+        # Das entspricht dem Vergleich: Passt das Modell C_X besser als das Modell U?
         
-        log_likelihood_sum = 0.0
+        # Term 1: Sum( log( C_X(X_i) ) )
+        sum_log_CX = 0.0
+        possible = True
         
         for t_obs in observed_timestamps:
-            # Convolution (d * f)(t) berechnen
-            conv_val = calculate_convolution_value(t_obs, target_input_timestamps, k, mu)
+            # (d * f)(t) - normiert!
+            conv_pdf = calculate_normalized_convolution(t_obs, target_input_timestamps, k, mu)
             
-            # Equation 23: Cx(t) = (lambda_f * (d*f)(t) + (lambda_X - lambda_f) * u) / lambda_X
-            # Wir müssen sicherstellen, dass lambda_X >= lambda_f, sonst ist das Modell "unmöglich" (mehr Output als Input + Noise geht nicht im Modell)
-            eff_lambda_X = max(lambda_X, lambda_f) 
-            noise_part = (eff_lambda_X - lambda_f) * u
-            signal_part = lambda_f * conv_val
+            # Gl. 23: C_X(t)
+            # Mischmodell: Wahrscheinlichkeit, dass das Paket vom Signal kommt + Wahrscheinlichkeit Noise
+            # Hier müssen wir mit den Raten gewichten.
+            # Der Anteil des Traffics, der vom Signal kommt, ist lambda_f / lambda_X
+            # Der Anteil des Traffics, der Noise ist, ist (lambda_X - lambda_f) / lambda_X
             
-            c_x_t = (signal_part + noise_part) / eff_lambda_X
+            signal_component = (lambda_f / lambda_X) * conv_pdf
+            noise_component = ((lambda_X - lambda_f) / lambda_X) * u
             
-            # Schutz vor log(0)
-            if c_x_t <= 1e-12:
-                c_x_t = 1e-12
-            if u <= 1e-12:
-                u = 1e-12
-                
-            # Der Beitrag zur Summe in Eq 28 (vereinfacht als Vergleich zu Uniform Noise)
-            # log(Cx(t)) - log(u)
-            log_likelihood_sum += (math.log(c_x_t) - math.log(u))
+            c_x_t = signal_component + noise_component
             
+            if c_x_t <= 0:
+                # Sollte numerisch nicht passieren, es sei denn conv_pdf=0 und noise=0
+                c_x_t = 1e-15 
+            
+            sum_log_CX += math.log(c_x_t)
+
+        # Term 2: Sum( log( U(X_i) ) ) -> Das ist das Modell unter H1 (nur Noise)
+        # Wenn wir testen "Ist Stream in Link A (H0) oder ist Link A nur Rauschen (H1)"?
+        # Sum( log( u ) ) = n_obs * log(u)
+        sum_log_U = n_obs * math.log(u)
+        
+        # Likelihood Ratio: log(L_H0 / L_H1) = Sum(log CX) - Sum(log U)
+        # (Dies entspricht der Logik von Gl. 28, wenn man Y als "den gleichen Link unter der Annahme Noise" betrachtet)
+        ll_ratio = sum_log_CX - sum_log_U
+        
         results.append({
             'receiver': receiver,
-            'log_likelihood_score': log_likelihood_sum,
-            'total_packets_received': n
+            'log_likelihood_ratio': ll_ratio,
+            'lambda_X': lambda_X
         })
 
     # Auswertung
-    # Sortiere nach höchstem Likelihood Score
-    results.sort(key=lambda x: x['log_likelihood_score'], reverse=True)
+    results.sort(key=lambda x: x['log_likelihood_ratio'], reverse=True)
     
-    # Finde den echten Empfänger (Ground Truth aus den Daten extrahieren)
-    # Wir schauen, wohin die Pakete von target_src tatsächlich gegangen sind
+    # Ground Truth Check
     actual_dst_packets = traffic_df[(traffic_df['src'] == target_src) & (traffic_df['event_type'] == 'RECEIVED')]
-    if not actual_dst_packets.empty:
-        true_receiver = actual_dst_packets['node_id'].mode()[0] # Der häufigste Empfänger
-    else:
-        true_receiver = "Unknown"
-
+    true_receiver = actual_dst_packets['node_id'].mode()[0] if not actual_dst_packets.empty else "Unknown"
+    
     top_match = results[0]['receiver'] if results else None
     
-    # Hat der Angriff funktioniert?
-    success = (top_match == true_receiver)
-    
+    # Nur ein positiver Ratio bedeutet "Detektion" (Condition 26: Ratio > 1 => Log Ratio > 0)
+    detected = (top_match is not None and results[0]['log_likelihood_ratio'] > 0)
+
     return {
         'target_src': target_src,
         'true_receiver': true_receiver,
-        'detected_receiver': top_match,
-        'likelihood_score': results[0]['log_likelihood_score'] if results else 0,
-        'success': success,
-        'all_scores': results  # Optional für Debugging
+        'detected_receiver': top_match if detected else "None (All < 0)",
+        'likelihood_score': results[0]['log_likelihood_ratio'] if results else -999,
+        'success': (top_match == true_receiver and detected)
     }
 
 def main():
@@ -188,46 +195,30 @@ def main():
     runs = [os.path.join(args.logs_root, d) for d in os.listdir(args.logs_root) 
             if os.path.isdir(os.path.join(args.logs_root, d)) and d.startswith("Testrun")]
     
-    print(f"{'Run Name':<40} | {'Target':<10} -> {'True Dst':<10} | {'Detected':<10} | {'Score':<10} | {'Success'}")
-    print("-" * 110)
-    
-    total_runs = 0
-    successful_runs = 0
+    print(f"{'Run Name':<40} | {'True Dst':<10} | {'Detected':<10} | {'Log-LR':<10} | {'Success'}")
+    print("-" * 100)
     
     for run in runs:
-        run_name = os.path.basename(run)
-        config = load_config(run)
-        
-        # Mix Rate mu
-        mu = config.get('mix_settings', {}).get('mu', 0.5)
-        # Anzahl der Hops k (Standard 3 für Onion Routing ähnliche Pfade)
-        # Wenn im Config nicht vorhanden, nehmen wir 3 an
-        k = config.get('network_settings', {}).get('num_hops', 3) 
-        
-        df = load_logs(run)
-        if df.empty:
-            continue
+        try:
+            run_name = os.path.basename(run)
+            config = load_config(run)
+            mu = config.get('mix_settings', {}).get('mu', 0.5)
+            k = config.get('network_settings', {}).get('num_hops', 3) 
             
-        metrics = perform_stream_attack(df, mu, k=k)
-        
-        if not metrics:
-            continue
+            df = load_logs(run)
+            if df.empty: continue
             
-        total_runs += 1
-        if metrics['success']:
-            successful_runs += 1
+            metrics = perform_strict_math_attack(df, mu, k=k)
+            if not metrics: continue
             
-        print(f"{run_name:<40} | {metrics['target_src']:<10} -> {metrics['true_receiver']:<10} | {metrics['detected_receiver']:<10} | {metrics['likelihood_score']:<10.2f} | {metrics['success']}")
-        
-        # Ergebnisse speichern
-        out_dir = os.path.join(run, "analysis_results")
-        os.makedirs(out_dir, exist_ok=True)
-        with open(os.path.join(out_dir, "traffic_analysis_attack_results.txt"), "w") as f:
-            f.write(json.dumps(metrics, indent=4, default=str))
-
-    if total_runs > 0:
-        print("-" * 110)
-        print(f"Overall Attack Success Rate: {successful_runs}/{total_runs} ({successful_runs/total_runs:.2%})")
+            print(f"{run_name:<40} | {metrics['true_receiver']:<10} | {metrics['detected_receiver']:<10} | {metrics['likelihood_score']:<10.2f} | {metrics['success']}")
+            
+            out_dir = os.path.join(run, "analysis_results")
+            os.makedirs(out_dir, exist_ok=True)
+            with open(os.path.join(out_dir, "strict_traffic_analysis.txt"), "w") as f:
+                f.write(json.dumps(metrics, indent=4, default=str))
+        except Exception as e:
+            logger.error(f"Error in {run}: {e}")
 
 if __name__ == "__main__":
     main()

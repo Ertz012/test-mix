@@ -3,6 +3,7 @@ import threading
 import random
 import os
 import math
+import uuid
 from src.core.node import Node
 from src.modules.routing import Routing
 from src.core.packet import Packet
@@ -182,48 +183,62 @@ class Client(Node):
             time.sleep(self._sleep_poisson(self.rate_real))
             if not self.receivers: continue
             
-            dest = random.choice(self.receivers)
-            payload = f"Real Msg {time.time()}"
-            
-            # --- FEATURE: Parallel Paths ---
-            paths = []
-            if self.config['features'].get('parallel_paths', False):
-                paths = self.routing.get_disjoint_paths(self.hostname, dest, k=2)
-                # Fallback if no disjoint paths
+            try:
+                dest = random.choice(self.receivers)
+                payload = f"Real Msg {time.time()}"
+                
+                # --- FEATURE: Parallel Paths ---
+                paths = []
+                if self.config['features'].get('parallel_paths', False):
+                    paths = self.routing.get_disjoint_paths(self.hostname, dest, k=2)
+                    # Fallback if no disjoint paths
+                    if not paths:
+                        p = self.routing.get_path(self.hostname, dest)
+                        if p: paths = [p]
+                else:
+                    p = self.routing.get_path(self.hostname, dest)
+                    if p: paths = [p]
+                    
                 if not paths:
-                    paths = [self.routing.get_path(self.hostname, dest)]
-            else:
-                paths = [self.routing.get_path(self.hostname, dest)]
-                
-            # --- FEATURE: Anonymous Return Addresses ---
-            surb_data = None
-            if self.config['features'].get('anonymous_return_addresses', False):
-                # Return route: Dst -> ... -> Src
-                # In Loopix, SURB allows receiver to reply.
-                # Simplified: Include a return path in the packet metadata.
-                return_route = self.routing.get_path(dest, self.hostname)
-                surb = SURB(self.hostname, return_route)
-                surb_data = surb.to_dict()
+                    self.logger.log(f"No path found to {dest}", "WARNING")
+                    continue
+                    
+                # --- FEATURE: Anonymous Return Addresses ---
+                surb_data = None
+                if self.config['features'].get('anonymous_return_addresses', False):
+                    # Return route: Dst -> ... -> Src
+                    # In Loopix, SURB allows receiver to reply.
+                    # Simplified: Include a return path in the packet metadata.
+                    return_route = self.routing.get_path(dest, self.hostname)
+                    if return_route:
+                        surb = SURB(self.hostname, return_route)
+                        surb_data = surb.to_dict()
+                    else:
+                        self.logger.log(f"No return path from {dest}", "WARNING")
 
-            # Generate a specific Message ID for this logical message
-            msg_uuid = str(uuid.uuid4())
-            
-            for i, path in enumerate(paths):
-                # Create Inner Packet
-                # Each packet gets a unique packet_id (physical), but shares message_id (logical)
-                packet = Packet(payload, dest, route=path, src=self.hostname, message_id=msg_uuid)
+                # Generate a specific Message ID for this logical message
+                msg_uuid = str(uuid.uuid4())
                 
-                if surb_data:
-                    packet.flags['surb'] = surb_data
+                for i, path in enumerate(paths):
+                    if not path: continue # Skip empty paths
+                    
+                    # Create Inner Packet
+                    # Each packet gets a unique packet_id (physical), but shares message_id (logical)
+                    packet = Packet(payload, dest, route=path, src=self.hostname, message_id=msg_uuid)
+                    
+                    if surb_data:
+                        packet.flags['surb'] = surb_data
 
-                # --- FEATURE: Reliability ---
-                # Track the packet for retransmission (using message_id?)
-                if self.config['features'].get('retransmission', False):
-                    self.reliability.track_packet(packet)
-                
-                # Send (Wrap in Onion)
-                # Use helper that accepts the pre-built packet
-                self._send_prepared_project(packet, path)
+                    # --- FEATURE: Reliability ---
+                    # Track the packet for retransmission (using message_id?)
+                    if self.config['features'].get('retransmission', False):
+                        self.reliability.track_packet(packet)
+                    
+                    # Send (Wrap in Onion)
+                    # Use helper that accepts the pre-built packet
+                    self._send_prepared_project(packet, path)
+            except Exception as e:
+                self.logger.log(f"Error in traffic loop: {e}", "ERROR")
 
     def _send_prepared_project(self, packet, path):
          # Keys

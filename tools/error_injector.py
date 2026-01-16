@@ -18,10 +18,16 @@ def get_node_pid(node_name):
     try:
         # Pgrep for the python process with the specific hostname argument
         # -f matches against full command line
-        cmd = f"pgrep -f 'src/run.py.*--hostname {node_name}'"
+    cmd = f"pgrep -f 'src/run.py.*--hostname {node_name}'"
+    try:
         pid = subprocess.check_output(cmd, shell=True).decode().strip()
         return pid
     except subprocess.CalledProcessError:
+        # Fallback/Debug: try finding any run.py process
+        # logger.warning(f"pgrep strict match failed for {node_name}. Checking widespread...")
+        return None
+    except Exception as e:
+        logger.error(f"Error finding PID for {node_name}: {e}")
         return None
 
 def kill_node(node_name):
@@ -34,7 +40,9 @@ def kill_node(node_name):
         logger.info(f"Killing {node_name} (PIDs {pids})...")
         os.system(f"kill -9 {pids}")
     else:
-        logger.warning(f"Could not find PID for {node_name}")
+        logger.warning(f"Could not find PID for {node_name} with pgrep pattern. Attempting partial match logging.")
+        # Diagnostic: List all run.py processes to dedug
+        os.system("ps aux | grep src/run.py | head -n 5")
 
 def inject_loss(node_name, loss_percent):
     """
@@ -81,8 +89,13 @@ def main():
 
     elif args.mode == 'random_kill':
         # Hardcoded set of candidates if config not provided, or better logic?
-        # Targeted nodes are x1..x36 (12 per layer * 3 layers)
-        candidates = [f"x{n}" for n in range(1, 37)]
+        # Target all mix layers: Entry (e), Intermediate (i), Exit (x)
+        # 12 nodes per layer
+        candidates = []
+        for n in range(1, 13):
+            candidates.append(f"e{n}")
+            candidates.append(f"i{n}")
+            candidates.append(f"x{n}")
         
         targets = random.sample(candidates, min(args.count, len(candidates)))
         for t in targets:

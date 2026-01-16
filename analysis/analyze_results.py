@@ -314,14 +314,23 @@ def calculate_metrics(df, config=None):
     if df.empty:
         return None
 
-    # 1. Network Level Metrics (Raw Packets)
+    # 1. Network Level Metrics (Refined)
+    
+    analysis_df = df.copy()
+    if 'flags' in df.columns:
+        # Identify ACKs to exclude from "Message/Packet" stats (overhead)
+        ack_mask = df['flags'].astype(str).str.contains('type=ACK', case=False, na=False)
+        analysis_df = df[~ack_mask]
+    else:
+        # Fallback if flags missing
+        analysis_df = df
+
     # Sent: CREATED events (Source Intent)
-    sent_df = df[df['event_type'] == 'CREATED'].drop_duplicates(subset=['packet_id'])
+    sent_df = analysis_df[analysis_df['event_type'] == 'CREATED'].drop_duplicates(subset=['packet_id'])
     # Received: RECEIVED events at Clients (Final Delivery)
     # Using 'RECEIVED FINAL DELIVERY' if available (added in Trace logic?) or just RECEIVED at Client
-    # Trace logic relies on raw logs. Let's see what parse_logs does.
     # Assuming 'RECEIVED' at client is final.
-    recv_df = df[(df['event_type'] == 'RECEIVED') & (df['node_id'].str.startswith(('c', 'Client')))].drop_duplicates(subset=['packet_id'])
+    recv_df = analysis_df[(analysis_df['event_type'] == 'RECEIVED') & (analysis_df['node_id'].str.startswith(('c', 'Client')))].drop_duplicates(subset=['packet_id'])
     
     total_sent = len(sent_df)
     total_received = len(recv_df)

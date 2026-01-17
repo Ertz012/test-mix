@@ -18,14 +18,12 @@ def get_node_pid(node_name):
     try:
         # Pgrep for the python process with the specific hostname argument
         # -f matches against full command line
-    cmd = f"pgrep -f 'src/run.py.*--hostname {node_name}'"
-    try:
-        pid = subprocess.check_output(cmd, shell=True).decode().strip()
-        return pid
-    except subprocess.CalledProcessError:
-        # Fallback/Debug: try finding any run.py process
-        # logger.warning(f"pgrep strict match failed for {node_name}. Checking widespread...")
-        return None
+        cmd = f"pgrep -f 'src/run.py.*--hostname {node_name}'"
+        try:
+            pid = subprocess.check_output(cmd, shell=True).decode().strip()
+            return pid
+        except subprocess.CalledProcessError:
+            return None
     except Exception as e:
         logger.error(f"Error finding PID for {node_name}: {e}")
         return None

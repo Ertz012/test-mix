@@ -10,7 +10,8 @@
                 "parallel_paths": false,
                 "anonymous_return_addresses": false,
                 "layered_encryption": true,
-                "mock_encryption": true
+                "mock_encryption": true,
+                "backup_mixes": false
             },
             "traffic": {
                 "mode": "random",
@@ -31,7 +32,8 @@
                 "parallel_paths": false,
                 "anonymous_return_addresses": false,
                 "layered_encryption": true,
-                "mock_encryption": true
+                "mock_encryption": true,
+                "backup_mixes": false
             },
             "traffic": {
                 "mode": "random",
@@ -52,7 +54,8 @@
             "features": {
                 "retransmission": true,
                 "path_reestablishment": false,
-                "parallel_paths": false
+                "parallel_paths": false,
+                "backup_mixes": false
             },
             "traffic": {
                 "mode": "random",
@@ -73,7 +76,8 @@
             "features": {
                 "retransmission": true,
                 "path_reestablishment": true,
-                "parallel_paths": false
+                "parallel_paths": false,
+                "backup_mixes": false
             },
             "traffic": {
                 "mode": "random",
@@ -94,7 +98,8 @@
             "features": {
                 "retransmission": false,
                 "path_reestablishment": false,
-                "parallel_paths": true
+                "parallel_paths": true,
+                "backup_mixes": false
             },
             "traffic": {
                 "mode": "random",

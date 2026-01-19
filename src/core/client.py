@@ -27,6 +27,8 @@ class Client(Node):
         self.rate_loop = self.traffic_config.get('loop_rate_packets_per_sec', 0.0)
         self.rate_drop = self.traffic_config.get('drop_rate_packets_per_sec', 0.0)
         self.duration = self.traffic_config.get('duration_sec', 30)
+        self.traffic_distribution = self.traffic_config.get('traffic_distribution', 'uniform_random')
+        self.assigned_partner = None
         
         # Crypto
         self.mock_crypto = config['features'].get('mock_encryption', False)
@@ -62,6 +64,10 @@ class Client(Node):
     def start_sending(self):
         self.sending = True
         self.logger.log("Starting traffic generation threads...")
+
+        if self.traffic_distribution == 'fixed_partner' and self.receivers:
+            self.assigned_partner = random.choice(self.receivers)
+            self.logger.log(f"Assigned fixed partner: {self.assigned_partner}")
         
         if self.rate_real > 0:
             threading.Thread(target=self._real_traffic_loop, daemon=True).start()
@@ -184,7 +190,10 @@ class Client(Node):
             if not self.receivers: continue
             
             try:
-                dest = random.choice(self.receivers)
+                if self.traffic_distribution == 'fixed_partner' and self.assigned_partner:
+                    dest = self.assigned_partner
+                else:
+                    dest = random.choice(self.receivers)
                 payload = f"Real Msg {time.time()}"
                 
                 # --- FEATURE: Parallel Paths ---

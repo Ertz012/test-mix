@@ -112,17 +112,6 @@ def perform_strict_math_attack(traffic_df, mu, k=3):
         n_obs = len(observed_timestamps)
         lambda_X = n_obs / T_duration
         
-        # Strenge Prüfung: Wenn Output-Rate < Input-Rate, ist H0 physikalisch unmöglich
-        # (unter der Annahme "kein Paketverlust" im Modell des Papers)
-        # RELAXED FOR LOSSY ENVIRONMENT:
-        # if lambda_X < lambda_f:
-        #     results.append({
-        #         'receiver': receiver,
-        #         'log_likelihood_ratio': -float('inf'), # Unmöglich
-        #         'reason': 'Rate too low'
-        #     })
-        #     continue
-
         # Berechnung Log-Likelihood Ratio nach Gl. 28
         # Wir vergleichen H0 (Signal ist in diesem Link X) gegen H1 (Signal ist NICHT in diesem Link).
         # Wenn H1 gilt, nehmen wir an, der Link enthält nur Uniform Noise (wie im Paper Y_j ~ U).
@@ -130,7 +119,6 @@ def perform_strict_math_attack(traffic_df, mu, k=3):
         
         # Term 1: Sum( log( C_X(X_i) ) )
         sum_log_CX = 0.0
-        possible = True
         
         for t_obs in observed_timestamps:
             # (d * f)(t) - normiert!
@@ -188,38 +176,68 @@ def perform_strict_math_attack(traffic_df, mu, k=3):
         'success': (top_match == true_receiver and detected)
     }
 
+def process_single_run(run_path):
+    try:
+        run_name = os.path.basename(run_path)
+        config = load_config(run_path)
+        
+        # Determine mu
+        mu = config.get('mix_settings', {}).get('mu')
+        if mu is None:
+             # Fallback
+             mu = 0.5 
+             
+        k = config.get('network_settings', {}).get('num_hops', 3) 
+        
+        df = load_logs(run_path)
+        if df.empty: 
+            return None
+        
+        metrics = perform_strict_math_attack(df, mu, k=k)
+        if not metrics: 
+            return None
+        
+        out_dir = os.path.join(run_path, "analysis_results")
+        os.makedirs(out_dir, exist_ok=True)
+        with open(os.path.join(out_dir, "strict_traffic_analysis.txt"), "w") as f:
+            f.write(json.dumps(metrics, indent=4, default=str))
+            
+        return metrics
+    except Exception as e:
+        logger.error(f"Error in {run_path}: {e}")
+        return None
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("logs_root", help="Root directory containing Testrun folders")
+    parser.add_argument("--logs-root", help="Root directory containing Testrun folders")
+    parser.add_argument("--run-dir", help="Single run directory to analyze")
     args = parser.parse_args()
     
-    runs = [os.path.join(args.logs_root, d) for d in os.listdir(args.logs_root) 
-            if os.path.isdir(os.path.join(args.logs_root, d)) and d.startswith("Testrun")]
-    
+    runs = []
+    if args.run_dir:
+        if os.path.isdir(args.run_dir):
+            runs.append(args.run_dir)
+        else:
+            print(f"Error: {args.run_dir} is not a directory")
+            return
+    elif args.logs_root:
+        if os.path.isdir(args.logs_root):
+            runs = [os.path.join(args.logs_root, d) for d in os.listdir(args.logs_root) 
+                    if os.path.isdir(os.path.join(args.logs_root, d)) and d.startswith("Testrun")]
+        else:
+             print(f"Error: {args.logs_root} is not a directory")
+             return
+    else:
+        print("Error: Must specify either --logs-root or --run-dir")
+        return
+
     print(f"{'Run Name':<40} | {'True Dst':<10} | {'Detected':<10} | {'Log-LR':<10} | {'Success'}")
     print("-" * 100)
     
     for run in runs:
-        try:
-            run_name = os.path.basename(run)
-            config = load_config(run)
-            mu = config.get('mix_settings', {}).get('mu', 0.5)
-            k = config.get('network_settings', {}).get('num_hops', 3) 
-            
-            df = load_logs(run)
-            if df.empty: continue
-            
-            metrics = perform_strict_math_attack(df, mu, k=k)
-            if not metrics: continue
-            
-            print(f"{run_name:<40} | {metrics['true_receiver']:<10} | {metrics['detected_receiver']:<10} | {metrics['likelihood_score']:<10.2f} | {metrics['success']}")
-            
-            out_dir = os.path.join(run, "analysis_results")
-            os.makedirs(out_dir, exist_ok=True)
-            with open(os.path.join(out_dir, "strict_traffic_analysis.txt"), "w") as f:
-                f.write(json.dumps(metrics, indent=4, default=str))
-        except Exception as e:
-            logger.error(f"Error in {run}: {e}")
+        metrics = process_single_run(run)
+        if metrics:
+             print(f"{os.path.basename(run):<40} | {metrics['true_receiver']:<10} | {metrics['detected_receiver']:<10} | {metrics['likelihood_score']:<10.2f} | {metrics['success']}")
 
 if __name__ == "__main__":
     main()

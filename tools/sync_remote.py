@@ -161,7 +161,7 @@ def main():
             f"cd {REMOTE_REPO}",
             "git config user.name 'Remote Runner'",
             "git config user.email 'remote@mixnet'",
-            f"git add -f {remote_log_path}", # Force add because logs/ is ignored
+            f"find {remote_log_path} -type f -exec git add -f {{}} +", # Force add all files including ignored .log/.out
             f"git commit -m 'Logs: {run_id}'",
             "git push origin main"
         ]

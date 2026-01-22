@@ -18,6 +18,7 @@ import consolidate_traffic_logs
 import analyze_results
 import analyze_traffic_binned
 import analyze_traffic_exact
+import analyze_metric_evolution
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -115,6 +116,14 @@ def process_single_run(exp_path, force=False):
                 metrics = analyze_traffic_exact.analyze_target_exact(exp_path, target_src=client)
                 if metrics:
                     results_summary.append(f"{client}: Success={metrics['success']} Diaz={metrics['global_metrics']['diaz_anonymity']:.3f}")
+            except Exception as e:
+                pass
+
+            # C. Evolution Analysis (Time-to-Compromise)
+            # This generates anonymity_evolution_{client}.csv
+            try:
+                # Step size 2500 is a good balance as established in previous experiments
+                analyze_metric_evolution.analyze_evolution(exp_path, target_src=client, step_size=2500)
             except Exception as e:
                 pass
 

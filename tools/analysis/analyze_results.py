@@ -581,6 +581,26 @@ def analyze_single_run(log_dir):
                     pass
                 
             f.write(f"Diaz Anonymity: {diaz_val}\n")
+            
+            # Metric Evolution Analysis (Time-to-Compromise)
+            f.write("\nEvolution Metrics (TTC: Packets to Diaz < 0.1):\n")
+            evolution_files = glob.glob(os.path.join(output_dir, "anonymity_evolution_*.csv"))
+            if evolution_files:
+                for ev_file in evolution_files:
+                    try:
+                        target = os.path.basename(ev_file).replace("anonymity_evolution_", "").replace(".csv", "")
+                        df_ev = pd.read_csv(ev_file)
+                        # Find first row where diaz_anonymity < 0.1
+                        compromised = df_ev[df_ev['diaz_anonymity'] < 0.1]
+                        if not compromised.empty:
+                            ttc = compromised.iloc[0]['packets_observed']
+                            f.write(f"  {target}: {ttc} packets\n")
+                        else:
+                            f.write(f"  {target}: > {df_ev['packets_observed'].max()} packets (Not Compromised)\n")
+                    except Exception as e:
+                        f.write(f"  {target}: Error reading evolution data\n")
+            else:
+                f.write("  N/A (Analysis not run)\n")
 
     # 1. Trace Report (The new feature)
     trace_path = os.path.join(output_dir, "packet_trace.txt")

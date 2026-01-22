@@ -8,7 +8,9 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 import analyze_traffic_exact
+import analyze_traffic_exact
 import analyze_results
+import analyze_metric_evolution
 
 # Determine base paths
 TOOLS_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -24,6 +26,10 @@ def process_run(run_path):
         # 1. Run Exact Analysis (Generates JSON with Diaz metric)
         # This is the heavy lifting, optimized with numpy
         analyze_traffic_exact.analyze_target_exact(run_path)
+        
+        # 1b. Run Metric Evolution (Generates CSVs)
+        # We need this before analyze_results updates the summary
+        analyze_metric_evolution.analyze_evolution(run_path, step_size=2500)
         
         # 2. Run General Analysis (Updates analysis_summary.txt)
         # This is fast, just parsing logs and writing summary

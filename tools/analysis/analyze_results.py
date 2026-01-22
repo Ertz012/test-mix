@@ -432,6 +432,56 @@ def calculate_metrics(df, config=None):
     else:
         packet_metrics['retrans_count'] = 0
 
+    # 4. Anonymity Metrics
+    # Danezis: A = -log( (lambda * e) / mu )
+    # Diaz: N/A (Requires attacker probability distribution)
+    
+    # Calculate Lambda (Arrival Rate)
+    # duration = max_timestamp - min_timestamp
+    if not merged.empty:
+        duration = merged['timestamp_sent'].max() - merged['timestamp_sent'].min()
+        if duration > 0:
+            lambda_val = total_sent / duration
+        else:
+            lambda_val = 0
+    else:
+        lambda_val = 0
+        
+    # Get Mu (Service Rate)
+    # Default to 1.0 if not found, or infer from avg latency?
+    # Paper uses exponential mix with parameter mu. Mean delay = 1/mu.
+    # So mu = 1 / avg_latency
+    mu = 0.5 # Default from common config
+    if config:
+        mu = config.get('mix_settings', {}).get('mu', 0.5)
+    elif packet_metrics['avg_latency'] > 0:
+        mu = 1.0 / packet_metrics['avg_latency']
+        
+    packet_metrics['lambda_val'] = lambda_val
+    packet_metrics['mu_val'] = mu
+    
+    # Calculate Danezis Metric
+    # Eq 14 condition: mu > lambda * e
+    # If condition fails, A < 0, which is "intuitively impossible".
+    try:
+        if mu > 0 and lambda_val > 0:
+            val = (lambda_val * math.e) / mu
+            if val > 0:
+                danezis_anon = -math.log(val)
+            else:
+                 danezis_anon = "Undefined (val<=0)"
+        else:
+            danezis_anon = "Undefined (Zero rates)"
+    except Exception as e:
+        danezis_anon = f"Error: {e}"
+        
+    packet_metrics['danezis_anonymity'] = danezis_anon
+    # Try to load Diaz metric from external JSON analysis if available
+    # Look for "traffic_analysis_dump_*.json" in analysis_results
+    # Since calculate_metrics doesn't know the log_dir directly unless passed, we might need to handle this in analyze_single_run
+    # For now, we set placeholder.
+    packet_metrics['diaz_anonymity'] = "N/A (Pending Traffic Analysis)"
+
     return packet_metrics
 
 def analyze_single_run(log_dir):
@@ -446,20 +496,7 @@ def analyze_single_run(log_dir):
         print("No traffic data found.")
         return
 
-    # 1. Trace Report (The new feature)
-    trace_path = os.path.join(output_dir, "packet_trace.txt")
-    generate_trace_report(traffic_df, mix_df, trace_path)
-    print(f"Trace report generated at {trace_path}")
-
-    # 2. Network Graph (The requested visualization)
-    graph_path = os.path.join(output_dir, "traffic_graph.png")
-    try:
-        generate_network_graph(traffic_df, mix_df, graph_path)
-        print(f"Graph generated at {graph_path}")
-    except Exception as e:
-        print(f"Graph generation failed: {e}")
-
-    # 3. Standard Metrics
+    # --- 0. Metrics (Prioritized) ---
     # Load config to check for parallel_paths k
     config_path = os.path.join(log_dir, "config.json")
     config = {}
@@ -511,7 +548,52 @@ def analyze_single_run(log_dir):
             else:
                 f.write("parallel k: 1 (disabled)\n")
                 
-            f.write(f"paths reestablished: N/A\n") # Placeholder as requested if not tracking
+            f.write(f"paths reestablished: N/A\n\n") # Placeholder as requested if not tracking
+
+            f.write("Anonymity Metrics:\n")
+            f.write(f"Arrival Rate (Lambda): {metrics.get('lambda_val', 0):.4f} msg/s\n")
+            f.write(f"Service Rate (Mu): {metrics.get('mu_val', 0):.4f} msg/s\n")
+            
+            d_val = metrics.get('danezis_anonymity', "N/A")
+            if isinstance(d_val, float):
+                f.write(f"Danezis Anonymity (Entropy): {d_val:.4f}\n")
+            else:
+                f.write(f"Danezis Anonymity: {d_val}\n")
+            
+            # Check for existing Diaz results
+            diaz_val = "N/A"
+            json_dump_files = glob.glob(os.path.join(output_dir, "traffic_analysis_dump_*.json"))
+            if json_dump_files:
+                try:
+                    # Just pick the first one or iterate? usually analysis runs on most active target
+                    # We can list all found
+                    vals = []
+                    for jf in json_dump_files:
+                        with open(jf, 'r') as jfile:
+                            data = json.load(jfile)
+                            if 'global_metrics' in data and 'diaz_anonymity' in data['global_metrics']:
+                                val = data['global_metrics']['diaz_anonymity']
+                                target = data.get('attack_config', {}).get('target_src', '?')
+                                vals.append(f"{val:.4f} (Target: {target})")
+                    if vals:
+                        diaz_val = ", ".join(vals)
+                except:
+                    pass
+                
+            f.write(f"Diaz Anonymity: {diaz_val}\n")
+
+    # 1. Trace Report (The new feature)
+    trace_path = os.path.join(output_dir, "packet_trace.txt")
+    generate_trace_report(traffic_df, mix_df, trace_path)
+    print(f"Trace report generated at {trace_path}")
+
+    # 2. Network Graph (The requested visualization)
+    graph_path = os.path.join(output_dir, "traffic_graph.png")
+    try:
+        generate_network_graph(traffic_df, mix_df, graph_path)
+        print(f"Graph generated at {graph_path}")
+    except Exception as e:
+        print(f"Graph generation failed: {e}")
 
 def main():
     parser = argparse.ArgumentParser()

@@ -1,0 +1,33 @@
+Analysis Metrics:
+packets sent: 28315
+packets arrived: 12733
+packet loss: 15582
+loss rate: 55.03%
+
+individual packets sent: 28315
+individual packets arrived: 12733
+individual packet loss: 15582
+individual loss rate: 55.03%
+
+highest latency: 10.0019s
+lowest latency: 0.2669s
+average latency: 2.5305s
+
+Mechanisms:
+packets retransmitted: 0
+backup events: 0
+parallel k: 1 (disabled)
+paths reestablished: N/A
+
+Anonymity Metrics:
+Arrival Rate (Lambda): 47.1617 msg/s
+Service Rate (Mu): 0.5000 msg/s
+Danezis Anonymity (Entropy): -5.5467
+Diaz Anonymity: 0.0000 (Target: c1), 0.0000 (Target: c2), 0.0000 (Target: c3), 0.0000 (Target: c4), 0.0000 (Target: c5)
+
+Evolution Metrics (TTC: Packets to Diaz < 0.1):
+  c1: 10000 packets
+  c2: 50000 packets
+  c3: 12500 packets
+  c4: 50000 packets
+  c5: 40000 packets

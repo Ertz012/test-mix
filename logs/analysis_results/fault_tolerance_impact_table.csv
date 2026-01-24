@@ -1,0 +1,19 @@
+run_id,mechanism,scenario,avg_diaz,avg_entropy,success_rate
+Testrun_20260120_110652_06_backup_mixes_no_noise,Backup Mixes,"No Noise, No Loss",2.5685116464077006e-16,4.0709946422217624e-16,1.0
+Testrun_20260120_101526_01_baseline_no_errors_no_noise,Baseline,"No Noise, No Loss",6.065387940987068e-27,9.613412438790806e-27,1.0
+Testrun_20260120_102543_02_baseline_errors_no_noise,Baseline,"No Noise, No Loss",6.147769734031049e-19,9.743984491507688e-19,1.0
+Testrun_20260120_105635_05_parallel_paths_no_noise,Parallel Paths,"No Noise, No Loss",2.5403373704432297e-38,4.026339471333108e-38,1.0
+Testrun_20260120_104617_04_path_reestablishment_no_noise,Path Reestablishment,"No Noise, No Loss",3.981465993804773e-20,9.244677749853936e-20,0.4
+Testrun_20260120_103600_03_retransmission_no_noise,Retransmission,"No Noise, No Loss",0.020021591262090986,0.0464886952558004,0.8
+Testrun_20260122_152438_06_backup_mixes_high_noise,Backup Mixes,"Noise 10pkt/s, No Loss",0.12057004158923676,0.1910989946293305,0.2
+Testrun_20260122_143312_01_baseline_no_errors_high_noise,Baseline,"Noise 10pkt/s, No Loss",0.012076732990182228,0.019141168920660916,0.2
+Testrun_20260122_144329_02_baseline_errors_high_noise,Baseline,"Noise 10pkt/s, No Loss",4.3990785273140144e-13,6.972374503520363e-13,0.4
+Testrun_20260122_151421_05_parallel_paths_high_noise,Parallel Paths,"Noise 10pkt/s, No Loss",3.614316518253525e-31,5.728556147168887e-31,1.0
+Testrun_20260122_150404_04_path_reestablishment_high_noise,Path Reestablishment,"Noise 10pkt/s, No Loss",0.03025213091126695,0.07024327269308116,0.8
+Testrun_20260122_145347_03_retransmission_high_noise,Retransmission,"Noise 10pkt/s, No Loss",2.1238497093589177e-99,4.931426309478829e-99,0.6
+Testrun_20260119_222724_06_backup_mixes_long,Backup Mixes,"Noise 2pkt/s, No Loss",1.5870094467405423e-21,1.5870094467405423e-21,1.0
+Testrun_20260119_213554_01_baseline_no_errors_long,Baseline,"Noise 2pkt/s, No Loss",1.968100307090086e-23,3.936200614180172e-23,1.0
+Testrun_20260119_214612_02_baseline_errors_long,Baseline,"Noise 2pkt/s, No Loss",7.966394441258446e-27,1.8497395068112495e-26,1.0
+Testrun_20260119_221705_05_parallel_paths_long,Parallel Paths,"Noise 2pkt/s, No Loss",1.4692905427797559e-50,2.3287704129701466e-50,1.0
+Testrun_20260119_220647_04_path_reestablishment_long,Path Reestablishment,"Noise 2pkt/s, No Loss",1.300863503305922e-07,3.02051151593962e-07,0.6
+Testrun_20260119_215629_03_retransmission_long,Retransmission,"Noise 2pkt/s, No Loss",8.262898014958514e-11,1.9185855046121187e-10,1.0

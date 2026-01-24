@@ -1,0 +1,63 @@
+{
+    "attack_config": {
+        "algorithm": "Danezis-Strict-Math",
+        "target_src": "c2",
+        "mu": 0.5,
+        "k_hops": 3
+    },
+    "input_traffic_stats": {
+        "total_packets": 5501,
+        "duration": 607.4200565814972,
+        "lambda_f": 9.056335793320867
+    },
+    "global_metrics": {
+        "entropy_bits": 2.4705979478893768e-12,
+        "max_entropy_bits": 2.321928094887362,
+        "diaz_anonymity": 1.064028620580185e-12,
+        "danezis_metric_A": -3.896611780984495
+    },
+    "candidates": [
+        {
+            "receiver": "c5",
+            "log_likelihood_ratio": 17.22740506984701,
+            "lambda_X": 8.210133903161456,
+            "normalized_probability": 0.9999999999999467
+        },
+        {
+            "receiver": "c2",
+            "log_likelihood_ratio": -13.317988712178703,
+            "lambda_X": 2.1237362612950226,
+            "normalized_probability": 5.423804572747792e-14
+        },
+        {
+            "receiver": "c1",
+            "log_likelihood_ratio": -20.03013776834632,
+            "lambda_X": 5.031114739936116,
+            "normalized_probability": 6.595606481240182e-17
+        },
+        {
+            "receiver": "c3",
+            "log_likelihood_ratio": -25.10411206061326,
+            "lambda_X": 5.164465621459292,
+            "normalized_probability": 4.127201756034158e-19
+        },
+        {
+            "receiver": "c4",
+            "log_likelihood_ratio": -80.49254748894964,
+            "lambda_X": 5.271475588113692,
+            "normalized_probability": 3.6371719393926265e-43
+        }
+    ],
+    "outcome": {
+        "true_receiver": "c5",
+        "detected_receiver": "c5",
+        "detected_llr": 17.22740506984701,
+        "success": true,
+        "is_detection_valid": true
+    },
+    "success": true,
+    "true_receiver": "c5",
+    "detected_receiver": "c5",
+    "likelihood_score": 17.22740506984701,
+    "target_src": "c2"
+}

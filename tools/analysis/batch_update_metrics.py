@@ -8,7 +8,6 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 import analyze_traffic_exact
-import analyze_traffic_exact
 import analyze_results
 import analyze_metric_evolution
 

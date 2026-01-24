@@ -56,8 +56,8 @@ def process_single_run(exp_path, force=False):
         return f"Skipped (Done): {run_name}"
 
     try:
-        # 1. General Analysis
-        analyze_results.analyze_single_run(exp_path)
+        # 1. General Analysis (MOVED TO END)
+        # analyze_results.analyze_single_run(exp_path)
 
         # 2. Consolidate Logs
         consolidate_traffic_logs.process_logs(exp_path)
@@ -126,6 +126,9 @@ def process_single_run(exp_path, force=False):
                 analyze_metric_evolution.analyze_evolution(exp_path, target_src=client, step_size=2500)
             except Exception as e:
                 pass
+
+        # 6. Generate Summary (NOW runs after all analysis is done)
+        analyze_results.analyze_single_run(exp_path)
 
         return f"Processed: {run_name} ({len(clients)} clients)"
 

@@ -9,6 +9,36 @@ from collections import defaultdict
 import math
 import json
 
+def robust_read_csv(filepath):
+    """
+    Reads a CSV file robustly, handling lines with extra commas.
+    """
+    try:
+        with open(filepath, 'r') as f:
+            lines = f.readlines()
+        if not lines: return pd.DataFrame()
+        
+        header = lines[0].strip().split(',')
+        expected_cols = len(header)
+        data = []
+        for line in lines[1:]:
+            parts = line.strip().split(',')
+            if len(parts) > expected_cols:
+                fixed_row = parts[:expected_cols-1]
+                tail = ",".join(parts[expected_cols-1:])
+                fixed_row.append(tail)
+                data.append(fixed_row)
+            elif len(parts) == expected_cols:
+                data.append(parts)
+            else:
+                if len(parts) == 1 and not parts[0]: continue
+                data.append(parts + [None]*(expected_cols - len(parts)))
+                
+        return pd.DataFrame(data, columns=header)
+    except Exception as e:
+        print(f"Failed to parse {filepath}: {e}")
+        return pd.DataFrame()
+
 def parse_logs(log_dir):
     """
     Parses sender, receiver, and mix node logs.
@@ -20,8 +50,10 @@ def parse_logs(log_dir):
     client_files = glob.glob(os.path.join(log_dir, "c*_traffic.csv"))
     for f in client_files:
         try:
-            df = pd.read_csv(f)
+            df = robust_read_csv(f)
             df['node_id'] = os.path.basename(f).split('_')[0]
+            # Force numeric timestamp
+            df['timestamp'] = pd.to_numeric(df['timestamp'], errors='coerce')
             traffic_dfs.append(df)
         except Exception as e:
             print(f"Error reading {f}: {e}")
@@ -35,8 +67,10 @@ def parse_logs(log_dir):
             continue 
         
         try:
-            df = pd.read_csv(f)
+            df = robust_read_csv(f)
             df['node_id'] = filename.split('_')[0]
+            # Force numeric timestamp
+            df['timestamp'] = pd.to_numeric(df['timestamp'], errors='coerce')
             mix_dfs.append(df)
         except Exception as e:
             print(f"Error reading {f}: {e}")
@@ -189,20 +223,21 @@ def calculate_metrics(df, config=None):
     merged = pd.merge(sent_df[['packet_id', 'timestamp']], recv_df[['packet_id', 'timestamp']], on='packet_id', suffixes=('_sent', '_recv'))
     merged['latency'] = merged['timestamp_recv'] - merged['timestamp_sent']
     
+    retrans = 0
+    if 'flags' in df.columns:
+         retrans = df['flags'].astype(str).str.count('retransmission').sum()
+
     metrics = {
-        'total_sent': total_sent,
-        'total_received': total_received,
-        'loss_rate': loss_rate,
-        'avg_latency': merged['latency'].mean() if not merged.empty else 0,
-        'max_latency': merged['latency'].max() if not merged.empty else 0,
-        'min_latency': merged['latency'].min() if not merged.empty else 0,
-        'retrans_count': 0,
-        'redirect_count': len(df[df['event_type'] == 'REDIRECTED'])
+        'total_sent': int(total_sent),
+        'total_received': int(total_received),
+        'loss_rate': float(loss_rate) if not np.isnan(loss_rate) else 0.0,
+        'avg_latency': float(merged['latency'].mean()) if not merged.empty and not np.isnan(merged['latency'].mean()) else 0.0,
+        'max_latency': float(merged['latency'].max()) if not merged.empty and not np.isnan(merged['latency'].max()) else 0.0,
+        'min_latency': float(merged['latency'].min()) if not merged.empty and not np.isnan(merged['latency'].min()) else 0.0,
+        'retrans_count': int(retrans),
+        'redirect_count': int(len(df[df['event_type'] == 'REDIRECTED']))
     }
     
-    if 'flags' in df.columns:
-         metrics['retrans_count'] = df['flags'].astype(str).str.count('retransmission').sum()
-
     return metrics
 
 def main():

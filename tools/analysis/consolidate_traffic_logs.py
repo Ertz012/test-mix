@@ -5,6 +5,45 @@ import glob
 import pandas as pd
 import argparse
 
+def robust_read_csv(filepath):
+    """
+    Reads a CSV file robustly, handling lines with extra commas (e.g. in unquoted JSON/dict strings).
+    Merges extra columns into the last expected column.
+    """
+    try:
+        with open(filepath, 'r') as f:
+            lines = f.readlines()
+            
+        if not lines:
+            return pd.DataFrame()
+            
+        # Parse header
+        header = lines[0].strip().split(',')
+        expected_cols = len(header)
+        data = []
+        
+        for line in lines[1:]:
+            parts = line.strip().split(',')
+            if len(parts) > expected_cols:
+                # Merge the tail
+                fixed_row = parts[:expected_cols-1]
+                tail = ",".join(parts[expected_cols-1:])
+                fixed_row.append(tail)
+                data.append(fixed_row)
+            elif len(parts) == expected_cols:
+                data.append(parts)
+            else:
+                # Too few columns? Skip or pad?
+                # Usually skip empty lines
+                if len(parts) == 1 and not parts[0]: continue
+                # Pad with None
+                data.append(parts + [None]*(expected_cols - len(parts)))
+                
+        return pd.DataFrame(data, columns=header)
+    except Exception as e:
+        print(f"Failed to parse {filepath}: {e}")
+        return pd.DataFrame()
+
 def process_logs(run_dir):
     """
     Consolidates traffic logs from Entry and Exit nodes into system_in.csv and system_out.csv.
@@ -18,14 +57,14 @@ def process_logs(run_dir):
     system_in_frames = []
     for f in entry_files:
         try:
-            df = pd.read_csv(f)
+            df = robust_read_csv(f)
             # Filter for RECEIVED packets coming from Clients or Providers
             # Note: We check if prev_hop is a client (c*) or provider (p*)
             # event_type must be RECEIVED
             if 'event_type' in df.columns and 'prev_hop' in df.columns:
                 mask = (
                     (df['event_type'] == 'RECEIVED') & 
-                    (df['prev_hop'].str.startswith(('c', 'p'), na=False))
+                    (df['prev_hop'].astype(str).str.startswith(('c', 'p'), na=False))
                 )
                 filtered_df = df[mask].copy()
                 
@@ -52,14 +91,14 @@ def process_logs(run_dir):
     system_out_frames = []
     for f in exit_files:
         try:
-            df = pd.read_csv(f)
+            df = robust_read_csv(f)
             # Filter for SENT packets going to Clients or Providers
             # Note: We check if next_hop is a client (c*) or provider (p*)
             # event_type must be SENT
             if 'event_type' in df.columns and 'next_hop' in df.columns:
                 mask = (
                     (df['event_type'] == 'SENT') & 
-                    (df['next_hop'].str.startswith(('c', 'p'), na=False))
+                    (df['next_hop'].astype(str).str.startswith(('c', 'p'), na=False))
                 )
                 filtered_df = df[mask].copy()
                 

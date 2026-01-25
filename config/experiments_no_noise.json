@@ -1,48 +1,50 @@
 [
     {
         "name": "01_baseline_no_errors_no_noise",
-        "description": "Baseline (10 min) - No Errors, No Cover Traffic.",
+        "description": "Baseline (No Noise): Real=3.0, Loop=0.0, Tx=3.0",
         "config_overrides": {
             "features": {
-                "dummy_traffic": false,
                 "retransmission": false,
                 "path_reestablishment": false,
                 "parallel_paths": false,
-                "anonymous_return_addresses": false,
+                "anonymous_return_addresses": true,
                 "layered_encryption": true,
                 "mock_encryption": true,
                 "backup_mixes": false
             },
             "traffic": {
+                "traffic_strategy": "loopix",
                 "mode": "random",
                 "duration_sec": 600,
                 "interval_sec": 0.1,
+                "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 0.0,
-                "drop_rate_packets_per_sec": 0.0
+                "transmission_rate_packets_per_sec": 3.0
             }
         },
         "error_injection": null
     },
     {
         "name": "02_baseline_errors_no_noise",
-        "description": "Baseline + Errors (10 min) - No Cover Traffic.",
+        "description": "Baseline Errors (No Noise): Real=3.0, Loop=0.0, Tx=3.0",
         "config_overrides": {
             "features": {
-                "dummy_traffic": false,
                 "retransmission": false,
                 "path_reestablishment": false,
                 "parallel_paths": false,
-                "anonymous_return_addresses": false,
+                "anonymous_return_addresses": true,
                 "layered_encryption": true,
                 "mock_encryption": true,
                 "backup_mixes": false
             },
             "traffic": {
+                "traffic_strategy": "loopix",
                 "mode": "random",
                 "duration_sec": 600,
                 "interval_sec": 0.1,
+                "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 0.0,
-                "drop_rate_packets_per_sec": 0.0
+                "transmission_rate_packets_per_sec": 3.0
             }
         },
         "error_injection": {
@@ -53,20 +55,23 @@
     },
     {
         "name": "03_retransmission_no_noise",
-        "description": "Retransmission (10 min) - No Cover Traffic.",
+        "description": "Retransmission (No Noise): Real=3.0, Loop=0.0, Tx=3.0",
         "config_overrides": {
             "features": {
                 "retransmission": true,
                 "path_reestablishment": false,
                 "parallel_paths": false,
+                "anonymous_return_addresses": true,
                 "backup_mixes": false
             },
             "traffic": {
+                "traffic_strategy": "loopix",
                 "mode": "random",
                 "duration_sec": 600,
                 "interval_sec": 0.1,
+                "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 0.0,
-                "drop_rate_packets_per_sec": 0.0
+                "transmission_rate_packets_per_sec": 3.0
             }
         },
         "error_injection": {
@@ -77,20 +82,23 @@
     },
     {
         "name": "04_path_reestablishment_no_noise",
-        "description": "Path Reestablishment (10 min) - No Cover Traffic.",
+        "description": "Path Reest (No Noise): Real=3.0, Loop=0.0, Tx=3.0",
         "config_overrides": {
             "features": {
                 "retransmission": true,
                 "path_reestablishment": true,
                 "parallel_paths": false,
+                "anonymous_return_addresses": true,
                 "backup_mixes": false
             },
             "traffic": {
+                "traffic_strategy": "loopix",
                 "mode": "random",
                 "duration_sec": 600,
                 "interval_sec": 0.1,
+                "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 0.0,
-                "drop_rate_packets_per_sec": 0.0
+                "transmission_rate_packets_per_sec": 3.0
             }
         },
         "error_injection": {
@@ -101,20 +109,23 @@
     },
     {
         "name": "05_parallel_paths_no_noise",
-        "description": "Parallel Paths (10 min) - No Cover Traffic.",
+        "description": "Multipath (No Noise): Real=3.0, Loop=0.0, Tx=3.0",
         "config_overrides": {
             "features": {
                 "retransmission": false,
                 "path_reestablishment": false,
                 "parallel_paths": true,
+                "anonymous_return_addresses": true,
                 "backup_mixes": false
             },
             "traffic": {
+                "traffic_strategy": "loopix",
                 "mode": "random",
                 "duration_sec": 600,
                 "interval_sec": 0.1,
+                "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 0.0,
-                "drop_rate_packets_per_sec": 0.0
+                "transmission_rate_packets_per_sec": 3.0
             }
         },
         "error_injection": {
@@ -125,20 +136,23 @@
     },
     {
         "name": "06_backup_mixes_no_noise",
-        "description": "Backup Mixes (10 min) - No Cover Traffic.",
+        "description": "Backup Mixes (No Noise): Real=3.0, Loop=0.0, Tx=3.0",
         "config_overrides": {
             "features": {
                 "retransmission": false,
                 "path_reestablishment": false,
                 "parallel_paths": false,
-                "backup_mixes": true
+                "backup_mixes": true,
+                "anonymous_return_addresses": true
             },
             "traffic": {
+                "traffic_strategy": "loopix",
                 "mode": "random",
                 "duration_sec": 600,
                 "interval_sec": 0.1,
+                "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 0.0,
-                "drop_rate_packets_per_sec": 0.0
+                "transmission_rate_packets_per_sec": 3.0
             }
         },
         "error_injection": {

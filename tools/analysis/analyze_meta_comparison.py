@@ -12,22 +12,53 @@ def load_run_metrics(log_dir):
     """
     run_name = os.path.basename(log_dir)
     
-    general_file = os.path.join(log_dir, "analysis_results", "general_metrics.json")
-    anonymity_file = os.path.join(log_dir, "analysis_results", "anonymity_stats.json")
-    
     metrics = {'name': run_name}
     
+    # Load General Metrics
+    general_file = os.path.join(log_dir, "analysis_results", "general_metrics.json")
+    metrics['general'] = {} # Initialize as empty dict
     if os.path.exists(general_file):
-        with open(general_file, 'r') as f:
-            metrics['general'] = json.load(f)
-    else:
-        metrics['general'] = {}
+        try:
+            with open(general_file, 'r') as f:
+                content = f.read()
+                if content.strip(): # Only try to load if content is not empty
+                    metrics['general'] = json.loads(content)
+        except json.JSONDecodeError as e:
+            print(f"Warning: Corrupt JSON in {general_file}: {e}")
         
+    # Load Anonymity Stats
+    anonymity_file = os.path.join(log_dir, "analysis_results", "anonymity_stats.json")
+    metrics['anonymity'] = {} # Initialize as empty dict
     if os.path.exists(anonymity_file):
-        with open(anonymity_file, 'r') as f:
-            metrics['anonymity'] = json.load(f)
-    else:
-        metrics['anonymity'] = {}
+        try:
+            with open(anonymity_file, 'r') as f:
+                content = f.read()
+                if content.strip(): # Only try to load if content is not empty
+                    metrics['anonymity'] = json.loads(content)
+        except json.JSONDecodeError as e:
+            print(f"Warning: Corrupt JSON in {anonymity_file}: {e}")
+            
+    # Check Attack Success (Top Link -> c3?)
+    # Look for the strict trace CSV
+    csv_pattern = os.path.join(log_dir, "analysis_results", "strict_link_trace_*.csv")
+    csv_files = glob.glob(csv_pattern)
+    metrics['attack_success'] = None # default
+    
+    if csv_files:
+        try:
+            # Assume one trace file per run for now
+            df_trace = pd.read_csv(csv_files[0])
+            if not df_trace.empty and 'link' in df_trace.columns:
+                top_link = df_trace.iloc[0]['link']
+                # Link format: "NodeID->NextHopID"
+                # We assume c1 -> c3 is the target flow.
+                # So if top link ends with '->c3', success.
+                if str(top_link).endswith('->c3'):
+                    metrics['attack_success'] = True
+                else:
+                    metrics['attack_success'] = False
+        except Exception as e:
+            print(f"Error checking attack success in {csv_files[0]}: {e}")
         
     return metrics
 
@@ -96,6 +127,8 @@ def main():
              row['diaz_anonymity'] = a['global_metrics'].get('diaz_anonymity', 0)
              row['attacker_confidence'] = a['global_metrics'].get('attacker_confidence', 0) # e.g. Max LLR
         
+        row['attack_success'] = r.get('attack_success')
+        
         rows.append(row)
         
     df = pd.DataFrame(rows)
@@ -108,7 +141,120 @@ def main():
     plot_comparison(df, 'avg_latency', 'Average Latency per Run', os.path.join(output_dir, "cmp_latency.png"), "Seconds")
     plot_comparison(df, 'diaz_anonymity', 'Diaz Anonymity (Entropy) per Run', os.path.join(output_dir, "cmp_anonymity.png"), "Entropy (0-1)")
     
+    # Generate HTML Dashboard
+    generate_dashboard_html(df, output_dir)
+    
     print(f"Meta Analysis complete. Comparison plots saved to {output_dir}")
+
+def generate_dashboard_html(df, output_dir):
+    """
+    Generates a single HTML dashboard file summarizing the results.
+    """
+    html_path = os.path.join(output_dir, "dashboard.html")
+    
+    # Format DataFrame for Display
+    display_df = df.copy()
+    if 'loss_rate' in display_df.columns:
+        display_df['loss_rate'] = display_df['loss_rate'].apply(lambda x: f"{x*100:.2f}%" if pd.notnull(x) else "N/A")
+    if 'avg_latency' in display_df.columns:
+        display_df['avg_latency'] = display_df['avg_latency'].round(4)
+    if 'diaz_anonymity' in display_df.columns:
+        display_df['diaz_anonymity'] = display_df['diaz_anonymity'].round(4)
+    if 'attacker_confidence' in display_df.columns:
+        display_df['attacker_confidence'] = display_df['attacker_confidence'].round(4)
+        
+    # Attack Success Formatting (Icons)
+    if 'attack_success' in display_df.columns:
+        display_df['attack_success'] = display_df['attack_success'].apply(
+            lambda x: "✅ YES" if x is True else ("❌ NO" if x is False else "❓ N/A")
+        )
+        
+    # Python to HTML Table
+    table_html = display_df.to_html(index=False, classes='table table-striped table-hover', escape=False) # escape=False for HTML inside cells
+    
+    html_content = f"""
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Loopix Analysis Dashboard</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body {{ padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }}
+            .metric-card {{ background: #f8f9fa; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
+            h1, h2 {{ color: #2c3e50; }}
+            .plot-container {{ text-align: center; margin-bottom: 40px; }}
+            .plot-container img {{ max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px; padding: 5px; }}
+            table {{ margin-top: 20px; }}
+            th {{ background-color: #34495e !important; color: white; }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="text-center mb-5">🚀 Loopix Network Analysis Dashboard</h1>
+            
+            <div class="metric-card">
+                <h2>📊 Experiment Summary</h2>
+                <div class="table-responsive">
+                    {table_html}
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>🛡️ Anonymity (Diaz)</h2>
+                        <div class="plot-container">
+                            <img src="cmp_anonymity.png" alt="Anonymity Comparison">
+                        </div>
+                        <p class="text-muted">Higher is better. Measures the entropy of the anonymity set.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>🕵️ Attacker Confidence</h2>
+                        <p class="text-muted">Does the attacker know who you are talking to? See table for 'Max LLR' and 'Attack Success'.</p>
+                        <div class="alert alert-info">
+                            <strong>Attack Success:</strong> Determines if the highest-ranked suspect was indeed the true receiver (c3).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>📉 Packet Loss Rate</h2>
+                        <div class="plot-container">
+                            <img src="cmp_loss_rate.png" alt="Loss Rate Comparison">
+                        </div>
+                        <p class="text-muted">Lower is better. High loss indicates network failures or active attacks.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>⏱️ Average Latency</h2>
+                        <div class="plot-container">
+                            <img src="cmp_latency.png" alt="Latency Comparison">
+                        </div>
+                        <p class="text-muted">Lower is generally better, but trade-off with anonymity exists.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="mt-5 text-center text-muted">
+                <p>Generated by Loopix Analysis Suite</p>
+            </footer>
+        </div>
+    </body>
+    </html>
+    """
+    
+    with open(html_path, "w", encoding='utf-8') as f:
+        f.write(html_content)
+        
+    print(f"Dashboard generated: {html_path}")
 
 if __name__ == "__main__":
     main()

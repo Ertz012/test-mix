@@ -10,6 +10,36 @@ from scipy.stats import erlang
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("StrictLinkTrace")
 
+def robust_read_csv(filepath):
+    """
+    Reads a CSV file robustly, handling lines with extra commas.
+    """
+    try:
+        with open(filepath, 'r') as f:
+            lines = f.readlines()
+        if not lines: return pd.DataFrame()
+        
+        header = lines[0].strip().split(',')
+        expected_cols = len(header)
+        data = []
+        for line in lines[1:]:
+            parts = line.strip().split(',')
+            if len(parts) > expected_cols:
+                fixed_row = parts[:expected_cols-1]
+                tail = ",".join(parts[expected_cols-1:])
+                fixed_row.append(tail)
+                data.append(fixed_row)
+            elif len(parts) == expected_cols:
+                data.append(parts)
+            else:
+                if len(parts) == 1 and not parts[0]: continue
+                data.append(parts + [None]*(expected_cols - len(parts)))
+                
+        return pd.DataFrame(data, columns=header)
+    except Exception as e:
+        print(f"Failed to parse {filepath}: {e}")
+        return pd.DataFrame()
+
 def load_all_traffic_logs(run_dir):
     """
     Loads all *_traffic.csv files in the directory to reconstruct ALL links in the system.
@@ -29,7 +59,7 @@ def load_all_traffic_logs(run_dir):
         filepath = os.path.join(run_dir, filename)
         
         try:
-            df = pd.read_csv(filepath)
+            df = robust_read_csv(filepath)
             
             # Filter for SENT events to identify outgoing links
             # We are looking for packets leaving a node towards a Next Hop.
@@ -51,6 +81,10 @@ def load_all_traffic_logs(run_dir):
                 link_traffic = sent_df[sent_df['next_hop'] == nh].copy()
                 
                 # We only need timestamps for the attack
+                # Force timestamp to float
+                link_traffic['timestamp'] = pd.to_numeric(link_traffic['timestamp'], errors='coerce')
+                link_traffic.dropna(subset=['timestamp'], inplace=True)
+                
                 # Sort by timestamp
                 link_traffic.sort_values('timestamp', inplace=True)
                 
@@ -75,6 +109,10 @@ def get_target_input_stream(run_dir, target_src):
     df = pd.read_csv(sys_in_path)
     # Target traffic: src matches target, event is effectively "Input to system"
     # system_in.csv contains RECEIVED events at Entry Nodes from Clients.
+    
+    # Force Timestamp numeric
+    df['timestamp'] = pd.to_numeric(df['timestamp'], errors='coerce')
+    df.dropna(subset=['timestamp'], inplace=True)
     
     target_df = df[df['src'] == target_src].sort_values('timestamp')
     if target_df.empty:

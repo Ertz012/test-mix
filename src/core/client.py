@@ -4,6 +4,7 @@ import random
 import os
 import math
 import uuid
+import queue
 from src.core.node import Node
 from src.modules.routing import Routing
 from src.core.packet import Packet

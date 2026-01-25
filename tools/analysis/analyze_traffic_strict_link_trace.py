@@ -281,6 +281,39 @@ def main():
     for _, row in results_df.head(20).iterrows():
         print(f"{row['link']:<30} | {row['llr']:<10.2f} | {int(row['obs_count']):<6}")
         
+    # --- Calculate Global Anonymity Metrics ---
+    # Convert LLR to unnormalized probabilities: P(Link_i) proportional to exp(LLR_i)
+    # To avoid overflow, subtract max LLR first: exp(LLR - max)
+    
+    if not results_df.empty:
+        llrs = results_df['llr'].values
+        max_llr = np.max(llrs)
+        
+        # Softmax
+        exp_vals = np.exp(llrs - max_llr)
+        sum_exp = np.sum(exp_vals)
+        probs = exp_vals / sum_exp
+        
+        # Entropy H (Shannon)
+        # Handle 0 probabilities (though softmax won't be exactly 0)
+        entropy = -np.sum(probs * np.log2(probs + 1e-100))
+        
+        # Max Entropy (log2 N)
+        n_links = len(results_df)
+        max_entropy = np.log2(n_links) if n_links > 1 else 1.0
+        
+        # Diaz Anonymity (Normalized)
+        diaz = entropy / max_entropy if max_entropy > 0 else 0.0
+        
+        print(f"\n--- Anonymity Metrics ---")
+        print(f"Max LLR (Attacker Confidence): {max_llr:.4f}")
+        print(f"System Entropy: {entropy:.4f} bits")
+        print(f"Diaz Anonymity: {diaz:.4f}")
+    else:
+        max_llr = 0
+        entropy = 0
+        diaz = 0
+
     # Create output directory
     output_dir = os.path.join(args.run_dir, "analysis_results")
     os.makedirs(output_dir, exist_ok=True)
@@ -292,11 +325,29 @@ def main():
     print(f"\nSummary results saved to: {out_csv}")
     
     # Detailed JSON (with evolution)
-    # Convert to list of dicts
     import json
+    # Save standard global metrics for meta-analysis
+    global_stats = {
+        "global_metrics": {
+            "max_llr": float(max_llr),
+            "system_entropy": float(entropy),
+            "diaz_anonymity": float(diaz),
+            "link_count": int(len(results_df)),
+            "attacker_confidence": float(max_llr) # Alias
+        },
+        "target_config": {
+            "target": args.target,
+            "mu": args.mu,
+            "lambda_f": float(lambda_f)
+        }
+    }
+    
+    with open(os.path.join(output_dir, "anonymity_stats.json"), 'w') as f:
+        json.dump(global_stats, f, indent=4)
+        
     out_json = os.path.join(output_dir, f"strict_link_trace_k{args.k_hops}_{args.target}_evolution.json")
     
-    # Prepare data for JSON (handle numpy types)
+    # Prepare data for detailed JSON (handle numpy types)
     json_data = {
         "metadata": {
             "target": args.target,
@@ -304,16 +355,14 @@ def main():
             "k_hops": args.k_hops,
             "duration": float(duration),
             "target_packets": len(input_timestamps),
-            "lambda_f": float(lambda_f)
+            "lambda_f": float(lambda_f),
+            "metrics": global_stats["global_metrics"]
         },
         "results": []
     }
     
-    # Save top 50 links to avoid massive JSONs if graph is huge (user likely only cares about candidates)
-    # Or save all? User said "alle zwischenergebnisse".
-    # Let's save all, user said storage/compute is no problem.
-    
-    for _, row in results_df.iterrows():
+    # Save top 100 links
+    for _, row in results_df.head(100).iterrows():
         json_data["results"].append({
             "link": row['link'],
             "llr": float(row['llr']),

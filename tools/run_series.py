@@ -16,7 +16,7 @@ EXPERIMENTS_FILE = os.path.join(BASE_DIR, "config", "experiments.json")
 RESULTS_DIR = os.path.join(BASE_DIR, "results")
 ORCHESTRATE_SCRIPT = os.path.join(BASE_DIR, "mininet", "orchestrate.py")
 INJECTOR_SCRIPT = os.path.join(BASE_DIR, "tools", "error_injector.py")
-ANALYSIS_SCRIPT = os.path.join(BASE_DIR, "analysis", "analyze_results.py")
+# Analysis is now run locally, not here.
 
 def load_json(path):
     with open(path, 'r') as f:
@@ -91,16 +91,9 @@ def run_experiment(exp_name, error_injection_config):
     latest_log_dir = max(all_subdirs, key=os.path.getmtime)
     logger.info(f"Captured logs in: {latest_log_dir}")
     
-    # 4. Run Analysis
-    logger.info("Running Analysis...")
-    run_command(["python3", ANALYSIS_SCRIPT, latest_log_dir])
+    # 4. Analysis Skipped (Run Locally)
+    logger.info("Experiment complete. Analysis should be run locally after sync.")
     
-    # 5. Archive Results (Disabled as per user request - logs stay in logs/ folder)
-    # exp_results_dir = os.path.join(RESULTS_DIR, exp_name)
-    # if os.path.exists(exp_results_dir):
-    #     shutil.rmtree(exp_results_dir)
-    # shutil.copytree(latest_log_dir, exp_results_dir)
-    # logger.info(f"Saved results to {exp_results_dir}")
     print(f"DONE: {exp_name}")
 
 def main():

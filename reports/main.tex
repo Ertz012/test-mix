@@ -1,0 +1,904 @@
+%!TEX encoding = UTF-8 Unicode
+% --------------------------------------------------------------------------------
+\documentclass[
+	fontsize=12pt,
+	headings=small,
+	parskip=half,           % Ersetzt manuelles Setzen von parskip/parindent.
+	bibliography=totoc,
+	numbers=noenddot,       % Entfernt den letzten Punkt der Kapitelnummern.
+	open=any,               % Kapitel kann auf jeder Seite beginnen.
+%	final                   % Entfernt alle todonotes und den Entwurfstempel.
+]{scrreprt}
+% --------------------------------------------------------------------------------
+% Hinweis: Das Übersetzen dieser Datei funktioniert auch Online mit 
+% https://www.overleaf.com. Hierzu müssen neben dieser Datei im gleichen 
+% Verzeichnis die Dateien hinweiseabschlussarbeit.bib und stylesvs.tex liegen.
+% --------------------------------------------------------------------------------
+\input{stylesvs}
+
+\title{ Evaluation der Anonymität von fehlertoleranten Mix-Netz-Architekturen}
+\author{Fritz Simon Meyer}
+% \date{01.01.2015} % Für bestimmtes Datum diese Zeile aktivieren.
+
+\begin{document}
+
+\begin{titlepage}
+\mbox{\parbox[t][1.75cm][b]{2.2cm}{\uhhlogo}}
+\begin{center}\Large
+	\setlength{\leftskip}{0pt plus 1fil}
+	\setlength{\rightskip}{0pt plus 1fil}
+	\vfill Masterarbeit \par
+	\vfill \makeatletter {\Large\textsf{\textbf{\@title}}\par} \makeatother
+	\vfill vorgelegt von \par\bigskip 
+	\makeatletter {\@author} \par \makeatother
+	Matrikelnummer 7784124 \par
+	Studiengang Informatik \par
+	\vfill MIN-Fakultät \par Fachbereich Informatik \par
+	\vfill \makeatletter eingereicht am {\@date} \makeatother
+	\vfill
+	Betreuerin: Anne Kunstmann, M.\,Sc. \par
+	Erstgutachter: Prof. Dr.-Ing. Hannes Federrath \par
+	Zweitgutachter: Dr. Jens Lindemann \par
+\end{center}
+\ifoptionfinal{}{
+\begin{tikzpicture}[remember picture, overlay]
+	\node[draw, red, font=\ttfamily\bfseries\Large, xshift=30mm, yshift=238mm, rotate=340, text centered, text width=6cm, very thick, rounded corners=4mm] at (current page.south) {Entwurf vom \today};
+\end{tikzpicture}
+}
+\end{titlepage}
+
+% --------------------------------------------------------------------------------
+% ----- Ab hier folgt der Haupttext
+% --------------------------------------------------------------------------------
+
+\chapter*{Aufgabenstellung}
+
+Mix-Netze sind eine etablierte Möglichkeit, um im Internet ein höheres Maß an Anonymität zu erlangen. Durch das Weiterleiten von mehrfach verschlüsselten Nachrichten über verschiedene Mix-Server können Inhalts- und Metadaten so verschlüsselt werden, dass eine Nachverfolgung dieser erheblich erschwert wird. Über die Jahre sind viele verschiedene Konzepte und Implementationen von Mix-Netzarchitekturen entstanden mit dem Fokus die Anonymität in bestimmten Anwendungsbereichen zu verbessern. Dabei ist die Verfügbarkeit und Robustheit von Mixen weitgehend auf der Strecke geblieben und stellt ein konkurrierendes Ziel zu dem der Anonymität dar. Durch die identifizierenden Informationen, die Fehlertoleranz benötigt, um zielgerichtet und effektiv Fehler im Mix Netz beseitigen zu können, verringert Fehlertoleranz den zur Verfügung gestellten Grad an Anonymität. Nichtsdestotrotz wird Fehlertoleranz in Mixnetzen benötigt, da die native Vorgehensweise von Mixnetzen bei Fehlerzuständen lediglich ein Abbruch und Wiederaufbau eines neuen Pfades durch das Netz umfasst. Diese Re-Etablierung von Pfaden und der erneuten Übertragung verloren gegangener Nachrichten begünstigt Verkehrsanalysen und verringert somit ebenfalls die Anonymität. 
+
+Im Rahmen dieser Masterarbeit soll daher: 
+\begin{enumerate}
+    \item Eine Literaturanalyse existierender Mix-Netze und ihrer Fehlertoleranzansätze durchgeführt werden. 
+    \item Eine Simulation eines grundlegenden Mix-Netzes mit Re-Etablierungen von Pfaden, erneutes Übertragen von Nachrichten, parallelen disjunkten Pfaden, anonymen Rückadressen und Ersatzmixen implementiert werden.
+    \item Der Einfluss der verschiedenen Mechanismen auf den Grad der Anonymität im Mix-Netz evaluiert werden.
+\end{enumerate}
+
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+\chapter*{Zusammenfassung}
+
+\tableofcontents
+
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+\chapter{Einleitung}
+
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+\chapter{Theoretische Grundlagen}
+%überarbeiten TODO
+Die Konzeption widerstandsfähiger Kommunikationssysteme bewegt sich stets in einem fundamentalen Spannungsfeld konkurrierender Ziele. Werden Mix-Netze unter realen Bedingungen betrieben, kollidieren die Anforderungen an hohe Bandbreiteneffizienz und geringe Latenz unweigerlich mit dem Anspruch auf maximale Sicherheit – ein Konflikt, der die Architektur solcher Systeme maßgeblich diktiert. Um die Effektivität und Sicherheit verschiedener Designentscheidungen jenseits bloßer Intuition bewerten zu können, bedarf es daher eines formalen Rahmens, der sowohl die theoretischen Grenzen der Anonymität absteckt als auch die Fähigkeiten potenzieller Angreifer und präzise Metriken zur Quantifizierung des Schutzniveaus definiert.
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+\section{Das Anonymitätstrilemma}
+Versucht man Mixnetze zu optimieren, um eine möglichst geringe Latenz sowie eine hohe Bandbreiteneffizienz zu erzielen und dabei gleichzeitig eine starke Anonymität zu gewährleisten, zeigt sich, dass diese Ziele in einem fundamentalen Spannungsverhältnis stehen. Dass diese Eigenschaften von Mixnetzen tatsächlich in direkter Konkurrenz zueinander stehen, wurde formal im sogenannten \textit{Anonymitätstrilemma} belegt \cite{Das2018}.
+
+Die Autoren der Studie zeigen auf, dass eine Optimierung von zwei von drei Eigenschaften: starke Anonymität, geringer Bandbreiten-Overhead und geringe Latenz, unweigerlich zur Vernachlässigung der dritten Eigenschaft führt \cite{Das2018}.
+\begin{itemize}
+    \item \textbf{Starke Anonymität} erfordert das Brechen der zeitlichen Korrelierbarkeit von eingehenden und ausgehenden Nachrichten. Dies wird in klassischen Chaum'schen Mixnetzen durch das Sammeln von Batches erreicht, was jedoch zwangsläufig zu hohen Latenzen führt.
+    \item \textbf{Low-Latency Mixnetze} hingegen müssen diesen Schutzmechanismus lockern. Sie opfern entweder Anonymität, indem sie die Wartezeiten minimieren (was Timing-Analysen erleichtert), oder sie müssen die Bandbreite massiv belasten, indem sie künstlichen \textit{Cover Traffic} erzeugen, um das Verkehrsaufkommen zu glätten.
+\end{itemize}
+
+Ein weiterer kritischer Aspekt betrifft die Zuverlässigkeit: Geringe Latenzen in Kombination mit hoher Zuverlässigkeit erfordern effiziente Fehlertoleranzmechanismen \cite{Oldenburg2021}. Diese sind in anonymen Netzen jedoch schwer zu implementieren, da das dafür notwendige Feedback (z.\,B. ACKs) entweder aus Sicherheitsgründen unterdrückt wird oder zu weiterem Protokoll-Overhead und damit zu Bandbreitenverlusten führt \cite{Piotrowska2017, Oldenburg2021}.
+Diese Schwierigkeit, alle drei Eigenschaften gleichzeitig zu optimieren, stellt eines der grundlegenden Probleme bei der Weiterentwicklung von anonymen Kommunikationssystemen dar.
+
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+\section{Verkehrsanalysen und Angriffsmodelle}
+
+Die Sicherheit von Mixnetzen wird primär an ihrer Widerstandsfähigkeit gegen Verkehrsanalysen gemessen. Das Standardmodell geht hierbei von einem \textit{Global Passive Adversary} (GPA) aus. Dieser Angreifer ist in der Lage, alle Netzverbindungen gleichzeitig zu überwachen, sieht also, wann Pakete in das Netz eintreten und wann sie es verlassen, kann jedoch aufgrund der Verschlüsselung deren Inhalt nicht lesen \cite{Danezis2009}. Ziel der Verkehrsanalyse ist es, trotz dieser Verschlüsselung die Kommunikationsbeziehung zwischen Sender und Empfänger zu deanonymisieren.
+
+%----------------------------------------------------------------
+\subsection{Timing- und Korrelationsangriffe}
+Bei Low-Latency-Systemen (wie Loopix oder Tor) ist der \textit{End-to-End Timing Attack} eine der effektivsten Methoden. Da Nachrichten das Netz so schnell wie möglich durchqueren sollen, korreliert das Zeitmuster des ausgehenden Pakets stark mit dem des eingehenden. Ein GPA kann durch statistische Analyse der Inter-Packet-Delays den Eingangs-Strom eines Senders mit dem Ausgangs-Strom eines Empfängers verknüpfen \cite{Shmatikov2006}.
+Mixnetze versuchen diese Korrelation durch das Hinzufügen von zufälligen Verzögerungen und Dummy-Traffic zu brechen. Mechanismen zur Fehlertoleranz, die bei Verlust sofortige Neuübertragungen auslösen, laufen Gefahr, charakteristische Zeitmuster zu erzeugen (Bursts), die diese Korrelation wieder erleichtern.
+
+%----------------------------------------------------------------
+\subsection{Intersection Attacks} Der \textit{Intersection Attack} (Schnittmengenangriff) stellt die deterministische Grundlage vieler statistischer Angriffe dar und wurde formal von Berthold et al. sowie Raymond als fundamentale Schwachstelle von Mixnetzen identifiziert \cite{berthold2000disadvantages, raymond2001traffic}. Im Gegensatz zu reinen Timing-Analysen nutzt dieser Angriff die Dynamik der Nutzeraktivität über einen längeren Zeitraum. Das Modell geht davon aus, dass ein Angreifer beobachten kann, welche Menge an potenziellen Empfängern zum Zeitpunkt eines Nachrichtenausgangs im Netz aktiv ist. Sendet ein Zielsubjekt wiederholt Nachrichten, bildet der Angreifer die Schnittmenge aller aktiven Nutzergruppen. Da der tatsächliche Empfänger bei jeder erfolgreichen Zustellung online sein muss, verbleibt dieser zwangsläufig in der Schnittmenge, während unbeteiligte Nutzer, die zu mindestens einem der Zeitpunkte offline waren, sukzessive eliminiert werden. Dieser Angriff demonstriert, dass selbst perfekte Mischverfahren die Anonymität nicht wahren können, wenn das \textit{Anonymity Set} durch das Zu- und Abschalten von Nutzern variiert. Während der oben beschriebene SDA robuster gegen Rauschen (z.,B. Cover-Traffic) ist, liefert der klassische Intersection Attack unter idealen Beobachtungsbedingungen eine eindeutige Identifikation des Kommunikationspartners.
+
+%----------------------------------------------------------------
+\subsection{Statistical Disclosure Attacks (SDA)}
+Für die Bewertung von Fehlertoleranz-Mechanismen ist der \textit{Statistical Disclosure Attack} (SDA) und dessen Verallgemeinerung als \textit{Intersection Attack} von zentraler Bedeutung. Diese Angriffe zielen nicht auf die Deanonymisierung einer einzelnen Nachricht ab, sondern beobachten das System über einen längeren Zeitraum \cite{Danezis2003}.
+Das Grundprinzip lautet: Wenn Alice wiederholt Nachrichten an Bob sendet, wird Bob in der Menge der möglichen Empfänger (Anonymity Set) öfter auftauchen als andere, unbeteiligte Nutzer. Durch das Bilden der Schnittmenge (\textit{Intersection}) der Empfänger-Sets über mehrere Runden hinweg, kristallisiert sich der tatsächliche Kommunikationspartner heraus.
+Dieser Angriff ist besonders relevant im Kontext von \textit{Retransmissions}: Wenn ein Protokoll bei Fehlerzuständen Nachrichten wiederholt sendet, erhöht es künstlich die Anzahl der Beobachtungen (Samples), die dem Angreifer zur Verfügung stehen. Ein Mechanismus, der Zuverlässigkeit durch Redundanz erkauft, beschleunigt somit potenziell die statistische Aufdeckung der Beziehung durch den Angreifer \cite{Agrawal2003}.
+
+%----------------------------------------------------------------
+\subsection{Aktive Angriffe (Blending / $n-1$ Attacks)}
+Während passive Angreifer nur beobachten, manipulieren aktive Angreifer den Nachrichtenfluss. Beim \textit{$(n-1)$-Angriff} (auch Blending Attack) blockiert der Angreifer gezielt alle legitimen Nachrichten, die in einen Mix eintreten, und flutet diesen stattdessen mit eigenen Nachrichten, bis nur noch genau eine Nachricht des Opfers im Batch verbleibt \cite{Serjantov2002}. Da der Angreifer seine eigenen Nachrichten kennt, kann er die Nachricht des Opfers am Ausgang eindeutig identifizieren.
+Diese Angriffsform nutzt die deterministische Arbeitsweise von Threshold-Mixen aus. Robuste Fehlertoleranz-Mechanismen könnten hier ungewollt als Orakel dienen: Wenn ein System bei manipulierten Paketen Fehlermeldungen (ACKs/NACKs) generiert, kann ein aktiver Angreifer diese nutzen, um die Anwesenheit oder den Pfad einer bestimmten Nachricht zu bestätigen \cite{Serjantov2002}.
+
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+\section{Metriken zur Quantifizierung von Anonymität}
+\label{sec:metriken}
+
+Um die Sicherheit von Mixnetzen und den Einfluss von Fehlertoleranzmechanismen empirisch bewerten zu können, ist es notwendig, den abstrakten Begriff der Anonymität in messbare Größen zu überführen. Während frühe Ansätze Anonymität oft als binären Zustand betrachteten (anonym oder nicht anonym), hat sich in der Forschung die Auffassung durchgesetzt, Anonymität als ein Kontinuum zu modellieren, das quantitativ durch wahrscheinlichkeitstheoretische und informationstheoretische Metriken beschrieben wird \cite{pfitzmann2010terminology}.
+
+\subsection{Die Anonymitätsmenge (Anonymity Set)}
+Das grundlegendste Maß für Anonymität ist die Größe der sogenannten Anonymitätsmenge. Nach der Definition von Pfitzmann und Hansen ist die Anonymitätsmenge die Menge aller möglichen Subjekte (Sender oder Empfänger), die eine bestimmte Aktion ausgeführt haben könnten \cite{pfitzmann2010terminology}.
+
+Sei $U$ die Menge aller Nutzer im System und $A \subseteq U$ die Teilmenge der potenziellen Sender einer Nachricht. Im einfachsten Fall, bei dem alle Nutzer mit gleicher Wahrscheinlichkeit als Sender in Frage kommen (Gleichverteilung), ist der Grad der Anonymität direkt proportional zur Kardinalität der Menge:
+\begin{equation}
+    Anonymit\ddot{a}t = |A|
+\end{equation}
+Dieser Ansatz ist jedoch oft unzureichend, da in realistischen Szenarien nicht alle Teilnehmer gleichwahrscheinlich sind. Ein Angreifer könnte durch Beobachtung (z.\,B. Timing-Analysen \cite{shmatikov2006timing}) bestimmten Nutzern eine höhere Wahrscheinlichkeit zuordnen, der Sender zu sein, als anderen. In einem solchen Fall würde die reine Größe der Menge $|A|$ eine Sicherheit suggerieren, die faktisch nicht existiert \cite{serjantov2002towards}.
+
+\subsection{Informationstheoretische Metriken (Entropie)}
+Um ungleiche Wahrscheinlichkeitsverteilungen zu berücksichtigen, wurden 2002 unabhängig voneinander von Serjantov und Danezis \cite{serjantov2002towards} sowie von Diaz et al. \cite{diaz2002towards} Metriken vorgeschlagen, die auf der Shannon-Entropie basieren. Diese Metriken messen die "Unsicherheit" eines Angreifers bezüglich der Identität des Senders (oder Empfängers).
+
+Jedem Nutzer $u_i$ aus der Anonymitätsmenge wird eine Wahrscheinlichkeit $p_i$ zugeordnet, die ausdrückt, wie wahrscheinlich es aus Sicht des Angreifers ist, dass $u_i$ der Urheber einer Nachricht ist. Dabei gilt $\sum p_i = 1$. Die Entropie $H(X)$ des Systems ist definiert als:
+\begin{equation}
+    H(X) = - \sum_{i=1}^{|A|} p_i \cdot \log_2(p_i)
+\end{equation}
+Der Wert $H(X)$ beschreibt die effektive Anzahl an Bits, die der Angreifer noch lernen müsste, um den Sender eindeutig zu identifizieren.
+
+\subsubsection{Effektive Größe der Anonymitätsmenge}
+Serjantov und Danezis leiten aus der Entropie die effektive Größe $S$ der Anonymitätsmenge ab. Diese Metrik gibt an, wie vielen Nutzern unter einer idealen Gleichverteilung die gemessene Entropie entsprechen würde:
+\begin{equation}
+    S = 2^{H(X)}
+\end{equation}
+Ein System mit 100 Nutzern, bei dem ein Nutzer eine Verdachtswahrscheinlichkeit von 99\% hat, besitzt eine sehr geringe Entropie und damit eine effektive Anonymitätsmenge, die nahe bei 1 liegt, obwohl $|A|=100$ ist \cite{serjantov2002towards}.
+
+\subsubsection{Grad der Anonymität}
+Diaz et al. schlagen vor, die gemessene Entropie zu normalisieren, um Systeme unterschiedlicher Größe vergleichbar zu machen. Der \textit{Degree of Anonymity} $d$ wird berechnet, indem die aktuelle Entropie $H(X)$ durch die maximal mögliche Entropie $H_{max}$ (die bei Gleichverteilung vorliegt, also $H_{max} = \log_2(|A|)$) geteilt wird:
+\begin{equation}
+    d = \frac{H(X)}{H_{max}} = \frac{- \sum p_i \log_2(p_i)}{\log_2(|A|)}
+\end{equation}
+Der Wert $d$ liegt immer zwischen 0 (keine Anonymität) und 1 (perfekte Anonymität relativ zur Gruppengröße) \cite{diaz2002towards}.
+
+Für die Evaluation von Fehlertoleranz ist die Entropie-Metrik besonders wertvoll. Wenn Fehlertoleranzmechanismen wie Retransmissions einem Angreifer ermöglichen, durch statistische Analysen (Intersection Attacks) die Wahrscheinlichkeit für bestimmte Sender zu erhöhen, sinkt die Entropie messbar, noch bevor der Sender eindeutig enttarnt ist.
+
+\subsection{Unverkettbarkeit (Unlinkability)}
+Neben der Senderanonymität ist die Unverkettbarkeit von Sender und Empfänger ein zentrales Schutzziel. Pfitzmann und Hansen definieren Unlinkability als die Eigenschaft, dass zwei Beobachtungen (z.\,B. das Senden einer Nachricht bei A und das Empfangen bei B) nicht stärker miteinander in Beziehung gesetzt werden können als durch reines Raten \cite{pfitzmann2010terminology}.
+
+In Mixnetzen wird dies oft gemessen, indem die Korrelation zwischen Eingangs- und Ausgangsnachrichten analysiert wird. Ein Angreifer versucht, eine Funktion zu finden, die einem Eingangspaket $m_{in}$ ein Ausgangspaket $m_{out}$ mit einer Wahrscheinlichkeit $P(m_{in} \rightarrow m_{out}) > \frac{1}{|A|}$ zuordnet.
+Timing-Angriffe, wie sie von Shmatikov und Wang beschrieben wurden, zielen genau darauf ab, diese Zuordnung durch die Analyse von Latenzen zu verbessern \cite{shmatikov2006timing}. Fehlertoleranzmechanismen, die feste Timeouts oder charakteristische Wiederholungsmuster nutzen, können diese Verknüpfung erleichtern und somit die Unverkettbarkeit schwächen.
+
+\subsection{Maximales Verkehrsaufkommen und Kapazität}
+Obwohl keine direkte Anonymitätsmetrik, spielt das Verhältnis von Nutzdaten zu Dummy-Traffic (Padding) eine indirekte Rolle. Murdoch et al. zeigen, dass die Bandbreitenkapazität eines Mixes die theoretische Obergrenze für die Menge an Informationen darstellt, die ein Angreifer über den verdeckten Kanal des Verkehrsflusses extrahieren kann \cite{murdoch2013quantifying}. Systeme wie Loopix nutzen dies, indem sie durch Poisson-verteilten Dummy-Traffic die Verbindung zwischen Verkehrsaufkommen und Nutzeraktivität verschleiern. Eine hohe Auslastung durch redundante Pakete (Fehlertoleranz) kann jedoch die Kapazität für diesen schützenden Dummy-Traffic verringern.
+
+
+\chapter{Literaturanalyse}
+%überarbeiten TODO
+Seit David Chaums ursprünglichem Entwurf eines Mixes hat sich die Forschung von idealisierten Modellen hin zu praktisch implementierbaren Architekturen entwickelt, die sich zunehmend den Herausforderungen realer, unzuverlässiger Netzwerke stellen müssen. Während frühe Konzepte primär die Maximierung der Anonymität in statischen Umgebungen fokussierten, erzwang der Wunsch nach breiter Nutzbarkeit eine Evolution hin zu dynamischen Systemen, die Ausfälle kompensieren können. Der aktuelle Forschungsstand offenbart hierbei ein breites Spektrum an Lösungsstrategien – von redundanten Nachrichtenpfaden bis hin zu selbstheilenden kryptographischen Protokollen –, die alle versuchen, das Topologie-Dilemma zwischen starrer Sicherheit und flexibler Verfügbarkeit auf unterschiedliche Weise aufzulösen.
+
+\section{Chronik der bisherigen Forschung}
+
+Mixnetze haben sich im laufe der Zeit immer weiter entwickelt. Dabei verschob sich der Fokus immer mehr von der Anonymität auf die Fehlertoleranz um Mixnetze praktisch nutzbar zu machen. 
+
+\subsection{Der klassische Chaum'sche Mix}
+
+Der von David Chaum 1981 eingeführte Mix stellt das fundamentale Referenzmodell für anonyme Kommunikation dar und legte den Grundstein für alle nachfolgenden Mixnetz-Architekturen \cite{chaum1981untraceable}. 
+Das grundlegende Modell beschreibt einzelne Knoten, die eingehende Nachrichten sammeln, kryptografisch transformieren und in veränderter Reihenfolge wieder ausgeben, um die Korrelation zwischen Eingang und Ausgang zu verschleiern.
+
+Die ursprüngliche Mix-Strategie basiert auf der Verarbeitung von Nachrichten in Gruppen, sogenannten \textit{Batches}. In der klassischen Ausprägung als \textit{Threshold Mix} sammelt der Knoten $n$ eingehende Nachrichten, bis ein vordefinierter Schwellenwert (Threshold) erreicht ist. Erst wenn dieser Puffer vollständig gefüllt ist, erfolgt der Mischprozess:
+Entschlüsselung: Der Mix entfernt die äußerste Verschlüsselungsschicht jeder Nachricht mittels seines privaten Schlüssels.
+Replay-Schutz: Der Mix prüft, ob eine Nachricht bereits verarbeitet wurde. Doppelte Nachrichten werden strikt verworfen, um Replay-Angriffe zu verhindern, bei denen ein Angreifer eine abgefangene Nachricht erneut einspeist, um ihren Weg durch das Netz zu verfolgen \cite{chaum1981untraceable}.
+Umordnung: Die Nachrichten werden lexikographisch (oder zufällig) sortiert ausgegeben. Dies dient dazu, die zeitliche Reihenfolge des Eingangs vollständig von der des Ausgangs zu entkoppeln.
+
+Aus der Perspektive der Fehlertoleranz und Verfügbarkeit weist der klassische Chaum'sche Mix, insbesondere in der oft diskutierten Konfiguration als feste Kaskade (Mix-Kaskade), signifikante Schwächen auf. 
+Eine Mix-Kaskade besteht aus einer festen, sequenziellen Kette von Knoten. Diese Topologie bietet zwar deterministische Anonymitätsgarantien (solange ein einziger Knoten in der Kette ehrlich ist, bleibt die Anonymität gewahrt), ist jedoch extrem anfällig für Ausfälle. Jeder Knoten in der Kaskade stellt einen \textit{Single Point of Failure} dar. Fällt ein einzelner Mix aus oder verweigert die Weiterleitung (DoS), bricht die Kommunikation für alle Nutzer dieses Kanals vollständig zusammen. Es existiert in diesem starren Modell kein dynamisches Routing um defekte Knoten herum \cite{berthold2000disadvantages}.
+Weiterhin ist der oben genannte Mechanismus zum Verwerfen von Duplikaten sicherheitstechnisch essenziell, stellt jedoch ein Hindernis für einfache Zuverlässigkeitsmechanismen dar. Sendet ein Client eine identische Nachricht erneut, weil er vermutet, dass sie verloren ging (Retransmission), wird diese vom Mix als Replay-Angriff identifiziert und gelöscht. Fehlertoleranz auf Protokollebene erfordert daher zwingend, dass jede Sendewiederholung neu verschlüsselt wird, was die Komplexität Client seitig erhöht.
+Ein zentrales Problem des Threshold-Ansatzes ist die direkte Abhängigkeit der Nachrichtenverarbeitung vom Verkehrsaufkommen. Bei geringer Netzauslastung kann es vorkommen, dass der Schwellenwert für einen Batch über lange Zeit nicht erreicht wird. Dies führt zu extrem hohen Latenzen oder im schlimmsten Fall (bei Ausbleiben weiterer Nachrichten) zu einem faktischen Nachrichtenverlust, da der Batch niemals verarbeitet wird \cite{kesdogan1998stop}. Dieser Zustand, in dem das Netz zwar technisch intakt ist, aber keine Nachrichten ausliefert, stellt ein Versagen der Verfügbarkeit dar. 
+
+Um dieses Problem zu adressieren, wurden verschiedene Modifikationen der Batching-Strategie entwickelt, die jeweils eigene Kompromisse hinsichtlich der Fehlertoleranz mit sich bringen.
+In Timed Mixes warten die Knoten nicht auf das Füllen des Batches, sondern verarbeiten den Inhalt nach Ablauf eines Zeitintervalls $t$. Dies stabilisiert die Latenz und garantiert eine Obergrenze für die Verzögerung. Das Risiko hierbei ist jedoch, dass bei geringem Verkehr Batches mit sehr wenigen Nachrichten (im Extremfall $N=1$) verarbeitet werden, was die Anonymitätsmenge (Anonymity Set) drastisch reduziert und Timing-Angriffe erleichtert \cite{serjantov2002towards}.
+Hybride Strategien versuchen, eine Balance herzustellen, indem sie einen Batch verarbeiten, sobald \textit{entweder} der Schwellenwert erreicht ist \textit{oder} das Zeitintervall abläuft. Zwar verbessert dies die Verfügbarkeit bei niedrigem Verkehr im Vergleich zum reinen Threshold Mix, doch bleibt das fundamentale Problem bestehen: Um Anonymität zu wahren, müssten bei Timeout fehlende Nachrichten durch künstlichen Datenverkehr (\textit{Dummy Traffic}) aufgefüllt werden. Ohne diesen Mechanismus führt die Priorisierung der Fehlertoleranz direkt zu einer Schwächung der Anonymität.
+
+
+\subsection{Das Mixminion-Protokoll (Type III Remailer)}
+
+Mixminion stellt die dritte Generation von Remailer-Systemen dar und wurde entwickelt, um die Schwachstellen früherer Systeme wie Cypherpunk (Typ I) und Mixmaster (Typ II) zu adressieren. Während Typ-II-Remailer keine direkten Antworten auf anonyme Nachrichten ermöglichten, führt Mixminion Mechanismen für bidirektionale Kommunikation ein, ohne die Anonymität der Teilnehmer zu kompromittieren \cite{Danezis2003}. Im Gegensatz zu Systemen wie Loopix, die auf niedrige Latenz abzielen, ist Mixminion als \textit{High-Latency Mixnet} konzipiert, das Nachrichten in Batches verarbeitet, um zeitbasierte Korrelationsangriffe zu erschweren.
+
+Die Architektur von Mixminion basiert auf einer freien Topologie, die durch redundante Verzeichnis-Server (\textit{Directory Authorities}) verwaltet wird. Diese Server publizieren signierte Verzeichnisse, die den aktuellen Zustand des Netzs, einschließlich der öffentlichen Schlüssel und der Verfügbarkeit der Knoten, abbilden. Sender nutzen diese Informationen, um Pfade durch das Netz zu wählen (Source Routing).
+
+% Um die Länge des Pfades und die Position einer Nachricht innerhalb des Netzs zu verschleiern, implementiert Mixminion ein spezialisiertes Paketformat mit \textit{Header Swapping}. Ein Paket besteht aus zwei Headern und der Nutzlast. An einem vordefinierten Übergabepunkt (\textit{Crossover Point}) im Pfad wird der erste Header, der bis dahin für das Routing genutzt wurde, verworfen und durch den zweiten Header ersetzt. Dies stellt sicher, dass kompromittierte Mix-Knoten nicht erkennen können, ob sie sich am Anfang oder Ende einer Kette befinden, und verhindert, dass die Pfadlänge durch die Paketgröße abgeleitet werden kann \cite{Danezis2003}.
+
+Ein zentrales Innovationsmerkmal von Mixminion ist die Einführung von \textit{Single-Use Reply Blocks} (SURBs), um Antworten an anonyme Sender zu ermöglichen. Ein SURB ist eine kryptografische Struktur, die der Sender erstellt und dem Empfänger zur Verfügung stellt. Sie enthält den verschlüsselten Pfad zurück zum Sender sowie die notwendigen Schlüssel, um die Nachricht auf dem Rückweg zu chiffrieren. Der Empfänger kann diesen Block nutzen, um eine Antwort in das Netz einzuspeisen, ohne die Identität oder den Standort des ursprünglichen Senders zu kennen \cite{Danezis2003}. Da jeder SURB nur einmal verwendet werden darf, um Replay-Angriffe und Deanonymisierung durch Pfadverfolgung zu verhindern, muss das System Mechanismen bereitstellen, um die Wiederverwendung bereits genutzter Blöcke (Double-Spending) zu erkennen und abzuweisen.
+
+Ein wesentlicher Unterschied zu modernen Low-Latency-Netzen liegt im Umgang mit Fehlertoleranz und Nachrichtenzustellung. Mixminion implementiert es auf der Anwendungsebene Mechanismen zur Behandlung von Paketverlusten, die über einfache Sendewiederholungen hinausgehen.
+Um Nachrichten zu übertragen, die größer sind als die fixierte Paketgröße des Netzs (28 KB), zerlegt Mixminion die Nutzdaten in mehrere Fragmente. Dabei kommt ein \textit{K-of-N Erasure Code} (eine Form der Vorwärtsfehlerkorrektur) zum Einsatz. Eine Nachricht wird in $N$ Fragmente aufgeteilt, wobei bereits eine Teilmenge von $K$ Fragmenten ($K < N$) ausreicht, um die ursprüngliche Nachricht vollständig zu rekonstruieren \cite{Danezis2003}. 
+Dieser Ansatz erhöht die Robustheit des Systems gegenüber Ausfällen einzelner Mix-Knoten signifikant Die Fragmente werden typischerweise über verschiedene, disjunkte Pfade durch das Netz gesendet \textit{Pfad-Diversität}. Fällt ein Knoten oder ein ganzer Pfad aus, gehen lediglich einige Fragmente verloren. Solange mindestens $K$ Fragmente den Empfänger erreichen, ist keine erneute Anforderung von Daten nötig. Dies reduziert die Notwendigkeit für interaktive Bestätigungsprotokolle (ACKs), die in High-Latency-Netzen ineffizient wären und zusätzliche Metadaten erzeugen würden.
+Diese Strategie der \textit{redundanten Fragmentierung} stellt einen bewussten Trade-off dar: Die Netzlast wird durch die Redundanz ($N > K$) erhöht, um im Gegenzug eine hohe Zustellwahrscheinlichkeit in einer unzuverlässigen Umgebung ohne direkte Ende-zu-Ende-Verbindung zu garantieren.
+
+% \subsection{Free Route Mixe}
+% Da statische Mix-Kaskaden den Single Point of Failure Nachteil haben, wurden Mixnetze vorgestellt, bei denen die Route, die Pakete durch das Netz nehmen, frei gewählt werden kann. Diese freien Routen können entweder für jedes Paket einzeln oder für jede Verbindung neu definiert werden. Freie Routen ermöglichen die Fehlertoleranz gegenüber einem Ausfall einzelner Knoten zu erhöhen. [] Wird ein Pfad durch Ausfall eines Mixknotens gestört, kann der Client nach einem Timeout einen anderen Pfad wählen. Dies ermöglicht Clients außerdem Pfade zu wählen, in denen besonders fehlerbehaftete oder langsame Knoten vorkommen zu meiden, und so die Performanz des Netzes hinsichtlich Latenz und Bandbreite individuell zu optimieren. [] 
+\subsection{Web MIXes: Echtzeit-Anonymität durch Mix-Kaskaden}
+\label{sec:webmixes}
+
+Als Gegenentwurf zu den latenzintensiven Message-Mixen stellte Berthold et al. im Jahr 2000 das System \textit{Web MIXes} vor, welches die Grundlage für spätere Implementierungen wie JAP/JonDo bildete \cite{Berthold2000}. Das Ziel dieses Ansatzes ist es, starke Anonymität gegenüber einem globalen passiven Angreifer (GPA) mit den Echtzeitanforderungen des World Wide Web zu vereinbaren.
+Ähnlich zum Chaums Mixnetz verwendet Web MIXes eine feste Folge von Mix-Knoten, über die ihr gesamter Datenverkehr geleitet wird. 
+Um die Korrelation von Eingangs- und Ausgangsdatenströmen durch Timing-Analysen zu verhindern, implementiert das System einen synchronisierten Takt (\textit{Time Slices}).
+Der Datenstrom wird mittels eines \textit{Chop-and-Mix}-Verfahrens in Pakete fester Länge zerlegt. In jedem Zeitintervall verarbeitet jeder Mix genau ein Paket pro Nutzer. Sendet ein Nutzer in einem Intervall keine Nutzdaten, generiert der Client ein nicht unterscheidbares Dummy-Paket. Dies führt zu einem konstanten, verbindungsorientierten Datenstrom, der unabhängig vom tatsächlichen Surfverhalten ist und somit Verkehrsanalysen effektiv unterbindet.
+
+Das Angreifermodell geht davon aus, dass der Angreifer den gesamten Netzverkehr überwachen kann (GPA) und aktiv in die Übertragung eingreift, indem er Pakete verzögert, löscht oder modifiziert. Zudem dürfen bis zu $n-1$ Mixe der Kaskade mit dem Angreifer kolludieren. Die Sicherheit basiert auf der Annahme, dass mindestens ein ehrlicher Mix in der Kette verbleibt, der die Verlinkbarkeit der Nachrichten aufhebt. Durch die feste Kaskadenstruktur wird verhindert, dass ein Angreifer durch Beobachtung verschiedener Pfadkombinationen (Intersection Attacks) die Anonymitätsmenge schrittweise reduziert.
+
+Aus der Perspektive der Fehlertoleranz offenbart diese Architektur signifikante Einschränkungen, die dem Fokus auf maximale Anonymität geschuldet sind. Allen voran stellt die statische Kaskaden-Topologie einen Single Point of Failure dar, da der Ausfall eines einzelnen Knotens zum sofortigen Abbruch der gesamten Kommunikationskette führt. Ein dynamisches Rerouting ist nicht vorgesehen, da eine flexible Pfadwahl dem Angreifer Möglichkeiten zur statistischen Analyse (Route Selection Attacks) bieten würde. Zudem ist das System als Fail-Stop-Architektur konzipiert. Bei Erkennung aktiver Angriffe (z.\,B. Manipulation von Zeitscheiben) stoppt die Übertragung, anstatt den Fehler zu korrigieren. Dies verhindert effektiv, dass Fehlerbehandlungs-Mechanismen als Orakel (Side-Channel) missbraucht werden können, geht jedoch zu Lasten der Verfügbarkeit.
+Somit illustriert Web MIXes exemplarisch das Anonymitätstrilemma: Um starke Anonymität und niedrige Latenz (durch Kaskadenoptimierung) zu erreichen, wird die Verfügbarkeit und Fehlertoleranz weitgehend geopfert.
+Die theoretische Evaluation der Autoren zeigt, dass Web MIXes eine Anonymität bietet, die proportional zur Anzahl der parallelen Nutzer in der Kaskade ist. Simulationen belegen jedoch, dass der Preis für diesen Schutz hoch ist: Um Timing-Angriffe abzuwehren, muss die Bandbreite aller Nutzer auf das Niveau des langsamsten Teilnehmers gedrosselt werden. Zudem erzeugt der permanente Dummy-Traffic einen signifikanten Bandbreiten-Overhead, der besonders in Phasen geringer Netzauslastung ineffizient ist. Nach dem Anonymitätstrilemma wird hier also Anonymität für Bandbreite erkauft.
+
+\subsection{Loopix}
+% Die Idee covertraffic zu nutzen um auch bei niedrigem Verkehrsaufkommen mehr Entropie in Mixnetzen zu gewährleisten, wurde schon in verschiedenen Mixnetzen implementiert. [] 
+
+Das Loopix-Anonymitätssystem implementiert ein Konzept von sogenannten \textit{Loop-Nachrichten}, um die Widerstandsfähigkeit gegenüber Verkehrsanalysen zu erhöhen \cite{Piotrowska2017}. Hierbei generieren die Clients aktiv künstlichen Datenverkehr (\textit{Cover Traffic}), indem sie kryptografisch ununterscheidbare Dummy-Nachrichten in das Netz einspeisen. Diese Nachrichten werden nach einem Poisson-Prozess mit einer festen Rate versendet, was zu einem statistisch gleichmäßigen Datenstrom führt \cite{Piotrowska2017}.
+Einerseits senden Clients Nachrichten an sich selbst zurück (\textit{Client Loops}), um die Anwesenheit im Netz zu verschleiern. Andererseits generieren auch die Mix-Knoten selbst Loop-Nachrichten, um den Nachrichtenfluss innerhalb der Netztopologie zu glätten. Durch diese kontinuierliche Aussendung von Paketen wird der Sendezeitpunkt echter Nutzdaten entkoppelt. Für einen globalen Beobachter ist es dadurch schwierig zu differenzieren, ob ein Client eine tatsächliche Nachricht übermittelt oder lediglich Cover Traffic generiert \cite{Piotrowska2017}. Dies bietet einen effektiven Schutz gegen Timing-Angriffe und statistische Offenlegungsanalysen, da das Kommunikationsaufkommen unabhängig von der tatsächlichen Nutzeraktivität konstant erscheint.
+
+Über die Verschleierung der Nutzeraktivität hinaus dienen Loop-Nachrichten in der Loopix-Architektur als impliziter Mechanismus zur Netzdiagnose und Fehlererkennung. Da die Pfadwahl für diese Nachrichten vom Client selbst bestimmt wird und die Pakete nach dem Durchlaufen des Mixnetzes wieder beim Absender eintreffen sollten, fungieren sie als kontinuierliche Integritätsprüfung der gewählten Route. Das Ausbleiben zurückkehrender Loop-Pakete ermöglicht es dem Client, auf Instabilitäten oder den Ausfall einzelner Mix-Knoten zu schließen, ohne auf explizite Fehlermeldungen angewiesen zu sein. Diese Form der passiven Pfadüberwachung ist im Kontext der Fehlertoleranz von besonderer Bedeutung, da sie es erlaubt, unzuverlässige Knoten zu identifizieren und bei der zukünftigen Pfadwahl auszuschließen, ohne dabei zusätzliche Metadaten zu erzeugen, die für Verkehrsanalysen nutzbar wären.
+
+Die strukturelle Organisation der Mix-Knoten in Loopix folgt einer \textit{stratified Topologie}, bei welcher die Knoten in fest definierten Schichten (\textit{Layers}) angeordnet sind \cite{Piotrowska2017}. In dieser Architektur ist jeder Knoten einer spezifischen Schicht zugeordnet, wobei Nachrichten ausschließlich sequenziell von Schicht i zu Schicht i+1 weitergeleitet werden. In jeder Schicht operieren mehrere Mix-Knoten parallel. Da die Pfadwahl für jedes Paket individuell und randomisiert erfolgt, kann beim Ausfall eines einzelnen Knotens der nächste Pfad diesen einfach umgehen. Dieses \textit{Path Reestablishment} findet jedoch nicht auf der Netzebene statt; stattdessen muss der Client den Ausfall identifizieren, einen neuen Pfad wählen und verloren gegangene Pakete erneut senden.
+
+Ein wesentlicher Grund für die Unmöglichkeit eines dynamischen \textit{Reroutings} liegt im verwendeten \textit{Sphinx-Paketformat} \cite{Danezis2009}. Sphinx ist ein kompaktes und kryptografisch sicheres Mix-Format, das Source-Routing verwendet. Hierbei berechnet der Absender im Vorfeld den gesamten Pfad und kapselt die Routing-Informationen für jeden Hop in mehreren Schichten einer zustandslosen Verschlüsselung (\textit{Onion Routing}) \cite{Danezis2009}. Jeder Mix-Knoten kann nur die Information für den unmittelbar nächsten Hop entschlüsseln, besitzt jedoch keine Kenntnis über den restlichen Pfad oder die Identität des Absenders. Da die Integrität des gesamten Headers kryptografisch geschützt ist, würde jede nachträgliche Änderung des Pfades durch einen Zwischenknoten (dynamisches Rerouting) die Verifikation des Headers am nächsten Hop fehlschlagen lassen und zur Verwerfung des Pakets führen \cite{Danezis2009, Piotrowska2017}.
+
+%Loopix setzt auf UDP als Transportprotokoll. Damit garantiert das System die Zustellung von Nachrichten nicht nativ; es erfolgt im Netz keine automatische \textit{Packet Retransmission}. Diese findet erst auf der Anwendungsebene statt \cite{Piotrowska2017}. Damit vermeidet Loopix, dass protokollbedingte Bestätigungsnachrichten oder automatisierte Wiederholungsmechanismen die Anonymität durch verräterische Metadaten-Muster kompromittieren.
+
+Um die Kommunikation zwischen asynchron agierenden Teilnehmern zu ermöglichen, implementiert Loopix einen \textit{Store-and-Forward}-Mechanismus. Hierbei fungiert der Provider des Empfängers als Zwischenspeicher. Wenn eine Nachricht den letzten Mix-Knoten der Topologie verlässt, wird sie an den Ziel-Provider zugestellt und in einer dedizierten Mailbox vorgehalten, falls der Empfänger offline ist \cite{Piotrowska2017}. Ein wesentliches Merkmal dieses Mechanismus ist die Wahrung der Metadaten-Anonymität während des Abrufvorgangs. Clients rufen ihre Nachrichten nicht aktiv durch einen Request ab, sondern empfangen einen kontinuierlichen Strom von Paketen von ihrem Provider, sobald sie online sind. Dieser Strom besteht aus einer Mischung von echten gepufferten Nachrichten und vom Provider generierten Dummy-Paketen (\textit{Downstream Cover Traffic}) \cite{Piotrowska2017}. Da auch dieser Empfangsstrom einem Poisson-Prozess folgt, bleibt für einen externen Beobachter verborgen, zu welchem Zeitpunkt tatsächlich Nutzdaten aus der Mailbox übertragen wurden.
+
+
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+\section{Grundlegende Architekturen und das Topologie-Dilemma}
+\label{sec:architekturen_topologie}
+
+Die Chronik in Kapitel~\ref{sec:chronik_der_bisherigen_forschung} hat gezeigt, dass sich Mixnetze historisch entlang sehr unterschiedlicher Ziele entwickelt haben. Von klassischen Message-Mixen über High-Latency-Ansätze bis hin zu Echtzeit-Systemen. Jede dieser Ansätze erfüllt eine spezifische Gewichtung im Anonymitätstrilemma. Grob lassen sich diese Ansätze jedoch in zwei grundlegende Architekturen einteilen: \textit{Statische Kaskaden} und \textit{Freies Routing}. 
+
+\subsection{Statische Kaskaden: Sicherheit durch Starrheit}
+
+Diese Starrheit ist im Kaskadenmodell keine „fehlende Funktion“, sondern ein Sicherheitsprinzip. Unter dem Angreifermodell eines globalen Beobachters wird Anonymität dadurch erreicht, dass sich Nutzerdatenströme in einer gemeinsamen, synchronisierten Verarbeitungsschicht überlagern. Die Anonymitätsmenge ergibt sich dann primär aus der Anzahl der gleichzeitig aktiven Nutzer innerhalb der Kaskade und bleibt über die Zeit stabil, solange der Betrieb konsistent ist.
+
+Aus Sicht der Fehlertoleranz ist die Konsequenz jedoch klar. Die Kaskade ist inhärent. Fällt ein einzelner Knoten aus (oder verweigert die Weiterleitung), ist der Dienst als Ganzes unterbrochen. Mechanismen wie transparentes Rerouting oder „Hot Swapping“ eines Mixes würden die deterministische Struktur aufbrechen und damit messbare Seiteneffekte erzeugen, wie beispielsweise veränderte Laufzeiten oder wechselnde Pfadmengen, die ein Angreifer als Orakel ausnutzen kann. In diesem Sinne ist die geringe Verfügbarkeit nicht nur ein Nebenprodukt, sondern Teil des Sicherheits-Trade-offs, den Kaskaden explizit eingehen.
+In Kaskaden ist Fehlertoleranz vor allem betriebsorganisatorisch (Redundanz auf Ebene ganzer Kaskaden, Wartungsfenster, konservatives Fail-Stop) und nur sehr begrenzt protokollseitig möglich, ohne Anonymitätseigenschaften zu schwächen.
+
+\subsection{Freies Routing: Verfügbarkeit durch Adaptivität}
+Im Gegenpol dazu steht \textit{Free Routing}, bei dem Clients Pfade dynamisch über eine Menge verfügbarer Mix-Knoten wählen \cite{Berthold2000FreeRoutes}. Der naheliegende Vorteil ist Robustheit gegenüber Ausfällen: wenn einzelne Knoten unzuverlässig sind, kann der Sender alternative Routen wählen, und das Netz bleibt trotz partieller Störungen nutzbar. Fehlertoleranz entsteht hier also primär durch \textit{Pfaddiversität} und durch die Möglichkeit, problematische Knoten zu umgehen.
+
+Diese Adaptivität kollidiert jedoch schnell mit den Anforderungen an Unbeobachtbarkeit. Sobald Pfadwahl, Wiederholungen oder Fehlerbehandlung vom beobachtbaren Verhalten abhängen, entstehen statistische Signale. Berthold et al. argumentieren, dass insbesondere langandauernde Beobachtung bei freien Routen Intersection-Angriffe begünstigt, weil unterschiedliche Pfadentscheidungen über die Zeit Informationen über Kommunikationsbeziehungen akkumulieren \cite{Berthold2000FreeRoutes}. Hinzu kommt, dass Zuverlässigkeitsmechanismen wie Retransmissions und ACK-basierte Bestätigungen zwar Zustellung verbessern, aber zugleich zusätzliche Nachrichtenmuster erzeugen, die für Korrelationsangriffe nutzbar sind.
+
+Ein weiterer struktureller Punkt ist, dass moderne Mix-Formate typischerweise Source-Routing mit kryptografisch geschütztem Header verwenden, wodurch innerhalb des Netzes kein transparentes, anonymitätserhaltendes Rerouting möglich ist: jede nachträgliche Pfadänderung verletzt die Header-Integrität und führt zur Verwerfung \cite{Danezis2009}. 
+
+Damit ergibt sich das Kernproblem des Free Routing. Es bietet bessere Verfügbarkeit als Kaskaden, jedoch zum Preis zusätzlicher Freiheitsgrade, die ein Angreifer statistisch auswerten kann. Fehlertoleranzmechanismen müssen daher so gestaltet werden, dass sie möglichst keine neuen, beobachtbaren Kontrollsignale erzeugen. Genau hier setzen die nachfolgenden Mechanismen an.
+
+\subsection{Zusammenfassung und Implikation}
+Die beiden Grundarchitekturen verdeutlichen das \textit{Topologie-Dilemma}: Statische Kaskaden erreichen starke Anonymität durch uniforme, deterministische Verarbeitung, sind aber als System fragil (Single Point of Failure und fail-stop). Freies Routing erhöht die Verfügbarkeit durch Pfaddiversität, öffnet jedoch die Tür für Intersection- und Route-Selection-Effekte sowie für Metadatenlecks über Fehlerbehandlung. Die folgenden Ansätze versuchen, diese Topologie-Dilemma zu lösen. Dabei wird in Festen Kaskaden häufig auf Redundanz der Nachricht selbst gesetzt, während beim Free Routing auf Redundanz in der Pfadwahl gesetzt wird um Ausfälle zu mitigieren.
+
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+
+\section{Redundanz durch Vervielfältigung: Multi-Path-Ansätze}
+\label{sec:multipath_redundanz}
+
+Als Antwort auf die Anfälligkeit einzelner Pfade in Mixnetzen wurden Ansätze entwickelt, die nicht auf der Ebene der Netztopologie, sondern auf der Ebene der Nachrichtenübertragung ansetzen. Die Grundidee ist simpel: Wenn die Wahrscheinlichkeit hoch ist, dass ein einzelner Pfad ausfällt, wird die Nachricht oder Teile davon über mehrere, disjunkte Pfade (Multi-Path) gesendet.
+
+Prominente Vertreter dieser Strategie sind die von Iwanik et al. vorgestellten Konzepte der \textit{DUO-Onions} und \textit{Hydra-Onions} \cite{Iwanik2005Hydra} sowie das SimEra-System \cite{erasure-coding}. Sie illustrieren den klassischen Trade-off zwischen Verfügbarkeit und Effizienz.
+
+%----------------------------------------------------------------
+\subsection{Konzept: Hydra- und DUO-Onions}
+Anstatt sich auf das Überleben eines einzelnen Zwiebel-Pakets (Onion) auf einem einzigen Pfad zu verlassen, schlagen die Autoren Protokolle vor, die durch kontrollierte Redundanz und alternative Routenführung die Robustheit gegen Ausfälle und Angriffe erhöhen.
+
+Das zugrundeliegende Konzept unterscheidet je nach Problemstellung zwischen zwei Ansätzen: DUO-Onions und Hydra-Onions.
+
+DUO-Onions (und K-Onions) dienen dem Schutz vor zufälligen Knotenausfällen. Anstatt das Paket zu vervielfältigen, kodiert das Onion an jedem Hop alternative Ausweichrouten. Ein Knoten $J_i$ verfügt somit über zwei (oder $k$) verschlüsselte Optionen für den nächsten Hop. Ist der primäre Knoten nicht erreichbar, wird der alternative Knoten gewählt. Es handelt sich hierbei primär um eine alternative Pfadwahl und nicht um paralleles Fluten.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pic/systems/duoonions.png}
+    \caption{DUO-Onion}
+    \label{fig:duoonion}
+\end{figure}
+
+Im Gegensatz dazu schützen Hydra-Onions vor aktiven Angreifern. Hier wird eine Nachricht tatsächlich als Strom von $K$ parallelen Onions gesendet. Um die Zerstörung einzelner Pakete durch den Angreifer zu kompensieren, sendet jeder Knoten das Paket an zwei Nachfolger (den geplanten und einen zufälligen), wodurch sich der Strom "regeneriert" (Self-Recovery), solange mindestens eine Kopie überlebt.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pic/systems/hydraonions.png}
+    \caption{Hydra-Onion}
+    \label{fig:hydraonion}
+\end{figure}
+
+Das Angreifermodell betrachtet zwei Szenarien: Zum einen einen passiven Angreifer oder zufällige Netzausfälle, die durch DUO-Onions adressiert werden. Zum anderen wird ein aktiver, adaptiver Angreifer angenommen, gegen den Hydra-Onions eingesetzt werden. Dieser kann einen konstanten Bruchteil der Leitungen überwachen und basierend auf Verkehrsanalysen gezielt alle ausgehenden Nachrichten bestimmter Server blockieren ("kill"), um die Kommunikation zu unterbrechen. Es wird jedoch angenommen, dass er nicht das gesamte Netz kontrolliert.
+
+Die Bewertung der Anonymität zeigt für DUO-Onions, dass sich das Protokoll für einen externen Beobachter identisch zum klassischen Onion-Routing verhält, weshalb bestehende Sicherheitsbeweise (Unlinkability) weiterhin gelten. Bei Hydra-Onions sind sich die Autoren der Gefahr der Traffic-Analyse bewusst. Sie nutzen jedoch "spärliche Kommunikation" (sparse communication) und zufällige Graphen-Eigenschaften, um Muster zu verschleiern. Die Sicherheit beruht auf sogenannten Crossover-Strukturen: Wenn sich Pfade im Netz kreuzen, verliert der Angreifer die Zuordnung (Linkability) zwischen Sender und Empfänger, selbst wenn er Teile des Pfades kennt.
+
+Zusammenfassend erhöhen diese Multi-Pfad- und Redundanz-Ansätze die Zustellwahrscheinlichkeit drastisch, selbst wenn ein signifikanter Teil der Knoten (z.\,B. 30 \%) ausfällt. Der Bandbreiten-Overhead verhält sich linear zu $K$, aber da bereits sehr kleine Werte (z.\,B. $K=2$ oder $K=3$) ausreichen, um eine hohe Zuverlässigkeit zu erreichen, wird das Verfahren als effizient angesehen. Die Autoren folgern, dass die Anonymität nicht sinkt, sondern zeigen, dass durch Mechanismen wie Crossovers und alternative Routenwahl die Robustheit erhöht werden kann, ohne die Privatsphäre gegenüber dem definierten Angreifermodell zu opfern.
+
+%----------------------------------------------------------------
+\subsection{Erasure} 
+\label{sec:erasure} 
+
+Das im Paper vorgestellte System SimEra zielt darauf ab, die Fragilität anonymer Routing-Pfade in Peer-to-Peer-Netzen zu überwinden, die durch die hohe Fluktuation von Knoten (Churn) entsteht. Das Konzept stützt sich dabei auf zwei Hauptsäulen:
+
+Erstens wird Erasure Coding in Kombination mit Pfad-Redundanz eingesetzt. Anstatt eine Nachricht einfach zu replizieren, wird sie in $n$ Segmente aufgeteilt, wobei bereits eine Teilmenge von $m$ Segmenten ($m < n$) zur Rekonstruktion genügt. Diese Segmente werden über $k$ disjunkte Pfade zum Empfänger gesendet, wodurch das System den Ausfall von bis zu $k(1 - 1/r)$ Pfaden toleriert.
+Zweitens nutzt das System eine Biased Mix Choice zur Erhöhung der Pfadstabilität. Da Knotenlaufzeiten oft einer Pareto-Verteilung folgen, werden Relay-Knoten nicht zufällig, sondern basierend auf einer Vorhersage ihrer Lebensdauer ausgewählt ("Liveness Predictor").
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pic/systems/erasure.png}
+    \caption{SimEra}
+    \label{fig:erasure}
+\end{figure}
+
+Die Sicherheitsanalyse geht von einem starken Angreifer aus, der einen Bruchteil $f$ aller Knoten im Netz kontrolliert und kompromittiert hat. Diese bösartigen Knoten kolludieren und tauschen Informationen ohne Latenz aus. Zwar wird angenommen, dass der Angreifer Teile des globalen Verkehrs beobachten kann, jedoch bleibt die Public-Key-Infrastruktur intakt.
+
+Hinsichtlich der Anonymität bietet das System eine Sender-Anonymität basierend auf dem Prinzip des Onion Routings. Die Kritik, dass $k$ parallele Pfade die Angriffsfläche für statistische Analysen erhöhen, wird durch generierten "Cover Traffic" mitigiert. Die Anonymität des Systems hängt maßgeblich davon ab, ob der erste Relay-Knoten im Pfad vertrauenswürdig ist. Ist der erste Hop ehrlich, weiß der Angreifer nicht, wer der wahre Sender ist, und muss ihn aus der Menge der möglichen Nutzer erraten. Die Wahrscheinlichkeit, den Sender korrekt zu identifizieren, skaliert dabei mit der Anzahl der ehrlichen Nutzer im Netz $\frac{1}{N(1-f)}$, wobei $N$ die Gesamtzahl der Nutzer und $f$ der Anteil korrumpierter Knoten ist.
+Eine zentrale Schlussfolgerung der Evaluation ist, dass der Einsatz von Erasure Coding in Kombination mit einer auf Lebensdauer basierten Knotenauswahl die Ausfallsicherheit drastisch erhöht, ohne die Bandbreite so stark zu belasten wie einfache Replikation. Besonders die Biased Mix Choice steigert die Erfolgsrate beim Pfadaufbau signifikant, weshalb dieser Ansatz P2P-Netze zu einer praktikablen Umgebung für anonyme Kommunikation macht.
+
+
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+\section{Kryptographische Resilienz und Self-Healing in dynamischen Netzen}
+\label{sec:crypto_resilience}
+
+Während strukturelle Ansätze wie Multi-Path-Routing versuchen, Ausfälle durch externe Redundanz zu kompensieren, verfolgt eine fortschrittlichere Klasse von Mechanismen das Ziel, die Widerstandsfähigkeit direkt in das kryptographische Protokoll zu integrieren. Insbesondere in hochdynamischen Peer-to-Peer-Umgebungen, die durch eine hohe Fluktuation von Knoten (Churn) geprägt sind, stoßen starre Routing-Konzepte an ihre Grenzen. Dieses Kapitel untersucht Ansätze, die Fehlertoleranz nicht als Routing-Problem, sondern als kryptographische Herausforderung begreifen. Im Fokus stehen dabei Verfahren wie das Resilient P2P Anonymous Routing und Poly Onions, die Mechanismen wie Re-Encryption und Threshold-Kryptographie nutzen, um Pfade „selbstheilend“ (self-healing) zu gestalten. Es wird analysiert, wie diese Systeme die Abhängigkeit von spezifischen Knoten auflösen und welche Kompromisse sie hinsichtlich der Rechenkomplexität und der theoretischen Anonymitätsgarantien eingehen.
+
+\subsection{Dynamische Reparatur durch Re-Encryption}
+Luo et al. erweitern in ihrer Arbeit \cite{Luo2002Resilient} das klassische Onion-Routing um einen Mechanismus, der es Zwischenknoten erlaubt, den Pfad lokal zu reparieren, ohne dass der Absender eingreifen muss.
+Das von den Autoren vorgeschlagene System ruht auf zwei Hauptpfeilern: Prävention durch Anreize und Reaktion durch kryptografische Reparatur. Anstatt Knoten zufällig zu wählen, nutzt das System ebenfalls eine "voreingenommene Auswahl" (Biased Mix Choice), wie bereits in Abschnitt \ref{sec:erasure} beschrieben.
+Das zweite Prinzip ist die kryptografische Reparatur (Re-encryption). Alle Knoten überwachen die Verbindung zu ihren direkten Nachbarn und generieren proaktiv Re-Encryption-Schlüssel. Diese ermöglichen es dem Knoten, ein Paket so umzuverschlüsseln, dass im Falle des Ausfalls eines Nachfolgeknotens ein alternativer Backup-Knoten einspringen und die Nachricht korrekt weiterverarbeiten kann.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pic/systems/reencryption.png}
+    \caption{Re-Encryption}
+    \label{fig:reencryption}
+\end{figure}
+
+Das Angreifermodell geht von einem Angreifer aus, der einen Teil der Knoten kontrolliert, die zusammenarbeiten können, und der Teile des Netzverkehrs beobachtet. Die Biased Mix Choice wird dabei als Schwachstelle erkannt, da Angreifer, die bestimmte Mixknoten kontrollieren, durch gute Leistung mehr Traffic auf sich ziehen und länger im System verweilen könnten.
+
+Die Bewertung der Anonymität in der \"Security Analysis \" beschränkt sich auf die Analyse nach Wang et al. und berechnet die Wahrscheinlichkeit, dass der direkte Vorgänger eines bösartigen Knotens der Initiator ist \cite{Wang2004}. Auf weitere Angriffsmöglichkeiten, wie beispielsweise Verkehrsanalysen oder den Missbrauch der Re-Encryption durch bösartige Knoten, gehen die Autoren nicht detailliert ein. Inwieweit diese Fehlertoleranzmechanismen die Anonymität der Nutzer tatsächlich beeinflussen, bleibt daher Gegenstand weiterer Forschung.
+
+%----------------------------------------------------------------
+\subsection{Poly Onions: Threshold-Kryptographie gegen Churn}
+Ando et al. stellen das Konzept der \"Poly Onions\" vor, um Onion Routing formal in Netzen zu behandeln, in denen Knoten häufig beitreten oder das Netz verlassen (\"Churn\"). \cite{Ando2004PolyOnions} Sie lösen das Problem, dass herkömmliche Protokolle über mehrere Durchläufe hinweg (\"Multi-Run\") bei hoher Fluktuation entweder keine Nachrichten zustellen oder ihre Anonymität verlieren .
+
+Das grundlegende Konzept ändert die Art der Verschlüsselung: Anstatt eine Zwiebelschicht für eine Gruppe gleichberechtigter Knoten zu verschlüsseln, wählt der Sender für jeden Hop eine geordnete Liste von Kandidaten sowie eine Gruppe von Helfern (Komitee). Der aktuelle Knoten versucht, das Onion an den bevorzugten Kandidaten $P^+$ zu senden. Nur wenn dieser offline ist, kontaktiert er die Helfer. Diese nutzen Secret Sharing, um die Umwandlung des Onions für den alternativen Kandidaten $P^-$ zu ermöglichen, sofern sie verifizieren können, dass $P^+$ tatsächlich offline ist. Dies garantiert die Zustellung auch bei Ausfällen. 
+%TODO: P+ und P- kommen aus dem paper, hier sollte man noch auf die Mixnodes in der Grafik verweisen
+%TODO: erklären auf welchem mathematischen Grundlagen die Umwandlung durch die Helfer basiert. unbedingt auch Referenz einbauen
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pic/systems/polyonions.png}
+    \caption{Poly Onions}
+    \label{fig:polyonions}
+\end{figure}
+
+Im Angreifermodell wird explizit der Network Churn berücksichtigt und dem Angreifer sogar erlaubt, den Churn Schedule zu kontrollieren, solange ein gewisses Limit nicht überschritten wird. Der Angreifer kann den gesamten Netzverkehr beobachten und zusätzlich eine Fraktion der Knoten korrumpieren.
+
+Hinsichtlich der Anonymität führen die Autoren eine neue Definition für Multi-Run Anonymity ein. Sie beweisen mathematisch, dass einfachere Lösungen unsicher sind, da ein Angreifer durch gezielte Auswahl korrumpierter Pfade Onions verfolgen kann. Poly Onions verhindern dies durch die Helfer-Komitees: Ein korrumpierter Knoten kann nicht eigenmächtig auf einen korrumpierten Pfad wechseln. Das Protokoll basiert auf Shamirs Secret Sharing Schema \cite{Shamir1979}, um sicherzustellen, dass nur eine ausreichende Anzahl von Helfern gemeinsam die Umleitung autorisieren kann. Das Protokoll erreicht somit Strong Adaptive Multi-Run Anonymity.
+Strong Adaptive Multi-Run Anonymity garantiert Anonymität auch gegenüber einem adaptiven Angreifer, der das System über mehrere Runden und unter Einfluss von Churn beobachtet.
+
+Zusammenfassend stellen Poly Onions die erste formale Konstruktion dar, die Anonymität und Zustellsicherheit in dynamischen Netzen beweisbar garantiert. Der erhöhte Kommunikationsaufwand durch die Helfer ist dabei notwendig, um aktive Angriffe zu verhindern, die bei simpleren Ansätzen die Anonymität brechen würden.
+
+
+
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+
+\section{Entkopplung von Knoten und Pfaden}
+\label{sec:gruppenbasiertes_routing}
+
+%----------------------------------------------------------------
+\subsection{SurePath}
+\label{sec:surepath}
+
+SurePath ist ein Ansatz für anonymes Routing in strukturierten Peer-to-Peer-Netzen. Das Kernziel ist die Entkopplung von anonymen Tunneln und physischen Knoten, um eine hohe Ausfallsicherheit in dynamischen Netzen zu gewährleisten. Anstatt einen Tunnel über feste IP-Adressen aufzubauen, nutzt SurePath eine Sequenz von virtuellen "Relay Sets". Der Initiator erzeugt kryptographische Anker (Relay Set Anchors - RSA) und lädt diese in die Distributed Hash Table (DHT) hoch, wo sie auf $k$ Knoten repliziert werden. Der Knoten, dessen ID der \texttt{rsetId} am nächsten ist, agiert als aktiver Agent. Fällt dieser aus, übernimmt automatisch einer der Backup-Knoten.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pic/systems/tap.png}
+    \caption{SurePath}
+    \label{fig:tap}
+\end{figure}
+
+Das System geht von internen, kolludierenden Angreifern aus, die einen Bruchteil der Knoten im Netz kontrollieren. Ein globaler, passiver Beobachter wird hingegen als unrealistisch betrachtet. Die Bedrohungen umfassen Kollusion, bei der böswillige Knoten Informationen austauschen, sowie das sogenannte RSA Harvesting. Hierbei versuchen Angreifer, die Teil eines Replica Sets sind, möglichst viele RSAs zu sammeln, um Tunnel vollständig zu entschlüsseln.
+
+Die Analyse der Anonymität offenbart einen fundamentalen Trade-off: Ein höherer Replikationsfaktor $k$ erhöht zwar die Fehlertoleranz massiv, senkt jedoch die Anonymität, da mehr Knoten Zugriff auf die Schlüssel haben. Zudem nimmt in dynamischen Netzen die Anonymität "alter" Tunnel rapide ab, da böswillige Knoten zufällig in Replica Sets rotieren können. Nutzer müssen ihre Tunnel daher periodisch erneuern ("Tunnel Refreshing").
+
+SurePath adressiert erfolgreich die Fragilität herkömmlicher anonymer Pfade in instabilen P2P-Umgebungen. Durch die Nutzung der DHT-Infrastruktur zur Replikation von Routing-Informationen wird eine hohe Robustheit gegenüber Knotenausfällen erreicht. Dies wird jedoch mit einer vergrößerten Angriffsfläche erkauft, da Routing-Geheimnisse an mehrere Knoten verteilt werden müssen. Das System bietet somit eine pragmatische Balance zwischen Funktionalität und Sicherheit, erfordert jedoch ein aktives Tunnel-Management.
+
+%----------------------------------------------------------------
+\subsection{TAP}
+\label{sec:tap}
+
+TAP richtet sich als Tunneling Approach for Anonymity gegen die Instabilität von Anonymisierungstunneln in hochdynamischen P2P-Netzen. Das Kernkonzept besteht in der Entkopplung des Tunnels von festen physischen Knoten. Anstatt eine feste Route über IP-Adressen zu definieren, besteht ein Tunnel aus einer Sequenz von logischen Tunnel Hops. Jeder Hop wird durch einen Tunnel Hop Anchor (THA) repräsentiert, der im DHT gespeichert und dort auf $k$ Knoten repliziert wird. Fällt der primäre Knoten (der nächste zur ID) aus, übernimmt automatisch ein Replikat-Knoten das Routing.
+
+Das Angreifermodell unterscheidet verschiedene Typen, wobei kolludierende bösartige Knoten als Hauptbedrohung identifiziert werden. Da THAs repliziert werden, steigt die Gefahr, dass bösartige Knoten Teil des Replica-Sets sind und Zugriff auf Schlüssel erhalten. Wenn Angreifer genügend THAs sammeln, können sie versuchen, die Anonymität durch Timing-Analysen zu brechen. Ein globaler Beobachter wird hingegen als unrealistisch eingestuft.
+
+In der Bewertung der Anonymität geht TAP explizit einen Kompromiss ein: Ein höherer Replikationsfaktor $k$ erhöht die Fehlertoleranz, verringert aber die Anonymität. Zudem können in dynamischen Netzen Tunnel mit der Zeit kompromittiert werden, wenn bösartige Knoten THAs sammeln.
+
+Als Schlussfolgerung liefert TAP einen effektiven Lösungsansatz für das Funktionalitätsproblem. Es beweist in Simulationen eine extrem hohe Fehlertoleranz gegenüber Knotenausfällen. Zwar führt das DHT-basierte Routing zu Latenzproblemen, diese können jedoch durch Performance-Optimierungen fast vollständig eliminiert werden. Abschließend wird empfohlen, dass Nutzer ihre Tunnel regelmäßig neu aufbauen, um das Risiko durch kolludierende Knoten zu minimieren. TAP wird somit als Balanceakt zwischen Verfügbarkeit und Anonymität bewertet.
+
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+
+\section{Gruppenbasierte Ansätze}
+\label{sec:gruppenbasierte_ansaetze}
+
+%----------------------------------------------------------------
+\subsection{Hybrid-Routing}
+\label{sec:hybrid-routing}
+
+Das in \cite{xia2020hybrid} vorgestellte Hybrid-Routing-Verfahren adressiert das Problem der geringen Ausfallsicherheit (Resilienz) in klassischen Onion-Mixnetzen. Es kombiniert verschiedene Routing-Strategien und kryptographische Verfahren, um Paketverluste durch Knotenausfälle zu minimieren, ohne die Anonymität zu gefährden.
+
+Dieses Hybrid-Routing-Verfahren kombiniert verschiedene Routing-Strategien, um Paketverluste zu minimieren. Der Kernansatz ist die Kombination von Source Routing (zwischen Gruppen) und Hop-by-Hop Routing (innerhalb von Gruppen). Auf der oberen Ebene wählt der Sender eine feste Route von Gruppen. Innerhalb einer Gruppe leiten die Knoten das Paket dynamisch an verfügbare Nachbarn weiter, um ausgefallene Knoten zu umgehen. Eine zentrale Neuerung ist das Threshold Hybrid Routing (T-Hybrid). Anstatt einen privaten Gruppenschlüssel an alle Mitglieder zu verteilen, wird Threshold Public Key Encryption (TPKE) eingesetzt. Ein Paket kann nur entschlüsselt werden, wenn eine definierte Anzahl von Knoten ihre individuellen Entschlüsselungs-Anteile beigesteuert hat.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pic/systems/hybridrouting.png}
+    \caption{Hybrid-Routing}
+    \label{fig:hybrid-routing}
+\end{figure}
+
+Das Angreifermodell betrachtet sowohl einen globalen passiven Angreifer (GPA) als auch aktive Angreifer. Zudem wird davon ausgegangen, dass Mix-Knoten durch DoS-Angriffe oder Churn ausfallen. Der Angreifer kann eine bestimmte Anzahl von Knoten pro Gruppe kompromittieren, jedoch nicht genügend, um den Schwellenwert zu überschreiten.
+
+In der Bewertung der Anonymität zielt das System darauf ab, die starke Anonymität von Onion-Mixnetzen beizubehalten. Da Inter-Group-Routing weiterhin Source Routing verwendet, wird die Gefahr von Route Capture Attacks minimiert. Durch den Einsatz von TPKE wird das Schlüsselmanagement massiv verbessert, da die Kompromittierung eines Einzelknotens nicht die gesamte Gruppe gefährdet.
+
+Die Evaluation zeigt, dass T-Hybrid-Routing die Resilienz signifikant erhöht. Der Preis für diese Robustheit ist eine erhöhte Latenz durch komplexere Krypto-Operationen, was jedoch von den Autoren als akzeptabler Trade-off bewertet wird.
+
+%----------------------------------------------------------------
+\subsection{CAT}
+\label{sec:cat}
+
+Dieses Protokoll adressiert das Problem der geringen Ausfallsicherheit durch einen neuartigen Tunneling-Ansatz. Anstatt eine fixe Sequenz von Relay-Knoten zu wählen, wählt der Initiator eine Sequenz von Relay-Gruppen. Durch einen Probing-Prozess wird ein virtueller Tunnel aufgebaut. Das Kernstück ist die Verwendung von kommutativer Verschlüsselung: Da die Reihenfolge der Entschlüsselung vertauschbar ist, kann das Paket flexibel verschiedene Routen innerhalb des Tunnels nehmen. Fällt ein Knoten aus, führt das System lokal ein Path Hopping auf einen Backup-Pfad durch.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pic/systems/cat.png}
+    \caption{CAT}
+    \label{fig:cat}
+\end{figure}
+
+Das Angreifermodell geht von einem starken Angreifer aus, der einen Teil der Relay-Server kontrolliert. Ein spezifischer Fokus liegt auf der Predecessor Attack: Hierbei protokolliert ein kompromittierter Knoten, von welchem Vorgänger er Nachrichten erhält. Zudem wird das Risiko betrachtet, dass ein Angreifer versucht, Knoten in alle Relay-Gruppen einzuschleusen, um alle privaten Gruppenschlüssel zu erlangen.
+
+Hinsichtlich der Anonymitätsbewertung zeigt sich, dass CAT eine hohe Sender-Anonymität ("Probable Innocence") gewährleistet. Besonders hervorgehoben wird die Resistenz gegen die Predecessor Attack: Da bei Knotenausfällen der Pfad nicht komplett neu aufgebaut wird, sondern lokal "gehüpft" wird, erhält der Angreifer über die Zeit weniger korrelierbare Informationen.
+
+Als Schlussfolgerung bietet CAT eine innovative Lösung für Node Failures. Die Kosten für Latenz und Verschlüsselung bewegen sich dabei im Rahmen vergleichbarer node-basierter Systeme. Eine identifizierte Schwachstelle ist das Management der Gruppenschlüssel, weshalb Gegenmaßnahmen wie Membership Refreshing essenziell sind.
+
+%----------------------------------------------------------------
+\subsection{Cashmere}
+\label{sec:cashmere}
+
+Cashmere ist ein resilientes, anonymes Routing-Protokoll für strukturierte P2P-Netze, das das Konzept der Relay Groups einführt. Eine Relay Group besteht aus allen Knoten, die ein gemeinsames ID-Präfix teilen. Das Routing funktioniert durch eine Kombination aus Anycast an die Gruppe und anschließendem Broadcast innerhalb der Gruppe. Ein zentrales Merkmal ist dabei die Entkopplung von Pfadinformation und Nutzlast.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pic/systems/cashmere.png}
+    \caption{Cashmere}
+    \label{fig:cashmere}
+\end{figure}
+
+Die Sicherheitsanalyse geht von einem starken Angreifer aus, der einen Bruchteil aller Knoten kontrolliert und kolludiert. Zudem wird ein globaler passiver Angreifer in Betracht gezogen. Das Paper analysiert auch die Widerstandsfähigkeit gegen Traffic Analysis.
+
+Die Bewertung der Anonymität mittels einer Entropie-basierten Metrik zeigt, dass Cashmere ein Niveau bietet, das mit traditionellen Chaum-Mixes vergleichbar ist. Ein wesentlicher Vorteil ist die Resistenz gegen Degradation Attacks, da Cashmere-Pfade extrem langlebig sind.
+
+Als Fazit löst Cashmere das Problem der Fragilität in anonymen P2P-Netzen effektiv. Durch den Einsatz von Relay Groups erreicht das System eine um Größenordnungen höhere Resilienz gegenüber Knotenausfällen. Der Preis für diese Robustheit ist ein erhöhter Bandbreitenbedarf durch den Broadcast.
+
+%----------------------------------------------------------------
+%----------------------------------------------------------------
+\section{Zusammenfassende Bewertung und Fazit}
+\label{sec:analyse_fazit}
+
+% Die Analyse der vorgestellten Arbeiten (siehe Tabelle \ref{tab:vergleich_fehlertoleranz}) offenbart eine klare Entwicklungslinie in der Forschung zur Fehlertoleranz von Anonymisierungsdiensten.
+
+Während statische Ansätze (Kaskaden) die höchste theoretische Anonymität bieten, scheitern sie in der Praxis oft an mangelnder Flexibilität und Angriffsresistenz. Multi-Path-Ansätze wie Hydra oder DUO erkaufen sich ihre Verfügbarkeit durch erhöhten Bandbreitenbedarf und schwächen dabei potenziell die Anonymität durch eine vergrößerte Angriffsfläche. Den aktuellen Stand der Technik markieren schließlich gruppenbasierte und kryptographische Ansätze (z.\,B. TAP, Poly Onions), die eine Entkopplung der logischen Route von der physischen Infrastruktur anstreben und damit Robustheit und Sicherheit besser in Einklang bringen.
+
+Es lässt sich schlussfolgern, dass Fehlertoleranz in Anonymitätsnetzen nicht "kostenlos" ist. Jeder Mechanismus, der Fehler maskiert oder umgeht, erzeugt zwangsläufig zusätzliche Metadaten (sei es durch mehr Pakete, Gruppenkommunikation oder verändertes Timing). Die zentrale Herausforderung besteht nicht mehr darin, Fehler \textit{irgendwie} zu tolerieren, sondern die Mechanismen der Toleranz so zu gestalten, dass sie von einem globalen Beobachter nicht von regulärem Netzrauschen unterschieden werden können.
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{3cm}|p{3cm}|p{4cm}|p{4cm}|}
+    \hline
+    \textbf{Ansatz} & \textbf{Vertreter} & \textbf{Fehlertoleranz-Mechanismus} & \textbf{Auswirkung auf Anonymität} \\
+    \hline
+    Kaskaden & Web MIXes & Keine (Fail-Stop) & Hoch (k-Anonymität), aber n-1 anfällig \\
+    \hline
+    Multi-Path & Hydra, DUO & Redundanz (Kopien) & Sinkt (erhöhte Linkability) \\
+    \hline
+    P2P-Gruppen & TAP, Cashmere & Anycast / Gruppen & Stabil, aber Risiken durch interne Angreifer \\
+    \hline
+    Krypto-basiert & Poly Onions & Threshold Crypto & Hoch, aber Timing-Side-Channels \\
+    \hline
+    \end{tabular}
+    \caption{Vergleich der Fehlertoleranz-Strategien und ihrer Auswirkung auf die Anonymität}
+    \label{tab:vergleich_fehlertoleranz}
+\end{table}
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\chapter{Simulation}
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+
+% -----------------------------------------------------------------------------
+%\subsection{Zielsetzung}
+% Eine Simulation eines grundlegenden Mix-Netzes mit Re-Etablierungen von Pfaden, erneutes Übertragen von Nachrichten, parallelen disjunkten Pfaden, anonymen Rückadressen und Ersatzmixen implementiert werden.
+% Der Einfluss der verschiedenen Mechanismen auf den Grad der Anonymität im Mix-Netz evaluiert werden.
+Um den Einfluss verschiedener Fehlertoleranzmechanismen auf die Anonymität und die Zuverlässigkeit eines Mix-Netzes zu untersuchen, soll eine Simulation implementiert werden die die verschiedenen Mechanismen implementiert und alle notwendigen Daten liefert, die zur Analyse der Anonymität notwendig sind.
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Angreifermodell} %TODO vielleicht als subsec unter systementwurf
+In dieser Simulation wird von einem externen Angreifer ausgegangen, der den Eingangs- und Ausgangsverkehr des Mixnetzes beobachten, jedoch nicht aktiv verändern kann. Er hat keine Kontrolle über die Komponenten des Mixnetzes. Die Rechenkapazität des Angreifers ist begrenzt, die kryptografisch gesicherten Daten können vom Angreifer nicht entschlüsselt werden. Die möglichkeiten des Angreifers besieren daher hauptsächlich auf statistischen Analysen und Schnittmengenangriffen. \cite{berthold2000disadvantages, raymond2001traffic, Danezis2003SDA}
+Ziel des Angreifers ist es, Kommunikationsbeziehungen zwischen Sendern und Empfängern zu aufzudecken.
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Evaluationsmetriken}
+Um die Annonymität des Netzes unter einfluss verschiedener Fehlertoleranzmechanismen zu untersuchen, werden verschiedene Herangehensweisen gewählt. Für jedes Szenario wird die Shannon Entropie berechnet \cite{Shannon1948}.
+Zusätzlich werden für die Szenarien eine \textit{Traffic Analysis} und eine \textit{Statistical Disclosure Attack} durchgeführt. Zur Quantifizierung der Zuordbarkeit wird der maximale Log-Likelihood Ratio (LLR) herangezogen. Dieser Wert beschreibt das Verhältnis der Wahrscheinlichkeit, dass ein beobachtetes Verkehrsmuster zu einem spezifischen Ziel gehört, verglichen mit dem Durchschnitt. Ein hoher LLR-Wert signalisiert eine hohe Sicherheit des Angreifers und somit eine geringe Anonymität.
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Systementwurf}
+%grundlegendes Netz
+Das System soll die Grundlegenden Eigenschaften eines modernen Mixnetzes implementieren. Das bedeutet es soll den Nachrichtenverkehr zwischen Sendern und Empfängern so verschleiern, dass eine Zuordnung der Kommunikationsbeziehungen durch Dritte nicht möglich ist. Besonderer Fokus liegt auf Ausfallsicherheit durch Fehlertoleranzmechanismen.
+Das System unterscheidet die primären Akteure:
+\begin{itemize}
+    \item \textbf{Sender (Initiator):} Die Partei, die eine anonyme Nachricht in das Netz einspeist.
+    \item \textbf{Empfänger:} Die Partei, für die die Nachricht bestimmt ist.
+    \item \textbf{Mixknoten:} Server, die Nachrichten empfangen, kryptographisch verarbeiten, verzögern und weitersenden.
+\end{itemize}
+
+Das Mixnetz ist als free routing Netz mit einer stratified topologie konzipiert. Nachrichten durchlaufen das Mixnetz zwingend in einer festgelegten Reihenfolge von 3 Schichten. Entry-Layer, Intermediate-Layer und Exit-Layer. Jede der drei Schichten verfügt über einen Pool von $12$ verfügbaren Mixknoten. Der Sender kann eine multiple Pfadwahl treffen. Für jede Nachricht oder Sitzung wählt der Sender pro Schicht einen der 12 Knoten aus, um einen individuellen Pfad durch die Kaskade zu definieren.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pic/systems/testmix.png}
+    \caption{Testmix}
+    \label{fig:testmix}
+\end{figure}
+
+Um eine zeitliche Korrelation von Ein- und Ausgangsnachrichten zu verhindern, wird Continuous Time Mixing basierend auf einer Poisson-Verteilung verwendet. \cite{SGMIX}
+Das System muss Single-Use Reply Blocks (SURBs) unterstützen, die es dem Empfänger ermöglichen, dem Sender zu antworten, ohne dessen Identität zu kennen. \cite{Danezis2003}
+
+%mockup encryption
+Zur Untersuchung des Einflusses verschiedener Fehlertoleranzmechanismen auf die Anonymität, ist eine sichere Verschlüsselung der Pakete nicht notwendig. Um die Performanz zu erhöhen, wird daher auf eine sichere Verschlüsselung verzichtet. Die Pakete werden jedoch von den Mixen verarbeitet, als seien sie verschlüsselt. Diese \textit{mockup encryption} sorgt dafür, dass die Simulation auch auf leistungsschwächerer Hardware laufen kann.
+
+%Fehlertoleranzmechanismen
+Es werden modular verschiedene Fehlertoleranzmechanismen implementiert. Jeder Mechanismus kann unabhängig von den anderen aktiviert werden, um die Auswirkungen auf die Anonymität des Netzes zu untersuchen. Es sollen insgesamt $4$ verschiedene Fehlertoleranzmechanismen implementiert werden, die eine Paketzustellung ermöglichen wenn ein Knoten im Mixnetz ausfällt.
+\begin{itemize}
+    \item \textbf{Paket Retransmission:} Die Mixnetzuspezifische Variante der Fehlertoleranz. Geht ein Paket verloren, bemerkt das der Sender auf erst auf Anwendungsebene und sendet es erneut. Das Mixnetz selbst ist an diesem Vorgang nicht beteiligt.
+    \item \textbf{Path Reestablishment:} Bei Ausfall eines Knoten bricht der gesamte Pfad ab und es wird ein neuer Pfad etabliert der versucht die Problemstelle im Mixnetz zu umgehen.
+    \item \textbf{Multiple Paths:} Jedes Paket wird redundant über mehrere Pfade übertragen. Die Anzahl der Pfade kann variieren. Je mehr Pfade verwendet werden, desto höher ist die Redundanz, jedoch auch der Overhead sowie die Menge an Metadaten die dabei entstehen.
+    \item \textbf{Backup Mixes:} Jeder Mixknoten wird durch einen anderen Mixknoten ersetzt, sollte er ausfallen. Durch die \textit{mockup encryption} wird das Problem der Schlüsselverteilung, das komplexe Ansätze notwendig macht, umgangen. Jedoch ist dies 
+\end{itemize}
+
+
+%logging
+Um den Angreifer zu Simulieren, wird der Traffic an den Entry und Exit Knoten erfasst und abgespeichert. Auf diesen Daten können später die Angriffe durchgeführt werden.
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Implementierung}
+Die Umsetzung des Simulationssystems erfolgt in Python und basiert auf einer objektorientierten Architektur, die in eine Mininet-Umgebung eingebettet ist. Dies ermöglicht die realitätsnahe Emulation eines Netzes, in dem jeder Akteur (Client, Mix, Provider) als eigenständiger Prozess mit eigenem Netz-Stack operiert.
+
+% -----------------------------------------------------------------------------
+\subsection{Mininet}
+Das Gesamte System ist in Mininet eingebettet, um die Simulationsumgebung enheitlich zu halten \cite{Lantz2010}. Mininet ist ein Tool, das es ermöglicht, Netze in einer virtualisierten Umgebung zu simulieren. Für diese Simulation wird Mininet verwendet, da es ermöglicht Netzwerke zu erstellen und zu verwalten, die je nach bedarf konfiguriert werden können. Dabei ist die einfache Skalierbarkeit ein wichtiger Faktor. Für jede Instanz, also jeden Sender, jeden Receiver und jeden Mixknoten läuft ein eigener Mininet Server.
+
+% -----------------------------------------------------------------------------
+\subsection{Systemarchitektur}
+Das System folgt einem modularen Ansatz, wobei die Kernlogik von der Netzinfrastruktur abstrahiert ist.
+Das Core Module Beinhaltet die abstrakten Basisklassen (\texttt{Node}) sowie die konkreten Implementierungen für \texttt{MixNode} und \texttt{Client}. Diese Klassen implementieren die Anwendungslogik, das Routing und das kryptographische Handling.
+Das Network Module Die physische Übertragung der Nachrichten erfolgt über TCP/IP-Sockets. Die Netztopologie wird durch Mininet definiert, welches virtuelle Hosts und Switches erstellt.
+Das Support Modules Separierte Module für \texttt{Routing}, \texttt{Reliability}, und \texttt{Crypto} stellen wiederverwendbare Funktionalitäten bereit.
+
+% -----------------------------------------------------------------------------
+\subsection{Mixknoten und Mixing-Strategie}
+Die Mixknoten verarbeiten die Pakete durch eine ereignisbasierte Verarbeitungsschleife (\textit{Event Loop}) und einen Scheduler. Zur Implementierung des \textit{Continuous Time Mixing} verwendet jeder Knoten einen internen Scheduler, der auf einer Priority Queue (Min-Heap) basiert. Eingehende Nachrichten werden nicht sofort weitergeleitet, sondern mit einer künstlichen Verzögerung versehen. Diese Verzögerung $\delta$ folgt einer Exponentialverteilung $P(t) = \lambda e^{-\lambda t}$, wobei $\lambda$ (implementiert als Variable \texttt{mu}) den Kehrwert der mittleren Verzögerung darstellt. Dies entspricht einem Poisson-Prozess, der zeitliche Korrelationen zwischen Ein- und Ausgangsnachrichten verschleiern soll.
+
+% -----------------------------------------------------------------------------
+\subsection{Clients und Traffic} %me
+
+Die Clients sind so konfiguriert, dass sie jeweils mit einem zufällig gewählten, jedoch im Testlauf spezifischen anderen Client kommunizieren. Dies sorgt dafür, dass die Muster in der Kommunikationsbeziehung, die geringstmögliche Entropie besitzen. Es wird im Sinne der Anonymität also der \textit{worst case} im Nutzungsverhalten simuliert. 
+%TODO: traffic shaping
+
+Die Kommunikation zwischen den Clients basiert auf diskreten Nachrichtenpaketen. Das zentrale Datenobjekt ist die Klasse \texttt{Packet}, welche als JSON-Objekt serialisiert über das Netz übertragen wird.
+Ein Paket besteht aus folgenden Feldern:
+\begin{itemize}
+    \item \texttt{id}: Eine universell eindeutige Identifikationsnummer (UUID version 4) zur Nachverfolgung und Deduplizierung.
+    \item \texttt{timestamp}: Ein Unix-Zeitstempel der Erstellung, genutzt für Latenzmessungen.
+    \item \texttt{type}: Unterscheidet zwischen \texttt{PLAIN} (Klartext für Debugging) und \texttt{ONION} (verschachtelte Verschlüsselung).
+    \item \texttt{route}: Enthält im Simulationsmodus Metadaten über den geplanten Pfad (primär für Debugging und Mockup-Analysen).
+    \item \texttt{payload}: Die eigentliche Nutzlast. Im Falle von \texttt{ONION}-Paketen enthält dieses Feld den verschlüsselten Zwiebel-Container (\textit{onion blob}).
+    \item \texttt{flags}: Ein flexibles Dictionary für Zusatzinformationen wie \texttt{ACK}-Typen oder \textit{Single Use Reply Blocks} (SURBs).
+\end{itemize}
+Um die Netzlast realistisch zu halten, werden Binärdaten im Payload mittels Base64 kodiert.
+
+Im System werden zwei verschiedene Arten von Covertraffic eingesetzt, um die Anonymität des Mixnetzes zu erhöhen und die Simulation in hinsichtlich des Angreifermodells realistisch zu halten. Der Covertraffic orientiert sich strukturell am Loopix Anonymity System. \cite{Piotrowska2017} Es wird zwischen Drop- und Loop traffic unterschieden. Der Drop traffic wird in Loopix anstatt echter Nachrichten gesendet, wenn der Sendepuffer des Clients leer ist um Lücken im Sendeverlauf abzudecken. Da in dieser Simulation keine Lücken im Sendeverlauf entstehen, wird der Drop traffic unabhängig von echten Nachrichten und somit \textit{zusätzlich} gesendet. Der Drop traffic dient also als zusätzliches Rauschen im input Signal des Systems. Loop traffic wird ebenfalls unabhängig von echten Nachrichten als Nachricht an sich selbst durch das Netz gesendet. Die rate an Covertraffic lässt sich in der config Datei anpassen.
+
+
+% -----------------------------------------------------------------------------
+\subsection{Kryptographie-Simulation (Mockup Encryption)}
+Die in Mixnetzen vorgesehene asymmetrische Schichtenverschlüsselung braucht relativ viel Rechenleistung. Die Simulation soll den Einfluss der verschiedenen Fehlertoleranzmechanismen auf die Anonymität des Mixnetzes untersuchbar machen. Die zugrundeliegenden Metriken die für die Analyse der Anonymität genutzt werden, zielen jedoch nicht auf das Brechen der Verschlüsselung ab, sondern untersuchen die erreichte Anonymität hinsichtlich der Analyse von Metadaten, die das netz erzeugt. Die Verschlüsselung wird hierbei als Sicher angenommen. Für die Analyse ist die Qualität der Verschlüsselung also nicht relevant. Um die Skalierbarkeit der Simulation auf Standard-Hardware zu gewährleisten, wird ein \textit{Mockup Encryption}-Verfahren eingesetzt (\texttt{CryptoManager}). Anstatt rechenintensive asymmetrische Operationen für jede Schicht durchzuführen, simuliert das System die Zwiebelverschlüsselung strukturell. Das Paket wird in JSON-Container verpackt, die die Metadaten der jeweiligen Schicht (Next Hop, Delay) enthalten. Ein spezieller Flag \texttt{mock\_marker} validiert die Integrität. Obwohl der Inhalt nicht kryptographisch verschlüsselt ist, behandelt die Anwendungslogik die Pakete als \textit{opaque blobs}, die nur vom jeweils adressierten Mix entschlüsselt, bzw. entpackt werden können. Dies erhält die kausale Struktur des Mixnetzes und vermeidet den Rechenaufwand einer asymmetrischen Schichtenverschlüsselung.
+
+% -----------------------------------------------------------------------------
+\subsection{Single Use Reply Blocks (SURBs)}
+Für anonyme Rückantworten erstellt der Sender ein SURB-Objekt, welches die Route vom Empfänger zurück zum Sender kapselt. In der Simulation wird dieses Objekt als Dictionary serialisiert und im \texttt{flags}-Feld des Pakets übertragen. Der Empfänger extrahiert dieses SURB, instanziiert daraus ein neues Paket und verwendet die enthaltene Route für die Antwort, ohne die Identität des ursprünglichen Senders kennen zu müssen.
+
+% -----------------------------------------------------------------------------
+\subsection{Implementierung der Fehlertoleranzmechanismen}
+Die Fehlertoleranz wird durch vier dedizierte Mechanismen realisiert, die modular konfigurierbar sind:
+
+1. Paket Retransmission (End-to-End)
+Die Zuverlässigkeitsschicht (\texttt{Reliability}-Modul) im Client überwacht alle ausgesendeten Pakete. Jedes Paket wird in einer Tabelle (\texttt{sent\_packets}) mit Sendezeitstempel registriert.
+Der Empfänger (Receiver) extrahiert beim Erhalt einer Nachricht die Quelladresse und sendet ein explizites Bestätigungspaket (\texttt{ACK}) zurück.
+Das \texttt{Reliability}-Modul prüft periodisch auf Zeitüberschreitungen (\textit{Timeouts}). Bleibt ein ACK aus, wird das Paket erneut in das Netz eingespeist. Ein exponentielles Backoff oder Limitierung der Versuche verhindert Netzüberlastung.
+
+2. Path Reestablishment
+Dieser Mechanismus greift, wenn ein Pfad als defekt erkannt wird (z.B. nach wiederholten Timeouts). Das \texttt{Routing}-Modul berechnet einen neuen Pfad für die betroffene Nachricht. Dabei werden optional die Knoten des fehlgeschlagenen Pfades temporär als "unzuverlässig" markiert und bei der Neuberechnung ausgeschlossen, um denselben Fehler zu vermeiden.
+
+3. Backup Mixes (Local Repair)
+Im Gegensatz zur End-to-End-Wiederherstellung agiert dieser Mechanismus lokal auf den Mix-Knoten. Erkennt ein Mix, dass der gewählte Nachfolgeknoten (\textit{Next Hop}) nicht erreichbar ist (simuliert durch \textit{Packet Loss Rate} oder Verbindungsfehler), konsultiert er die Routing-Tabelle für einen definierten Backup-Knoten.
+Die Implementierung nutzt eine Ring-Topologie innerhalb einer Schicht: Der Backup-Knoten ist definiert als der logische Nachfolger im selben Layer ($ID_{backup} = (ID_{current} + 1) \mod N$). Das Paket wird dynamisch umgeleitet, ohne dass der Sender involviert werden muss.
+
+4. Multiple (Parallel) Paths
+Der Sender generiert für eine logische Nachricht $k$ redundante Pakete (konfigurierbar via \texttt{parallel\_paths}, typischerweise $k=2$). Diese Pakete werden über disjunkte Pfade geroutet, die durch das \texttt{Routing}-Modul mittels Mengenoperationen (\texttt{exclude\_nodes}) bestimmt werden. Der Empfänger filtert Duplikate anhand der Paket-ID.
+
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\chapter{Experimente}
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Szenarien}
+
+Um die Auswirkungen der verschiedenen Fehlertoleranzmechanismen isoliert zu betrachten und quantitativ bewerten zu können, wurde eine Reihe von sechs experimentellen Szenarien definiert. Diese Szenarien bauen aufeinander auf und untersuchen jeweils eine spezifische Hypothese bezüglich des Verhältnisses von Zuverlässigkeit und Anonymität.
+
+Alle Experimente nutzen dieselbe grundlegende Netztopologie (Stratified Mixnet mit 36 Knoten) und Verkehrseigenschaften (Random Traffic), unterscheiden sich jedoch in der Aktivierung der Fehlertoleranz-Module und der Injektion von Fehlern.
+
+\subsection{Szenario 1: Baseline (Idealzustand)}
+\textbf{Bezeichnung:} \texttt{01\_baseline\_no\_errors} \\
+Dieses Szenario dient als Referenzmessung für das System unter idealen Bedingungen. Es werden keinerlei künstliche Fehler injiziert und alle Fehlertoleranzmechanismen sind deaktiviert.
+\begin{itemize}
+    \item \textbf{Ziel:} Ermittlung der theoretischen Obergrenze für die Leistungsfähigkeit des Netzes (minimale Latenz, maximaler Durchsatz) sowie der Basis-Anonymität (Entropie), die durch den reinen Mixing-Prozess erreicht wird.
+    \item \textbf{Konfiguration:} Keine Fehler, keine Retransmission, keine parallelen Pfade.
+\end{itemize}
+
+\subsection{Szenario 2: Baseline (Fehlerfall)}
+\textbf{Bezeichnung:} \texttt{02\_baseline\_errors} \\
+In diesem Szenario wird das Verhalten eines ungeschützten Mixnetzes unter Last und Fehlern simuliert. Es werden gezielt Knoten im laufenden Betrieb abgeschaltet (\textit{Random Kill}: 2 Knoten, 10s Verzögerung).
+\begin{itemize}
+    \item \textbf{Ziel:} Quantifizierung des Nachrichtenverlustes ohne Schutzmechanismen. Dieses Szenario liefert den "Worst Case" für die Zuverlässigkeit und dient als Vergleichsgrundlage, um die Effektivität der nachfolgenden Mechanismen zu bewerten.
+    \item \textbf{Konfiguration:} Fehlerinjektion aktiv, keine Fehlertoleranzmechanismen.
+\end{itemize}
+
+\subsection{Szenario 3: End-to-End Retransmission}
+\textbf{Bezeichnung:} \texttt{03\_retransmission} \\
+Hier wird der klassische Ansatz der Transportschicht untersucht: Zuverlässigkeit durch Wiederholung. Paketverluste werden erst beim Empfänger detektiert (durch das Fehlen von ACKs) und führen zu einer erneuten Aussendung durch den Sender.
+\begin{itemize}
+    \item \textbf{Ziel:} Untersuchung, ob eine hohe Zuverlässigkeit erreicht werden kann und wie stark sich die mehrfache Übertragung derselben logischen Nachricht auf die Anonymität (Intersection Attack) und die Netzlast auswirkt.
+    \item \textbf{Konfiguration:} Fehlerinjektion aktiv, \texttt{retransmission: true}.
+\end{itemize}
+
+\subsection{Szenario 4: Path Re-establishment}
+\textbf{Bezeichnung:} \texttt{04\_path\_reestablishment} \\
+Dieses Szenario erweitert die Retransmission um eine intelligente Pfadwahl. Nach einem festgestellten Verlust wird für die Wiederholung nicht derselbe Pfad genutzt, sondern ein neuer Pfad berechnet, der die vermutlich ausgefallenen Knoten explizit meidet.
+\begin{itemize}
+    \item \textbf{Ziel:} Validierung, ob das aktive Vermeiden von Fehlerquellen die Zustellrate schneller stabilisiert als reine Wiederholung. Kritisch betrachtet wird hierbei, ob der Ausschluss von Knoten die Anonymitätsmenge (Anonymity Set) für den Angreifer sichtbar verkleinert.
+    \item \textbf{Konfiguration:} Fehlerinjektion aktiv, \texttt{retransmission: true}, \texttt{path\_reestablishment: true}.
+\end{itemize}
+
+\subsection{Szenario 5: Parallel Flows (Redundanz)}
+\textbf{Bezeichnung:} \texttt{05\_parallel\_paths} \\
+Anstatt auf Fehler zu reagieren, agiert dieses Szenario proaktiv. Jede Nachricht wird vom Sender initial vervielfältigt und über $k$ disjunkte Pfade gesendet (hier $k=2$).
+\begin{itemize}
+    \item \textbf{Ziel:} Messung der Ausfallsicherheit ohne Zeitverlust durch Timeouts. Die zentrale Forschungsfrage ist hier das Verhältnis von Bandbreiten-Overhead (erwartet: +100\%) zum Gewinn an Verfügbarkeit und die Auswirkung der signifikant erhöhten Nachrichtenmenge auf die Entropie.
+    \item \textbf{Konfiguration:} Fehlerinjektion aktiv, \texttt{parallel\_paths: true}.
+\end{itemize}
+
+\subsection{Szenario 6: Backup Mixes (Lokale Reparatur)}
+\textbf{Bezeichnung:} \texttt{06\_backup\_mixes} \\
+Dieses Szenario untersucht den Ansatz der lokalen Selbstheilung. Fällt ein Next-Hop aus, versucht der aktuelle Mix-Knoten selbstständig, das Paket an einen definierten Backup-Knoten im selben Layer umzuleiten, ohne den Sender zu involvieren.
+\begin{itemize}
+    \item \textbf{Ziel:} Evaluation eines Mechanismus, der Fehlertoleranz "unsichtbar" für die Endpunkte macht. Analysiert wird, ob diese lokalen Umleitungen (die nicht vom Sender geplant waren) neue Muster für Verkehrsanalysen erzeugen oder die Latenz im Vergleich zur End-to-End-Reparatur signifikant senken.
+    \item \textbf{Konfiguration:} Fehlerinjektion aktiv, \texttt{backup\_mixes: true}.
+\end{itemize}
+
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Durchführung}
+Die Simulationen wurden auf einer standardisierten Hardwareumgebung innerhalb der Mininet-Virtualisierung durchgeführt. Für jedes der definierten Szenarien wurden unabhängige Testläufe mit jeweils 5 Minuten Dauer gestartet, um statistisch signifikante Datenmengen (ca. 300.000 bis 600.000 Pakete pro Lauf) zu generieren. Die resultierenden Log-Dateien (System In/Out, Traffic Logs) wurden anschließend durch automatisierte Python-Skripte aggregiert, bereinigt und ausgewertet.
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Ergebnisse}
+\label{sec:ergebnisse}
+
+Die durchgeführten Simulationen liefern einen detaillierten Einblick in das Verhalten der verschiedenen Fehlertoleranzmechanismen unter Last und Angriffsszenarien. Tabelle \ref{tab:results_normal} fasst die zentralen quantitativen Ergebnisse zusammen, die für die Standard-Konfiguration (Normal Noise, aktiver Covertraffic) ermittelt wurden.
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|l|c|c|c|c|r|}
+    \hline
+    \textbf{Mechanismus} & \textbf{Entropie (Bits)} & \textbf{Max LLR} & \textbf{Latenz (s)} & \textbf{Overhead Ratio} & \textbf{Traffic (Pkt)} \\
+    \hline
+    Baseline (Ideal) & 6.26 & 80.25 & 1.52 & 20.76 & 306,537 \\
+    Baseline (Errors) & 6.01 & 42.51 & 1.51 & 22.47 & 283,119 \\
+    Retransmission & 6.30 & 77.98 & 1.52 & 20.52 & 480,382 \\
+    Path Re-est. & 6.31 & 42.27 & 1.51 & 20.49 & 480,274 \\
+    Parallel Paths & 6.30 & 93.45 & 1.52 & 20.42 & 504,012 \\
+    Backup Mixes & 6.15 & 33.13 & 1.52 & 21.00 & 311,309 \\
+    \hline
+    \end{tabular}
+    \caption{Aggregierte Ergebnisse der Simulationsläufe (Normal Noise). Die Entropie (höher=besser) gibt den Grad der Unbestimmtheit an. Max LLR (niedriger=besser) quantifiziert die Sicherheit der Zuordnung durch den Angreifer.}
+    \label{tab:results_normal}
+\end{table}
+
+Die Ergebnisse zeigen deutliche Unterschiede in der Schutzwirkung. Während die Entropie durch den Covertraffic bei fast allen Mechanismen auf einem hohen Niveau (ca. 6.3 Bits) stabilisiert wird, offenbart der LLR-Wert (Log-Likelihood Ratio) signifikante Schwachstellen bei redundanten Übertragungen. backup\_mixes erreicht hierbei den besten (niedrigsten) Wert, was auf eine geringere statistische Exponierung hindeutet.
+
+Abbildung \ref{fig:radar_chart} visualisiert diese Zielkonflikte in Form eines Radar-Charts und verdeutlicht das Anonymitätstrilemma: Die Verbesserung einer Dimension (z.B. Geschwindigkeit oder Zuverlässigkeit) geht oft zu Lasten einer anderen (z.B. Resistenz gegen statistische Analyse).
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pic/analysis/plot_trilemma_radar_normal.png}
+    \caption{Das Anonymitätstrilemma: Visualisierung der Trade-offs. 1.0 = Beste Leistung in der Kategorie. Man erkennt, wie Mechanismen wie Parallel Paths zwar performant sind, aber im Bereich "Resistance" (Sicherheit vor Analyse) einbrechen.}
+    \label{fig:radar_chart}
+\end{figure}
+
+% -----------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+\section{Evaluation und Diskussion}
+\label{sec:evaluation}
+
+Basierend auf den Messergebnissen lässt sich der Einfluss der Mechanismen auf die Anonymität differenziert bewerten.
+
+% -----------------------------------------------------------------------------
+\subsection{Paket Retransmission}
+Das Konzept der End-to-End Retransmission (\texttt{03\_retransmission}) stellt die Verfügbarkeit effektiv wieder her, erkauft dies jedoch mit einem massiven Anstieg des Verkehrsvolumens (+56\% gegenüber Baseline Fehler).
+\begin{itemize}
+    \item \textbf{Anonymität:} Die Entropie bleibt konstant hoch, doch der hohe LLR-Wert (77.98) ist problematisch. Da Retransmissions oft denselben Pfad oder zeitlich korrelierte Muster nutzen, liefern sie dem Angreifer zusätzliche Datenpunkte für Intersection Attacks. Das bloße Wiederholen einer Nachricht erhöht die Wahrscheinlichkeit ihrer Identifikation.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\subsection{Path Reestablishment}
+Die aktive Pfad-Neuwahl (\texttt{04\_path\_reestablishment}) zeigt sich als überlegene Strategie gegenüber der einfachen Retransmission.
+\begin{itemize}
+    \item \textbf{Sicherheitsgewinn:} Der LLR-Wert fällt dramatisch auf 42.27 (vergleichbar mit dem Fehler-Fall). Das bedeutet: Obwohl genauso viele Pakete gesendet werden wie bei der Retransmission, kann der Angreifer sie schlechter zuordnen. Der Pfadwechsel "bricht" die Korrelation. Wenn eine Wiederholung einen völlig neuen Weg nimmt, liefert sie dem Angreifer keine Bestätigung des vorherigen Verdachts.
+    \item \textbf{Fazit:} Path Reestablishment bietet bei gleichen Kosten (Overhead) eine signifikant höhere Anonymität als statische Retransmission.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\subsection{Multiple Paths (Redundanz)}
+Parallele Pfade (\texttt{05\_parallel\_paths}) maximieren die Verfügbarkeit, stellen aber ein Sicherheitsrisiko dar.
+\begin{itemize}
+    \item \textbf{Die Redundanz-Falle:} Mit einem LLR von 93.45 weist dieser Mechanismus die schlechteste Resistenz auf. Die Vervielfachung der Pfade (Flooding) führt dazu, dass eine einzige Nachricht an vielen Stellen des Netzes auftaucht. Für einen globalen Beobachter (GPA) ist dies ein Geschenk: Er kann Ein- und Ausgänge viel leichter korrelieren, da die "Signatur" der Nachricht im Netz omnipräsent ist. Redundanz tötet hier Unlinkability.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\subsection{Backup Mixes (Lokale Reparatur)}
+Der Ansatz der lokalen Reparatur (\texttt{06\_backup\_mixes}) erweist sich als äußerst effizient und sicher.
+\begin{itemize}
+    \item \textbf{Hidden Champion:} Mit einem LLR von 33.13 und minimalem Overhead ist dies der sicherste Mechanismus. Da Fehler lokal behoben werden, muss der Sender nicht aktiv werden. Es entstehen keine neuen, zeitlich korrelierten Injektionen am Netzrand. Der Fehlerbehandlungsprozess bleibt weitgehend innerhalb der Wolke ("Cloud") verborgen.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+\subsection{Zusammenfassung}
+
+Abbildung \ref{fig:scatter_plot} verortet die Mechanismen im Spannungsfeld. Es zeigt sich, dass \textbf{Backup Mixes} und \textbf{Path Reestablishment} die besten Strategien für Anonymität sind, während \textbf{Parallel Paths} zwar robust, aber "laut" und damit unsicher sind.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{pic/analysis/plot_tradeoff_scatter.png}
+    \caption{Trade-off Analyse: Latenz vs. Entropie. Die Größe der Punkte repräsentiert den Overhead. Mechanismen unten links bieten die beste Balance.}
+    \label{fig:scatter_plot}
+\end{figure}
+
+
+
+
+\chapter{Zusammenfassung und Ausblick}
+
+
+\chapter{Schlussbemerkungen}
+
+
+% --------------------------------------------------------------------------------
+% ----- Literaturverzeichnis
+% --------------------------------------------------------------------------------
+\begin{raggedright} % raggedright schaltet den Blocksatz ab und erzeugt ein stimmigeres Schriftbild im Literaturverzeichnis.
+  \printbibliography % alphabetic ist definiert unter biblatex in style.svs
+  \label{sec:literaturverzeichnis}
+\end{raggedright}
+
+% --------------------------------------------------------------------------------
+% ----- Anhang
+% --------------------------------------------------------------------------------
+\appendix
+\setcounter{figure}{0}
+\renewcommand\thetable{A.\arabic{figure}}
+\setcounter{table}{0}
+\renewcommand\thetable{A.\arabic{table}}
+
+% --------------------------------------------------------------------------------
+% ----- Eidesstattliche Versicherung
+% --------------------------------------------------------------------------------
+\chapter*{Eidesstattliche Versicherung}
+\vspace{1cm}
+
+\todo[noline]{Bitte verwenden Sie hier in jedem Fall die offizielle von der Prüfungsbehörde vorgegebene Formulierung der Selbständigkeitserklärung.}
+%
+Hiermit versichere ich an Eides statt, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen als die angegebenen Hilfsmittel – insbesondere keine im Quellenverzeichnis nicht benannten Internet-Quellen – benutzt habe. Alle Stellen, die wörtlich oder sinngemäß aus Veröffentlichungen entnommen wurden, sind als solche kenntlich gemacht. Ich versichere weiterhin, dass ich die Arbeit vorher nicht in einem anderen Prüfungsverfahren eingereicht habe und die eingereichte schriftliche Fassung der auf dem elektronischen Speichermedium entspricht.
+Ich bin damit einverstanden, dass meine Abschlussarbeit in den Bestand der Fachbereichsbibliothek eingestellt wird.
+
+\makeatletter
+Hamburg, den {\@date}
+\makeatother
+
+\vspace{2cm}
+\rule{6cm}{0.25pt}\\
+\makeatletter
+{\@author} \par
+\makeatother
+
+\newpage
+
+% --------------------------------------------------------------------------------
+% ----- Literaturliste (Muster)
+% --------------------------------------------------------------------------------
+\newpage
+\thispagestyle{empty}
+\label{sec:literaturliste}
+\par\textbf{\textsf{Thema:}} Evaluation der Anonymität von fehlertoleranten Mix-Netz-Architekturen
+\par\textbf{\textsf{Bearbeiter:}} Fritz Simon Meyer
+\par\textbf{\textsf{Datum:}} \today
+\bigskip
+\section*{Literaturliste}
+
+% ----- Nachfolgend eine händisch gesetzte Literaturliste, die sich exakt an die Syntax im Abschnitt \ref{sec:literaturhowto} hält. Wir nutzen diese aber hier nicht, sondern lassen BibLaTeX die Einträge formatieren.
+\iffalse
+David Chaum: Untraceable Electronic Mail, Return Addresses, and Digital Pseudonyms. Communications of the ACM 24/2 (1981) 84--88.
+
+David Chaum: The Dining Cryptographers Problem: Unconditional Sender and Recipient Untraceability. Journal of Cryptology 1/1 (1988) 65--75.
+
+David Goldschlag, Michael Reed, Paul Syverson: Onion Routing for Anonymous and Private Internet Connections. Communications of the ACM 42/2 (1999) 39--41.
+
+Andreas Pfitzmann: Diensteintegrierende Kommunikationsnetze mit teilnehmerüberprüfbarem Datenschutz. IFB 234, Springer-Verlag, Berlin 1990.
+
+Wei Wang, Mehul Motani, Vikram Srinivasan: Dependent link padding algorithms for low latency anonymity systems. Proc. 15th ACM conference on Computer and communications security. ACM, 2008, 323--332.
+\fi
+
+% ----- Nachfolgend die Ausgabe unter Verwendung von BibLaTeX. Die Formatierung übernimmt BibLaTeX. Dadurch wird es zu Abweichungen von der vorgegebenen Syntax kommen. Dies ist tolerabel, da es i.W. auf Einheitlichkeit ankommt, nicht auf eine dogmatische Einhaltung der Syntax.
+\fullcite{chaum1981untraceable}
+
+\fullcite{Chau88}
+
+\fullcite{GoRS99}
+
+\fullcite{Pfit90}
+
+\fullcite{WaMS2008}
+
+% --------------------------------------------------------------------------------
+% ----- Wiss. Kurzzusammenfassung (Muster)
+% --------------------------------------------------------------------------------
+\newpage
+\thispagestyle{empty}
+\label{sec:kurzusammenfassung}
+\par\textbf{\textsf{Thema:}} Evaluation der Anonymität von fehlertoleranten Mix-Netz-Architekturen
+\par\textbf{\textsf{Bearbeiter:}} Fritz Simon Meyer
+\par\textbf{\textsf{Datum:}} \today
+\bigskip
+
+
+% --------------------------------------------------------------------------------
+% ----- Todo list
+% --------------------------------------------------------------------------------
+\listoftodos
+% \todototoc
+
+\end{document}

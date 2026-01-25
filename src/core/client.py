@@ -68,13 +68,64 @@ class Client(Node):
         if self.traffic_distribution == 'fixed_partner' and self.receivers:
             self.assigned_partner = random.choice(self.receivers)
             self.logger.log(f"Assigned fixed partner: {self.assigned_partner}")
-        
-        if self.rate_real > 0:
-            threading.Thread(target=self._real_traffic_loop, daemon=True).start()
-        if self.rate_loop > 0:
-            threading.Thread(target=self._loop_traffic_loop, daemon=True).start()
-        if self.rate_drop > 0:
-            threading.Thread(target=self._drop_traffic_loop, daemon=True).start()
+            
+        # Strategy selection
+        strategy = self.traffic_config.get('traffic_strategy', 'loopix')
+        self.logger.log(f"Traffic Strategy: {strategy}")
+
+        if strategy == 'loopix':
+            # --- Loopix Mode (Strict) ---
+            # Paper Model: Users send at Poisson rate lambda (Total Emission).
+            # Real messages (lambda_P) are generated. If no real message ready, send drop.
+            
+            # 1. Config Loading
+            # In Loopix mode, we interpret 'transmission_rate_packets_per_sec' as the Master Rate.
+            # Fallback for backward compat: use 'drop_rate_packets_per_sec' if transmission_rate not set.
+            # (User complained about 'drop_rate' being confusing, so we prefer transmission_rate)
+            
+            tx_rate = self.traffic_config.get('transmission_rate_packets_per_sec', 0.0)
+            if tx_rate <= 0:
+                 # Fallback to drop_rate if user hasn't updated config yet, or purely legacy config
+                 tx_rate = self.traffic_config.get('drop_rate_packets_per_sec', 0.0)
+                 
+            # If still 0, default to Real Rate (No cover traffic capacity)
+            if tx_rate <= 0:
+                tx_rate = self.rate_real
+                self.logger.log("No transmission/drop rate configured. Defaulting to Real Rate (Zero Cover Traffic).", "WARNING")
+
+            # SAFETY: Limit Check
+            # We cannot effectively send Real Messages if Tx Rate < Real Rate (queue would explode).
+            # We force Tx >= Real.
+            if tx_rate < self.rate_real:
+                self.logger.log(f"Transmission Rate ({tx_rate}) < Real Rate ({self.rate_real}). Adjusting up.", "WARNING")
+                tx_rate = self.rate_real
+
+            self.logger.log(f"Loopix Mode: Emission Rate = {tx_rate} pps (Real: {self.rate_real})")
+
+            # 2. Threads
+            self.message_buffer = queue.Queue()
+            
+            # Producer (Real)
+            if self.rate_real > 0:
+                threading.Thread(target=self._real_traffic_producer, daemon=True).start()
+                
+            # Consumer/Emitter (Pacer)
+            if tx_rate > 0:
+                threading.Thread(target=self._transmission_loop_pacer, args=(tx_rate,), daemon=True).start()
+            
+            # 3. Loops (Independent)
+            if self.rate_loop > 0:
+                threading.Thread(target=self._loop_traffic_loop, daemon=True).start()
+                
+        else:
+            # --- Legacy Mode (Additive) ---
+            self.logger.log("Legacy Mode: Additive Traffic")
+            if self.rate_real > 0:
+                threading.Thread(target=self._real_traffic_loop, daemon=True).start()
+            if self.rate_loop > 0:
+                threading.Thread(target=self._loop_traffic_loop, daemon=True).start()
+            if self.rate_drop > 0:
+                threading.Thread(target=self._drop_traffic_loop, daemon=True).start()
 
     def _get_delay(self):
         # Exponential delay for mixing
@@ -142,6 +193,92 @@ class Client(Node):
                 
         except Exception as e:
             self.logger.log(f"Onion creation failed: {e}", "ERROR")
+
+    # --- Traffic Loops ---
+
+    def _real_traffic_producer(self):
+        """
+        Produces real messages and puts them into the buffer queue.
+        Does NOT send them directly.
+        """
+        start_time = time.time()
+        while self.sending and (time.time() - start_time < self.duration):
+            time.sleep(self._sleep_poisson(self.rate_real))
+            if not self.receivers: continue
+            
+            # Generate Message Content (Same logic as _real_traffic_loop)
+            try:
+                if self.traffic_distribution == 'fixed_partner' and self.assigned_partner:
+                    dest = self.assigned_partner
+                else:
+                    dest = random.choice(self.receivers)
+                payload = f"Real Msg {time.time()}"
+                
+                # --- FEATURE: Parallel Paths ---
+                paths = []
+                if self.config['features'].get('parallel_paths', False):
+                    paths = self.routing.get_disjoint_paths(self.hostname, dest, k=2)
+                    if not paths:
+                        p = self.routing.get_path(self.hostname, dest)
+                        if p: paths = [p]
+                else:
+                    p = self.routing.get_path(self.hostname, dest)
+                    if p: paths = [p]
+                    
+                if not paths: continue
+
+                # Create Packets
+                msg_uuid = str(uuid.uuid4())
+                
+                # SURB logic
+                surb_data = None
+                if self.config['features'].get('anonymous_return_addresses', False):
+                    return_route = self.routing.get_path(dest, self.hostname)
+                    if return_route:
+                        surb = SURB(self.hostname, return_route)
+                        surb_data = surb.to_dict()
+
+                for path in paths:
+                    if not path: continue
+                    packet = Packet(payload, dest, route=path, src=self.hostname, message_id=msg_uuid)
+                    if surb_data: packet.flags['surb'] = surb_data
+                    
+                    if self.config['features'].get('retransmission', False):
+                        self.reliability.track_packet(packet)
+                        
+                    # PUSH TO BUFFER
+                    self.message_buffer.put((packet, path))
+                    
+            except Exception as e:
+                self.logger.log(f"Producer error: {e}", "ERROR")
+
+    def _transmission_loop_pacer(self, rate):
+        """
+        Consumes from buffer or sends Drop traffic to maintain constant rate.
+        """
+        start_time = time.time()
+        while self.sending and (time.time() - start_time < self.duration):
+            time.sleep(self._sleep_poisson(rate))
+            
+            if not self.message_buffer.empty():
+                # Send Real
+                try:
+                    packet, path = self.message_buffer.get_nowait()
+                    self._send_prepared_project(packet, path)
+                except queue.Empty:
+                    pass
+            else:
+                # Buffer Empty -> Gap Filling -> Send Drop
+                self._send_drop_packet()
+
+    def _send_drop_packet(self):
+        # Use Drop Logic (extracted from old _drop_traffic_loop)
+        if not self.mixes: return
+        random_mix = random.choice(self.mixes)
+        path = self.routing.get_path(self.hostname, random_mix)
+        payload = f"Drop Msg {time.time()}"
+        self._send_onion_packet(payload, path, "DROP")
+    
 
     # --- Traffic Loops ---
     

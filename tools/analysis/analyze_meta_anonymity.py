@@ -91,6 +91,24 @@ def calculate_ttc(evolution_data):
             
     return None # Never reached threshold (Anoymous within window)
 
+def get_diaz_score(run_dir, target):
+    """
+    Reads the anonymity_evolution_{target}.csv to get the final Diaz score.
+    Returns: Final Diaz Score (0.0 - 1.0) or None if file missing.
+    """
+    csv_path = os.path.join(run_dir, "analysis_results", f"anonymity_evolution_{target}.csv")
+    if not os.path.exists(csv_path):
+        return None
+        
+    try:
+        df = pd.read_csv(csv_path)
+        if df.empty:
+            return None
+        # Return the last recorded Diaz Anonymity score
+        return df['diaz_anonymity'].iloc[-1]
+    except Exception:
+        return None
+
 def main():
     print("--- Meta-Analysis: Fault Tolerance Anonymity ---")
     os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -98,7 +116,7 @@ def main():
     # 1. Collect Data
     data_records = []
     
-    # Find all evolution JSONs
+    # Find all evolution JSONs (LLR/Entropy Source)
     # Pattern: logs/Testrun_*/analysis_results/*_evolution.json
     search_pattern = os.path.join(LOGS_ROOT, "Testrun_*", "analysis_results", "*_evolution.json")
     files = glob.glob(search_pattern)
@@ -123,10 +141,13 @@ def main():
             results.sort(key=lambda x: x['llr'], reverse=True)
             top_link = results[0]
             
-            # Metrics
+            # Metrics from Strict Trace (Attacker View)
             max_llr = top_link['llr']
             entropy = calculate_entropy(results)
             ttc = calculate_ttc(top_link['evolution'])
+            
+            # Metric from Exact Analysis (System View via Danezis/Diaz)
+            diaz = get_diaz_score(run_dir, target)
             
             obs_count = top_link['obs_count']
             
@@ -136,7 +157,8 @@ def main():
                 'Target': target,
                 'Max_LLR': max_llr,
                 'Entropy': entropy,
-                'TTC': ttc if ttc is not None else obs_count * 2, # Penalize validly anonymous? Or use max? Using obs*2 as placeholder for "Safe"
+                'Diaz_Anonymity': diaz, # Can be None
+                'TTC': ttc if ttc is not None else obs_count * 2,
                 'Is_Compromised': ttc is not None,
                 'Run': run_name
             })
@@ -158,7 +180,7 @@ def main():
     plt.figure(figsize=(12, 6))
     sns.barplot(data=df, x='Mechanism', y='Max_LLR', hue='Noise', palette='viridis')
     plt.title("Attacker Confidence (Max LLR) by Tolerance Mechanism")
-    plt.ylabel("Max LLR Score (Higher = Less Anon)")
+    plt.ylabel("average Max LLR Scores (Higher = Less Anon)")
     plt.tight_layout()
     plt.savefig(os.path.join(OUTPUT_DIR, "plot_max_llr.png"))
     plt.close()
@@ -172,17 +194,20 @@ def main():
     plt.savefig(os.path.join(OUTPUT_DIR, "plot_entropy.png"))
     plt.close()
     
-    # Metric 3: Time-to-Compromise (Only for compromised)
-    # Filter for compromised or handle None
-    # If not compromised, TTC is high (good). 
-    # Let's plot "Packets until Compromise".
+    # Metric 3: Diaz Anonymity (System-wide Normalized)
+    # Filter out None values just in case
+    df_diaz = df.dropna(subset=['Diaz_Anonymity'])
+    if not df_diaz.empty:
+        plt.figure(figsize=(12, 6))
+        sns.barplot(data=df_diaz, x='Mechanism', y='Diaz_Anonymity', hue='Noise', palette='coolwarm')
+        plt.title("Diaz Anonymity (Normalized 0-1)")
+        plt.ylabel("Diaz Score (1.0 = Perfect Anon)")
+        plt.ylim(0, 1.1) # Diaz is strictly 0-1
+        plt.tight_layout()
+        plt.savefig(os.path.join(OUTPUT_DIR, "plot_diaz.png"))
+        plt.close()
     
-    # For visualization, we can impute non-compromised:
-    # If not compromised within window, data has 'obs_count*2'.
-    # This might skew averages. 
-    # Alternative: Plot Success Rate of Attack?
-    
-    # Let's Plot TTC, but careful with huge bars.
+    # Metric 4: Time-to-Compromise
     plt.figure(figsize=(12, 6))
     sns.barplot(data=df, x='Mechanism', y='TTC', hue='Noise', palette='rocket')
     plt.title("Time-To-Compromise (Packets until LLR > 10)")
@@ -192,7 +217,7 @@ def main():
     plt.close()
     
     # Summary Tables
-    summary = df.groupby(['Mechanism', 'Noise'])[['Max_LLR', 'Entropy', 'TTC', 'Is_Compromised']].mean()
+    summary = df.groupby(['Mechanism', 'Noise'])[['Max_LLR', 'Entropy', 'Diaz_Anonymity', 'TTC', 'Is_Compromised']].mean()
     summary.to_csv(os.path.join(OUTPUT_DIR, "meta_analysis_summary.csv"))
     print("\nSummary Table:")
     print(summary)

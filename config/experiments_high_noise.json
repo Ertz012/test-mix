@@ -1,48 +1,50 @@
 [
     {
         "name": "01_baseline_no_errors_high_noise",
-        "description": "Baseline (High Noise): Loop=5.0, Drop=5.0",
+        "description": "Baseline (High Noise): Real=3.0, Loop=5.0, Tx=15.0",
         "config_overrides": {
             "features": {
-                "dummy_traffic": true,
                 "retransmission": false,
                 "path_reestablishment": false,
                 "parallel_paths": false,
-                "anonymous_return_addresses": false,
+                "anonymous_return_addresses": true,
                 "layered_encryption": true,
                 "mock_encryption": true,
                 "backup_mixes": false
             },
             "traffic": {
+                "traffic_strategy": "loopix",
                 "mode": "random",
                 "duration_sec": 600,
                 "interval_sec": 0.1,
+                "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
-                "drop_rate_packets_per_sec": 5.0
+                "transmission_rate_packets_per_sec": 15.0
             }
         },
         "error_injection": null
     },
     {
         "name": "02_baseline_errors_high_noise",
-        "description": "Baseline Errors (High Noise): Loop=5.0, Drop=5.0",
+        "description": "Baseline Errors (High Noise): Real=3.0, Loop=5.0, Tx=15.0",
         "config_overrides": {
             "features": {
-                "dummy_traffic": true,
                 "retransmission": false,
                 "path_reestablishment": false,
                 "parallel_paths": false,
-                "anonymous_return_addresses": false,
+                "anonymous_return_addresses": true,
                 "layered_encryption": true,
                 "mock_encryption": true,
                 "backup_mixes": false
             },
             "traffic": {
+                "traffic_strategy": "loopix",
                 "mode": "random",
                 "duration_sec": 600,
                 "interval_sec": 0.1,
+                "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
-                "drop_rate_packets_per_sec": 5.0
+                "transmission_rate_packets_per_sec": 15.0
             }
         },
         "error_injection": {
@@ -53,21 +55,23 @@
     },
     {
         "name": "03_retransmission_high_noise",
-        "description": "Retransmission (High Noise): Loop=5.0, Drop=5.0",
+        "description": "Retransmission (High Noise): Real=3.0, Loop=5.0, Tx=15.0",
         "config_overrides": {
             "features": {
-                "dummy_traffic": true,
                 "retransmission": true,
                 "path_reestablishment": false,
                 "parallel_paths": false,
+                "anonymous_return_addresses": true,
                 "backup_mixes": false
             },
             "traffic": {
+                "traffic_strategy": "loopix",
                 "mode": "random",
                 "duration_sec": 600,
                 "interval_sec": 0.1,
+                "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
-                "drop_rate_packets_per_sec": 5.0
+                "transmission_rate_packets_per_sec": 15.0
             }
         },
         "error_injection": {
@@ -78,21 +82,23 @@
     },
     {
         "name": "04_path_reestablishment_high_noise",
-        "description": "Path Reest (High Noise): Loop=5.0, Drop=5.0",
+        "description": "Path Reest (High Noise): Real=3.0, Loop=5.0, Tx=15.0",
         "config_overrides": {
             "features": {
-                "dummy_traffic": true,
                 "retransmission": true,
                 "path_reestablishment": true,
                 "parallel_paths": false,
+                "anonymous_return_addresses": true,
                 "backup_mixes": false
             },
             "traffic": {
+                "traffic_strategy": "loopix",
                 "mode": "random",
                 "duration_sec": 600,
                 "interval_sec": 0.1,
+                "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
-                "drop_rate_packets_per_sec": 5.0
+                "transmission_rate_packets_per_sec": 15.0
             }
         },
         "error_injection": {
@@ -103,21 +109,23 @@
     },
     {
         "name": "05_parallel_paths_high_noise",
-        "description": "Multipath (High Noise): Loop=5.0, Drop=5.0",
+        "description": "Multipath (High Noise): Real=3.0, Loop=5.0, Tx=15.0",
         "config_overrides": {
             "features": {
-                "dummy_traffic": true,
                 "retransmission": false,
                 "path_reestablishment": false,
                 "parallel_paths": true,
+                "anonymous_return_addresses": true,
                 "backup_mixes": false
             },
             "traffic": {
+                "traffic_strategy": "loopix",
                 "mode": "random",
                 "duration_sec": 600,
                 "interval_sec": 0.1,
+                "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
-                "drop_rate_packets_per_sec": 5.0
+                "transmission_rate_packets_per_sec": 15.0
             }
         },
         "error_injection": {
@@ -128,21 +136,23 @@
     },
     {
         "name": "06_backup_mixes_high_noise",
-        "description": "Backup Mixes (High Noise): Loop=5.0, Drop=5.0",
+        "description": "Backup Mixes (High Noise): Real=3.0, Loop=5.0, Tx=15.0",
         "config_overrides": {
             "features": {
-                "dummy_traffic": true,
                 "retransmission": false,
                 "path_reestablishment": false,
                 "parallel_paths": false,
-                "backup_mixes": true
+                "backup_mixes": true,
+                "anonymous_return_addresses": true
             },
             "traffic": {
+                "traffic_strategy": "loopix",
                 "mode": "random",
                 "duration_sec": 600,
                 "interval_sec": 0.1,
+                "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
-                "drop_rate_packets_per_sec": 5.0
+                "transmission_rate_packets_per_sec": 15.0
             }
         },
         "error_injection": {

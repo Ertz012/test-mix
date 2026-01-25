@@ -19,23 +19,23 @@
         "mu": 0.5
     },
     "features": {
-        "dummy_traffic": true,
         "retransmission": false,
         "path_reestablishment": false,
         "backup_mixes": true,
         "parallel_paths": false,
-        "anonymous_return_addresses": false,
+        "anonymous_return_addresses": true,
         "layered_encryption": true,
         "mock_encryption": true
     },
     "traffic": {
-        "rate_packets_per_sec": 5.0,
+        "traffic_strategy": "loopix",
+        "rate_packets_per_sec": 3.0,
         "duration_sec": 600,
         "mode": "random",
         "traffic_distribution": "fixed_partner",
         "precalc_file": "traffic_data.bin",
         "loop_rate_packets_per_sec": 5.0,
-        "drop_rate_packets_per_sec": 5.0,
+        "transmission_rate_packets_per_sec": 15.0,
         "interval_sec": 0.1
     },
     "logging": {

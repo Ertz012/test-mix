@@ -1,0 +1,47 @@
+{
+    "topology": {
+        "layers": [
+            "entry",
+            "intermediate",
+            "exit"
+        ],
+        "nodes_per_layer": 12,
+        "num_clients": 5,
+        "num_providers": 3
+    },
+    "network": {
+        "base_port": 8000,
+        "host": "localhost",
+        "packet_loss_rate": 0.0
+    },
+    "mix_settings": {
+        "strategy": "poisson",
+        "mu": 0.5
+    },
+    "features": {
+        "retransmission": false,
+        "path_reestablishment": false,
+        "backup_mixes": false,
+        "parallel_paths": false,
+        "anonymous_return_addresses": true,
+        "layered_encryption": true,
+        "mock_encryption": true,
+        "dummy_traffic": false
+    },
+    "traffic": {
+        "traffic_strategy": "loopix",
+        "rate_packets_per_sec": 3.0,
+        "duration_sec": 600,
+        "mode": "random",
+        "traffic_distribution": "fixed_partner",
+        "precalc_file": "traffic_data.bin",
+        "loop_rate_packets_per_sec": 5.0,
+        "transmission_rate_packets_per_sec": 15.0,
+        "interval_sec": 0.1,
+        "drop_rate_packets_per_sec": 0.0
+    },
+    "logging": {
+        "level": "INFO",
+        "log_dir": "logs"
+    }
+}

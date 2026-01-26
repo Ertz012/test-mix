@@ -1,0 +1,238 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Loopix Analysis Dashboard</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+            .metric-card { background: #f8f9fa; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            h1, h2 { color: #2c3e50; }
+            .plot-container { text-align: center; margin-bottom: 40px; }
+            .plot-container img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px; padding: 5px; }
+            table { margin-top: 20px; }
+            th { background-color: #34495e !important; color: white; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="text-center mb-5">🚀 Loopix Network Analysis Dashboard</h1>
+            
+            <div class="metric-card">
+                <h2>📊 Experiment Summary</h2>
+                <div class="table-responsive">
+                    <table border="1" class="dataframe table table-striped table-hover">
+  <thead>
+    <tr style="text-align: right;">
+      <th>name</th>
+      <th>loss_rate</th>
+      <th>avg_latency</th>
+      <th>throughput</th>
+      <th>diaz_anonymity</th>
+      <th>shannon_entropy</th>
+      <th>attacker_confidence</th>
+      <th>attack_success</th>
+      <th>attack_success_top2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Testrun_20260126_013351_01_baseline_no_errors_high_noise</td>
+      <td>77.36%</td>
+      <td>2.5425</td>
+      <td>9110</td>
+      <td>0.2089</td>
+      <td>2.005009e+00</td>
+      <td>11.5972</td>
+      <td>❌ NO</td>
+      <td>❌ NO</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260126_014408_02_baseline_errors_high_noise</td>
+      <td>80.47%</td>
+      <td>2.5307</td>
+      <td>7797</td>
+      <td>0.0392</td>
+      <td>3.763867e-01</td>
+      <td>17.0254</td>
+      <td>❌ NO</td>
+      <td>✅ YES</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260126_015425_03_retransmission_high_noise</td>
+      <td>85.23%</td>
+      <td>2.5654</td>
+      <td>5872</td>
+      <td>0.0006</td>
+      <td>5.945450e-03</td>
+      <td>28.1238</td>
+      <td>✅ YES</td>
+      <td>❌ NO</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260126_020441_04_path_reestablishment_high_noise</td>
+      <td>80.69%</td>
+      <td>2.5432</td>
+      <td>7634</td>
+      <td>0.0014</td>
+      <td>1.364386e-02</td>
+      <td>24.8369</td>
+      <td>✅ YES</td>
+      <td>❌ NO</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260126_021458_05_parallel_paths_high_noise</td>
+      <td>62.31%</td>
+      <td>2.5327</td>
+      <td>15212</td>
+      <td>0.0000</td>
+      <td>7.027256e-18</td>
+      <td>53.4999</td>
+      <td>✅ YES</td>
+      <td>❌ NO</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260126_022515_06_backup_mixes_high_noise</td>
+      <td>77.76%</td>
+      <td>2.5166</td>
+      <td>8897</td>
+      <td>0.0014</td>
+      <td>1.345945e-02</td>
+      <td>17.6137</td>
+      <td>❌ NO</td>
+      <td>❌ NO</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260126_023532_01_baseline_no_errors_no_noise</td>
+      <td>2.16%</td>
+      <td>2.5322</td>
+      <td>8505</td>
+      <td>0.0001</td>
+      <td>6.137593e-04</td>
+      <td>17.4689</td>
+      <td>✅ YES</td>
+      <td>❌ NO</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260126_024549_02_baseline_errors_no_noise</td>
+      <td>17.27%</td>
+      <td>2.5366</td>
+      <td>7475</td>
+      <td>0.0000</td>
+      <td>6.307175e-05</td>
+      <td>20.8642</td>
+      <td>✅ YES</td>
+      <td>❌ NO</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260126_025606_03_retransmission_no_noise</td>
+      <td>16.33%</td>
+      <td>2.5175</td>
+      <td>7426</td>
+      <td>0.0000</td>
+      <td>2.015082e-10</td>
+      <td>43.9789</td>
+      <td>✅ YES</td>
+      <td>✅ YES</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260126_030623_04_path_reestablishment_no_noise</td>
+      <td>17.27%</td>
+      <td>2.5304</td>
+      <td>7336</td>
+      <td>0.0004</td>
+      <td>3.911508e-03</td>
+      <td>26.0989</td>
+      <td>❌ NO</td>
+      <td>✅ YES</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260126_031640_05_parallel_paths_no_noise</td>
+      <td>14.92%</td>
+      <td>2.5547</td>
+      <td>7576</td>
+      <td>0.0000</td>
+      <td>3.789229e-12</td>
+      <td>41.8818</td>
+      <td>✅ YES</td>
+      <td>❌ NO</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260126_032657_06_backup_mixes_no_noise</td>
+      <td>1.94%</td>
+      <td>2.5483</td>
+      <td>8799</td>
+      <td>0.0000</td>
+      <td>2.488801e-09</td>
+      <td>31.4149</td>
+      <td>✅ YES</td>
+      <td>❌ NO</td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>🛡️ Anonymity (Diaz)</h2>
+                        <div class="plot-container">
+                            <img src="cmp_anonymity.png" alt="Anonymity Comparison">
+                        </div>
+                        <p class="text-muted">Higher is better. Measures the entropy of the anonymity set.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>🎯 Attacker Confidence</h2>
+                        <div class="plot-container">
+                            <img src="cmp_confidence.png" alt="Attacker Confidence">
+                        </div>
+                        <p class="text-muted">Higher bars = Attacker is more sure. <span style="color:#2ecc71">Green</span> = Success, <span style="color:#e74c3c">Red</span> = Fail.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>🎲 Shannon Entropy</h2>
+                        <div class="plot-container">
+                            <img src="cmp_shannon.png" alt="Shannon Entropy Comparison">
+                        </div>
+                        <p class="text-muted">Higher is better. Absolute measure of uncertainty (in bits).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>📉 Packet Loss Rate</h2>
+                        <div class="plot-container">
+                            <img src="cmp_loss_rate.png" alt="Loss Rate Comparison">
+                        </div>
+                        <p class="text-muted">Lower is better. High loss indicates network failures or active attacks.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>⏱️ Average Latency</h2>
+                        <div class="plot-container">
+                            <img src="cmp_latency.png" alt="Latency Comparison">
+                        </div>
+                        <p class="text-muted">Lower is generally better, but trade-off with anonymity exists.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="mt-5 text-center text-muted">
+                <p>Generated by Loopix Analysis Suite</p>
+            </footer>
+        </div>
+    </body>
+    </html>
+    

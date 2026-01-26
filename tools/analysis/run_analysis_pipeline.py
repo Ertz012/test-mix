@@ -22,6 +22,11 @@ def run_command(cmd_list):
         return False
 
 def analyze_single_run(run_dir):
+    # 0. Check if already analyzed (Resume Capability)
+    if os.path.exists(os.path.join(run_dir, "analysis_results", "anonymity_stats.json")):
+        print(f"Skipping: {os.path.basename(run_dir)} (Already Initialized)")
+        return
+
     print(f"Analying: {os.path.basename(run_dir)} ...")
     
     # 1. Consolidate Logs

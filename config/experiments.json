@@ -8,7 +8,7 @@
                 "retransmission": false,
                 "path_reestablishment": false,
                 "parallel_paths": false,
-                "anonymous_return_addresses": false,
+                "anonymous_return_addresses": true,
                 "layered_encryption": true,
                 "mock_encryption": true
             },
@@ -27,7 +27,7 @@
                 "retransmission": false,
                 "path_reestablishment": false,
                 "parallel_paths": false,
-                "anonymous_return_addresses": false,
+                "anonymous_return_addresses": true,
                 "layered_encryption": true,
                 "mock_encryption": true
             },
@@ -48,7 +48,8 @@
             "features": {
                 "retransmission": true,
                 "path_reestablishment": false,
-                "parallel_paths": false
+                "parallel_paths": false,
+                "anonymous_return_addresses": true
             }
         },
         "error_injection": {
@@ -64,7 +65,8 @@
             "features": {
                 "retransmission": true,
                 "path_reestablishment": true,
-                "parallel_paths": false
+                "parallel_paths": false,
+                "anonymous_return_addresses": true
             }
         },
         "error_injection": {
@@ -80,7 +82,8 @@
             "features": {
                 "retransmission": false,
                 "path_reestablishment": false,
-                "parallel_paths": true
+                "parallel_paths": true,
+                "anonymous_return_addresses": true
             }
         },
         "error_injection": {
@@ -97,7 +100,8 @@
                 "retransmission": false,
                 "path_reestablishment": false,
                 "parallel_paths": false,
-                "backup_mixes": true
+                "backup_mixes": true,
+                "anonymous_return_addresses": true
             }
         },
         "error_injection": {

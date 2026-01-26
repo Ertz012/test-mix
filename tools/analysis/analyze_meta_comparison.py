@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import argparse
 import glob
+import re
 
 def load_run_metrics(log_dir):
     """
@@ -38,31 +39,68 @@ def load_run_metrics(log_dir):
         except json.JSONDecodeError as e:
             print(f"Warning: Corrupt JSON in {anonymity_file}: {e}")
             
-    # Check Attack Success (Top Link -> c3?)
+    # Determine Ground Truth Target (who was c1 actually determining?)
+    # We try to read c1_traffic.csv to find the most frequent destination.
+    target_client = "c1"
+    true_recipient = "c3" # Default fallback
+    
+    traffic_file = os.path.join(log_dir, f"{target_client}_traffic.csv")
+    if os.path.exists(traffic_file):
+        try:
+            # Manual parse to avoid CSV errors with unquoted SURBs containing commas
+            dst_counts = {}
+            with open(traffic_file, 'r', encoding='utf-8', errors='replace') as f:
+                next(f, None) # Skip header
+                for line in f:
+                    parts = line.split(',')
+                    if len(parts) > 6: # Ensure we have enough columns
+                        # timestamp(0), event(1), pid(2), mid(3), src(4), dst(5)
+                        if parts[1] == 'SENT' and parts[4] == target_client:
+                            dst = parts[5]
+                            if dst.startswith('c') and dst != target_client:
+                                dst_counts[dst] = dst_counts.get(dst, 0) + 1
+            
+            if dst_counts:
+                # Get max key
+                true_recipient = max(dst_counts, key=dst_counts.get)
+                # print(f"  [Info] Run {run_name}: Detected True Recipient for {target_client} -> {true_recipient} (Count: {dst_counts[true_recipient]})")
+        except Exception as e:
+            print(f"Warning: Could not determine ground truth from {traffic_file}: {e}")
+
+    # Check Attack Success (Top Link -> True Recipient?)
     # Look for the strict trace CSV
     csv_pattern = os.path.join(log_dir, "analysis_results", "strict_link_trace_*.csv")
     csv_files = glob.glob(csv_pattern)
-    metrics['attack_success'] = None # default
+    metrics['attack_success'] = None 
+    metrics['true_recipient'] = true_recipient # Store for debugging/display
     
     if csv_files:
         try:
             # Assume one trace file per run for now
             df_trace = pd.read_csv(csv_files[0])
             if not df_trace.empty and 'link' in df_trace.columns:
+                # Check Top 1
                 top_link = df_trace.iloc[0]['link']
-                # Link format: "NodeID->NextHopID"
-                # We assume c1 -> c3 is the target flow.
-                # So if top link ends with '->c3', success.
-                if str(top_link).endswith('->c3'):
+                # Allow bidirectional match (target endpoint found)
+                link_str = str(top_link)
+                if f"->{true_recipient}" in link_str or f"{true_recipient}->" in link_str:
                     metrics['attack_success'] = True
                 else:
                     metrics['attack_success'] = False
+                    
+                # Check Top 2 (Secondary Candidate)
+                metrics['attack_success_top2'] = False # Default
+                if len(df_trace) > 1:
+                    second_link = df_trace.iloc[1]['link']
+                    link_str_2 = str(second_link)
+                    if f"->{true_recipient}" in link_str_2 or f"{true_recipient}->" in link_str_2:
+                        metrics['attack_success_top2'] = True
         except Exception as e:
             print(f"Error checking attack success in {csv_files[0]}: {e}")
         
     return metrics
 
-def plot_comparison(data_df, metric_col, title, output_path, ylabel="Value"):
+def plot_comparison(data_df, metric_col, title, output_path, ylabel="Value", color_col=None):
     if metric_col not in data_df.columns: return
 
     plt.figure(figsize=(12, 6))
@@ -70,7 +108,17 @@ def plot_comparison(data_df, metric_col, title, output_path, ylabel="Value"):
     # Sort by Name
     df = data_df.sort_values('name')
     
-    bars = plt.bar(df['name'], df[metric_col], color='skyblue')
+    # Shorten names for display (Remove Testrun_Timestamp prefix)
+    # Pattern: Testrun_20260125_190457_... -> ...
+    short_names = df['name'].apply(lambda x: re.sub(r'^Testrun_\d{8}_\d{6}_', '', x))
+    
+    colors = 'skyblue'
+    if color_col and color_col in df.columns:
+        # Map success to colors
+        # True -> Green (#2ecc71), False -> Red (#e74c3c), None -> Gray
+        colors = df[color_col].apply(lambda x: '#2ecc71' if x is True else ('#e74c3c' if x is False else '#95a5a6')).tolist()
+    
+    bars = plt.bar(short_names, df[metric_col], color=colors)
     
     plt.title(title)
     plt.ylabel(ylabel)
@@ -125,9 +173,11 @@ def main():
         # Refinement needed here once strict analysis is standardized.
         if 'global_metrics' in a:
              row['diaz_anonymity'] = a['global_metrics'].get('diaz_anonymity', 0)
+             row['shannon_entropy'] = a['global_metrics'].get('system_entropy', 0)
              row['attacker_confidence'] = a['global_metrics'].get('attacker_confidence', 0) # e.g. Max LLR
         
         row['attack_success'] = r.get('attack_success')
+        row['attack_success_top2'] = r.get('attack_success_top2')
         
         rows.append(row)
         
@@ -139,7 +189,15 @@ def main():
     # Plotting
     plot_comparison(df, 'loss_rate', 'Packet Loss Rate per Run', os.path.join(output_dir, "cmp_loss_rate.png"), "Loss Rate (0-1)")
     plot_comparison(df, 'avg_latency', 'Average Latency per Run', os.path.join(output_dir, "cmp_latency.png"), "Seconds")
-    plot_comparison(df, 'diaz_anonymity', 'Diaz Anonymity (Entropy) per Run', os.path.join(output_dir, "cmp_anonymity.png"), "Entropy (0-1)")
+    plot_comparison(df, 'diaz_anonymity', 'Diaz Anonymity (Normalized Entropy) per Run', os.path.join(output_dir, "cmp_anonymity.png"), "Entropy (0-1)")
+    plot_comparison(df, 'shannon_entropy', 'Shannon Entropy per Run', os.path.join(output_dir, "cmp_shannon.png"), "Bits")
+    
+    # Attacker Confidence Chart (Color-coded by Success)
+    # We prefer Top-2 success if available, else standard success for coloring?
+    # User asked for "success", usually standard. Let's use 'attack_success'.
+    plot_comparison(df, 'attacker_confidence', 'Attacker Confidence (Max LLR)', 
+                   os.path.join(output_dir, "cmp_confidence.png"), "Log Likelihood Ratio",
+                   color_col='attack_success')
     
     # Generate HTML Dashboard
     generate_dashboard_html(df, output_dir)
@@ -166,6 +224,11 @@ def generate_dashboard_html(df, output_dir):
     # Attack Success Formatting (Icons)
     if 'attack_success' in display_df.columns:
         display_df['attack_success'] = display_df['attack_success'].apply(
+            lambda x: "✅ YES" if x is True else ("❌ NO" if x is False else "❓ N/A")
+        )
+    
+    if 'attack_success_top2' in display_df.columns:
+        display_df['attack_success_top2'] = display_df['attack_success_top2'].apply(
             lambda x: "✅ YES" if x is True else ("❌ NO" if x is False else "❓ N/A")
         )
         
@@ -213,11 +276,23 @@ def generate_dashboard_html(df, output_dir):
                 </div>
                 <div class="col-md-6">
                     <div class="metric-card">
-                        <h2>🕵️ Attacker Confidence</h2>
-                        <p class="text-muted">Does the attacker know who you are talking to? See table for 'Max LLR' and 'Attack Success'.</p>
-                        <div class="alert alert-info">
-                            <strong>Attack Success:</strong> Determines if the highest-ranked suspect was indeed the true receiver (c3).
+                        <h2>🎯 Attacker Confidence</h2>
+                        <div class="plot-container">
+                            <img src="cmp_confidence.png" alt="Attacker Confidence">
                         </div>
+                        <p class="text-muted">Higher bars = Attacker is more sure. <span style="color:#2ecc71">Green</span> = Success, <span style="color:#e74c3c">Red</span> = Fail.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>🎲 Shannon Entropy</h2>
+                        <div class="plot-container">
+                            <img src="cmp_shannon.png" alt="Shannon Entropy Comparison">
+                        </div>
+                        <p class="text-muted">Higher is better. Absolute measure of uncertainty (in bits).</p>
                     </div>
                 </div>
             </div>

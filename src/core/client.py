@@ -508,11 +508,13 @@ class Client(Node):
                            self.logger.log(f"Could not send ACK: {e}", "WARNING")
 
         # Reply via SURB if requested (and not just an ACK)
-        if 'surb' in packet.flags and packet.flags.get('type') != 'ACK':
-             # Simulate application response (independent of ACK)
-             # Only if we want to reply to data strings
-             if "Real Msg" in str(packet.payload):
-                 self._send_surb_reply(f"RE: {packet.payload}", packet.flags['surb'])
+        # FLAG: Disabled to compare "Pure Unidirectional" vs "Reliable Bidirectional" scenarios.
+        # SURBs are still attached (overhead), but only used if retransmission (ACKs) is enabled.
+        # if 'surb' in packet.flags and packet.flags.get('type') != 'ACK':
+        #      # Simulate application response (independent of ACK)
+        #      # Only if we want to reply to data strings
+        #      if "Real Msg" in str(packet.payload):
+        #          self._send_surb_reply(f"RE: {packet.payload}", packet.flags['surb'])
 
     def _send_surb_reply(self, payload_str, surb_dict, ack_id=None, is_ack=False):
         """

@@ -48,6 +48,8 @@ def load_all_traffic_logs(run_dir):
         where link_id_string is "NodeID->NextHopID"
     """
     links = {}
+    ground_truth_target = None
+    max_packets = 0
     
     # Iterate over all files
     all_files = [f for f in os.listdir(run_dir) if f.endswith('_traffic.csv')]
@@ -80,6 +82,14 @@ def load_all_traffic_logs(run_dir):
                 link_id = f"{node_id}->{nh}"
                 link_traffic = sent_df[sent_df['next_hop'] == nh].copy()
                 
+                # Dynamic Ground Truth Detection (Simplistic: Highest traffic volume from target source)
+                # Assuming node_id is the source we are interested in (e.g. c1)
+                # But here we iterate all files. We will filter later or just track global max.
+                if len(link_traffic) > max_packets and node_id.startswith('c'):
+                     # Heuristic: The client sending the most packets usually sends to the target/gateway
+                     # But we specifically want c1 -> target.
+                     pass 
+
                 # We only need timestamps for the attack
                 # Force timestamp to float
                 link_traffic['timestamp'] = pd.to_numeric(link_traffic['timestamp'], errors='coerce')
@@ -95,6 +105,39 @@ def load_all_traffic_logs(run_dir):
             
     logger.info(f"Identified {len(links)} distinct links in the network.")
     return links
+
+def detect_ground_truth_target(run_dir, source_node):
+    """
+    Detects which destination received the most packets from the source_node.
+    Returns: detected_target (str) or None
+    """
+    try:
+        source_file = os.path.join(run_dir, f"{source_node}_traffic.csv")
+        if not os.path.exists(source_file):
+            return None
+            
+        df = robust_read_csv(source_file)
+        if df.empty or 'dst' not in df.columns:
+            return None
+            
+        # Count destinations
+        # Filter for SENT packets
+        sent_df = df[df['event_type'] == 'SENT']
+        if sent_df.empty:
+            return None
+            
+        # Get most frequent dst
+        counts = sent_df['dst'].value_counts()
+        if counts.empty:
+            return None
+            
+        top_target = counts.idxmax()
+        logger.info(f"Detected Ground Truth Target for {source_node}: {top_target} (Packets: {counts.max()})")
+        return top_target
+    except Exception as e:
+        logger.warning(f"Failed to detect ground truth target: {e}")
+        return None
+
 
 def get_target_input_stream(run_dir, target_src):
     """
@@ -375,9 +418,23 @@ def main():
         },
         "target_config": {
             "target": args.target,
+            "detected_ground_truth": detect_ground_truth_target(args.run_dir, "c1"),  # Hardcoded source c1 for now, or infer from somewhere else? 
+            # Ideally source is args.target if args.target is the Source? 
+            # In this script, args.target usually means "The node we are tracing", which is the Mix/Gateway?
+            # Wait, 'strict_link_trace_k1_c1.csv' implies target is c1 (packet source).
+            # Yes, args.target is the Entity whose inputs we track.
+            
             "mu": args.mu,
             "lambda_f": float(lambda_f)
-        }
+        },
+        "top_candidates": [
+            {
+                "link": row['link'],
+                "llr": float(row['llr']),
+                "rank": i + 1
+            }
+            for i, row in results_df.head(10).iterrows()
+        ]
     }
     
     with open(os.path.join(output_dir, "anonymity_stats.json"), 'w') as f:

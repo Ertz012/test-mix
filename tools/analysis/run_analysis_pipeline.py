@@ -50,6 +50,7 @@ def main():
     parser.add_argument("path", help="Path to a single run directory OR a root directory containing multiple runs.")
     parser.add_argument("--meta-only", action="store_true", help="Skip individual analysis and only run meta-comparison.")
     parser.add_argument("--workers", type=int, default=4, help="Number of parallel workers (default: 4)")
+    parser.add_argument("--filter", type=str, default=None, help="Only analyze directories containing this string.")
     args = parser.parse_args()
     
     target_path = os.path.abspath(args.path)
@@ -71,13 +72,16 @@ def main():
         run_dirs = []
         
         for run_dir in subdirs:
+            if args.filter and args.filter not in os.path.basename(run_dir):
+                continue
+                
             if glob.glob(os.path.join(run_dir, "*_traffic.csv")) or os.path.exists(os.path.join(run_dir, "config.json")):
                  run_dirs.append(run_dir)
         
         if not args.meta_only:
             count = len(run_dirs)
             workers = min(args.workers, count) if count > 0 else 1
-            print(f"Found {count} runs. Starting analysis with {workers} workers...")
+            print(f"Found {count} runs matching filter. Starting analysis with {workers} workers...")
             
             with Pool(workers) as p:
                 p.map(analyze_wrapper, run_dirs)

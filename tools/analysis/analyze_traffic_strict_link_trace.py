@@ -4,6 +4,10 @@ import argparse
 import pandas as pd
 import numpy as np
 import logging
+import pandas as pd
+import numpy as np
+import logging
+import matplotlib.pyplot as plt
 from scipy.stats import erlang
 
 # Configure strict logging
@@ -223,11 +227,95 @@ def compute_convolution(input_timestamps, mu, k, duration, time_resolution=0.1):
     
     # Renormalize to ensure it's a valid PDF (Integral approx 1)
     # sum(conv) * dt should be approx 1
-    current_sum = np.sum(conv_result) * time_resolution
-    if current_sum > 0:
-        conv_result /= current_sum
+    curr_sum = np.sum(conv_result) * time_resolution
+    if curr_sum > 0:
+        conv_result /= curr_sum
         
     return conv_result, bin_edges[:-1]
+
+def generate_legacy_binned_plot(run_dir, target_src, input_ts_norm, convolved_pdf, time_axis, 
+                                results_df, links, output_filename, global_start):
+    """
+    Generates the legacy 4-panel plot requested by the user.
+    """
+    if results_df.empty: return
+    
+    # Top Candidate
+    winner_row = results_df.iloc[0]
+    winner_link = winner_row['link']
+    winner_score = winner_row['llr']
+    winner_evolution = winner_row['evolution'] # List of [ts, idx, score]
+    
+    # Second Candidate (Loser)
+    loser_row = results_df.iloc[1] if len(results_df) > 1 else winner_row
+    loser_link = loser_row['link']
+    loser_score = loser_row['llr']
+    loser_evolution = loser_row['evolution']
+    
+    # Extract Timestamps for Plotting
+    # Winner Output Events (Green Bars)
+    # links[winner_link] has absolute timestamps. We subtract global_start to align.
+    if winner_link in links:
+        winner_df = links[winner_link]
+        winner_ts_norm = winner_df['timestamp'].values - global_start
+    else:
+        winner_ts_norm = []
+    
+    # Plotting
+    fig, axs = plt.subplots(4, 1, figsize=(12, 14), sharex=True)
+    
+    # Plot 1: Input
+    axs[0].vlines(input_ts_norm, 0, 1, color='blue', alpha=0.5)
+    axs[0].set_title(f'1. Input Signal (Source: {target_src})')
+    axs[0].set_ylabel('Events')
+    axs[0].grid(True, alpha=0.3)
+    
+    # Plot 2: Convolution
+    axs[1].plot(time_axis, convolved_pdf, color='red', lw=1.5)
+    axs[1].fill_between(time_axis, convolved_pdf, color='red', alpha=0.1)
+    axs[1].set_title(f'2. Expected Pattern (Convolution PDF)')
+    axs[1].set_ylabel('Density')
+    axs[1].grid(True, alpha=0.3)
+    
+    # Plot 3: Output Winner
+    if len(winner_ts_norm) > 0:
+        axs[2].vlines(winner_ts_norm, 0, 1, color='green', alpha=0.5, label='Packets')
+    
+    # Overlay Scaled Model for comparison
+    model_scaled = convolved_pdf / (convolved_pdf.max() if convolved_pdf.max() > 0 else 1)
+    axs[2].plot(time_axis, model_scaled, 'r--', alpha=0.3, label='Pattern (scaled)')
+    axs[2].set_title(f'3. Output Traffic on {winner_link} (Top Candidate)')
+    axs[2].legend(loc='upper right')
+    axs[2].grid(True, alpha=0.3)
+    
+    # Plot 4: Decision Metric (LLR)
+    axs[3].axhline(y=0, color='black', linestyle='-', linewidth=1, alpha=0.5)
+    
+    # Evolution Data: [ts, idx, val]
+    w_times = [x[0] - global_start for x in winner_evolution]
+    w_scores = [x[2] for x in winner_evolution]
+    
+    l_times = [x[0] - global_start for x in loser_evolution]
+    l_scores = [x[2] for x in loser_evolution]
+    
+    axs[3].step(w_times, w_scores, where='post', 
+                label=f'{winner_link} (Score: {winner_score:.2f})', color='green', linewidth=2)
+                
+    if winner_link != loser_link:
+        axs[3].step(l_times, l_scores, where='post', 
+                    label=f'{loser_link} (Score: {loser_score:.2f})', color='gray', alpha=0.6)
+                    
+    axs[3].set_title('4. Decision Metric (Log-Likelihood Ratio)\nRises = Match | Flat/Fall = Noise')
+    axs[3].set_ylabel('Cumulative Score')
+    axs[3].set_xlabel('Time (s)')
+    axs[3].legend(loc='upper left')
+    axs[3].grid(True, alpha=0.3)
+
+    plt.tight_layout()
+    plt.savefig(output_filename)
+    print(f"\nLegacy Graph saved to '{output_filename}'")
+    plt.close(fig)
+
 
 def strict_likelihood_ratio_test(links_data, convolved_pdf, time_resolution, 
                                  lambda_f, total_duration, duration_offset):
@@ -340,7 +428,7 @@ def main():
     
     # 3. Model Construction (Convolution)
     input_ts_norm = input_timestamps - global_start
-    convolved_pdf, _ = compute_convolution(input_ts_norm, args.mu, args.k_hops, duration, args.resolution)
+    convolved_pdf, time_axis = compute_convolution(input_ts_norm, args.mu, args.k_hops, duration, args.resolution)
     
     # 4. Global Hypothesis Testing
     results_df = strict_likelihood_ratio_test(links, convolved_pdf, args.resolution, 
@@ -468,7 +556,17 @@ def main():
         
     with open(out_json, 'w') as f:
         json.dump(json_data, f, indent=2)
+    with open(out_json, 'w') as f:
+        json.dump(json_data, f, indent=2)
     print(f"Detailed evolution data saved to: {out_json}")
+
+    # 6. Detailed Visualization (Input, Model, Output, LLR)
+    try:
+        plot_filename = os.path.join(output_dir, f'traffic_analysis_detail_{args.target}.png')
+        generate_legacy_binned_plot(args.run_dir, args.target, input_ts_norm, convolved_pdf, time_axis, 
+                                   results_df, links, plot_filename, global_start)
+    except Exception as e:
+        print(f"Error generating detailed plot: {e}")
 
 if __name__ == "__main__":
     main()

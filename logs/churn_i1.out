@@ -1,0 +1,15 @@
+DEBUG RUN.PY: Loaded Config Features: {'retransmission': True, 'path_reestablishment': False, 'backup_mixes': False, 'parallel_paths': False, 'anonymous_return_addresses': True, 'layered_encryption': True, 'mock_encryption': True, 'dummy_traffic': False}
+DEBUG RUN.PY: Loaded Config Features: {'retransmission': True, 'path_reestablishment': False, 'backup_mixes': False, 'parallel_paths': False, 'anonymous_return_addresses': True, 'layered_encryption': True, 'mock_encryption': True, 'dummy_traffic': False}
+DEBUG: Creating log file at logs/Testrun_20260129_222510_03_retransmission_short/i1.log
+Traceback (most recent call last):
+  File "/home/s/test-mix/src/run.py", line 74, in <module>
+    main()
+  File "/home/s/test-mix/src/run.py", line 60, in main
+    node.start()
+  File "/home/s/test-mix/src/core/mix.py", line 58, in start
+    super().start()
+  File "/home/s/test-mix/src/core/node.py", line 20, in start
+    self.sock.bind(('0.0.0.0', self.port))
+OSError: [Errno 98] Address already in use
+DEBUG RUN.PY: Loaded Config Features: {'retransmission': True, 'path_reestablishment': False, 'backup_mixes': False, 'parallel_paths': False, 'anonymous_return_addresses': True, 'layered_encryption': True, 'mock_encryption': True, 'dummy_traffic': False}
+DEBUG RUN.PY: Loaded Config Features: {'retransmission': True, 'path_reestablishment': False, 'backup_mixes': False, 'parallel_paths': False, 'anonymous_return_addresses': True, 'layered_encryption': True, 'mock_encryption': True, 'dummy_traffic': False}

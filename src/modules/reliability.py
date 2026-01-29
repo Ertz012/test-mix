@@ -27,6 +27,7 @@ class Reliability:
             return
         
         with self.lock:
+            print(f"DEBUG: Tracking packet {packet.packet_id}", flush=True)
             self.sent_packets[packet.packet_id] = {
                 "packet": packet,
                 "ts": time.time(),
@@ -47,6 +48,7 @@ class Reliability:
         try:
             while self.sender.running:
                 time.sleep(1.0)
+                print(f"DEBUG: Heartbeat - Monitoring {len(self.sent_packets)} packets", flush=True)
                 now = time.time()
                 to_resend = []
                 

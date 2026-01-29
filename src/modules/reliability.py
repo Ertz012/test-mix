@@ -17,6 +17,7 @@ class Reliability:
         
         if self.retransmission_enabled:
             # Start monitoring thread
+            print("DEBUG: Reliability Thread STARTING", flush=True) 
             threading.Thread(target=self._monitor_loop, daemon=True).start()
 
     def track_packet(self, packet):
@@ -62,6 +63,9 @@ class Reliability:
                         else:
                             self.sender.logger.log(f"Packet {pid} failed after max retries", "WARNING")
                             del self.sent_packets[pid]
+                            
+            # print(f"Reliability Beat: {len(self.sent_packets)} tracked", flush=True) # DEBUG
+
                             
             for pkt in to_resend:
                 # Path Re-establishment

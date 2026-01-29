@@ -78,10 +78,10 @@
         },
         "error_injection": {
             "mode": "churn",
-            "count": 2,
-            "delay": 15,
-            "interval": 15,
-            "downtime": 15
+            "count": 25,
+            "delay": 10,
+            "interval": 10,
+            "downtime": 5
         }
     },
     {

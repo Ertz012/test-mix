@@ -1,0 +1,33 @@
+DEBUG: Creating log file at logs/Testrun_20260129_195903_06_backup_mixes_high_noise/i1.log
+Traceback (most recent call last):
+  File "/home/s/test-mix/src/run.py", line 73, in <module>
+    main()
+  File "/home/s/test-mix/src/run.py", line 59, in main
+    node.start()
+  File "/home/s/test-mix/src/core/mix.py", line 58, in start
+    super().start()
+  File "/home/s/test-mix/src/core/node.py", line 20, in start
+    self.sock.bind(('0.0.0.0', self.port))
+OSError: [Errno 98] Address already in use
+DEBUG: Creating log file at logs/Testrun_20260129_195903_06_backup_mixes_high_noise/i1.log
+Traceback (most recent call last):
+  File "/home/s/test-mix/src/run.py", line 73, in <module>
+    main()
+  File "/home/s/test-mix/src/run.py", line 59, in main
+    node.start()
+  File "/home/s/test-mix/src/core/mix.py", line 58, in start
+    super().start()
+  File "/home/s/test-mix/src/core/node.py", line 20, in start
+    self.sock.bind(('0.0.0.0', self.port))
+OSError: [Errno 98] Address already in use
+DEBUG: Creating log file at logs/Testrun_20260129_195903_06_backup_mixes_high_noise/i1.log
+Traceback (most recent call last):
+  File "/home/s/test-mix/src/run.py", line 73, in <module>
+    main()
+  File "/home/s/test-mix/src/run.py", line 59, in main
+    node.start()
+  File "/home/s/test-mix/src/core/mix.py", line 58, in start
+    super().start()
+  File "/home/s/test-mix/src/core/node.py", line 20, in start
+    self.sock.bind(('0.0.0.0', self.port))
+OSError: [Errno 98] Address already in use

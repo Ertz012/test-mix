@@ -1,108 +1,49 @@
 
-import paramiko
 import os
 import sys
-import time
-
-def create_ssh_client(server, port, user, password):
-    client = paramiko.SSHClient()
-    client.load_system_host_keys()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(server, port, user, password)
-    return client
+import subprocess
 
 def main():
-    HOST = "192.168.178.64"
-    USER = "simon"
-    PASS = "-" # Assuming key-based auth or this is handled
-    PORT = 22
-    REPO_NAME = "test-mix"
+    """
+    Script to launch the high noise experiment series locally (on the remote machine).
+    Prerequisites:
+    1. Repository is synced (manual git pull by user).
+    2. config/experiments_high_noise.json exists.
+    """
     
-    # Files to upload (Relative to project root)
-    FILES_TO_SYNC = [
-        "tools/run_series.py",
-        "config/experiments_longrun.json",
-        "config/config.json",
-        "src/core/client.py"
-    ]
-
+    base_dir = os.getcwd()
+    config_rel_path = os.path.join("config", "experiments_high_noise.json")
+    config_path = os.path.join(base_dir, config_rel_path)
+    runner_script = os.path.join(base_dir, "tools", "run_series.py")
+    
+    if not os.path.exists(config_path):
+        print(f"Error: Config not found at {config_path}")
+        print(f"Please ensure '{config_rel_path}' exists.")
+        sys.exit(1)
+        
+    print(f"Launching High Noise Experiment Series...")
+    print(f"Config: {config_path}")
+    
+    # Execute run_series.py using sudo
+    # We use subprocess.call to allow streaming output to stdout if needed, 
+    # but run_series.py handles its own logging mostly.
+    # However, for long runs, we often want to detach or just run.
+    # User runs this with 'sudo python3 tools/launch_high_noise.py', so we are already root or have sudo rights.
+    # But run_series.py calls sudo internally for some things, or expects to be run as root?
+    # run_series.py uses `subprocess.Popen` for `orchestrate.py` which needs root (Mininet).
+    # So we should ensure we run run_series.py with sudo if we aren't already.
+    
+    if os.geteuid() != 0:
+        print("Switching to sudo...")
+        cmd = f"sudo python3 {runner_script} --experiments {config_path}"
+    else:
+        cmd = f"python3 {runner_script} --experiments {config_path}"
+    
+    print(f"Running: {cmd}")
     try:
-        print(f"Connecting to {HOST}...")
-        client = create_ssh_client(HOST, PORT, USER, PASS)
-        sftp = client.open_sftp()
-        
-        # 1. Locate Repo
-        print("Locating remote repository...")
-        stdin, stdout, stderr = client.exec_command(f"find /home/{USER} -type d -name '{REPO_NAME}' -print -quit")
-        remote_repo_path = stdout.read().decode().strip()
-        
-        if not remote_repo_path:
-            remote_repo_path = f"/home/{USER}/{REPO_NAME}"
-            print(f"Assuming repo at {remote_repo_path}")
-            
-        print(f"Target Repo: {remote_repo_path}")
-        
-        # Cleanup possibly running old experiments
-        print("Stopping any running python experiments...")
-        client.exec_command("echo '-' | sudo -S killall python3")
-        time.sleep(2)        
-
-        # Fix permissions so we can upload
-        print("Fixing permissions on remote...")
-        client.exec_command(f"echo '{PASS}' | sudo -S chown -R {USER}:{USER} {remote_repo_path}")
-
-        # --- GIT SYNC INSTEAD OF SFTP ---
-        print(f"Syncing code via Git...")
-        # Reset to ensure clean state and pull latest
-        # Using 'git reset --hard' to overwrite any local changes/logs that might conflict 
-        # (though logs are usually untracked, config.json might be modified)
-        # BE CAREFUL: This wipes local changes on remote.
-        # User requested: "ausschließlich über git daten zwischen remote und lokalem host tauschst"
-        
-        # We assume remote has correct origin set.
-        stdin, stdout, stderr = client.exec_command(f"cd {remote_repo_path} && git fetch --all && git reset --hard origin/main")
-        exit_status = stdout.channel.recv_exit_status()
-        if exit_status != 0:
-            print(f"Git sync failed: {stderr.read().decode()}")
-            # Check if we should abort or continue?
-            # If git fails, code might be old. Abort.
-            sys.exit(1)
-        else:
-            print("Git sync successful (reset to origin/main).")
-        
-        # Upload config files that are NOT in git?
-        # experiments_longrun.json IS in git (we can commit it if not).
-        # If config files are generated/modified locally and NOT committed, we must commit them or we still need SFTP.
-        # The user said "EXCLUSIVELY via git". 
-        # So I must commit config files too if I changed them.
-        # I changed config/experiments_longrun.json recently. I should check if it's committed.
-        # For now, I will assume configs are committed. 
-        # If not, I'll need to add a step to commit them locally first.
-
-        # 3. Launch Experiment in Screen
-        print("Launching 10-minute experiment series (Long Run)...")
-        
-        # We must cd into the repo so that relative paths in scripts works
-        remote_cmd = f"cd {remote_repo_path} && echo '{PASS}' | sudo -S nohup python3 tools/run_series.py --experiments config/experiments_high_noise.json > experiment_output.log 2>&1 & echo $!"
-        
-        print(f"Executing: {remote_cmd}")
-        stdin, stdout, stderr = client.exec_command(remote_cmd)
-        
-        # Read PID
-        pid = stdout.read().decode().strip()
-        err = stderr.read().decode().strip()
-        
-        print(f"PID: {pid}")
-        if err:
-            print(f"Stderr: {err}")
-            
-        print("Experiment launched in background.")
-        print(f"Check '{remote_repo_path}/experiment_output.log' on remote for progress.")
-        
-        client.close()
-        
-    except Exception as e:
-        print(f"Failed: {e}")
+        os.system(cmd)
+    except KeyboardInterrupt:
+        print("Aborted by user.")
 
 if __name__ == "__main__":
     main()

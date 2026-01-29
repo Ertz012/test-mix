@@ -1,23 +1,38 @@
+
 import os
-import subprocess
 import sys
 
 def main():
-    tools_dir = os.path.dirname(os.path.abspath(__file__))
-    base_dir = os.path.dirname(tools_dir)
-    experiments_file = os.path.join(base_dir, "config", "experiments_no_noise.json")
-    run_series_script = os.path.join(tools_dir, "run_series.py")
+    """
+    Script to launch the NO NOISE experiment series locally (on the remote machine).
+    Prerequisites:
+    1. Repository is synced.
+    2. config/experiments_no_noise.json exists.
+    """
     
-    print(f"Launching No-Noise Test Series...")
-    print(f"Config: {experiments_file}")
+    base_dir = os.getcwd()
+    config_rel_path = os.path.join("config", "experiments_no_noise.json")
+    config_path = os.path.join(base_dir, config_rel_path)
+    runner_script = os.path.join(base_dir, "tools", "run_series.py")
     
-    cmd = [sys.executable, run_series_script, "--experiments", experiments_file]
-    
-    try:
-        subprocess.check_call(cmd)
-    except subprocess.CalledProcessError as e:
-        print(f"Error executing run_series.py: {e}")
+    if not os.path.exists(config_path):
+        print(f"Error: Config not found at {config_path}")
         sys.exit(1)
         
+    print(f"Launching NO NOISE Experiment Series...")
+    print(f"Config: {config_path}")
+    
+    if os.geteuid() != 0:
+        print("Switching to sudo...")
+        cmd = f"sudo python3 {runner_script} --experiments {config_path}"
+    else:
+        cmd = f"python3 {runner_script} --experiments {config_path}"
+    
+    print(f"Running: {cmd}")
+    try:
+        os.system(cmd)
+    except KeyboardInterrupt:
+        print("Aborted by user.")
+
 if __name__ == "__main__":
     main()

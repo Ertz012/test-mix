@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 import time
 import subprocess
 import shutil
@@ -60,7 +61,7 @@ def run_experiment(exp_name, error_injection_config):
     # 2. Start Orchestration (in background or blocking? Blocking generally, but orchestrate handles the duration)
     # However, we need to run error injector in parallel if it exists.
     
-    orchestrator_proc = subprocess.Popen(["sudo", "python3", ORCHESTRATE_SCRIPT, exp_name])
+    orchestrator_proc = subprocess.Popen(["sudo", sys.executable, ORCHESTRATE_SCRIPT, exp_name])
     
     injector_proc = None
     if error_injection_config:
@@ -71,7 +72,7 @@ def run_experiment(exp_name, error_injection_config):
         # We start injector asynchronously
         logger.info(f"Scheduling Error Injection: {mode} in {delay}s")
         injector_cmd = [
-            "sudo", "python3", INJECTOR_SCRIPT,
+            "sudo", sys.executable, INJECTOR_SCRIPT,
             "--mode", mode,
             "--count", str(count),
             "--delay", str(delay)
@@ -89,7 +90,15 @@ def run_experiment(exp_name, error_injection_config):
     orchestrator_proc.wait()
     
     if injector_proc:
-        injector_proc.wait() # Should have finished by now or we kill it
+        # Check if still running
+        if injector_proc.poll() is None:
+            logger.info("Terminating error injector...")
+            # Try terminating cleanly first
+            run_command(f"sudo kill {injector_proc.pid}", shell=True)
+            try:
+                injector_proc.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                 run_command(f"sudo kill -9 {injector_proc.pid}", shell=True)
     
     # 3. Identify the log directory
     # Orchestrator creates a timestamped dir in logs/. We need the LATEST one.

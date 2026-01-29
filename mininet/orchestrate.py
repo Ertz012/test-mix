@@ -48,7 +48,7 @@ def run_experiment():
 
     # Generate Run ID
     run_id = f"Testrun_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}{exp_suffix}"
-    run_dir = os.path.join("logs", run_id)
+    run_dir = os.path.join(os.getcwd(), "logs", run_id)
     os.makedirs(run_dir, exist_ok=True)
     info(f"Logging to {run_dir}\n")
     
@@ -70,6 +70,11 @@ def run_experiment():
     # Start Agents
     info("Starting MixNet Agents...\n")
     
+    # Get Absolute Path for src/run.py
+    run_script = os.path.join(os.getcwd(), "src", "run.py")
+    config_path = os.path.join(os.getcwd(), "config", "config.json")
+    map_path = os.path.join(os.getcwd(), "network_map.json")
+
     for host in net.hosts:
         role = "mix"
         if host.name.startswith('s'): role = 'sender' # Legacy
@@ -81,7 +86,11 @@ def run_experiment():
         # Cmd
         # Pass TESTRUN_ID as env var
         # Redirect stdout/stderr to the run_dir
-        cmd = f"TESTRUN_ID={run_id} python3 src/run.py --role {role} --config config/config.json --hostname {host.name} --network-map network_map.json > {run_dir}/{host.name}.out 2>&1 &"
+        # Use absolute paths and run via bash to ensure redirection works
+        cmd = f"TESTRUN_ID={run_id} python3 {run_script} --role {role} --config {config_path} --hostname {host.name} --network-map {map_path} > {run_dir}/{host.name}.out 2>&1 &"
+        
+        # Using bash explicitly might be safer if host.cmd doesn't invoke shell
+        # But Mininet host.cmd usually sends string to shell.
         host.cmd(cmd)
         
     info(f"Agents running. Traffic generation will be handled by config.\n")

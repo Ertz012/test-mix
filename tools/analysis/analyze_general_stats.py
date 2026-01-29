@@ -213,7 +213,7 @@ def calculate_metrics(df, config=None):
         ack_mask = df['flags'].astype(str).str.contains('type=ACK', case=False, na=False)
         analysis_df = df[~ack_mask]
 
-    sent_df = analysis_df[analysis_df['event_type'] == 'CREATED'].drop_duplicates(subset=['packet_id'])
+    sent_df = analysis_df[(analysis_df['event_type'] == 'CREATED') & (analysis_df['dst'] != 'DROP')].drop_duplicates(subset=['packet_id'])
     recv_df = analysis_df[(analysis_df['event_type'] == 'RECEIVED') & (analysis_df['node_id'].str.startswith(('c', 'Client')))].drop_duplicates(subset=['packet_id'])
     
     total_sent = len(sent_df)
@@ -235,8 +235,16 @@ def calculate_metrics(df, config=None):
         'max_latency': float(merged['latency'].max()) if not merged.empty and not np.isnan(merged['latency'].max()) else 0.0,
         'min_latency': float(merged['latency'].min()) if not merged.empty and not np.isnan(merged['latency'].min()) else 0.0,
         'retrans_count': int(retrans),
-        'redirect_count': int(len(df[df['event_type'] == 'REDIRECTED']))
+        'retrans_count': int(retrans),
+        'redirect_count': int(len(df[df['event_type'] == 'REDIRECTED'])),
+        'total_messages_sent': len(sent_df['message_id'].unique()) if 'message_id' in sent_df else 0,
+        'total_messages_received': len(recv_df['message_id'].unique()) if 'message_id' in recv_df else 0
     }
+    
+    if metrics['total_messages_sent'] > 0:
+        metrics['message_loss_rate'] = 1.0 - (metrics['total_messages_received'] / metrics['total_messages_sent'])
+    else:
+        metrics['message_loss_rate'] = 0.0
     
     return metrics
 
@@ -266,11 +274,12 @@ def main():
     print("Generating Trace Report...")
     generate_trace_report(traffic_df, mix_df, os.path.join(output_dir, "packet_trace.txt"))
     
-    print("Generating Network Graph...")
-    try:
-        generate_network_graph(traffic_df, mix_df, os.path.join(output_dir, "traffic_graph.png"))
-    except Exception as e:
-        print(f"Graph error: {e}")
+    # Graph generation disabled by user request
+    # print("Generating Network Graph...")
+    # try:
+    #     generate_network_graph(traffic_df, mix_df, os.path.join(output_dir, "traffic_graph.png"))
+    # except Exception as e:
+    #     print(f"Graph error: {e}")
 
     print("General Analysis Complete.")
 

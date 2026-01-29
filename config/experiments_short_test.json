@@ -1,7 +1,7 @@
 [
     {
-        "name": "01_baseline_no_errors_high_noise",
-        "description": "Baseline (High Noise): Real=3.0, Loop=5.0, Tx=15.0",
+        "name": "01_baseline_no_errors_short",
+        "description": "Baseline (Short): Real=3.0, Loop=5.0, Tx=15.0",
         "config_overrides": {
             "features": {
                 "retransmission": false,
@@ -15,7 +15,7 @@
             "traffic": {
                 "traffic_strategy": "loopix",
                 "mode": "random",
-                "duration_sec": 600,
+                "duration_sec": 180,
                 "interval_sec": 0.1,
                 "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
@@ -25,8 +25,8 @@
         "error_injection": null
     },
     {
-        "name": "02_baseline_errors_high_noise",
-        "description": "Baseline Errors (High Noise): Real=3.0, Loop=5.0, Tx=15.0",
+        "name": "02_baseline_errors_short",
+        "description": "Baseline Errors (Short): Real=3.0, Loop=5.0, Tx=15.0",
         "config_overrides": {
             "features": {
                 "retransmission": false,
@@ -40,7 +40,7 @@
             "traffic": {
                 "traffic_strategy": "loopix",
                 "mode": "random",
-                "duration_sec": 600,
+                "duration_sec": 180,
                 "interval_sec": 0.1,
                 "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
@@ -50,14 +50,14 @@
         "error_injection": {
             "mode": "churn",
             "count": 2,
-            "delay": 60,
-            "interval": 30,
-            "downtime": 30
+            "delay": 20,
+            "interval": 20,
+            "downtime": 20
         }
     },
     {
-        "name": "03_retransmission_high_noise",
-        "description": "Retransmission (High Noise): Real=3.0, Loop=5.0, Tx=15.0",
+        "name": "03_retransmission_short",
+        "description": "Retransmission (Short): Real=3.0, Loop=5.0, Tx=15.0",
         "config_overrides": {
             "features": {
                 "retransmission": true,
@@ -69,7 +69,7 @@
             "traffic": {
                 "traffic_strategy": "loopix",
                 "mode": "random",
-                "duration_sec": 600,
+                "duration_sec": 180,
                 "interval_sec": 0.1,
                 "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
@@ -79,14 +79,14 @@
         "error_injection": {
             "mode": "churn",
             "count": 2,
-            "delay": 60,
-            "interval": 30,
-            "downtime": 30
+            "delay": 20,
+            "interval": 20,
+            "downtime": 20
         }
     },
     {
-        "name": "04_path_reestablishment_high_noise",
-        "description": "Path Reest (High Noise): Real=3.0, Loop=5.0, Tx=15.0",
+        "name": "04_path_reestablishment_short",
+        "description": "Path Reest (Short): Real=3.0, Loop=5.0, Tx=15.0",
         "config_overrides": {
             "features": {
                 "retransmission": true,
@@ -98,7 +98,7 @@
             "traffic": {
                 "traffic_strategy": "loopix",
                 "mode": "random",
-                "duration_sec": 600,
+                "duration_sec": 180,
                 "interval_sec": 0.1,
                 "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
@@ -108,14 +108,14 @@
         "error_injection": {
             "mode": "churn",
             "count": 2,
-            "delay": 60,
-            "interval": 30,
-            "downtime": 30
+            "delay": 20,
+            "interval": 20,
+            "downtime": 20
         }
     },
     {
-        "name": "05_parallel_paths_high_noise",
-        "description": "Multipath (High Noise): Real=3.0, Loop=5.0, Tx=15.0",
+        "name": "05_parallel_paths_short",
+        "description": "Multipath (Short): Real=3.0, Loop=5.0, Tx=15.0",
         "config_overrides": {
             "features": {
                 "retransmission": false,
@@ -127,7 +127,7 @@
             "traffic": {
                 "traffic_strategy": "loopix",
                 "mode": "random",
-                "duration_sec": 600,
+                "duration_sec": 180,
                 "interval_sec": 0.1,
                 "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
@@ -137,14 +137,14 @@
         "error_injection": {
             "mode": "churn",
             "count": 2,
-            "delay": 60,
-            "interval": 30,
-            "downtime": 30
+            "delay": 20,
+            "interval": 20,
+            "downtime": 20
         }
     },
     {
-        "name": "06_backup_mixes_high_noise",
-        "description": "Backup Mixes (High Noise): Real=3.0, Loop=5.0, Tx=15.0",
+        "name": "06_backup_mixes_short",
+        "description": "Backup Mixes (Short): Real=3.0, Loop=5.0, Tx=15.0",
         "config_overrides": {
             "features": {
                 "retransmission": false,
@@ -156,7 +156,7 @@
             "traffic": {
                 "traffic_strategy": "loopix",
                 "mode": "random",
-                "duration_sec": 600,
+                "duration_sec": 180,
                 "interval_sec": 0.1,
                 "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
@@ -166,9 +166,9 @@
         "error_injection": {
             "mode": "churn",
             "count": 2,
-            "delay": 60,
-            "interval": 30,
-            "downtime": 30
+            "delay": 20,
+            "interval": 20,
+            "downtime": 20
         }
     }
 ]

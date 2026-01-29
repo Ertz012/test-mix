@@ -29,6 +29,7 @@ class ExperimentLogger:
         
         # File handler
         fh = logging.FileHandler(os.path.join(self.run_dir, f"{self.hostname}.log"))
+        print(f"DEBUG: Creating log file at {os.path.join(self.run_dir, f'{self.hostname}.log')}")
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         fh.setFormatter(formatter)
         logger.addHandler(fh)

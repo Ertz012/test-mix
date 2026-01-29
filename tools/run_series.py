@@ -76,6 +76,13 @@ def run_experiment(exp_name, error_injection_config):
             "--count", str(count),
             "--delay", str(delay)
         ]
+        
+        # Optional Churn Params
+        if 'interval' in error_injection_config:
+            injector_cmd.extend(["--interval", str(error_injection_config['interval'])])
+        if 'downtime' in error_injection_config:
+            injector_cmd.extend(["--downtime", str(error_injection_config['downtime'])])
+            
         injector_proc = subprocess.Popen(injector_cmd)
 
     # Wait for orchestrator to finish (it waits for traffic duration)

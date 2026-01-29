@@ -1,0 +1,178 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Loopix Analysis Dashboard</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+            .metric-card { background: #f8f9fa; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            h1, h2 { color: #2c3e50; }
+            .plot-container { text-align: center; margin-bottom: 40px; }
+            .plot-container img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px; padding: 5px; }
+            table { margin-top: 20px; font-size: 0.9rem; }
+            th { background-color: #34495e !important; color: white; }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <h1 class="text-center mb-5">🚀 Loopix Network Analysis Dashboard</h1>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>🛡️ Anonymity Distribution (Diaz)</h2>
+                        <div class="plot-container">
+                            <img src="cmp_anonymity.png" alt="Anonymity Comparison">
+                        </div>
+                        <p class="text-muted">Distribution over test runs. Box shows Median & Quartiles.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>🎯 Attacker Confidence (LLR)</h2>
+                        <div class="plot-container">
+                            <img src="cmp_confidence.png" alt="Attacker Confidence">
+                        </div>
+                        <p class="text-muted">Distribution of Max LLR. Dots indicate individual runs.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>🎲 Shannon Entropy</h2>
+                        <div class="plot-container">
+                            <img src="cmp_shannon.png" alt="Shannon Entropy Comparison">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>📉 Packet Loss Rate</h2>
+                        <div class="plot-container">
+                            <img src="cmp_loss_rate.png" alt="Packet Loss Rate Comparison">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>📩 Message Loss Rate</h2>
+                        <div class="plot-container">
+                            <img src="cmp_message_loss.png" alt="Message Loss Rate Comparison">
+                        </div>
+                        <p class="text-muted">Percentage of messages where NO copy arrived.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="metric-card">
+                        <h2>⏱️ Average Latency</h2>
+                        <div class="plot-container">
+                            <img src="cmp_latency.png" alt="Latency Comparison">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h2>📊 Detailed Experiment Data</h2>
+                <div class="table-responsive" style="max-height: 800px; overflow-y: auto;">
+                    <table border="1" class="dataframe table table-striped table-hover">
+  <thead>
+    <tr style="text-align: right;">
+      <th>name</th>
+      <th>loss_rate</th>
+      <th>avg_latency</th>
+      <th>diaz_anonymity</th>
+      <th>shannon_entropy</th>
+      <th>attacker_confidence</th>
+      <th>attack_success</th>
+      <th>attack_success_top2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Testrun_20260129_175535_01_baseline_no_errors_high_noise</td>
+      <td>0.00%</td>
+      <td>2.5569</td>
+      <td>0.6768</td>
+      <td>6.497393</td>
+      <td>7.0597</td>
+      <td>❌ NO</td>
+      <td>❌ NO</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260129_180552_02_baseline_errors_high_noise</td>
+      <td>8.06%</td>
+      <td>2.5216</td>
+      <td>0.5362</td>
+      <td>5.159345</td>
+      <td>7.5291</td>
+      <td>❌ NO</td>
+      <td>❌ NO</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260129_181657_03_retransmission_high_noise</td>
+      <td>7.80%</td>
+      <td>2.5729</td>
+      <td>0.0442</td>
+      <td>0.424980</td>
+      <td>16.7636</td>
+      <td>❌ NO</td>
+      <td>✅ YES</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260129_182802_04_path_reestablishment_high_noise</td>
+      <td>23.58%</td>
+      <td>2.5386</td>
+      <td>0.0043</td>
+      <td>0.041006</td>
+      <td>26.9845</td>
+      <td>✅ YES</td>
+      <td>✅ YES</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260129_183908_05_parallel_paths_high_noise</td>
+      <td>7.55%</td>
+      <td>2.5471</td>
+      <td>0.0216</td>
+      <td>0.208203</td>
+      <td>13.4861</td>
+      <td>❌ NO</td>
+      <td>❌ NO</td>
+    </tr>
+    <tr>
+      <td>Testrun_20260129_185013_06_backup_mixes_high_noise</td>
+      <td>0.09%</td>
+      <td>2.5394</td>
+      <td>0.6639</td>
+      <td>6.372995</td>
+      <td>6.2806</td>
+      <td>❌ NO</td>
+      <td>❌ NO</td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                <div class="mt-3">
+                    <p class="text-muted d-inline me-3">Raw Data (All Runs): <a href="raw_metrics.csv" class="btn btn-sm btn-outline-primary">Download raw_metrics.csv</a></p>
+                    <p class="text-muted d-inline">Aggregated Stats (Mean/Median for Plots): <a href="aggregated_stats.csv" class="btn btn-sm btn-outline-success">Download aggregated_stats.csv</a></p>
+                </div>
+            </div>
+            
+            <footer class="mt-5 text-center text-muted">
+                <p>Generated by Loopix Analysis Suite</p>
+            </footer>
+        </div>
+    </body>
+    </html>
+    

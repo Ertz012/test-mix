@@ -84,10 +84,10 @@ def run_experiment():
         else: role = 'mix'
         
         # Cmd
-        # Pass TESTRUN_ID as env var
+        # Pass TESTRUN_ID as env var AND argument (so it persists in process cmdline for PIDs)
         # Redirect stdout/stderr to the run_dir
         # Use absolute paths and run via bash to ensure redirection works
-        cmd = f"TESTRUN_ID={run_id} python3 {run_script} --role {role} --config {config_path} --hostname {host.name} --network-map {map_path} > {run_dir}/{host.name}.out 2>&1 &"
+        cmd = f"TESTRUN_ID={run_id} python3 {run_script} --role {role} --config {config_path} --hostname {host.name} --network-map {map_path} --testrun-id {run_id} > {run_dir}/{host.name}.out 2>&1 &"
         
         # Using bash explicitly might be safer if host.cmd doesn't invoke shell
         # But Mininet host.cmd usually sends string to shell.

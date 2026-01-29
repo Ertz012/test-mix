@@ -21,8 +21,14 @@ def main():
     parser.add_argument("--config", required=True, help="Path to config file")
     parser.add_argument("--hostname", required=True, help="Hostname (e.g., h_entry_1)")
     parser.add_argument("--network-map", required=False, help="JSON file with network map (host->ip:port)")
+    parser.add_argument("--testrun-id", required=False, help="Run ID for logging folder consistency")
     
     args = parser.parse_args()
+    
+    # Propagate Run ID to Environment (for Logger)
+    if args.testrun_id:
+        os.environ["TESTRUN_ID"] = args.testrun_id
+        
     config = load_config(args.config)
     
     # Load Network Map

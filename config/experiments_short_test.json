@@ -15,7 +15,7 @@
             "traffic": {
                 "traffic_strategy": "loopix",
                 "mode": "random",
-                "duration_sec": 180,
+                "duration_sec": 60,
                 "interval_sec": 0.1,
                 "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
@@ -40,7 +40,7 @@
             "traffic": {
                 "traffic_strategy": "loopix",
                 "mode": "random",
-                "duration_sec": 180,
+                "duration_sec": 60,
                 "interval_sec": 0.1,
                 "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
@@ -50,9 +50,9 @@
         "error_injection": {
             "mode": "churn",
             "count": 2,
-            "delay": 20,
-            "interval": 20,
-            "downtime": 20
+            "delay": 15,
+            "interval": 15,
+            "downtime": 15
         }
     },
     {
@@ -69,7 +69,7 @@
             "traffic": {
                 "traffic_strategy": "loopix",
                 "mode": "random",
-                "duration_sec": 180,
+                "duration_sec": 60,
                 "interval_sec": 0.1,
                 "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
@@ -79,9 +79,9 @@
         "error_injection": {
             "mode": "churn",
             "count": 2,
-            "delay": 20,
-            "interval": 20,
-            "downtime": 20
+            "delay": 15,
+            "interval": 15,
+            "downtime": 15
         }
     },
     {
@@ -98,7 +98,7 @@
             "traffic": {
                 "traffic_strategy": "loopix",
                 "mode": "random",
-                "duration_sec": 180,
+                "duration_sec": 60,
                 "interval_sec": 0.1,
                 "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
@@ -108,9 +108,9 @@
         "error_injection": {
             "mode": "churn",
             "count": 2,
-            "delay": 20,
-            "interval": 20,
-            "downtime": 20
+            "delay": 15,
+            "interval": 15,
+            "downtime": 15
         }
     },
     {
@@ -127,7 +127,7 @@
             "traffic": {
                 "traffic_strategy": "loopix",
                 "mode": "random",
-                "duration_sec": 180,
+                "duration_sec": 60,
                 "interval_sec": 0.1,
                 "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
@@ -137,9 +137,9 @@
         "error_injection": {
             "mode": "churn",
             "count": 2,
-            "delay": 20,
-            "interval": 20,
-            "downtime": 20
+            "delay": 15,
+            "interval": 15,
+            "downtime": 15
         }
     },
     {
@@ -156,7 +156,7 @@
             "traffic": {
                 "traffic_strategy": "loopix",
                 "mode": "random",
-                "duration_sec": 180,
+                "duration_sec": 60,
                 "interval_sec": 0.1,
                 "rate_packets_per_sec": 3.0,
                 "loop_rate_packets_per_sec": 5.0,
@@ -166,9 +166,9 @@
         "error_injection": {
             "mode": "churn",
             "count": 2,
-            "delay": 20,
-            "interval": 20,
-            "downtime": 20
+            "delay": 15,
+            "interval": 15,
+            "downtime": 15
         }
     }
 ]

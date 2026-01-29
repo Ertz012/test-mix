@@ -17,6 +17,7 @@ class Reliability:
         self.max_retries = 3
         self.lock = threading.Lock()
         
+    def start(self):
         if self.retransmission_enabled:
             # Start monitoring thread
             print("DEBUG: Reliability Thread STARTING", flush=True) 

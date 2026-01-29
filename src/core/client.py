@@ -60,6 +60,7 @@ class Client(Node):
 
     def start(self):
         super().start()
+        self.reliability.start()
         # No processing loop needed for client receive for now (handled by listener thread in Node)
 
     def start_sending(self):

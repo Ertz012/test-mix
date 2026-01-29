@@ -1,0 +1,1531 @@
+2026-01-29 22:12:58,363 - Node_c4 - INFO - Started node on port 8000
+2026-01-29 22:13:00,370 - Node_c4 - INFO - Starting traffic generation threads...
+2026-01-29 22:13:00,370 - Node_c4 - INFO - Assigned fixed partner: c1
+2026-01-29 22:13:00,370 - Node_c4 - INFO - Traffic Strategy: loopix
+2026-01-29 22:13:00,370 - Node_c4 - INFO - Loopix Mode: Emission Rate = 15.0 pps (Real: 3.0)
+2026-01-29 22:13:00,451 - Node_c4 - INFO - Sent packet a6eac9e0-38a2-46b2-b8b5-285cb81b01c2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:00,457 - Node_c4 - INFO - Sent packet 42117aa3-1a7b-4b9e-9ae5-0d3e53fe4df4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:00,463 - Node_c4 - INFO - Sent packet 6e34613d-5743-43bc-844d-b6ae09860b28 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:00,641 - Node_c4 - INFO - Sent packet 95d3ea7b-0c5c-4468-865c-12b6ebffc4a3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:00,649 - Node_c4 - INFO - Sent packet 3f052e51-353d-469c-b54c-f9bac53e080f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:00,676 - Node_c4 - INFO - Sent packet 12345e1c-1ffb-4e8f-b2a8-f6807dfe55da to p1 (10.0.0.6:8000)
+2026-01-29 22:13:00,876 - Node_c4 - INFO - Sent packet 2b8ad07b-2f04-4bd3-b597-237b41bf2c6c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:00,947 - Node_c4 - INFO - Sent packet b8cd2275-1348-4e11-811a-8ce9a6174389 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:01,099 - Node_c4 - INFO - Sent packet 36f479ae-5ba0-4c65-8b86-64b845f59f87 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:01,260 - Node_c4 - INFO - Sent packet 1358c0d9-6a54-4349-b743-756bc5c3a0e9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:01,313 - Node_c4 - INFO - Sent packet a72f4822-f55d-498d-bd8b-8b4ab6999aca to p1 (10.0.0.6:8000)
+2026-01-29 22:13:01,481 - Node_c4 - INFO - Sent packet d348b0aa-805b-4b3f-b9a2-9950cf249069 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:01,645 - Node_c4 - INFO - Sent packet 47d078fb-fb80-4713-bdb8-dbe3a132d30c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:01,659 - Node_c4 - INFO - Sent packet 6cda719e-422b-4590-9787-b7a16f60b67d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:01,679 - Node_c4 - INFO - Sent packet b4c5dc7b-2575-4997-9c6c-4b613ad91113 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:01,757 - Node_c4 - INFO - Received msg: Real Msg 1769721180.... Latency: 1.0536s
+2026-01-29 22:13:01,802 - Node_c4 - INFO - Sent packet 21a7a2af-1143-4637-b0ea-cf2de6efafde to p1 (10.0.0.6:8000)
+2026-01-29 22:13:01,848 - Node_c4 - INFO - Sent packet 7c10bd2a-e633-430f-b721-44fd172daffc to p1 (10.0.0.6:8000)
+2026-01-29 22:13:01,868 - Node_c4 - INFO - Sent packet ebe5c8b4-a441-4dad-ae07-a73dd1a8b325 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:01,889 - Node_c4 - INFO - Sent packet fc2469d2-4194-4b0e-9184-474347181bfa to p1 (10.0.0.6:8000)
+2026-01-29 22:13:01,948 - Node_c4 - INFO - Sent packet 781386a8-4890-439c-91dd-8a7081fd2784 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:01,999 - Node_c4 - INFO - Sent packet 81d4eed7-7080-483a-8771-016e9970ba11 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:02,028 - Node_c4 - INFO - Sent packet eab1b89b-ba02-437e-900b-141a997fb178 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:02,055 - Node_c4 - INFO - Sent packet f86326a0-e722-466c-b32f-d32daa28f2a6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:02,215 - Node_c4 - INFO - Sent packet fc276c3c-5220-4d60-bb4b-0b30ca2a56e5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:02,445 - Node_c4 - INFO - Received msg: Real Msg 1769721180.... Latency: 1.7629s
+2026-01-29 22:13:02,450 - Node_c4 - INFO - Sent packet 578939ce-35b9-470e-81b6-cf596beaf580 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:02,489 - Node_c4 - INFO - Received msg: Real Msg 1769721180.... Latency: 1.7831s
+2026-01-29 22:13:02,499 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 0.8813s
+2026-01-29 22:13:02,519 - Node_c4 - INFO - Sent packet cf815c5a-f6d2-4dc1-84b7-a37383296a91 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:02,615 - Node_c4 - INFO - Sent packet d345fab3-35e1-4a80-95de-44777d96072d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:02,670 - Node_c4 - INFO - Sent packet 1c58e014-925a-4a47-a106-b34b3fafa8d5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:02,723 - Node_c4 - INFO - Sent packet f86dfea5-901a-42c4-87ed-d0f9f5a50e84 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:02,739 - Node_c4 - INFO - Sent packet ebf0dfb7-2b62-472c-9c9d-b1cc027e1551 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:02,773 - Node_c4 - INFO - Sent packet 3ec3f6fa-f226-4928-84f0-da6366129f60 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:02,815 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 1.5588s
+2026-01-29 22:13:02,821 - Node_c4 - INFO - Sent packet 23976d34-b5dd-48a9-b906-7fe91b262691 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:02,976 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 1.0141s
+2026-01-29 22:13:03,028 - Node_c4 - INFO - Sent packet 39fabcc8-a574-44f5-8898-8b0259055eef to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,065 - Node_c4 - INFO - Sent packet 3a3c02df-7596-4590-8227-287a801566d6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,067 - Node_c4 - INFO - Sent packet ae839615-e62d-40ee-b224-2ac40b4a178f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,202 - Node_c4 - INFO - Sent packet 7d7cd295-246a-47a8-aecb-7f64b9eb93bb to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,345 - Node_c4 - INFO - Received msg: Real Msg 1769721182.... Latency: 0.7728s
+2026-01-29 22:13:03,397 - Node_c4 - INFO - Sent packet 4bde29c2-8270-496b-a1d8-81f9738acd62 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,425 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 2.1688s
+2026-01-29 22:13:03,467 - Node_c4 - INFO - Sent packet 0ac6cc40-60de-4ecb-a033-8f75e35f2117 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,566 - Node_c4 - INFO - Sent packet db8fb14e-49fa-4da9-a285-a7822da26d0f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,582 - Node_c4 - INFO - Sent packet 804d6463-c029-43c8-8211-262168c625ad to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,642 - Node_c4 - INFO - Sent packet d28bf993-e6d7-4627-97f7-0aac38f456af to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,684 - Node_c4 - INFO - Sent packet 7e2bca38-c227-4a5e-ba39-963a48d2bc88 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,689 - Node_c4 - INFO - Sent packet c61f964e-d7d0-41c8-b667-030f04fc55e6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,709 - Node_c4 - INFO - Received msg: Real Msg 1769721180.... Latency: 3.0031s
+2026-01-29 22:13:03,780 - Node_c4 - INFO - Received msg: Real Msg 1769721180.... Latency: 3.0759s
+2026-01-29 22:13:03,860 - Node_c4 - INFO - Received msg: Real Msg 1769721182.... Latency: 1.2887s
+2026-01-29 22:13:03,931 - Node_c4 - INFO - Sent packet 0912c846-36c1-4503-840f-f4ea18666327 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,957 - Node_c4 - INFO - Sent packet 1ad2815b-9a2b-4f49-98e4-9888cd7faf6b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,962 - Node_c4 - INFO - Sent packet 75df59c7-c16f-41e9-b5d7-cb862d2b287c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:03,968 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 2.5270s
+2026-01-29 22:13:03,984 - Node_c4 - INFO - Sent packet 9ca5192b-e1ad-42d4-b953-b2658e2d299b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,098 - Node_c4 - INFO - Sent packet c2b19cac-fc8f-4220-b168-9ecc844c8361 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,123 - Node_c4 - INFO - Sent packet e7056fb6-b167-4905-8994-e791d755df56 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,153 - Node_c4 - INFO - Received msg: Real Msg 1769721180.... Latency: 3.4157s
+2026-01-29 22:13:04,194 - Node_c4 - INFO - Sent packet 90625020-73e6-476c-93c5-315f634e21f3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,232 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 2.4910s
+2026-01-29 22:13:04,251 - Node_c4 - INFO - Sent packet b1c51d9b-3f9e-4762-9086-89cef46e84f8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,263 - Node_c4 - INFO - Sent packet d89699a2-d304-4f20-b4b2-3e48bab4b09c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,281 - Node_c4 - INFO - Received msg: Real Msg 1769721180.... Latency: 3.5437s
+2026-01-29 22:13:04,299 - Node_c4 - INFO - Sent packet 1ca5d02e-0c7a-402b-955f-bf455759df33 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,322 - Node_c4 - INFO - Sent packet 8c5edc7c-87e2-4b66-bfd7-2f9668b8a330 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,333 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 1.2928s
+2026-01-29 22:13:04,345 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 2.5385s
+2026-01-29 22:13:04,364 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 2.7468s
+2026-01-29 22:13:04,417 - Node_c4 - INFO - Sent packet fab42a45-e85d-4ff6-8cda-2156964f7359 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,477 - Node_c4 - INFO - Sent packet c84b1b8b-6e61-4a77-b3c9-ad763579e2ec to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,517 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 2.8953s
+2026-01-29 22:13:04,523 - Node_c4 - INFO - Sent packet f71d48c2-30eb-40d8-b294-ecc7177fb6dd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,622 - Node_c4 - INFO - Sent packet 9bef13e3-6d95-4777-a7d5-8e7b5ecd98d4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,626 - Node_c4 - INFO - Sent packet 1b37c11b-076b-49e6-a21c-741516fb923e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,742 - Node_c4 - INFO - Sent packet 95a0d62d-ee79-4a3f-b25b-2b5c2883ce36 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,769 - Node_c4 - INFO - Sent packet 6e766e9d-a3e1-43c9-a486-8dc7e5b50e6d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,796 - Node_c4 - INFO - Sent packet 1e14d1b3-b4b6-46f6-89aa-968db9381207 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,850 - Node_c4 - INFO - Sent packet b13535a5-f959-4089-a872-0424946260b4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:04,936 - Node_c4 - INFO - Received msg: Real Msg 1769721180.... Latency: 4.2534s
+2026-01-29 22:13:04,953 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 1.9128s
+2026-01-29 22:13:04,959 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 1.4683s
+2026-01-29 22:13:05,031 - Node_c4 - INFO - Sent packet 5ba2984b-0c47-4fdd-943d-b70bb5872687 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:05,104 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 1.3534s
+2026-01-29 22:13:05,141 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 1.0044s
+2026-01-29 22:13:05,168 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 3.2061s
+2026-01-29 22:13:05,268 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 3.4610s
+2026-01-29 22:13:05,476 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 4.0347s
+2026-01-29 22:13:05,478 - Node_c4 - INFO - Sent packet 9977da30-dd16-47df-9cff-a80489353c80 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:05,526 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 2.0354s
+2026-01-29 22:13:05,596 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 1.7914s
+2026-01-29 22:13:05,616 - Node_c4 - INFO - Sent packet 5947c360-5823-4789-9ed8-542dcb44d1c1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:05,701 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 0.8175s
+2026-01-29 22:13:05,710 - Node_c4 - INFO - Sent packet 5b2c4334-c6d1-4c03-9433-b10748ece4eb to p1 (10.0.0.6:8000)
+2026-01-29 22:13:05,714 - Node_c4 - INFO - Sent packet c3fb0717-353e-4855-acf5-b02292b5d009 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:05,745 - Node_c4 - INFO - Sent packet 8107c9c2-856a-4bfe-90d7-fbf32cdef2c8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:05,785 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 1.5660s
+2026-01-29 22:13:05,793 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 1.6296s
+2026-01-29 22:13:05,806 - Node_c4 - INFO - Sent packet 1c13af37-8f9b-4d37-940c-16881e603141 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:05,857 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 1.7203s
+2026-01-29 22:13:05,895 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 2.0108s
+2026-01-29 22:13:05,973 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 2.0938s
+2026-01-29 22:13:05,983 - Node_c4 - INFO - Sent packet c7c3f382-bd98-4342-8992-27e0a4a19142 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:05,995 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 1.1796s
+2026-01-29 22:13:06,020 - Node_c4 - INFO - Sent packet 1ccf608a-5065-445b-aea2-5a75f93b83ba to p1 (10.0.0.6:8000)
+2026-01-29 22:13:06,072 - Node_c4 - INFO - Sent packet c8f80a74-4a94-4261-aec2-e4d5fb4d1b08 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:06,133 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 4.3916s
+2026-01-29 22:13:06,250 - Node_c4 - INFO - Received msg: Real Msg 1769721181.... Latency: 4.6279s
+2026-01-29 22:13:06,310 - Node_c4 - INFO - Sent packet 3cfb88e8-cab4-4df3-8f84-71a87e910928 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:06,336 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 2.5318s
+2026-01-29 22:13:06,401 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 0.7581s
+2026-01-29 22:13:06,475 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 1.0263s
+2026-01-29 22:13:06,475 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 2.2564s
+2026-01-29 22:13:06,482 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 1.5990s
+2026-01-29 22:13:06,503 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 2.6241s
+2026-01-29 22:13:06,564 - Node_c4 - INFO - Sent packet 914dfd88-16f8-4eca-8ffd-4871f5980bd8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:06,573 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 1.9544s
+2026-01-29 22:13:06,604 - Node_c4 - INFO - Sent packet 8608c008-1e7b-4141-bc68-19f1ddcc2764 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:06,629 - Node_c4 - INFO - Sent packet c777563d-ce24-4a48-b18e-3cd533a58e1f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:06,637 - Node_c4 - INFO - Sent packet 2c07a0ce-b019-43d4-ba96-87d6e80ee2ac to p1 (10.0.0.6:8000)
+2026-01-29 22:13:06,654 - Node_c4 - INFO - Sent packet 26db97c0-6b89-45cb-be49-e4472187ea66 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:06,660 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 2.7760s
+2026-01-29 22:13:06,671 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 1.8469s
+2026-01-29 22:13:06,700 - Node_c4 - INFO - Sent packet 9a8d9649-d018-4eb7-a562-378be72452cb to p1 (10.0.0.6:8000)
+2026-01-29 22:13:06,723 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 2.6159s
+2026-01-29 22:13:06,758 - Node_c4 - INFO - Sent packet 34fd5f3f-db43-4720-9008-addcc356922b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:06,787 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 2.7815s
+2026-01-29 22:13:06,793 - Node_c4 - INFO - Sent packet 5876e09d-e824-4e8c-b1dd-7ab8391d9769 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:06,808 - Node_c4 - INFO - Sent packet 0e7731c1-8fcf-4e46-be7e-7bb2a4dd3450 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:06,815 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 2.7073s
+2026-01-29 22:13:06,827 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 2.6520s
+2026-01-29 22:13:06,849 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 2.6743s
+2026-01-29 22:13:06,913 - Node_c4 - INFO - Sent packet 5b895936-f157-43b0-ad4b-81afb1219793 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:06,992 - Node_c4 - INFO - Sent packet a787137f-fc88-47be-b7be-ec3d8d124d25 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,075 - Node_c4 - INFO - Sent packet e12530ad-42e4-4002-8256-2fba5d2f3ccd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,084 - Node_c4 - INFO - Sent packet b7af45b2-cab7-4d9e-a0fc-e0d9843d4e9c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,138 - Node_c4 - INFO - Sent packet bc85288c-ae5f-44be-9a27-779a197ed34d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,204 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 1.8899s
+2026-01-29 22:13:07,209 - Node_c4 - INFO - Sent packet f529c6d5-d68e-49e7-885a-3975d77453d0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,283 - Node_c4 - INFO - Sent packet 40fbe26a-914e-4dba-96f9-9004a5c193a8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,305 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 3.3265s
+2026-01-29 22:13:07,325 - Node_c4 - INFO - Sent packet 8b1da2c0-d3de-4a38-84e5-171ed38cb69d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,330 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 0.8952s
+2026-01-29 22:13:07,340 - Node_c4 - INFO - Sent packet d9c6245f-f6a4-4da4-b3cd-1706ceb135c6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,367 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 2.5514s
+2026-01-29 22:13:07,388 - Node_c4 - INFO - Sent packet fdb3b205-9bff-4e07-8a46-40a9adc6417e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,476 - Node_c4 - INFO - Sent packet 56bd1d9d-2249-4039-9421-316af5b51520 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,481 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 1.0215s
+2026-01-29 22:13:07,546 - Node_c4 - INFO - Sent packet 962547dc-81e4-4a8a-9477-4cf4ca0a8901 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,556 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 2.7296s
+2026-01-29 22:13:07,623 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 1.3925s
+2026-01-29 22:13:07,631 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 1.6817s
+2026-01-29 22:13:07,639 - Node_c4 - INFO - Sent packet 70dade56-e055-492e-a553-985d850c304f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,668 - Node_c4 - INFO - Sent packet 9564b4ab-e240-40c5-a59b-6f9874f55d0f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,695 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 3.6898s
+2026-01-29 22:13:07,723 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 2.4096s
+2026-01-29 22:13:07,736 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 2.3948s
+2026-01-29 22:13:07,752 - Node_c4 - INFO - Sent packet 211c51ab-d8c5-4857-aab3-ac39169f8c1a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,763 - Node_c4 - INFO - Sent packet 923c7a7f-3fd4-4436-8e28-ebee68037dc3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,805 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 1.6510s
+2026-01-29 22:13:07,822 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 2.9978s
+2026-01-29 22:13:07,826 - Node_c4 - INFO - Sent packet a01098cd-f01b-4db9-a16e-a94323f2c5fe to p1 (10.0.0.6:8000)
+2026-01-29 22:13:07,974 - Node_c4 - INFO - Sent packet 46df6fe7-da8d-48fd-bab2-8a2673fd05c2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,037 - Node_c4 - INFO - Sent packet 1c5f11fa-679c-4c66-aca0-dda9a0ab5305 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,084 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 2.6447s
+2026-01-29 22:13:08,092 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 1.2244s
+2026-01-29 22:13:08,125 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 1.8946s
+2026-01-29 22:13:08,142 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 2.6939s
+2026-01-29 22:13:08,148 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 2.2679s
+2026-01-29 22:13:08,163 - Node_c4 - INFO - Sent packet 6d2a4234-a6e8-4520-9120-294e43fef60f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,186 - Node_c4 - INFO - Sent packet 635ef659-acfe-4985-8942-644c079a063f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,207 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 2.8658s
+2026-01-29 22:13:08,221 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 3.6019s
+2026-01-29 22:13:08,239 - Node_c4 - INFO - Sent packet 4b48cd93-24f9-4492-8e8d-66a8085f36aa to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,284 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 1.7964s
+2026-01-29 22:13:08,284 - Node_c4 - INFO - Sent packet 596b3f55-e8f8-4004-9bc7-66ab52ce7aba to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,306 - Node_c4 - INFO - Sent packet 6c9322df-472a-4eb2-b0a9-267615eb5a93 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,319 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 2.4691s
+2026-01-29 22:13:08,328 - Node_c4 - INFO - Sent packet c302eb1b-f8c5-45fe-9c12-deaddd30112d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,371 - Node_c4 - INFO - Sent packet fcc514e4-bfdd-4b95-8990-b5b324a13eeb to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,390 - Node_c4 - INFO - Sent packet b9033f02-5202-4310-9594-98f6eed33cd1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,434 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 4.0137s
+2026-01-29 22:13:08,445 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 2.8024s
+2026-01-29 22:13:08,471 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 2.5911s
+2026-01-29 22:13:08,501 - Node_c4 - INFO - Sent packet 3bd1d8ab-0947-45c9-b69e-1b4e957a3337 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,537 - Node_c4 - INFO - Sent packet 5ce50a71-ca34-411a-a26c-4bcc41900cab to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,607 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 3.1678s
+2026-01-29 22:13:08,672 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 4.6930s
+2026-01-29 22:13:08,673 - Node_c4 - INFO - Sent packet 1510cefa-d503-487b-b4b8-faac4a1c8c3b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,680 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 4.4169s
+2026-01-29 22:13:08,706 - Node_c4 - INFO - Sent packet ae7ba5c1-e150-43ae-843e-d348638bfc7f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:08,748 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 2.3124s
+2026-01-29 22:13:08,828 - Node_c4 - INFO - Received msg: Real Msg 1769721183.... Latency: 5.0774s
+2026-01-29 22:13:08,921 - Node_c4 - INFO - Sent packet 398d750a-f551-4fc9-b5b0-c8a60635269a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,002 - Node_c4 - INFO - Sent packet bdd0914a-2694-48fd-a9cd-92cd2fd621a1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,068 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 3.1180s
+2026-01-29 22:13:09,190 - Node_c4 - INFO - Sent packet 99cf3ca5-231c-47f8-a583-0d512947b0e2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,247 - Node_c4 - INFO - Sent packet 3d4c029e-7514-46ea-9982-a86b8bf6b997 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,284 - Node_c4 - INFO - Sent packet a5ae74a3-f9ac-464b-95b8-2e1a66bbb9e3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,333 - Node_c4 - INFO - Sent packet c7cc4b69-bea4-4a2e-bec2-e882e3b07fe5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,372 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 2.8848s
+2026-01-29 22:13:09,398 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 5.2342s
+2026-01-29 22:13:09,409 - Node_c4 - INFO - Sent packet 2e3da3ba-c4d0-4173-9337-fdb5d2ed3f1c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,433 - Node_c4 - INFO - Sent packet d756b622-6779-43cf-afc7-ba73d2707126 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,469 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 3.3151s
+2026-01-29 22:13:09,589 - Node_c4 - INFO - Sent packet 65bce9ce-b4c0-4fd2-a740-00cab79ce2a9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,675 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 1.4605s
+2026-01-29 22:13:09,695 - Node_c4 - INFO - Sent packet e358dfe4-fce9-420b-90e5-5ffdb3b810e9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,703 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 5.4399s
+2026-01-29 22:13:09,759 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 0.7785s
+2026-01-29 22:13:09,774 - Node_c4 - INFO - Sent packet 887b0fb3-81bd-46f8-b253-008bc7644951 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,780 - Node_c4 - INFO - Sent packet c9251745-4dca-4b92-8009-4024df90a98f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,810 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 1.6881s
+2026-01-29 22:13:09,821 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 1.4843s
+2026-01-29 22:13:09,837 - Node_c4 - INFO - Sent packet 300d0059-f9e8-46eb-9733-bcf870906806 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,870 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 5.4499s
+2026-01-29 22:13:09,878 - Node_c4 - INFO - Received msg: Real Msg 1769721185.... Latency: 4.0286s
+2026-01-29 22:13:09,926 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 0.9475s
+2026-01-29 22:13:09,928 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 3.0599s
+2026-01-29 22:13:09,944 - Node_c4 - INFO - Sent packet a0b73ebe-8e94-4732-ab11-9a99417b10c2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,966 - Node_c4 - INFO - Sent packet b9bc6647-5f01-4baa-bb54-da918b69e260 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,969 - Node_c4 - INFO - Sent packet 9a4f4cde-0ba1-4d9e-9a7e-489c0d856260 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:09,973 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 1.1948s
+2026-01-29 22:13:09,985 - Node_c4 - INFO - Sent packet 9fa72c5a-2944-49cc-b285-98de0ca48733 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,036 - Node_c4 - INFO - Sent packet 081c64a0-eb3f-454e-b147-8f414b4402fe to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,039 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 1.3337s
+2026-01-29 22:13:10,081 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 1.3759s
+2026-01-29 22:13:10,154 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 1.4082s
+2026-01-29 22:13:10,179 - Node_c4 - INFO - Sent packet cb3dbd13-d446-4a40-bd97-148393113dc6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,229 - Node_c4 - INFO - Sent packet ed83c20d-d31c-4d62-abca-7751e0450f23 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,357 - Node_c4 - INFO - Sent packet d0e0fd5f-4022-4f32-b93f-1d4a6d2f97e0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,367 - Node_c4 - INFO - Sent packet efff3b61-48cb-40c7-ae40-0e9a6a6dccc2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,404 - Node_c4 - INFO - Sent packet bbe5e978-4202-4feb-b882-8e286f783d33 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,407 - Node_c4 - INFO - Sent packet c6467d2f-6be8-4f3a-b67b-4402e10ac556 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,468 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 1.4896s
+2026-01-29 22:13:10,602 - Node_c4 - INFO - Sent packet 57933be2-a800-4599-a7d4-a276e2d40a1d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,663 - Node_c4 - INFO - Sent packet 43990863-1bab-4890-89f1-6685643061ad to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,691 - Node_c4 - INFO - Sent packet 0fe42614-fe09-4140-9304-d14d5cd9f416 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,702 - Node_c4 - INFO - Received msg: Real Msg 1769721189.... Latency: 1.0208s
+2026-01-29 22:13:10,703 - Node_c4 - INFO - Sent packet fa200d63-342e-4cee-8c52-ee90fe496126 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,710 - Node_c4 - INFO - Sent packet ccefd030-728a-4268-8363-96cb12af7d43 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,777 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 4.3176s
+2026-01-29 22:13:10,805 - Node_c4 - INFO - Sent packet b13ec921-dc49-4254-abb4-b365443a5536 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:10,885 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 1.9044s
+2026-01-29 22:13:11,010 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 2.7951s
+2026-01-29 22:13:11,048 - Node_c4 - INFO - Sent packet cbbd51ab-c002-45c2-b16c-f70d44e9577e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:11,114 - Node_c4 - INFO - Sent packet 40a05d65-1eba-4736-a542-0fe6df660fd9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:11,147 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 2.8100s
+2026-01-29 22:13:11,202 - Node_c4 - INFO - Sent packet 63558153-4d13-4a1c-8c44-2ce9b44b733d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:11,226 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 3.1041s
+2026-01-29 22:13:11,300 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 4.9802s
+2026-01-29 22:13:11,322 - Node_c4 - INFO - Sent packet 3c7a6262-9d3e-41d9-890e-2ce518116190 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:11,511 - Node_c4 - INFO - Received msg: Real Msg 1769721189.... Latency: 1.6021s
+2026-01-29 22:13:11,525 - Node_c4 - INFO - Received msg: Real Msg 1769721184.... Latency: 6.6995s
+2026-01-29 22:13:11,565 - Node_c4 - INFO - Sent packet fd043462-18d6-4744-9545-bdb68f043ca9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:11,648 - Node_c4 - INFO - Sent packet 0679fd92-c975-46fa-8a5e-f41fcd25054e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:11,759 - Node_c4 - INFO - Sent packet 47cc97a1-c46b-4ad8-811e-619a73a802a8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:11,822 - Node_c4 - INFO - Sent packet 5f94817b-9f3f-43ea-bd00-25a3da6b1a54 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:11,874 - Node_c4 - INFO - Sent packet ef181a52-cfa2-4af0-a6b5-4ae22e7b610b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:11,956 - Node_c4 - INFO - Sent packet fbecf14c-032a-408a-b497-1c322bba8e25 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:11,997 - Node_c4 - INFO - Sent packet 19694285-d815-4350-a0d2-b23cb3130a99 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:12,020 - Node_c4 - INFO - Sent packet 9a59c0c8-2f44-4b2d-8382-042705be0bca to p1 (10.0.0.6:8000)
+2026-01-29 22:13:12,029 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 3.2831s
+2026-01-29 22:13:12,040 - Node_c4 - INFO - Received msg: Real Msg 1769721191.... Latency: 1.0089s
+2026-01-29 22:13:12,063 - Node_c4 - INFO - Received msg: Real Msg 1769721189.... Latency: 2.5373s
+2026-01-29 22:13:12,083 - Node_c4 - INFO - Sent packet 55657cac-3e9c-46b8-ae0e-d2ec274be2a2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:12,096 - Node_c4 - INFO - Sent packet 40fb8069-541a-4459-a9ce-47632835589e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:12,102 - Node_c4 - INFO - Received msg: Real Msg 1769721186.... Latency: 5.7816s
+2026-01-29 22:13:12,150 - Node_c4 - INFO - Received msg: Real Msg 1769721190.... Latency: 1.5886s
+2026-01-29 22:13:12,172 - Node_c4 - INFO - Sent packet 675cc627-a07e-4f12-83b1-240e390eb581 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:12,271 - Node_c4 - INFO - Sent packet 23a40081-3287-4b28-9a9e-2bca1ee895f6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:12,292 - Node_c4 - INFO - Sent packet 38dc2088-9ebd-4a19-9a78-dfebd309dfcc to p1 (10.0.0.6:8000)
+2026-01-29 22:13:12,409 - Node_c4 - INFO - Received msg: Real Msg 1769721190.... Latency: 1.5280s
+2026-01-29 22:13:12,414 - Node_c4 - INFO - Received msg: Real Msg 1769721190.... Latency: 1.8528s
+2026-01-29 22:13:12,448 - Node_c4 - INFO - Sent packet 7c3ffc31-b1bd-4ac2-9a2d-e188167414e4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:12,484 - Node_c4 - INFO - Sent packet a3322336-f95b-4e89-a7c3-064dde031d4a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:12,512 - Node_c4 - INFO - Sent packet 52ecd5bb-822e-4e1d-9fb2-b68651b673a0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:12,533 - Node_c4 - INFO - Received msg: Real Msg 1769721189.... Latency: 3.0076s
+2026-01-29 22:13:12,570 - Node_c4 - INFO - Sent packet ce8a5c05-be59-4246-bc27-e1a0f144a9dd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:12,591 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 3.8126s
+2026-01-29 22:13:12,627 - Node_c4 - INFO - Received msg: Real Msg 1769721190.... Latency: 2.1949s
+2026-01-29 22:13:12,689 - Node_c4 - INFO - Received msg: Real Msg 1769721190.... Latency: 2.4176s
+2026-01-29 22:13:12,724 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 3.8608s
+2026-01-29 22:13:12,772 - Node_c4 - INFO - Sent packet f5772598-bec7-469e-bbe0-1e90b0c765cf to p1 (10.0.0.6:8000)
+2026-01-29 22:13:12,846 - Node_c4 - INFO - Received msg: Real Msg 1769721191.... Latency: 1.8151s
+2026-01-29 22:13:12,873 - Node_c4 - INFO - Received msg: Real Msg 1769721189.... Latency: 3.1914s
+2026-01-29 22:13:12,930 - Node_c4 - INFO - Sent packet 27dfb000-83b7-49c6-b908-c3275411b0d3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,030 - Node_c4 - INFO - Sent packet b982d287-2068-4180-96df-8b3cea8219d4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,111 - Node_c4 - INFO - Sent packet e66dbd9f-f030-492e-9d6c-6a4b34b6b7b1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,148 - Node_c4 - INFO - Sent packet 3465e1e7-0657-490c-84c9-72da775504e2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,189 - Node_c4 - INFO - Sent packet e8426349-c931-47c5-a508-7d4a5918b86a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,233 - Node_c4 - INFO - Received msg: Real Msg 1769721191.... Latency: 1.6300s
+2026-01-29 22:13:13,233 - Node_c4 - INFO - Sent packet 9e47b50c-adc2-444b-9817-a252862733dd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,245 - Node_c4 - INFO - Received msg: Real Msg 1769721191.... Latency: 1.6534s
+2026-01-29 22:13:13,296 - Node_c4 - INFO - Received msg: Real Msg 1769721189.... Latency: 3.3875s
+2026-01-29 22:13:13,299 - Node_c4 - INFO - Received msg: Real Msg 1769721191.... Latency: 1.7000s
+2026-01-29 22:13:13,299 - Node_c4 - INFO - Sent packet cd782f1c-a391-49fc-9607-00c2997319b2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,369 - Node_c4 - INFO - Sent packet ee3f29ae-4081-45c1-be9c-0ce3e686153d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,390 - Node_c4 - INFO - Sent packet ef9e90ba-9eb8-4905-b72c-7e7d3b25cea3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,425 - Node_c4 - INFO - Received msg: Real Msg 1769721191.... Latency: 1.7071s
+2026-01-29 22:13:13,450 - Node_c4 - INFO - Sent packet 289ef27f-aa11-4cb8-8d90-304822b0b569 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,461 - Node_c4 - INFO - Sent packet 60a73a26-1fec-4950-b938-400fa1e700e9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,586 - Node_c4 - INFO - Sent packet 11ac66a8-f7b1-4ead-bd08-7864be44c574 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,597 - Node_c4 - INFO - Sent packet a177ece6-4463-44f0-9179-24ad1676f81e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,616 - Node_c4 - INFO - Sent packet cbd3bac4-6428-4a92-b478-84c8be267592 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,625 - Node_c4 - INFO - Received msg: Real Msg 1769721188.... Latency: 4.7610s
+2026-01-29 22:13:13,646 - Node_c4 - INFO - Sent packet d48976fd-0e14-4d13-99e6-2d69bc158cf6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,697 - Node_c4 - INFO - Sent packet edc105bc-88f9-4e5d-ae67-9afa21a67a09 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,703 - Node_c4 - INFO - Received msg: Real Msg 1769721190.... Latency: 2.8806s
+2026-01-29 22:13:13,759 - Node_c4 - INFO - Sent packet 51047274-f121-469f-b843-698332b782c5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,866 - Node_c4 - INFO - Sent packet bc6a3aef-b1ba-4132-b43c-64ab85076367 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,883 - Node_c4 - INFO - Sent packet 283af5b7-d63a-43c6-9a74-64d8b2de11be to p1 (10.0.0.6:8000)
+2026-01-29 22:13:13,889 - Node_c4 - INFO - Received msg: Real Msg 1769721190.... Latency: 3.4572s
+2026-01-29 22:13:13,946 - Node_c4 - INFO - Received msg: Real Msg 1769721192.... Latency: 1.2881s
+2026-01-29 22:13:14,065 - Node_c4 - INFO - Received msg: Real Msg 1769721191.... Latency: 2.3291s
+2026-01-29 22:13:14,113 - Node_c4 - INFO - Sent packet f835a71c-81d4-4f11-89af-b2aef8ee2822 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:14,135 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 0.9973s
+2026-01-29 22:13:14,172 - Node_c4 - INFO - Received msg: Real Msg 1769721191.... Latency: 2.5734s
+2026-01-29 22:13:14,191 - Node_c4 - INFO - Sent packet 425808da-33a6-441c-a302-86d6dae6a98c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:14,215 - Node_c4 - INFO - Received msg: Real Msg 1769721191.... Latency: 2.6118s
+2026-01-29 22:13:14,321 - Node_c4 - INFO - Sent packet 370cf214-587b-4f4e-9485-1f8b68b8e5d7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:14,325 - Node_c4 - INFO - Sent packet 5bd29008-78d8-44ee-81ae-4eba5c2dbcdb to p1 (10.0.0.6:8000)
+2026-01-29 22:13:14,378 - Node_c4 - INFO - Received msg: Real Msg 1769721192.... Latency: 1.9149s
+2026-01-29 22:13:14,388 - Node_c4 - INFO - Sent packet 40eb0be1-66e5-481f-b601-8ff5f1aa177b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:14,437 - Node_c4 - INFO - Received msg: Real Msg 1769721190.... Latency: 3.5555s
+2026-01-29 22:13:14,454 - Node_c4 - INFO - Sent packet 2cc2e923-4928-4680-9050-313c2caf67fa to p1 (10.0.0.6:8000)
+2026-01-29 22:13:14,571 - Node_c4 - INFO - Sent packet e09cc253-74ee-4fed-a504-15519a477016 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:14,578 - Node_c4 - INFO - Sent packet e4646066-4652-4cc0-80c0-4088cd8bf9af to p1 (10.0.0.6:8000)
+2026-01-29 22:13:14,622 - Node_c4 - INFO - Sent packet dc2aaa1c-219d-4263-9ee7-20392479669a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:14,665 - Node_c4 - INFO - Sent packet 8a67f73a-151a-4e46-9d4b-62bde4cbad1d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:14,768 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 1.1625s
+2026-01-29 22:13:14,858 - Node_c4 - INFO - Sent packet 10c134e6-9706-42da-86ec-cd5b31ab2ca8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:14,869 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 1.7320s
+2026-01-29 22:13:14,884 - Node_c4 - INFO - Received msg: Real Msg 1769721190.... Latency: 4.0614s
+2026-01-29 22:13:14,910 - Node_c4 - INFO - Sent packet 7f717e76-b47e-4913-94f0-d8e6a1b72dc1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:14,943 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 1.6423s
+2026-01-29 22:13:14,970 - Node_c4 - INFO - Sent packet c5e14444-3a11-4267-8714-362aa29a16dd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:14,990 - Node_c4 - INFO - Sent packet a8c603a7-fb3e-4152-9418-528fb6a22d98 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:15,005 - Node_c4 - INFO - Sent packet 14bc7b59-8bea-4938-a84f-a5b692fa8956 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:15,136 - Node_c4 - INFO - Sent packet dceab7b3-984f-4b00-85a3-6a758ca160c9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:15,206 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 2.2028s
+2026-01-29 22:13:15,298 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 1.6179s
+2026-01-29 22:13:15,300 - Node_c4 - INFO - Received msg: Real Msg 1769721191.... Latency: 3.5637s
+2026-01-29 22:13:15,325 - Node_c4 - INFO - Sent packet 211e7e22-f4d6-46ca-a174-fe7eed5571d6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:15,574 - Node_c4 - INFO - Received msg: Real Msg 1769721191.... Latency: 3.9827s
+2026-01-29 22:13:15,644 - Node_c4 - INFO - Sent packet 53969f6a-baa0-42df-a0bd-8992f533086d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:15,658 - Node_c4 - INFO - Received msg: Real Msg 1769721194.... Latency: 1.6232s
+2026-01-29 22:13:15,664 - Node_c4 - INFO - Sent packet 361bb7f1-7d5b-4257-83c9-6d6a3ad49d83 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:15,698 - Node_c4 - INFO - Sent packet 18b35eaa-c7a8-4bd6-8466-d937ff6eb3ed to p1 (10.0.0.6:8000)
+2026-01-29 22:13:15,698 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 2.0178s
+2026-01-29 22:13:15,745 - Node_c4 - INFO - Sent packet 63ec5f8a-9a67-456c-906a-f21ea446da44 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:15,951 - Node_c4 - INFO - Sent packet 2e2912c2-56c7-4153-8254-dd74514c941d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:15,956 - Node_c4 - INFO - Sent packet c76cd2bb-bf90-4f3a-975f-897f53dd1210 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:15,959 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 2.6583s
+2026-01-29 22:13:15,996 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 2.3681s
+2026-01-29 22:13:16,003 - Node_c4 - INFO - Sent packet 1ed44c07-465e-42f5-9f36-cc9eecb21a30 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,094 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 3.0326s
+2026-01-29 22:13:16,101 - Node_c4 - INFO - Sent packet 19e2bc42-b0d6-49ee-85bd-2123adb08aa4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,173 - Node_c4 - INFO - Sent packet dddcb8f7-86b4-4b1a-86ee-e3dd57f73ae1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,230 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 2.3399s
+2026-01-29 22:13:16,234 - Node_c4 - INFO - Received msg: Real Msg 1769721194.... Latency: 1.2917s
+2026-01-29 22:13:16,267 - Node_c4 - INFO - Sent packet 6af4b868-186d-4b50-a108-1b230204d919 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,288 - Node_c4 - INFO - Received msg: Real Msg 1769721195.... Latency: 1.2806s
+2026-01-29 22:13:16,303 - Node_c4 - INFO - Received msg: Real Msg 1769721194.... Latency: 1.6650s
+2026-01-29 22:13:16,320 - Node_c4 - INFO - Received msg: Real Msg 1769721194.... Latency: 1.3774s
+2026-01-29 22:13:16,387 - Node_c4 - INFO - Sent packet c22611f3-9486-4df5-86eb-73497de39637 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,412 - Node_c4 - INFO - Sent packet 4c6e2e13-15bb-45e9-a1a3-24ad4c881951 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,422 - Node_c4 - INFO - Received msg: Real Msg 1769721195.... Latency: 1.2108s
+2026-01-29 22:13:16,499 - Node_c4 - INFO - Sent packet 047081a7-12f5-42b4-b1c1-306d0bec08da to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,516 - Node_c4 - INFO - Sent packet ec8fe7a1-73c7-47e5-9c21-96427cd6d71d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,540 - Node_c4 - INFO - Sent packet 7856036e-bd6c-475f-8033-b4ab97c852f4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,552 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 3.0750s
+2026-01-29 22:13:16,593 - Node_c4 - INFO - Sent packet 18c72819-47da-4146-8b61-61cc12218de2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,622 - Node_c4 - INFO - Received msg: Real Msg 1769721194.... Latency: 1.9839s
+2026-01-29 22:13:16,737 - Node_c4 - INFO - Sent packet 267e6dc1-d7c6-405d-926a-d172c9212c20 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,751 - Node_c4 - INFO - Received msg: Real Msg 1769721195.... Latency: 1.2881s
+2026-01-29 22:13:16,778 - Node_c4 - INFO - Sent packet ac998ea6-cc3d-43ba-be86-b2d3878859d2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,796 - Node_c4 - INFO - Sent packet abe1193f-dc37-4960-a7a3-4a7d36329829 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,802 - Node_c4 - INFO - Received msg: Real Msg 1769721194.... Latency: 2.0126s
+2026-01-29 22:13:16,822 - Node_c4 - INFO - Sent packet a59a9e77-40b0-4f77-bcd6-4569753c8714 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,846 - Node_c4 - INFO - Sent packet c7476716-cad1-41c4-b382-74e52921a695 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,901 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 3.1018s
+2026-01-29 22:13:16,903 - Node_c4 - INFO - Sent packet 4cf1d7c1-cbab-432d-8592-ea0b0d5f7850 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:16,976 - Node_c4 - INFO - Received msg: Real Msg 1769721195.... Latency: 1.5134s
+2026-01-29 22:13:17,060 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 3.5836s
+2026-01-29 22:13:17,094 - Node_c4 - INFO - Sent packet 8c19a28b-98ca-4b82-9617-57f597eba80e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,199 - Node_c4 - INFO - Received msg: Real Msg 1769721195.... Latency: 1.5002s
+2026-01-29 22:13:17,267 - Node_c4 - INFO - Sent packet de88c9b4-4324-442f-a4f6-a7d3849f03da to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,281 - Node_c4 - INFO - Sent packet c0c22f99-0066-4552-867a-2b63ae4bc27a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,352 - Node_c4 - INFO - Received msg: Real Msg 1769721196.... Latency: 1.1330s
+2026-01-29 22:13:17,375 - Node_c4 - INFO - Sent packet f8a7e457-eaf9-4460-aac1-34ed4c61b9fb to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,399 - Node_c4 - INFO - Received msg: Real Msg 1769721196.... Latency: 1.3543s
+2026-01-29 22:13:17,402 - Node_c4 - INFO - Sent packet ebee405d-5433-4362-b98a-f9d2e09b99a1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,507 - Node_c4 - INFO - Sent packet 32ea2766-d1af-49ef-b142-ba2ded1d0f92 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,558 - Node_c4 - INFO - Received msg: Real Msg 1769721194.... Latency: 3.5236s
+2026-01-29 22:13:17,618 - Node_c4 - INFO - Sent packet ab11ab39-5cbf-42e3-bf29-17f67e00bf10 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,649 - Node_c4 - INFO - Sent packet 8b9d3d1e-2aed-4dde-be69-fbdc2c978d1f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,657 - Node_c4 - INFO - Sent packet 55be1a02-89a3-423e-b506-a88bae3b35a5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,667 - Node_c4 - INFO - Sent packet bf9f2fb3-34b8-486d-9b46-d0b2b1de9908 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,669 - Node_c4 - INFO - Sent packet c52de523-5c3b-4946-8000-d2b956069859 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,692 - Node_c4 - INFO - Received msg: Real Msg 1769721195.... Latency: 2.0556s
+2026-01-29 22:13:17,706 - Node_c4 - INFO - Sent packet d62a2c3e-7ed6-41dd-a26f-a31dcf27f882 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,731 - Node_c4 - INFO - Received msg: Real Msg 1769721195.... Latency: 1.8674s
+2026-01-29 22:13:17,766 - Node_c4 - INFO - Received msg: Real Msg 1769721196.... Latency: 1.0891s
+2026-01-29 22:13:17,867 - Node_c4 - INFO - Sent packet f762a7f4-5aae-4c0f-9502-acd3d331ed88 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,873 - Node_c4 - INFO - Sent packet 4020993c-672a-49ff-9ccb-b007aa9a354e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:17,905 - Node_c4 - INFO - Received msg: Real Msg 1769721196.... Latency: 1.8868s
+2026-01-29 22:13:17,944 - Node_c4 - INFO - Received msg: Real Msg 1769721196.... Latency: 1.8990s
+2026-01-29 22:13:17,969 - Node_c4 - INFO - Sent packet a86f9866-c3b6-4d6d-947d-999301ce0afc to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,028 - Node_c4 - INFO - Sent packet 45499d8e-c51c-4567-b73c-a5a25ed27ecc to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,094 - Node_c4 - INFO - Sent packet 023dfcac-c1f8-4992-9b50-37179824fa63 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,191 - Node_c4 - INFO - Received msg: Real Msg 1769721197.... Latency: 1.0139s
+2026-01-29 22:13:18,193 - Node_c4 - INFO - Sent packet 8613b7c5-35e9-4336-a4b0-47e827254555 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,245 - Node_c4 - INFO - Sent packet 879c5f28-8500-411c-a189-532c9299fe14 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,260 - Node_c4 - INFO - Sent packet 2eeea32e-1b71-469c-abda-8e933f978544 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,309 - Node_c4 - INFO - Received msg: Real Msg 1769721194.... Latency: 3.5192s
+2026-01-29 22:13:18,373 - Node_c4 - INFO - Received msg: Real Msg 1769721195.... Latency: 2.5096s
+2026-01-29 22:13:18,384 - Node_c4 - INFO - Sent packet 3df847b3-91ee-4be8-9e66-294f839b5654 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,415 - Node_c4 - INFO - Received msg: Real Msg 1769721195.... Latency: 2.7783s
+2026-01-29 22:13:18,467 - Node_c4 - INFO - Sent packet 0a617d98-b172-4340-af79-3fe295c6d98e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,470 - Node_c4 - INFO - Sent packet 7327f009-afb0-460a-ad9a-9ed691c2be0f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,503 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 4.8752s
+2026-01-29 22:13:18,505 - Node_c4 - INFO - Sent packet 8549f43a-91ea-4cef-99f2-52850f548a91 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,538 - Node_c4 - INFO - Received msg: Real Msg 1769721194.... Latency: 3.8219s
+2026-01-29 22:13:18,586 - Node_c4 - INFO - Sent packet 38a23470-4900-409d-a37f-90a9b8c5e900 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,620 - Node_c4 - INFO - Sent packet b883b1e4-85d2-4244-81f2-6bcb0eec7ace to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,647 - Node_c4 - INFO - Sent packet 6d9d32ec-254c-4557-91a7-eacb1647c74b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,689 - Node_c4 - INFO - Sent packet c07bc988-86a9-4e4d-98f4-52e6bc93cfca to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,695 - Node_c4 - INFO - Sent packet c7e36228-ce14-47be-99cd-ac5cc5f791e7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,744 - Node_c4 - INFO - Sent packet 95ce6155-b88d-4e0a-bd63-db3b2bc95305 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,762 - Node_c4 - INFO - Sent packet 2b991e70-13eb-42ed-b8ac-0daea8194880 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,772 - Node_c4 - INFO - Sent packet 6e100c8d-51ac-4ed9-8d33-3613c6d63f7a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,779 - Node_c4 - INFO - Sent packet 732297fc-3aa3-43b1-9da4-20fd97faf733 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,796 - Node_c4 - INFO - Received msg: Real Msg 1769721195.... Latency: 3.0970s
+2026-01-29 22:13:18,802 - Node_c4 - INFO - Sent packet 7cc1f357-c40e-4ef3-a012-201a90c25248 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,818 - Node_c4 - INFO - Sent packet 05689482-6dff-4f59-b8a3-b0d20afa1404 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,832 - Node_c4 - INFO - Sent packet eff8e64c-6238-4515-b796-f32c202c3061 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,841 - Node_c4 - INFO - Sent packet 8ad04a34-691f-4203-9ef5-d03ad57f7315 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,858 - Node_c4 - INFO - Sent packet 2ef3348e-951f-408a-9f83-b5bdbbe09a9a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,889 - Node_c4 - INFO - Received msg: Real Msg 1769721193.... Latency: 4.9988s
+2026-01-29 22:13:18,936 - Node_c4 - INFO - Sent packet 8eb1a598-6093-47d6-82a5-be7dc1679c33 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:18,957 - Node_c4 - INFO - Received msg: Real Msg 1769721196.... Latency: 2.9205s
+2026-01-29 22:13:19,006 - Node_c4 - INFO - Sent packet 05ce2ce4-b9c7-4229-99b7-0a00f6e3324d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:19,048 - Node_c4 - INFO - Received msg: Real Msg 1769721195.... Latency: 4.0411s
+2026-01-29 22:13:19,052 - Node_c4 - INFO - Sent packet 0fd2b3f3-d0ee-45a6-b3d4-f774e2622a4e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:19,063 - Node_c4 - INFO - Received msg: Real Msg 1769721195.... Latency: 3.1768s
+2026-01-29 22:13:19,133 - Node_c4 - INFO - Sent packet ae4581fb-e436-4c2a-9db3-e517f3064dcf to p1 (10.0.0.6:8000)
+2026-01-29 22:13:19,175 - Node_c4 - INFO - Sent packet 7e836d4f-cf4e-421d-a43f-081443b93733 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:19,197 - Node_c4 - INFO - Sent packet 273a0cbb-93b6-46f7-96e9-da12faad7329 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:19,243 - Node_c4 - INFO - Received msg: Real Msg 1769721196.... Latency: 3.0702s
+2026-01-29 22:13:19,365 - Node_c4 - INFO - Sent packet b4e3594d-1efc-46a8-8413-4e1dff017170 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:19,465 - Node_c4 - INFO - Sent packet 5c8554ba-6150-480c-b5f8-9be055c81490 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:19,528 - Node_c4 - INFO - Received msg: Real Msg 1769721196.... Latency: 3.4914s
+2026-01-29 22:13:19,552 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 0.6832s
+2026-01-29 22:13:19,578 - Node_c4 - INFO - Sent packet c1ed8f5c-a474-4de3-b8ea-de2eba343db8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:19,594 - Node_c4 - INFO - Received msg: Real Msg 1769721197.... Latency: 1.8625s
+2026-01-29 22:13:19,700 - Node_c4 - INFO - Sent packet fe5ef2b3-698f-4ea3-8426-04346149e80a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:19,769 - Node_c4 - INFO - Sent packet 42b60912-fb6e-4b05-8058-b0cf256d83c4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:19,773 - Node_c4 - INFO - Sent packet 44203b15-19f5-40bd-a4b7-7dc13a4fc9b3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:19,838 - Node_c4 - INFO - Received msg: Real Msg 1769721196.... Latency: 3.8196s
+2026-01-29 22:13:19,847 - Node_c4 - INFO - Sent packet 2f1266cd-46a4-4bc5-ad24-ba0ddf71be79 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:19,864 - Node_c4 - INFO - Received msg: Real Msg 1769721196.... Latency: 3.6912s
+2026-01-29 22:13:20,018 - Node_c4 - INFO - Sent packet 08e135f5-5e98-4f46-8754-967b6f8ef408 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,062 - Node_c4 - INFO - Sent packet e79c9236-d407-4605-86fd-00ae1d7506db to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,069 - Node_c4 - INFO - Sent packet 640f98ec-65cf-4372-a08a-252a07705849 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,108 - Node_c4 - INFO - Received msg: Real Msg 1769721196.... Latency: 3.4314s
+2026-01-29 22:13:20,117 - Node_c4 - INFO - Sent packet c8fe7b9d-f4cd-4240-9e68-29b2258787c8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,126 - Node_c4 - INFO - Sent packet 1cd5cfd5-3799-4ab2-bc3f-6527a1854392 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,139 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 1.9789s
+2026-01-29 22:13:20,154 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 1.2855s
+2026-01-29 22:13:20,164 - Node_c4 - INFO - Sent packet 0349e6fb-2353-4093-aad8-9d77ff6ea7cc to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,235 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 2.0990s
+2026-01-29 22:13:20,285 - Node_c4 - INFO - Sent packet b8fa6bd7-326f-40c4-a489-700a00f4475a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,291 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 1.8856s
+2026-01-29 22:13:20,306 - Node_c4 - INFO - Sent packet 574ca700-5c09-4346-8e5c-39daaed296c7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,308 - Node_c4 - INFO - Received msg: Real Msg 1769721196.... Latency: 3.4575s
+2026-01-29 22:13:20,318 - Node_c4 - INFO - Sent packet f1b14588-8e01-44d1-b93c-f343001023a5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,345 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 0.5014s
+2026-01-29 22:13:20,356 - Node_c4 - INFO - Sent packet db5252a2-9c7c-48c6-b33f-28870853c147 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,374 - Node_c4 - INFO - Sent packet 0de88675-b6fd-48ba-a3ed-5891cedf6e86 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,383 - Node_c4 - INFO - Received msg: Real Msg 1769721195.... Latency: 5.1718s
+2026-01-29 22:13:20,416 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 1.5281s
+2026-01-29 22:13:20,437 - Node_c4 - INFO - Sent packet b9579c06-8b05-4fe2-a769-c87246c11e62 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,486 - Node_c4 - INFO - Sent packet 0ca76f71-d1e6-47e3-b086-7b4f745e28d5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,592 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 2.1927s
+2026-01-29 22:13:20,666 - Node_c4 - INFO - Sent packet 235bee09-7d44-405d-a50e-9b13edfc3926 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,705 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 2.5230s
+2026-01-29 22:13:20,711 - Node_c4 - INFO - Sent packet a6cc4444-0929-47cd-b2e6-85a28da8f007 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,721 - Node_c4 - INFO - Sent packet f2d17e70-c013-4e73-b798-296d607a7183 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,751 - Node_c4 - INFO - Received msg: Real Msg 1769721197.... Latency: 3.1521s
+2026-01-29 22:13:20,776 - Node_c4 - INFO - Sent packet fa7c2f69-928a-4882-8f06-d39bec9a7aaa to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,780 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 1.8923s
+2026-01-29 22:13:20,839 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 2.6572s
+2026-01-29 22:13:20,860 - Node_c4 - INFO - Sent packet aea87965-ed9e-4ef6-8c11-e3af1683cbbe to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,867 - Node_c4 - INFO - Sent packet 36cda959-de1d-4446-b279-ecc90c6a0abd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,885 - Node_c4 - INFO - Sent packet 1d3eb4fa-e512-4e78-a948-0776f8f3c2b6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,956 - Node_c4 - INFO - Received msg: Real Msg 1769721197.... Latency: 3.7784s
+2026-01-29 22:13:20,962 - Node_c4 - INFO - Sent packet c32b4ffd-fe12-4604-8eff-124a04fb1e0f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:20,968 - Node_c4 - INFO - Received msg: Real Msg 1769721197.... Latency: 3.0412s
+2026-01-29 22:13:21,059 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 2.9235s
+2026-01-29 22:13:21,173 - Node_c4 - INFO - Received msg: Real Msg 1769721196.... Latency: 4.3226s
+2026-01-29 22:13:21,178 - Node_c4 - INFO - Sent packet 0e94deaa-106e-499e-8f00-c3d5c6a5c30d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,236 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 3.0752s
+2026-01-29 22:13:21,240 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 2.5205s
+2026-01-29 22:13:21,245 - Node_c4 - INFO - Sent packet 4150f1ba-3e99-4c98-9f3b-96682ef60ea6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,269 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 1.8279s
+2026-01-29 22:13:21,318 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 3.0999s
+2026-01-29 22:13:21,343 - Node_c4 - INFO - Sent packet aea7d3da-2cde-4d1d-9cb3-87ce44f25928 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,389 - Node_c4 - INFO - Sent packet c6a8e2b8-5ea1-4575-b6bd-e2f5a437231f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,458 - Node_c4 - INFO - Sent packet f78a1766-fc9e-4072-8bd5-bbc56fd72d73 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,472 - Node_c4 - INFO - Sent packet bc773c6f-aef5-4009-988e-1e1c91b49737 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,477 - Node_c4 - INFO - Sent packet 2c731501-2f0d-4e2e-bdf2-51f48deed801 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,547 - Node_c4 - INFO - Sent packet 6daf1873-3e4f-4879-a73d-2c954f96a032 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,553 - Node_c4 - INFO - Sent packet 7c0fb47c-af10-471e-8a88-123aa07005f5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,558 - Node_c4 - INFO - Sent packet a52787bd-c7fc-424a-9e25-69aeaa5f41b3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,564 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 1.2351s
+2026-01-29 22:13:21,591 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 1.2826s
+2026-01-29 22:13:21,609 - Node_c4 - INFO - Sent packet 58a7c311-4b84-442e-b8e5-35735ad0fbd1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,618 - Node_c4 - INFO - Received msg: Real Msg 1769721197.... Latency: 3.8867s
+2026-01-29 22:13:21,653 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 2.1941s
+2026-01-29 22:13:21,677 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 1.2964s
+2026-01-29 22:13:21,686 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 1.7582s
+2026-01-29 22:13:21,700 - Node_c4 - INFO - Sent packet 69b2a598-4a24-4ac3-a4cd-16698fe32bcf to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,726 - Node_c4 - INFO - Sent packet 133c060d-5841-4410-8e03-6912973d38c6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,752 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 1.9491s
+2026-01-29 22:13:21,762 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 3.3570s
+2026-01-29 22:13:21,770 - Node_c4 - INFO - Sent packet ff420722-1e50-4447-ab3f-f8d00a3eb357 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,799 - Node_c4 - INFO - Sent packet c38e5ace-0c14-408f-acfd-53bbd58fa1fc to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,805 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 1.6263s
+2026-01-29 22:13:21,809 - Node_c4 - INFO - Sent packet 5d092fa0-b239-4de4-9bed-c7c06885fe36 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,847 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 3.1274s
+2026-01-29 22:13:21,857 - Node_c4 - INFO - Received msg: Real Msg 1769721197.... Latency: 3.9304s
+2026-01-29 22:13:21,900 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 3.7699s
+2026-01-29 22:13:21,903 - Node_c4 - INFO - Sent packet cbf92202-47e7-46ca-ae3e-49a058661c78 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:21,940 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 1.5587s
+2026-01-29 22:13:21,945 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 2.1366s
+2026-01-29 22:13:22,097 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 2.4537s
+2026-01-29 22:13:22,189 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 2.2610s
+2026-01-29 22:13:22,216 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 4.0853s
+2026-01-29 22:13:22,228 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 1.8367s
+2026-01-29 22:13:22,235 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 2.4008s
+2026-01-29 22:13:22,238 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 2.4343s
+2026-01-29 22:13:22,307 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 1.8154s
+2026-01-29 22:13:22,342 - Node_c4 - INFO - Sent packet 73bef8b6-7758-466f-8a7a-a7270642f108 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:22,363 - Node_c4 - INFO - Sent packet 3b68de3a-ee51-4070-b50e-a4b8cddbe54d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:22,422 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 2.0307s
+2026-01-29 22:13:22,443 - Node_c4 - INFO - Sent packet f11f09ce-84fb-40ca-8dd9-e0dd072b632f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:22,579 - Node_c4 - INFO - Sent packet 21f412d0-f37b-4cc1-8dc4-cdf217384387 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:22,625 - Node_c4 - INFO - Sent packet 2b40d849-738d-4cb1-aa67-9605346bb5d4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:22,648 - Node_c4 - INFO - Sent packet 0f6afa39-d71d-42a0-93c2-f50982f8be40 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:22,696 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 2.5202s
+2026-01-29 22:13:22,720 - Node_c4 - INFO - Sent packet dd0e5662-57e3-4735-b2f6-a2e782cfe073 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:22,725 - Node_c4 - INFO - Sent packet 69b556de-685f-4363-8f06-a92adb007ccc to p1 (10.0.0.6:8000)
+2026-01-29 22:13:22,767 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 3.1242s
+2026-01-29 22:13:22,854 - Node_c4 - INFO - Sent packet 16dbb0c4-b8e5-422e-96e1-620c73a91815 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:22,940 - Node_c4 - INFO - Received msg: Real Msg 1769721201.... Latency: 1.8405s
+2026-01-29 22:13:22,965 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 2.9934s
+2026-01-29 22:13:22,985 - Node_c4 - INFO - Sent packet b7629459-f615-43a7-b613-15d5e2c9816e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:23,046 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 3.2372s
+2026-01-29 22:13:23,070 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 4.6706s
+2026-01-29 22:13:23,102 - Node_c4 - INFO - Sent packet ce39ca1c-9882-4dde-bb78-bd1368fdb234 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:23,108 - Node_c4 - INFO - Sent packet 64bcb9a4-8d1a-413e-8528-ab90f88c2cb0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:23,127 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 2.9477s
+2026-01-29 22:13:23,176 - Node_c4 - INFO - Received msg: Real Msg 1769721201.... Latency: 1.2361s
+2026-01-29 22:13:23,189 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 2.9654s
+2026-01-29 22:13:23,210 - Node_c4 - INFO - Sent packet 932dbaae-ed52-45ee-bf2f-213aa1c94bd1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:23,253 - Node_c4 - INFO - Received msg: Real Msg 1769721201.... Latency: 1.3128s
+2026-01-29 22:13:23,575 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 3.2460s
+2026-01-29 22:13:23,715 - Node_c4 - INFO - Sent packet 79cc78d1-7a8e-47d3-af6d-aa383519cff2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:23,736 - Node_c4 - INFO - Sent packet 2fa90c6a-8e18-4470-b2df-ec97fd2859ff to p1 (10.0.0.6:8000)
+2026-01-29 22:13:23,771 - Node_c4 - INFO - Sent packet 43bd60fc-ccc3-4c00-a701-9a0d37e044dd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:23,776 - Node_c4 - INFO - Sent packet 164e8aa1-97c8-4520-9918-fbf0b6b774cf to p1 (10.0.0.6:8000)
+2026-01-29 22:13:23,855 - Node_c4 - INFO - Sent packet f5cbaa42-28af-45e9-9de5-ed5ddc704ace to p1 (10.0.0.6:8000)
+2026-01-29 22:13:23,874 - Node_c4 - INFO - Sent packet c383bc86-33dc-4ab3-92fd-11fb6081ca5d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:23,879 - Node_c4 - INFO - Sent packet f66c4b01-01f3-4118-a122-25756090431d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:23,977 - Node_c4 - INFO - Sent packet 48600d86-3055-45ce-8019-186b787a885b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,000 - Node_c4 - INFO - Sent packet f49f47e5-5fee-4008-817b-87a9fbbbfb63 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,025 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 4.0533s
+2026-01-29 22:13:24,069 - Node_c4 - INFO - Received msg: Real Msg 1769721202.... Latency: 1.2570s
+2026-01-29 22:13:24,157 - Node_c4 - INFO - Sent packet ca69242f-7a9c-4a79-ba8e-de6f5f264c24 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,160 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 3.2541s
+2026-01-29 22:13:24,173 - Node_c4 - INFO - Sent packet fb224874-4bec-412a-b8b4-3050ada7920a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,209 - Node_c4 - INFO - Sent packet b532e48f-e436-4ee9-a8b0-44a6434e5d57 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,243 - Node_c4 - INFO - Received msg: Real Msg 1769721202.... Latency: 1.4030s
+2026-01-29 22:13:24,258 - Node_c4 - INFO - Sent packet 838e6a41-3429-4543-8098-b602fa549a6a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,386 - Node_c4 - INFO - Received msg: Real Msg 1769721201.... Latency: 3.2870s
+2026-01-29 22:13:24,392 - Node_c4 - INFO - Sent packet e90c4d56-26bb-444b-8007-6dadf7b194f5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,469 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 5.0102s
+2026-01-29 22:13:24,490 - Node_c4 - INFO - Sent packet afd15a1b-0a07-4042-b85c-d99165fa6370 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,492 - Node_c4 - INFO - Sent packet 051619e3-5b0a-4c8d-a3ed-8e55b338feb7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,497 - Node_c4 - INFO - Sent packet cf0408eb-3184-4143-8c76-1c8f99ff9131 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,511 - Node_c4 - INFO - Received msg: Real Msg 1769721201.... Latency: 2.5448s
+2026-01-29 22:13:24,557 - Node_c4 - INFO - Sent packet 00439397-fdc6-432a-ae79-bcc503516031 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,627 - Node_c4 - INFO - Sent packet 402ac654-6c5a-4f14-b04c-895fd979a262 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,637 - Node_c4 - INFO - Received msg: Real Msg 1769721202.... Latency: 1.8247s
+2026-01-29 22:13:24,645 - Node_c4 - INFO - Sent packet b4ce390c-882b-43a2-ad0c-774d0d2d94f2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,682 - Node_c4 - INFO - Sent packet 9077923d-a166-45c0-b131-ac552bed0726 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,710 - Node_c4 - INFO - Received msg: Real Msg 1769721202.... Latency: 1.7525s
+2026-01-29 22:13:24,742 - Node_c4 - INFO - Sent packet b12dbfc9-53d7-4e32-821e-c3345cf8c234 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,744 - Node_c4 - INFO - Received msg: Real Msg 1769721202.... Latency: 2.2457s
+2026-01-29 22:13:24,797 - Node_c4 - INFO - Received msg: Real Msg 1769721203.... Latency: 1.3283s
+2026-01-29 22:13:24,806 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 4.9628s
+2026-01-29 22:13:24,837 - Node_c4 - INFO - Sent packet 921e035b-cd6e-4bd3-8cf3-4871022b915b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,871 - Node_c4 - INFO - Sent packet f63efd73-e6d5-493a-a785-9c9463eb46ba to p1 (10.0.0.6:8000)
+2026-01-29 22:13:24,873 - Node_c4 - INFO - Received msg: Real Msg 1769721200.... Latency: 4.6971s
+2026-01-29 22:13:24,935 - Node_c4 - INFO - Received msg: Real Msg 1769721203.... Latency: 1.0427s
+2026-01-29 22:13:25,078 - Node_c4 - INFO - Received msg: Real Msg 1769721203.... Latency: 1.6776s
+2026-01-29 22:13:25,083 - Node_c4 - INFO - Sent packet f5252984-dfe8-4ec7-8d0c-6b2e0c7c8765 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,158 - Node_c4 - INFO - Sent packet 882e9b8a-ae25-4a21-97ec-58128c8cf02e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,197 - Node_c4 - INFO - Received msg: Real Msg 1769721201.... Latency: 3.2307s
+2026-01-29 22:13:25,224 - Node_c4 - INFO - Sent packet e13a2c66-2a2c-4f0e-9e06-5e1f003dcbe7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,338 - Node_c4 - INFO - Sent packet c82850f7-2a71-4a6e-9546-db74f34de761 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,360 - Node_c4 - INFO - Sent packet 8f7f58b3-92cb-4610-aecd-dc5f932b3368 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,408 - Node_c4 - INFO - Received msg: Real Msg 1769721199.... Latency: 5.9663s
+2026-01-29 22:13:25,416 - Node_c4 - INFO - Sent packet ad6465a6-8d9b-40f5-892d-8e70271b7d5d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,425 - Node_c4 - INFO - Sent packet c14d052d-f455-44ad-8c0d-a79fb7af8006 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,437 - Node_c4 - INFO - Received msg: Real Msg 1769721202.... Latency: 2.8642s
+2026-01-29 22:13:25,472 - Node_c4 - INFO - Received msg: Real Msg 1769721204.... Latency: 0.6157s
+2026-01-29 22:13:25,540 - Node_c4 - INFO - Sent packet 513e82b8-4c7e-4f64-a720-b8a991b42b9b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,559 - Node_c4 - INFO - Sent packet 9fe428ae-ce0c-4b2a-93e2-577ff6a622b4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,620 - Node_c4 - INFO - Sent packet 2373b8fe-cd95-4501-8175-76a299a87ec1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,626 - Node_c4 - INFO - Sent packet af17ce64-9a52-4ce6-8ce8-dc0264d51757 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,633 - Node_c4 - INFO - Sent packet 498269f8-23b3-46c8-ac1a-70ac5618d11b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,640 - Node_c4 - INFO - Received msg: Real Msg 1769721203.... Latency: 1.6983s
+2026-01-29 22:13:25,642 - Node_c4 - INFO - Received msg: Real Msg 1769721198.... Latency: 7.4232s
+2026-01-29 22:13:25,824 - Node_c4 - INFO - Received msg: Real Msg 1769721204.... Latency: 1.8183s
+2026-01-29 22:13:25,859 - Node_c4 - INFO - Sent packet 3c2c30df-4f0f-47dd-898c-359cd11b44c5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,936 - Node_c4 - INFO - Received msg: Real Msg 1769721202.... Latency: 2.9789s
+2026-01-29 22:13:25,977 - Node_c4 - INFO - Sent packet d8bf8a1e-fee2-47b8-a8d3-b88f9bd438e5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:25,987 - Node_c4 - INFO - Sent packet 694d462d-b229-4db2-a7b5-8ae15c305462 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,031 - Node_c4 - INFO - Sent packet b5b44248-3e4a-4233-9326-c3d21002eb0d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,044 - Node_c4 - INFO - Received msg: Real Msg 1769721204.... Latency: 1.9419s
+2026-01-29 22:13:26,070 - Node_c4 - INFO - Received msg: Real Msg 1769721204.... Latency: 1.7601s
+2026-01-29 22:13:26,114 - Node_c4 - INFO - Sent packet 6ba79157-d52c-47ce-9c5d-be1f24f487b4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,144 - Node_c4 - INFO - Sent packet 4529fd8c-f549-475f-b20a-6bdc23013e7d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,156 - Node_c4 - INFO - Sent packet 8109f973-dff8-48c3-bff1-766b7bb64ca9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,183 - Node_c4 - INFO - Sent packet 3f4a1bbf-69c0-4818-a78e-d9cf18a2e423 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,296 - Node_c4 - INFO - Sent packet bdd52e70-a32b-4a65-a5d9-ea33446baac2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,359 - Node_c4 - INFO - Received msg: Real Msg 1769721204.... Latency: 1.3687s
+2026-01-29 22:13:26,376 - Node_c4 - INFO - Sent packet c724b35f-d3f8-43d2-be5e-4834aefe6fb9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,483 - Node_c4 - INFO - Sent packet 7e676429-f2fe-4142-9182-3bdd72c4e7f0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,501 - Node_c4 - INFO - Sent packet 4b7009ab-a802-47dd-aee5-7de4e6e97535 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,519 - Node_c4 - INFO - Sent packet 14632f4d-ca4f-48bd-a930-9616556eafa4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,584 - Node_c4 - INFO - Sent packet c486ff45-e5cd-49fc-aeaa-91b3f3c3dc3f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,619 - Node_c4 - INFO - Sent packet 089e78f2-563d-4331-9dec-7b87b96e4422 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,623 - Node_c4 - INFO - Sent packet 105c2fc8-5df7-4b30-ad06-5f86dcb08abe to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,665 - Node_c4 - INFO - Sent packet 71848ade-08e5-439d-8790-81672d32aec0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,689 - Node_c4 - INFO - Received msg: Real Msg 1769721201.... Latency: 4.8186s
+2026-01-29 22:13:26,698 - Node_c4 - INFO - Sent packet 51ddd950-c7f4-4518-981d-d7fe97ef6ae3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,762 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 1.4747s
+2026-01-29 22:13:26,773 - Node_c4 - INFO - Sent packet d1e23fcf-2ff9-41f6-bc68-b32b91751b8a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,850 - Node_c4 - INFO - Sent packet baaf2db6-a597-48a0-a69c-806eaeb3106e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,856 - Node_c4 - INFO - Sent packet b6d92c57-d7ab-4598-b66c-e5e7169c59ec to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,889 - Node_c4 - INFO - Sent packet d53799ae-3ac3-4fc0-bbd9-00dac8adc01e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,935 - Node_c4 - INFO - Sent packet 6567896b-cc98-44d8-9ea7-9922b2a077b5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,939 - Node_c4 - INFO - Sent packet 9850e017-1d98-40d0-a386-dafdadfaaa63 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:26,970 - Node_c4 - INFO - Sent packet fa18f53c-f7ba-413e-8d90-426716afb7fd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,019 - Node_c4 - INFO - Received msg: Real Msg 1769721201.... Latency: 5.1492s
+2026-01-29 22:13:27,046 - Node_c4 - INFO - Sent packet 4a7a81b9-223f-4df0-838b-08dc134e5607 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,070 - Node_c4 - INFO - Sent packet 4db65383-3f3e-4faa-a120-418a524ebff8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,234 - Node_c4 - INFO - Sent packet db9b6f62-34f6-4451-a652-e7028cdeb92a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,245 - Node_c4 - INFO - Received msg: Real Msg 1769721203.... Latency: 3.7770s
+2026-01-29 22:13:27,260 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 1.1094s
+2026-01-29 22:13:27,306 - Node_c4 - INFO - Received msg: Real Msg 1769721203.... Latency: 3.3636s
+2026-01-29 22:13:27,349 - Node_c4 - INFO - Received msg: Real Msg 1769721204.... Latency: 3.0174s
+2026-01-29 22:13:27,420 - Node_c4 - INFO - Sent packet b14c9de0-1556-4294-babd-19c6f4c0d703 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,522 - Node_c4 - INFO - Sent packet 8ffd84f1-0638-49c4-abe8-5c6d6ca0f3ee to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,524 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 2.5178s
+2026-01-29 22:13:27,532 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 1.4732s
+2026-01-29 22:13:27,618 - Node_c4 - INFO - Sent packet d0a27ff3-51a0-4ad3-a586-3eaeed97c132 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,641 - Node_c4 - INFO - Received msg: Real Msg 1769721202.... Latency: 5.4361s
+2026-01-29 22:13:27,706 - Node_c4 - INFO - Sent packet cb4d3edb-dfb5-4bcd-ac44-5b2566b4f951 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,717 - Node_c4 - INFO - Sent packet e79ef6f7-c461-4b4d-99e7-ae37b4280e49 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,803 - Node_c4 - INFO - Sent packet ac08f95d-5932-486d-9838-46ea9166959d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,838 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 1.7791s
+2026-01-29 22:13:27,869 - Node_c4 - INFO - Sent packet a98bbfba-e511-4ee3-964d-cf53db56a44b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,910 - Node_c4 - INFO - Sent packet 71b30b49-fef3-421b-8363-9d83a1d26191 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,925 - Node_c4 - INFO - Sent packet 6af61110-5126-4d5b-b618-04a69c49f19e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,942 - Node_c4 - INFO - Sent packet d6f3d7e6-30cf-4854-8ccb-448180a38d20 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:27,978 - Node_c4 - INFO - Received msg: Real Msg 1769721204.... Latency: 3.8762s
+2026-01-29 22:13:28,020 - Node_c4 - INFO - Received msg: Real Msg 1769721204.... Latency: 4.0143s
+2026-01-29 22:13:28,176 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 2.4912s
+2026-01-29 22:13:28,245 - Node_c4 - INFO - Received msg: Real Msg 1769721203.... Latency: 4.7676s
+2026-01-29 22:13:28,253 - Node_c4 - INFO - Sent packet d04cdd77-addd-435b-81fe-c061e42ceace to p1 (10.0.0.6:8000)
+2026-01-29 22:13:28,339 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 1.4629s
+2026-01-29 22:13:28,377 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 3.0899s
+2026-01-29 22:13:28,387 - Node_c4 - INFO - Sent packet 28bf29e8-e6f3-4670-ac68-642f2a492128 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:28,419 - Node_c4 - INFO - Received msg: Real Msg 1769721202.... Latency: 5.5786s
+2026-01-29 22:13:28,453 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 2.4591s
+2026-01-29 22:13:28,453 - Node_c4 - INFO - Sent packet b4b7247e-e49f-41e9-9f8c-6266a7d63d51 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:28,459 - Node_c4 - INFO - Sent packet cb3373cc-d6b1-4a41-ae0b-f242fbe6420a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:28,476 - Node_c4 - INFO - Sent packet df112fcc-5d0b-44cd-bfd3-08e6a8c62c5d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:28,504 - Node_c4 - INFO - Received msg: Real Msg 1769721204.... Latency: 4.1727s
+2026-01-29 22:13:28,574 - Node_c4 - INFO - Sent packet 7b95b2e7-6b62-48ad-9bba-e1949e5e703c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:28,635 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 2.7399s
+2026-01-29 22:13:28,652 - Node_c4 - INFO - Sent packet 0c4bca74-f310-4964-b3f2-b018dedef0c7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:28,694 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 2.8865s
+2026-01-29 22:13:28,738 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 3.7320s
+2026-01-29 22:13:28,759 - Node_c4 - INFO - Received msg: Real Msg 1769721207.... Latency: 1.3088s
+2026-01-29 22:13:28,809 - Node_c4 - INFO - Sent packet b52a091e-7840-4e47-83f5-03fc8b2ebec7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:28,841 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 2.8957s
+2026-01-29 22:13:28,890 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 2.0785s
+2026-01-29 22:13:28,906 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 2.0490s
+2026-01-29 22:13:28,944 - Node_c4 - INFO - Sent packet 43bc6418-8580-49ed-a38a-a3ee854ee300 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:28,982 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 2.8314s
+2026-01-29 22:13:29,001 - Node_c4 - INFO - Received msg: Real Msg 1769721208.... Latency: 0.9174s
+2026-01-29 22:13:29,030 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 2.3661s
+2026-01-29 22:13:29,050 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 2.5587s
+2026-01-29 22:13:29,130 - Node_c4 - INFO - Sent packet 589f1abf-ee53-4b29-954f-fd270fbee449 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:29,144 - Node_c4 - INFO - Received msg: Real Msg 1769721208.... Latency: 1.0601s
+2026-01-29 22:13:29,190 - Node_c4 - INFO - Received msg: Real Msg 1769721207.... Latency: 1.8189s
+2026-01-29 22:13:29,238 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 2.5484s
+2026-01-29 22:13:29,251 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 3.5666s
+2026-01-29 22:13:29,293 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 3.2991s
+2026-01-29 22:13:29,338 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 2.4810s
+2026-01-29 22:13:29,356 - Node_c4 - INFO - Sent packet b035a35f-77a4-422c-9d0d-450cab6a2628 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:29,360 - Node_c4 - INFO - Sent packet 36945b96-acc4-4461-9ea5-c494b2a7a02f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:29,374 - Node_c4 - INFO - Sent packet c378188d-9e50-4698-905e-e0f391a194a2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:29,394 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 3.4479s
+2026-01-29 22:13:29,476 - Node_c4 - INFO - Sent packet ebf31608-02f1-450e-9a92-0fdba9eae6f2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:29,488 - Node_c4 - INFO - Sent packet 1f9cc0a5-764f-47b2-aa3f-76504b5f203b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:29,496 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 2.8324s
+2026-01-29 22:13:29,528 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 3.7207s
+2026-01-29 22:13:29,569 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 2.8795s
+2026-01-29 22:13:29,669 - Node_c4 - INFO - Sent packet 24c0365b-337b-4d5c-8dd3-d680b48555d6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:29,696 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 2.8851s
+2026-01-29 22:13:29,778 - Node_c4 - INFO - Received msg: Real Msg 1769721208.... Latency: 1.4168s
+2026-01-29 22:13:29,832 - Node_c4 - INFO - Sent packet 6cd87687-3907-4ea4-92ab-103f6ee5af3a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:29,882 - Node_c4 - INFO - Received msg: Real Msg 1769721207.... Latency: 2.8811s
+2026-01-29 22:13:29,972 - Node_c4 - INFO - Sent packet c534ae22-73b3-44bb-bf95-de290c80d843 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,005 - Node_c4 - INFO - Received msg: Real Msg 1769721208.... Latency: 1.4154s
+2026-01-29 22:13:30,191 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 3.4107s
+2026-01-29 22:13:30,229 - Node_c4 - INFO - Sent packet 10eb9c3f-e49c-42d7-8eaf-c2647aed0117 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,257 - Node_c4 - INFO - Sent packet ff71e237-4852-4561-8de5-9077d81823cd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,269 - Node_c4 - INFO - Received msg: Real Msg 1769721208.... Latency: 1.9078s
+2026-01-29 22:13:30,282 - Node_c4 - INFO - Sent packet 79dfb052-5d0d-4715-8dd7-6318fb8e95f1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,314 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 3.8231s
+2026-01-29 22:13:30,319 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 1.2060s
+2026-01-29 22:13:30,363 - Node_c4 - INFO - Sent packet feeff986-48d1-43e4-84fd-cdea9709a962 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,393 - Node_c4 - INFO - Received msg: Real Msg 1769721207.... Latency: 3.3923s
+2026-01-29 22:13:30,421 - Node_c4 - INFO - Sent packet f7c9c74d-35ed-4044-9bd1-5275ac92005b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,439 - Node_c4 - INFO - Sent packet f2dd271a-7378-45a5-9839-f34e0288f9dd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,482 - Node_c4 - INFO - Sent packet fd75778f-6ba7-4bf1-8a40-b2cb92f5fefc to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,487 - Node_c4 - INFO - Sent packet fe8f2540-ee82-4d06-b692-a1797565d5c9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,504 - Node_c4 - INFO - Sent packet c59f2bc4-061a-4d73-8caf-e4610da00d62 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,547 - Node_c4 - INFO - Sent packet 0f407209-d52e-4279-a5f8-7b0793ad8a1a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,568 - Node_c4 - INFO - Received msg: Real Msg 1769721207.... Latency: 3.1394s
+2026-01-29 22:13:30,657 - Node_c4 - INFO - Received msg: Real Msg 1769721208.... Latency: 1.9134s
+2026-01-29 22:13:30,680 - Node_c4 - INFO - Sent packet ac6ec2db-aa4e-41db-bb10-f742d7e2b2e7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,697 - Node_c4 - INFO - Sent packet e1eee646-028a-4fe2-93fc-f9f27ce91a8b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,710 - Node_c4 - INFO - Sent packet b4909a3b-4de1-40d0-a5e8-aa081d546173 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,776 - Node_c4 - INFO - Sent packet 925b0dc9-956a-4f23-b3ac-1c2a7840bfbd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,800 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 1.7083s
+2026-01-29 22:13:30,839 - Node_c4 - INFO - Sent packet f82efd0a-0676-4e66-8d66-c09c56a879d8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,853 - Node_c4 - INFO - Sent packet ec58dd03-ccc9-46d3-9759-dd0e7fcc1ee2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:30,869 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 3.9937s
+2026-01-29 22:13:30,902 - Node_c4 - INFO - Received msg: Real Msg 1769721207.... Latency: 3.5310s
+2026-01-29 22:13:30,905 - Node_c4 - INFO - Received msg: Real Msg 1769721204.... Latency: 6.0481s
+2026-01-29 22:13:31,043 - Node_c4 - INFO - Received msg: Real Msg 1769721204.... Latency: 6.0530s
+2026-01-29 22:13:31,045 - Node_c4 - INFO - Received msg: Real Msg 1769721206.... Latency: 4.2650s
+2026-01-29 22:13:31,071 - Node_c4 - INFO - Sent packet f7075331-bf75-4c59-8c6c-262238ce69d9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,116 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 1.5173s
+2026-01-29 22:13:31,162 - Node_c4 - INFO - Sent packet e75252bb-d00c-4d77-a296-c325f6805cac to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,171 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 1.8536s
+2026-01-29 22:13:31,186 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 2.0312s
+2026-01-29 22:13:31,261 - Node_c4 - INFO - Sent packet 77819f66-ff3c-4fc2-89f1-79732902051e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,289 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 1.7243s
+2026-01-29 22:13:31,300 - Node_c4 - INFO - Sent packet c89e2b41-0261-404e-bf20-32972684a448 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,346 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 1.7488s
+2026-01-29 22:13:31,354 - Node_c4 - INFO - Received msg: Real Msg 1769721208.... Latency: 2.7416s
+2026-01-29 22:13:31,377 - Node_c4 - INFO - Sent packet 5b740ed4-ac26-4aee-b956-5c7a9cda73ae to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,396 - Node_c4 - INFO - Sent packet 91286903-ffef-4863-ae10-d2c40bf203ea to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,469 - Node_c4 - INFO - Sent packet e3c34d18-894c-4d3a-80a7-45da1ef8d94c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,540 - Node_c4 - INFO - Received msg: Real Msg 1769721207.... Latency: 4.1119s
+2026-01-29 22:13:31,636 - Node_c4 - INFO - Received msg: Real Msg 1769721205.... Latency: 5.7403s
+2026-01-29 22:13:31,657 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 1.9911s
+2026-01-29 22:13:31,672 - Node_c4 - INFO - Sent packet 56f3cbe6-d98c-4bd3-a144-84b235996f1c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,676 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 2.3590s
+2026-01-29 22:13:31,677 - Node_c4 - INFO - Sent packet 483b71df-f573-4bb2-b041-597beaa4c5a0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,678 - Node_c4 - INFO - Received msg: Real Msg 1769721208.... Latency: 3.0655s
+2026-01-29 22:13:31,777 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 1.6639s
+2026-01-29 22:13:31,785 - Node_c4 - INFO - Sent packet af3318cc-11f5-4589-9c8e-c75e1b0125ff to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,825 - Node_c4 - INFO - Sent packet 9123513b-fccd-43f6-8f93-5dd562929e20 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,868 - Node_c4 - INFO - Sent packet a3deb063-89b9-40b0-96dc-3f291c384f8e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,930 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 2.3648s
+2026-01-29 22:13:31,941 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 1.8722s
+2026-01-29 22:13:31,947 - Node_c4 - INFO - Received msg: Real Msg 1769721208.... Latency: 3.2035s
+2026-01-29 22:13:31,950 - Node_c4 - INFO - Sent packet 034f8b76-73d8-49a0-8284-597f8099b3b5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,954 - Node_c4 - INFO - Sent packet 54688bff-0bf9-420e-b2bb-0ac5a3f22030 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:31,978 - Node_c4 - INFO - Sent packet f66b6ee8-20f8-4e8b-a674-921f1ad6f11b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,034 - Node_c4 - INFO - Sent packet 4257f7e7-92cd-46f4-850a-296bc1b4b256 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,042 - Node_c4 - INFO - Sent packet 8120434f-21ce-4aa9-b923-3f54a6b29986 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,154 - Node_c4 - INFO - Sent packet fe6899c1-e73f-4def-8dc2-544df7360681 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,194 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 1.8769s
+2026-01-29 22:13:32,199 - Node_c4 - INFO - Sent packet f99bf865-c354-481e-83fb-b7916d1e98aa to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,204 - Node_c4 - INFO - Sent packet b6fa9ea5-e12f-4d9d-a54f-e80a07226ffb to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,262 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 2.2925s
+2026-01-29 22:13:32,287 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 2.2185s
+2026-01-29 22:13:32,295 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 3.1397s
+2026-01-29 22:13:32,388 - Node_c4 - INFO - Sent packet fef4e005-1cf0-4951-a0a5-8f9bc204f372 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,440 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 2.7881s
+2026-01-29 22:13:32,452 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 3.3604s
+2026-01-29 22:13:32,455 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 2.2188s
+2026-01-29 22:13:32,461 - Node_c4 - INFO - Sent packet a5e2aa8a-a5e3-40d9-85ca-02c06046468e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,502 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 1.5717s
+2026-01-29 22:13:32,567 - Node_c4 - INFO - Sent packet 0fa8b247-b549-4964-9b48-5d01ff09f358 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,579 - Node_c4 - INFO - Sent packet 907173d7-8942-49b7-b0bb-404ba704f79a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,623 - Node_c4 - INFO - Sent packet 4a84c85d-55c7-4652-8bc5-d17668e38e92 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,669 - Node_c4 - INFO - Sent packet b6e9682a-a116-4602-9d26-ef88c8302778 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,707 - Node_c4 - INFO - Sent packet 8cda8464-a162-4e4e-9fe0-3ba842f1154e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,765 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 2.7950s
+2026-01-29 22:13:32,772 - Node_c4 - INFO - Sent packet 422b4ab3-895b-453a-bb95-e984e0fa4909 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,778 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 3.1254s
+2026-01-29 22:13:32,783 - Node_c4 - INFO - Sent packet 630a8e72-b72d-4529-b0ac-b8bfe93b50de to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,801 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 3.6883s
+2026-01-29 22:13:32,826 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 2.7134s
+2026-01-29 22:13:32,847 - Node_c4 - INFO - Sent packet c460a82b-2b5e-4b25-a7b6-927d5dd76efb to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,861 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 2.6482s
+2026-01-29 22:13:32,862 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 2.6257s
+2026-01-29 22:13:32,951 - Node_c4 - INFO - Sent packet 9280c2fe-cf11-4337-9557-7160ac401870 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:32,965 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 2.6471s
+2026-01-29 22:13:32,985 - Node_c4 - INFO - Received msg: Real Msg 1769721211.... Latency: 1.5414s
+2026-01-29 22:13:32,998 - Node_c4 - INFO - Sent packet 1b30168c-243d-4ba5-98ed-0f16a59c1fe2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:33,067 - Node_c4 - INFO - Sent packet e9423055-d138-43f7-bcb4-4aa9d546a7f8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:33,120 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 2.7074s
+2026-01-29 22:13:33,174 - Node_c4 - INFO - Sent packet 8ea4dfbe-ccda-42e1-9bb5-485d1a9262f5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:33,267 - Node_c4 - INFO - Sent packet 196e2d5c-4121-4243-8659-671da06688f7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:33,350 - Node_c4 - INFO - Sent packet 2eb098ab-7f18-4993-b66e-07f7f3702686 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:33,357 - Node_c4 - INFO - Sent packet 29577ec8-d9ad-4110-9e12-818227a58980 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:33,405 - Node_c4 - INFO - Received msg: Real Msg 1769721211.... Latency: 1.6032s
+2026-01-29 22:13:33,488 - Node_c4 - INFO - Sent packet f6923485-e801-4d11-af2f-dfa76f08182e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:33,522 - Node_c4 - INFO - Received msg: Real Msg 1769721211.... Latency: 1.7200s
+2026-01-29 22:13:33,527 - Node_c4 - INFO - Sent packet 83695c87-3115-4d31-95ea-83b5d2306ba7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:33,552 - Node_c4 - INFO - Sent packet 8f2d83cc-c46f-4db9-9c4c-6dd8a5b3ab21 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:33,585 - Node_c4 - INFO - Sent packet 33855a83-81f1-4c89-8c8f-6aaace812556 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:33,625 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 4.0269s
+2026-01-29 22:13:33,629 - Node_c4 - INFO - Sent packet 098ed02a-1312-4b9b-b231-8406e948e79c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:33,644 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 1.2569s
+2026-01-29 22:13:33,657 - Node_c4 - INFO - Received msg: Real Msg 1769721211.... Latency: 2.2130s
+2026-01-29 22:13:33,693 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 2.7631s
+2026-01-29 22:13:33,701 - Node_c4 - INFO - Sent packet 0f599e3f-c4e8-484b-ace7-9c022d66006d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:33,885 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 3.6722s
+2026-01-29 22:13:33,944 - Node_c4 - INFO - Sent packet 1edc08f6-f920-458d-aa9b-f75b25b2ca56 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,015 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 1.3366s
+2026-01-29 22:13:34,026 - Node_c4 - INFO - Sent packet 48fccfc1-c8bd-406d-a497-feef8c1a8ed8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,082 - Node_c4 - INFO - Sent packet a699c2a8-5ef9-4123-98ad-5285401b4609 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,088 - Node_c4 - INFO - Sent packet f24697c5-d252-4de2-b228-fc45fe194891 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,158 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 3.7450s
+2026-01-29 22:13:34,189 - Node_c4 - INFO - Sent packet 02c6717c-1d18-4fd7-bf58-c7367e403dde to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,195 - Node_c4 - INFO - Received msg: Real Msg 1769721211.... Latency: 2.4749s
+2026-01-29 22:13:34,224 - Node_c4 - INFO - Sent packet 9add87ba-e6a0-4042-8470-1e1754deb0cf to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,263 - Node_c4 - INFO - Sent packet 09e34d66-513d-4bb8-9ba6-c8cb6f1f59fa to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,330 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 1.7296s
+2026-01-29 22:13:34,372 - Node_c4 - INFO - Sent packet db2e8cc6-b96b-4735-82a1-3cc7064a16e3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,401 - Node_c4 - INFO - Sent packet f26031d1-4f33-441a-b54a-57d7138cd001 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,408 - Node_c4 - INFO - Received msg: Real Msg 1769721213.... Latency: 1.2978s
+2026-01-29 22:13:34,495 - Node_c4 - INFO - Sent packet dd2b21e8-82ef-4719-b25e-2ffcfc1ed9a0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,511 - Node_c4 - INFO - Received msg: Real Msg 1769721208.... Latency: 5.9222s
+2026-01-29 22:13:34,516 - Node_c4 - INFO - Sent packet 566ad2cc-32e2-498d-a2e2-c3207b1af5bb to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,538 - Node_c4 - INFO - Sent packet bc29c9ba-13aa-4588-b17a-99eafea8335d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,553 - Node_c4 - INFO - Sent packet bffdc879-e91f-4d74-981a-96f5a2366758 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,573 - Node_c4 - INFO - Sent packet 7bc8af7a-a873-47d9-b6d4-3b466d2ff882 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,666 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 2.0657s
+2026-01-29 22:13:34,678 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 5.0808s
+2026-01-29 22:13:34,764 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 2.3772s
+2026-01-29 22:13:34,766 - Node_c4 - INFO - Sent packet f4c6b634-662c-4db7-a745-c60a30bc4790 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,851 - Node_c4 - INFO - Sent packet 0dfaa545-d41f-4bb6-8e5c-3e4b2d7bcc35 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,861 - Node_c4 - INFO - Sent packet e7e8dc8d-7e81-4eef-bf98-5e09a9fe0db1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:34,969 - Node_c4 - INFO - Sent packet 29fae43c-d8a2-4e3f-96da-ac51c6d9c71d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,001 - Node_c4 - INFO - Sent packet f950e532-2118-431c-b3fd-4fd80e3593fe to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,005 - Node_c4 - INFO - Received msg: Real Msg 1769721213.... Latency: 1.3137s
+2026-01-29 22:13:35,040 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 2.0540s
+2026-01-29 22:13:35,068 - Node_c4 - INFO - Sent packet fd432f63-f34f-48da-a546-533117625c01 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,108 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 2.5322s
+2026-01-29 22:13:35,124 - Node_c4 - INFO - Received msg: Real Msg 1769721213.... Latency: 2.0147s
+2026-01-29 22:13:35,126 - Node_c4 - INFO - Sent packet 40383e82-b884-42de-ad90-a0800cdf31a6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,178 - Node_c4 - INFO - Sent packet 6ae953a2-a16d-4481-b9e5-faedb8690466 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,181 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 2.3570s
+2026-01-29 22:13:35,267 - Node_c4 - INFO - Sent packet d615691a-37a0-420b-9e4c-17bed4e84bdb to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,273 - Node_c4 - INFO - Received msg: Real Msg 1769721213.... Latency: 1.6908s
+2026-01-29 22:13:35,313 - Node_c4 - INFO - Sent packet 6d62f9e2-6a1f-4a02-8ab7-c2ebfff42fbd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,320 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 4.5075s
+2026-01-29 22:13:35,321 - Node_c4 - INFO - Sent packet 9a8504a8-0719-4919-b94c-3a0060d639f1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,341 - Node_c4 - INFO - Sent packet 4c793ec4-80d7-4f6a-8fdc-51ad93fbbbac to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,379 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 2.3932s
+2026-01-29 22:13:35,387 - Node_c4 - INFO - Sent packet 50cf3d7c-fdc7-41a5-b864-e04ca8832eea to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,390 - Node_c4 - INFO - Sent packet 5b19ad8d-db04-47ea-9537-223e3b431029 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,438 - Node_c4 - INFO - Sent packet c7415397-887d-45ba-a76d-af3b118338c4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,479 - Node_c4 - INFO - Sent packet 70286fa8-e8e6-4c32-af94-a04eee7f515c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,655 - Node_c4 - INFO - Sent packet 52af51c8-c562-4940-b81c-236731594b07 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,689 - Node_c4 - INFO - Sent packet d4186773-6e98-4e86-9794-6f4d37ae3303 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,739 - Node_c4 - INFO - Sent packet da6029ec-6990-4f5b-aa5e-b7e0c70d78a7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,751 - Node_c4 - INFO - Sent packet 8917e5fb-1b3d-4bae-95d4-f1e84e05286d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,775 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 3.1584s
+2026-01-29 22:13:35,856 - Node_c4 - INFO - Sent packet 52fa9e64-e819-421b-b5bf-bc9102b6a608 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,869 - Node_c4 - INFO - Received msg: Real Msg 1769721211.... Latency: 4.1487s
+2026-01-29 22:13:35,880 - Node_c4 - INFO - Received msg: Real Msg 1769721215.... Latency: 0.7735s
+2026-01-29 22:13:35,890 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 3.0659s
+2026-01-29 22:13:35,919 - Node_c4 - INFO - Sent packet ee39b100-fe54-4994-a137-12184340a91f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:35,965 - Node_c4 - INFO - Received msg: Real Msg 1769721215.... Latency: 0.8591s
+2026-01-29 22:13:36,017 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 3.3997s
+2026-01-29 22:13:36,026 - Node_c4 - INFO - Received msg: Real Msg 1769721214.... Latency: 1.6098s
+2026-01-29 22:13:36,045 - Node_c4 - INFO - Received msg: Real Msg 1769721213.... Latency: 2.5932s
+2026-01-29 22:13:36,089 - Node_c4 - INFO - Sent packet 8314125c-f4f0-4e98-ada1-99418952dde2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,099 - Node_c4 - INFO - Sent packet 9202a980-bd72-419b-a733-e95ad4667e76 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,136 - Node_c4 - INFO - Sent packet cf622dbe-6faf-45b7-8afa-efe0a7afb35a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,222 - Node_c4 - INFO - Sent packet 3dc04ace-83a9-4efd-8abf-fa043efabbac to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,271 - Node_c4 - INFO - Sent packet f3fcfc51-bd72-4afc-8a37-7370b4d1d98b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,316 - Node_c4 - INFO - Sent packet bec4d2e5-0ee8-436f-8da9-37ab3debc919 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,362 - Node_c4 - INFO - Received msg: Real Msg 1769721209.... Latency: 6.6966s
+2026-01-29 22:13:36,383 - Node_c4 - INFO - Sent packet 64af95fa-4ef7-4218-ae1b-6209276fd641 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,397 - Node_c4 - INFO - Sent packet b3df9e90-90a1-42ee-9985-d48e15e5e85b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,402 - Node_c4 - INFO - Sent packet a4b2d8d1-362c-4b11-bb14-e3bcbcad8c87 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,467 - Node_c4 - INFO - Sent packet efcb9da5-0432-466b-a79d-c31e1058affe to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,488 - Node_c4 - INFO - Received msg: Real Msg 1769721214.... Latency: 1.8311s
+2026-01-29 22:13:36,584 - Node_c4 - INFO - Sent packet 5616e558-bb6a-424a-a5f8-715f29284dc9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,654 - Node_c4 - INFO - Received msg: Real Msg 1769721213.... Latency: 2.9622s
+2026-01-29 22:13:36,655 - Node_c4 - INFO - Sent packet c6a5d588-de3b-429b-aca7-b4a5fe4f4063 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,658 - Node_c4 - INFO - Received msg: Real Msg 1769721213.... Latency: 3.2061s
+2026-01-29 22:13:36,703 - Node_c4 - INFO - Received msg: Real Msg 1769721215.... Latency: 1.4542s
+2026-01-29 22:13:36,717 - Node_c4 - INFO - Received msg: Real Msg 1769721215.... Latency: 1.1137s
+2026-01-29 22:13:36,728 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 4.1526s
+2026-01-29 22:13:36,771 - Node_c4 - INFO - Sent packet 49a85d42-ab80-436a-8f7d-d46348c0d497 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,815 - Node_c4 - INFO - Received msg: Real Msg 1769721214.... Latency: 2.3989s
+2026-01-29 22:13:36,912 - Node_c4 - INFO - Sent packet d7e550c7-083c-4f00-b37f-b22c8bc431a3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:36,932 - Node_c4 - INFO - Received msg: Real Msg 1769721213.... Latency: 3.3502s
+2026-01-29 22:13:37,124 - Node_c4 - INFO - Received msg: Real Msg 1769721210.... Latency: 6.3112s
+2026-01-29 22:13:37,136 - Node_c4 - INFO - Received msg: Real Msg 1769721215.... Latency: 2.1102s
+2026-01-29 22:13:37,143 - Node_c4 - INFO - Sent packet 14cf1f60-b9bb-463c-b42f-0865573717a1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:37,239 - Node_c4 - INFO - Sent packet c88ae707-eb80-4f6d-afbe-d4e91ccfba2b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:37,291 - Node_c4 - INFO - Sent packet bd02a1af-8887-42be-8c81-be27f650a831 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:37,305 - Node_c4 - INFO - Received msg: Real Msg 1769721215.... Latency: 2.0570s
+2026-01-29 22:13:37,340 - Node_c4 - INFO - Sent packet c2ddb768-a3f7-45c0-bc32-1f3c72b97c2b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:37,389 - Node_c4 - INFO - Received msg: Real Msg 1769721215.... Latency: 1.4266s
+2026-01-29 22:13:37,401 - Node_c4 - INFO - Sent packet 8eaab87f-4e5a-4b77-9439-33ae9460c6dd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:37,438 - Node_c4 - INFO - Sent packet a3a6d59b-1a3a-413b-97d4-132da4c5660f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:37,595 - Node_c4 - INFO - Received msg: Real Msg 1769721212.... Latency: 4.9169s
+2026-01-29 22:13:37,680 - Node_c4 - INFO - Sent packet 56e221e5-4e9b-42d4-9854-3ddea67e43d9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:37,684 - Node_c4 - INFO - Sent packet 74a9af0d-bcac-4866-ad69-800ebeafd297 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:37,775 - Node_c4 - INFO - Received msg: Real Msg 1769721216.... Latency: 1.7490s
+2026-01-29 22:13:37,781 - Node_c4 - INFO - Sent packet f3430498-4d29-4fae-9a8f-403169c4d52d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:37,808 - Node_c4 - INFO - Sent packet 47d9b8ff-7d01-4117-bacd-f4827465f928 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:37,831 - Node_c4 - INFO - Sent packet 73acfdce-b8d7-4996-897d-9b8bfe71d0f3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:37,946 - Node_c4 - INFO - Sent packet 1bedd000-e06e-40a3-80fc-82de5894619e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,063 - Node_c4 - INFO - Sent packet c0385229-6c8f-4f52-ba01-f97dc45a2303 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,130 - Node_c4 - INFO - Received msg: Real Msg 1769721215.... Latency: 2.5276s
+2026-01-29 22:13:38,140 - Node_c4 - INFO - Sent packet e4539933-01c7-44d3-8ee0-7a5df5b94a5b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,295 - Node_c4 - INFO - Received msg: Real Msg 1769721213.... Latency: 4.3582s
+2026-01-29 22:13:38,324 - Node_c4 - INFO - Sent packet 9ce094b7-ce17-4898-8e0e-0ad7bde107b3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,329 - Node_c4 - INFO - Received msg: Real Msg 1769721216.... Latency: 1.6898s
+2026-01-29 22:13:38,351 - Node_c4 - INFO - Received msg: Real Msg 1769721216.... Latency: 2.3252s
+2026-01-29 22:13:38,361 - Node_c4 - INFO - Sent packet af6b3109-8c98-48df-b32c-215e71bfaa19 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,373 - Node_c4 - INFO - Received msg: Real Msg 1769721213.... Latency: 4.4361s
+2026-01-29 22:13:38,393 - Node_c4 - INFO - Sent packet 020c4e2a-c72e-4b91-baca-895baf2c4d9c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,437 - Node_c4 - INFO - Sent packet f085bf0f-5f06-4175-99b6-3dfb50dafed0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,610 - Node_c4 - INFO - Sent packet 8def7091-ea7b-4e75-b09d-ec59fc36b982 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,641 - Node_c4 - INFO - Sent packet 657d27c8-33a8-4341-93cb-e3b51caea616 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,667 - Node_c4 - INFO - Received msg: Real Msg 1769721216.... Latency: 1.9905s
+2026-01-29 22:13:38,770 - Node_c4 - INFO - Sent packet c1e9de29-5799-41df-981d-127dfccb4c67 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,851 - Node_c4 - INFO - Sent packet fd74bd81-a1fa-4d8a-b8f1-70fb15f45d7b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,877 - Node_c4 - INFO - Sent packet 7a3a289a-e491-4ca9-8200-c7d2cda5d3c2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,901 - Node_c4 - INFO - Received msg: Real Msg 1769721214.... Latency: 4.2437s
+2026-01-29 22:13:38,937 - Node_c4 - INFO - Sent packet 91d15105-1870-47ee-a2cd-ac51b6441c72 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,955 - Node_c4 - INFO - Sent packet e85fec76-e7d3-463e-aa08-3bb417621635 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:38,962 - Node_c4 - INFO - Sent packet b12997b2-e213-4f28-8404-1620bffd23d0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:39,006 - Node_c4 - INFO - Received msg: Real Msg 1769721217.... Latency: 1.3704s
+2026-01-29 22:13:39,077 - Node_c4 - INFO - Received msg: Real Msg 1769721216.... Latency: 2.4011s
+2026-01-29 22:13:39,085 - Node_c4 - INFO - Received msg: Real Msg 1769721217.... Latency: 1.0972s
+2026-01-29 22:13:39,175 - Node_c4 - INFO - Sent packet e455aab5-3538-484b-bc57-628b74daaa09 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:39,181 - Node_c4 - INFO - Sent packet 4bb05c4a-ff1e-45f1-b0ef-686a26e9a0e6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:39,233 - Node_c4 - INFO - Sent packet 66d1eb7b-dcb3-4a98-8b5c-41a8501bc8ad to p1 (10.0.0.6:8000)
+2026-01-29 22:13:39,249 - Node_c4 - INFO - Sent packet 3fd4e372-7c2d-45f6-92d7-a45b650852e3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:39,297 - Node_c4 - INFO - Sent packet 8d7ea3d9-3fb0-4071-847f-423c93f37e1a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:39,308 - Node_c4 - INFO - Sent packet eb4f77ea-68ed-42ca-b49c-b27c4a34b579 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:39,314 - Node_c4 - INFO - Received msg: Real Msg 1769721217.... Latency: 1.8479s
+2026-01-29 22:13:39,318 - Node_c4 - INFO - Sent packet 98385cd8-478f-45b0-95ef-a4acdb3fc3b6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:39,349 - Node_c4 - INFO - Received msg: Real Msg 1769721216.... Latency: 2.7019s
+2026-01-29 22:13:39,407 - Node_c4 - INFO - Sent packet a5eafbfa-fb26-4f75-a313-0296a8e90d10 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:39,438 - Node_c4 - INFO - Received msg: Real Msg 1769721207.... Latency: 11.9878s
+2026-01-29 22:13:39,510 - Node_c4 - INFO - Received msg: Real Msg 1769721215.... Latency: 3.5482s
+2026-01-29 22:13:39,772 - Node_c4 - INFO - Sent packet aa7c3b8b-e652-4094-a2b2-9d45cade7b1d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:39,829 - Node_c4 - INFO - Received msg: Real Msg 1769721217.... Latency: 2.1643s
+2026-01-29 22:13:39,837 - Node_c4 - INFO - Sent packet 5a5aedec-1698-4b34-8a97-9b88e40b0a87 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:39,951 - Node_c4 - INFO - Received msg: Real Msg 1769721216.... Latency: 3.5180s
+2026-01-29 22:13:40,002 - Node_c4 - INFO - Received msg: Real Msg 1769721218.... Latency: 1.2388s
+2026-01-29 22:13:40,037 - Node_c4 - INFO - Received msg: Real Msg 1769721216.... Latency: 3.3901s
+2026-01-29 22:13:40,076 - Node_c4 - INFO - Received msg: Real Msg 1769721217.... Latency: 2.6092s
+2026-01-29 22:13:40,085 - Node_c4 - INFO - Sent packet d6f4a6d4-20fe-437b-a645-f4165f55c8bc to p1 (10.0.0.6:8000)
+2026-01-29 22:13:40,145 - Node_c4 - INFO - Sent packet fe69fa20-bdcb-43de-9a55-6dd6f725167e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:40,148 - Node_c4 - INFO - Sent packet 38989127-b1aa-4e5e-905d-4e728cff97ba to p1 (10.0.0.6:8000)
+2026-01-29 22:13:40,178 - Node_c4 - INFO - Received msg: Real Msg 1769721217.... Latency: 2.5424s
+2026-01-29 22:13:40,224 - Node_c4 - INFO - Sent packet 13a62d9a-997d-4609-b7c9-1f3ba27785be to p1 (10.0.0.6:8000)
+2026-01-29 22:13:40,295 - Node_c4 - INFO - Sent packet 60fe5918-2690-4d22-a80d-ca346cebea8b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:40,301 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 0.9191s
+2026-01-29 22:13:40,305 - Node_c4 - INFO - Sent packet 7b798cde-0b29-4c82-a1f5-5e3677c0ea29 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:40,386 - Node_c4 - INFO - Received msg: Real Msg 1769721218.... Latency: 1.9851s
+2026-01-29 22:13:40,404 - Node_c4 - INFO - Received msg: Real Msg 1769721217.... Latency: 2.7396s
+2026-01-29 22:13:40,419 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 1.2732s
+2026-01-29 22:13:40,470 - Node_c4 - INFO - Sent packet bb803535-63c1-496d-b6e6-f1b6b8d38534 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:40,488 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 1.2327s
+2026-01-29 22:13:40,496 - Node_c4 - INFO - Received msg: Real Msg 1769721218.... Latency: 1.6734s
+2026-01-29 22:13:40,516 - Node_c4 - INFO - Sent packet aa548c9c-e3a0-47df-bbec-a306d3ae9145 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:40,528 - Node_c4 - INFO - Sent packet ca74bcef-b5cb-4691-9b70-961aebc37265 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:40,554 - Node_c4 - INFO - Received msg: Real Msg 1769721215.... Latency: 5.5282s
+2026-01-29 22:13:40,653 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 1.2711s
+2026-01-29 22:13:40,689 - Node_c4 - INFO - Sent packet 36a6b6b1-a2a0-47dd-8f75-17a17bc5f95b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:40,709 - Node_c4 - INFO - Sent packet c576490e-81e0-4cea-ba91-818865aa2699 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:40,866 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 1.2229s
+2026-01-29 22:13:40,901 - Node_c4 - INFO - Received msg: Real Msg 1769721218.... Latency: 1.9311s
+2026-01-29 22:13:41,046 - Node_c4 - INFO - Sent packet 789a0e3d-7c5d-457d-9879-f638c8710b39 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,060 - Node_c4 - INFO - Sent packet 602785db-ddf4-49cb-9056-7a8ddfc81457 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,101 - Node_c4 - INFO - Sent packet 00231850-7d51-43fa-827c-dbc9ff679595 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,106 - Node_c4 - INFO - Sent packet 915e0667-353f-42a2-b547-b8f727bbdf19 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,110 - Node_c4 - INFO - Sent packet b3f0f1eb-4bda-4a5b-9868-ec87164ac2ce to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,119 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 1.9728s
+2026-01-29 22:13:41,154 - Node_c4 - INFO - Received msg: Real Msg 1769721218.... Latency: 2.3907s
+2026-01-29 22:13:41,320 - Node_c4 - INFO - Received msg: Real Msg 1769721218.... Latency: 2.6504s
+2026-01-29 22:13:41,414 - Node_c4 - INFO - Sent packet 4fc12a83-aab1-4cce-9a55-a0fd3d9e30d2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,478 - Node_c4 - INFO - Sent packet 9d18d4ad-81a2-4c3a-8e66-03e2d2da8f96 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,542 - Node_c4 - INFO - Sent packet efc8f5a7-04fb-4728-81f0-b2f8684a4ebf to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,579 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 1.9320s
+2026-01-29 22:13:41,660 - Node_c4 - INFO - Sent packet a8c6c133-8f29-4ce8-a983-a0d90604a183 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,755 - Node_c4 - INFO - Sent packet e6e993a5-1a7d-4bdd-948d-6b242c81cc13 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,760 - Node_c4 - INFO - Received msg: Real Msg 1769721220.... Latency: 1.0492s
+2026-01-29 22:13:41,829 - Node_c4 - INFO - Sent packet 771bc617-7f81-4eff-822c-f77a73d414b1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,849 - Node_c4 - INFO - Sent packet a7594847-65c6-4c4a-8d97-2ca3d3f675d0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,853 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 2.6553s
+2026-01-29 22:13:41,881 - Node_c4 - INFO - Sent packet 087966cd-aaa6-4460-b329-2ca23061d9eb to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,900 - Node_c4 - INFO - Sent packet 670a1425-d35f-46f8-809c-f100cbe86807 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:41,995 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 2.3407s
+2026-01-29 22:13:42,025 - Node_c4 - INFO - Received msg: Real Msg 1769721216.... Latency: 5.5921s
+2026-01-29 22:13:42,099 - Node_c4 - INFO - Sent packet e9f110f1-d6db-4c26-96f4-597061cc14c2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:42,214 - Node_c4 - INFO - Sent packet 96eeb20b-e5b8-4362-979d-4b1da150d3c8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:42,221 - Node_c4 - INFO - Received msg: Real Msg 1769721218.... Latency: 3.8204s
+2026-01-29 22:13:42,246 - Node_c4 - INFO - Received msg: Real Msg 1769721220.... Latency: 1.7770s
+2026-01-29 22:13:42,262 - Node_c4 - INFO - Received msg: Real Msg 1769721218.... Latency: 3.4396s
+2026-01-29 22:13:42,296 - Node_c4 - INFO - Sent packet 71303f52-2815-4d75-85d6-a20996f0b5ac to p1 (10.0.0.6:8000)
+2026-01-29 22:13:42,329 - Node_c4 - INFO - Received msg: Real Msg 1769721220.... Latency: 1.6843s
+2026-01-29 22:13:42,342 - Node_c4 - INFO - Received msg: Real Msg 1769721218.... Latency: 3.3720s
+2026-01-29 22:13:42,369 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 3.1717s
+2026-01-29 22:13:42,381 - Node_c4 - INFO - Received msg: Real Msg 1769721217.... Latency: 4.3930s
+2026-01-29 22:13:42,427 - Node_c4 - INFO - Sent packet e80fb26e-ff3a-49b4-86e2-415983431e3f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:42,539 - Node_c4 - INFO - Sent packet daf40d4c-5cd7-42ae-9ce4-91e9305dfc3f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:42,576 - Node_c4 - INFO - Received msg: Real Msg 1769721221.... Latency: 1.3104s
+2026-01-29 22:13:42,611 - Node_c4 - INFO - Sent packet 1477195d-3860-408b-85f6-c0037652856a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:42,668 - Node_c4 - INFO - Sent packet c47486a1-516c-4a06-b322-12f8e117149e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:42,762 - Node_c4 - INFO - Received msg: Real Msg 1769721220.... Latency: 2.2926s
+2026-01-29 22:13:42,765 - Node_c4 - INFO - Sent packet 9c984995-8b31-4c32-ad31-dc03cd71d03e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:42,874 - Node_c4 - INFO - Sent packet 2d148213-907f-4a1b-8fde-0c595ecd8da7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:42,885 - Node_c4 - INFO - Sent packet ecdcc920-341d-4ed0-b456-6224f294650d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:42,998 - Node_c4 - INFO - Received msg: Real Msg 1769721216.... Latency: 6.3584s
+2026-01-29 22:13:43,067 - Node_c4 - INFO - Received msg: Real Msg 1769721220.... Latency: 3.0607s
+2026-01-29 22:13:43,113 - Node_c4 - INFO - Received msg: Real Msg 1769721220.... Latency: 2.4682s
+2026-01-29 22:13:43,205 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 3.9492s
+2026-01-29 22:13:43,276 - Node_c4 - INFO - Sent packet 773c0cc7-a136-4728-b938-193f93ef1176 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:43,292 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 3.4296s
+2026-01-29 22:13:43,310 - Node_c4 - INFO - Sent packet f9e9cf67-9703-400e-8c96-1e1ef3390cde to p1 (10.0.0.6:8000)
+2026-01-29 22:13:43,320 - Node_c4 - INFO - Received msg: Real Msg 1769721220.... Latency: 3.3130s
+2026-01-29 22:13:43,326 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 0.9787s
+2026-01-29 22:13:43,504 - Node_c4 - INFO - Sent packet 042766e3-e7be-424b-8172-6ea6f5e73db3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:43,536 - Node_c4 - INFO - Sent packet f56ae3d6-6805-457b-bb79-b14e1fe01313 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:43,556 - Node_c4 - INFO - Received msg: Real Msg 1769721221.... Latency: 1.7791s
+2026-01-29 22:13:43,559 - Node_c4 - INFO - Sent packet 5e8195a0-2404-42ed-9768-2db756fb3069 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:43,572 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 3.9176s
+2026-01-29 22:13:43,576 - Node_c4 - INFO - Sent packet 5705e2c2-aafc-49a8-b2ff-3768fe7398b6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:43,622 - Node_c4 - INFO - Sent packet c37bcba8-dfd8-4b1c-86bf-c58f37b3b5b6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:43,645 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 3.9976s
+2026-01-29 22:13:43,648 - Node_c4 - INFO - Received msg: Real Msg 1769721221.... Latency: 2.0541s
+2026-01-29 22:13:43,659 - Node_c4 - INFO - Received msg: Real Msg 1769721221.... Latency: 1.9407s
+2026-01-29 22:13:43,692 - Node_c4 - INFO - Sent packet e6ffe89d-9275-4a0d-8619-16bd5c641aef to p1 (10.0.0.6:8000)
+2026-01-29 22:13:43,705 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 1.4471s
+2026-01-29 22:13:43,739 - Node_c4 - INFO - Received msg: Real Msg 1769721221.... Latency: 2.5640s
+2026-01-29 22:13:43,835 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 1.4717s
+2026-01-29 22:13:43,928 - Node_c4 - INFO - Sent packet a42a45fb-ccf5-4ea8-bb01-defe180eef2b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:43,952 - Node_c4 - INFO - Sent packet 2ff3f967-5e53-49d7-aba8-28d918b52798 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:44,007 - Node_c4 - INFO - Received msg: Real Msg 1769721223.... Latency: 0.9226s
+2026-01-29 22:13:44,022 - Node_c4 - INFO - Received msg: Real Msg 1769721221.... Latency: 2.7569s
+2026-01-29 22:13:44,048 - Node_c4 - INFO - Sent packet 1cfe6c06-565d-4f48-86e1-917941131df1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:44,079 - Node_c4 - INFO - Sent packet 74759737-6345-4541-a7c0-7219ced23217 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:44,088 - Node_c4 - INFO - Received msg: Real Msg 1769721221.... Latency: 2.3911s
+2026-01-29 22:13:44,133 - Node_c4 - INFO - Received msg: Real Msg 1769721221.... Latency: 2.3561s
+2026-01-29 22:13:44,147 - Node_c4 - INFO - Received msg: Real Msg 1769721221.... Latency: 2.4282s
+2026-01-29 22:13:44,188 - Node_c4 - INFO - Sent packet d6425338-307c-47da-a66a-d3128f90e0d6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:44,278 - Node_c4 - INFO - Sent packet e41401eb-62f2-4d04-a3e7-d2c7e74e74c7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:44,297 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 1.9339s
+2026-01-29 22:13:44,309 - Node_c4 - INFO - Received msg: Real Msg 1769721221.... Latency: 2.7157s
+2026-01-29 22:13:44,348 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 4.7054s
+2026-01-29 22:13:44,364 - Node_c4 - INFO - Received msg: Real Msg 1769721221.... Latency: 2.3780s
+2026-01-29 22:13:44,479 - Node_c4 - INFO - Received msg: Real Msg 1769721220.... Latency: 3.7676s
+2026-01-29 22:13:44,588 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 2.2385s
+2026-01-29 22:13:44,664 - Node_c4 - INFO - Sent packet 73c512c3-25f1-4867-94cf-8dbaa4ab1def to p1 (10.0.0.6:8000)
+2026-01-29 22:13:44,763 - Node_c4 - INFO - Sent packet 4a031df1-fa8f-4454-b96e-7444939e6805 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:44,857 - Node_c4 - INFO - Sent packet d9b5636d-fb4c-4409-858c-8ff23cd174c4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:44,901 - Node_c4 - INFO - Received msg: Real Msg 1769721223.... Latency: 0.9733s
+2026-01-29 22:13:45,011 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 2.7535s
+2026-01-29 22:13:45,040 - Node_c4 - INFO - Sent packet 87250361-605e-4a67-b6c6-12a58d9c8c2e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,063 - Node_c4 - INFO - Sent packet 1d79e823-87aa-4332-b041-caf59da22551 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,176 - Node_c4 - INFO - Sent packet 7423158d-b212-4c2f-a501-b86eae1a9b71 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,213 - Node_c4 - INFO - Sent packet 89ca50ab-0d37-4ef4-b15b-d812c6331638 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,228 - Node_c4 - INFO - Received msg: Real Msg 1769721221.... Latency: 3.4763s
+2026-01-29 22:13:45,319 - Node_c4 - INFO - Received msg: Real Msg 1769721219.... Latency: 5.4569s
+2026-01-29 22:13:45,358 - Node_c4 - INFO - Received msg: Real Msg 1769721223.... Latency: 1.4537s
+2026-01-29 22:13:45,405 - Node_c4 - INFO - Sent packet 8f93fdb8-6a7c-461a-a1ee-e4bab805e116 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,410 - Node_c4 - INFO - Sent packet 1fca0940-8bc9-42a5-a93b-7aeba832cd3c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,468 - Node_c4 - INFO - Sent packet a6baf293-8963-4269-a89d-7cf3a5cb0685 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,493 - Node_c4 - INFO - Sent packet ee1d81c4-e0e5-4162-b2ec-aac968b0ec2e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,514 - Node_c4 - INFO - Sent packet a78be8cd-2fff-4726-a844-9b2f9f9b215a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,544 - Node_c4 - INFO - Sent packet c4e52a64-392f-4f0c-83e8-12a3fb54563c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,556 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 3.2037s
+2026-01-29 22:13:45,585 - Node_c4 - INFO - Sent packet cfb64f47-963f-4162-ae0f-900f660a2567 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,647 - Node_c4 - INFO - Sent packet b8fffc54-a0f4-42fb-bbbf-28d9ad36b3f9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,701 - Node_c4 - INFO - Sent packet e249c28c-b7dd-485d-83d4-1372847ab24a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,732 - Node_c4 - INFO - Sent packet a0c82d70-fa62-4752-918b-5383b9b8c5b8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,759 - Node_c4 - INFO - Received msg: Real Msg 1769721223.... Latency: 2.6745s
+2026-01-29 22:13:45,792 - Node_c4 - INFO - Sent packet 3d7ef376-15ac-4991-9123-7f8979fe2c5f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,805 - Node_c4 - INFO - Sent packet a30c6007-4975-40ca-a23c-08a1fc8de1b0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:45,967 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 3.3065s
+2026-01-29 22:13:45,991 - Node_c4 - INFO - Sent packet 36dc3c55-bcc5-4c88-b8d9-fee099a65bf2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:46,011 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 3.6593s
+2026-01-29 22:13:46,086 - Node_c4 - INFO - Received msg: Real Msg 1769721223.... Latency: 2.7262s
+2026-01-29 22:13:46,114 - Node_c4 - INFO - Sent packet d136d634-b25c-4be5-9914-25e6369a142c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:46,119 - Node_c4 - INFO - Sent packet 86319538-645a-4271-a013-b8e8838199c9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:46,184 - Node_c4 - INFO - Sent packet 0c54f8e3-90c0-4453-8810-a26ef0870655 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:46,235 - Node_c4 - INFO - Sent packet 74e7a04f-3091-4557-b85f-8ce1f8685f0d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:46,305 - Node_c4 - INFO - Received msg: Real Msg 1769721224.... Latency: 1.5677s
+2026-01-29 22:13:46,329 - Node_c4 - INFO - Received msg: Real Msg 1769721224.... Latency: 1.5671s
+2026-01-29 22:13:46,333 - Node_c4 - INFO - Sent packet acdfe32c-fadb-4b64-a9e4-bc59d2313cfd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:46,374 - Node_c4 - INFO - Sent packet f69229c5-e772-408b-9dbe-d80768914d54 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:46,393 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 4.0453s
+2026-01-29 22:13:46,404 - Node_c4 - INFO - Sent packet c87374f7-a685-4e57-b4a4-c212f2241661 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:46,566 - Node_c4 - INFO - Sent packet f0d72422-ae12-4cc2-a11d-18480dd08811 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:46,642 - Node_c4 - INFO - Sent packet c0f3febf-d85d-4c16-8fa3-b3b8d259948d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:46,719 - Node_c4 - INFO - Sent packet 08ec2280-f787-4b7b-9d3f-f2b8ad63f28b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:46,813 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 4.4637s
+2026-01-29 22:13:46,839 - Node_c4 - INFO - Sent packet 663ea735-3614-45f2-8d84-cb3497930fa9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:46,850 - Node_c4 - INFO - Sent packet 08dc94f5-e22b-493f-8212-ec4747e54463 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:46,901 - Node_c4 - INFO - Received msg: Real Msg 1769721225.... Latency: 1.3187s
+2026-01-29 22:13:46,934 - Node_c4 - INFO - Received msg: Real Msg 1769721225.... Latency: 1.2290s
+2026-01-29 22:13:47,003 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 4.8350s
+2026-01-29 22:13:47,042 - Node_c4 - INFO - Sent packet fa721ae5-335c-4bfb-aa16-cb8bddea383a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:47,050 - Node_c4 - INFO - Received msg: Real Msg 1769721226.... Latency: 0.7133s
+2026-01-29 22:13:47,120 - Node_c4 - INFO - Received msg: Real Msg 1769721225.... Latency: 1.8672s
+2026-01-29 22:13:47,132 - Node_c4 - INFO - Received msg: Real Msg 1769721224.... Latency: 2.3623s
+2026-01-29 22:13:47,203 - Node_c4 - INFO - Sent packet 512429cc-e293-48bd-851d-46bef8f8d18e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:47,205 - Node_c4 - INFO - Sent packet 22c3fc61-a219-45ee-bf3b-411e270e3f1e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:47,246 - Node_c4 - INFO - Sent packet f36e5478-1432-4d7b-afb3-bda8f11023e6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:47,249 - Node_c4 - INFO - Sent packet 5e09576f-664e-426c-9995-9159e13f7b7a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:47,332 - Node_c4 - INFO - Sent packet e449d41d-94ce-4ec9-bcba-8fd0dfcc2b59 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:47,381 - Node_c4 - INFO - Sent packet 43261351-c1fe-4cac-b187-3fcd18feffae to p1 (10.0.0.6:8000)
+2026-01-29 22:13:47,433 - Node_c4 - INFO - Sent packet 2ab7a892-75bc-4a71-896c-ea0d1d072f8c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:47,485 - Node_c4 - INFO - Received msg: Real Msg 1769721226.... Latency: 1.3586s
+2026-01-29 22:13:47,496 - Node_c4 - INFO - Sent packet d0529086-00ff-4dba-af15-c1151195e435 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:47,602 - Node_c4 - INFO - Received msg: Real Msg 1769721224.... Latency: 2.8136s
+2026-01-29 22:13:47,648 - Node_c4 - INFO - Received msg: Real Msg 1769721224.... Latency: 2.9105s
+2026-01-29 22:13:47,760 - Node_c4 - INFO - Received msg: Real Msg 1769721225.... Latency: 2.3723s
+2026-01-29 22:13:47,769 - Node_c4 - INFO - Received msg: Real Msg 1769721224.... Latency: 3.2991s
+2026-01-29 22:13:47,771 - Node_c4 - INFO - Sent packet 2e71b67e-f4a9-4d57-a312-48324aa26377 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:47,787 - Node_c4 - INFO - Received msg: Real Msg 1769721224.... Latency: 3.0247s
+2026-01-29 22:13:47,837 - Node_c4 - INFO - Sent packet f3739006-c22c-4b4f-a969-8d51523aedae to p1 (10.0.0.6:8000)
+2026-01-29 22:13:47,952 - Node_c4 - INFO - Sent packet 8c570d8f-e6ef-43e0-992c-63bcbee3b135 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:47,962 - Node_c4 - INFO - Received msg: Real Msg 1769721225.... Latency: 2.1609s
+2026-01-29 22:13:47,974 - Node_c4 - INFO - Sent packet f1c125d8-b479-4021-970e-3caa1cd81c10 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,025 - Node_c4 - INFO - Sent packet 32c42e17-f8b4-43fb-9cc6-0ba08db610ed to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,031 - Node_c4 - INFO - Sent packet 87f09ee9-16df-4899-962a-a679f0327e16 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,065 - Node_c4 - INFO - Sent packet 02dd185e-2868-4029-bfe2-60e6134f66c8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,101 - Node_c4 - INFO - Sent packet 11e67cd5-01eb-4c75-b27a-2711e06f652b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,113 - Node_c4 - INFO - Sent packet 8370e9fc-fa52-487d-9338-42ed71dd0bf0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,219 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 5.5590s
+2026-01-29 22:13:48,227 - Node_c4 - INFO - Sent packet 22241475-d037-4fb9-ba56-a67811c784c0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,235 - Node_c4 - INFO - Received msg: Real Msg 1769721226.... Latency: 1.5458s
+2026-01-29 22:13:48,250 - Node_c4 - INFO - Sent packet 263c4aba-3539-4b92-86a0-1f6b3340df8c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,262 - Node_c4 - INFO - Sent packet 17041398-f64b-4586-add5-8e154a74712c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,303 - Node_c4 - INFO - Received msg: Real Msg 1769721222.... Latency: 6.1350s
+2026-01-29 22:13:48,417 - Node_c4 - INFO - Received msg: Real Msg 1769721225.... Latency: 3.0295s
+2026-01-29 22:13:48,500 - Node_c4 - INFO - Received msg: Real Msg 1769721225.... Latency: 3.2466s
+2026-01-29 22:13:48,503 - Node_c4 - INFO - Sent packet 23b955e3-9cc9-4ed6-9bb5-98c38406e626 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,512 - Node_c4 - INFO - Received msg: Real Msg 1769721225.... Latency: 2.9300s
+2026-01-29 22:13:48,533 - Node_c4 - INFO - Received msg: Real Msg 1769721226.... Latency: 1.8441s
+2026-01-29 22:13:48,586 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 1.4922s
+2026-01-29 22:13:48,623 - Node_c4 - INFO - Sent packet 568876ed-b769-4fd6-86ca-1a30092fbb35 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,639 - Node_c4 - INFO - Received msg: Real Msg 1769721226.... Latency: 2.5126s
+2026-01-29 22:13:48,651 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 1.6061s
+2026-01-29 22:13:48,663 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 1.6183s
+2026-01-29 22:13:48,796 - Node_c4 - INFO - Sent packet abdc7642-42f2-4d23-b51f-5c54aa75d19e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,807 - Node_c4 - INFO - Sent packet 6892f7fe-8b41-44df-a2d1-502ac2d71839 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,819 - Node_c4 - INFO - Sent packet e0c01211-7280-4656-aa67-bbbde8d9903b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,835 - Node_c4 - INFO - Received msg: Real Msg 1769721225.... Latency: 3.0058s
+2026-01-29 22:13:48,844 - Node_c4 - INFO - Sent packet a093f6d7-a38f-4c00-8137-3594b842fb8d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:48,887 - Node_c4 - INFO - Received msg: Real Msg 1769721226.... Latency: 2.5496s
+2026-01-29 22:13:48,902 - Node_c4 - INFO - Received msg: Real Msg 1769721223.... Latency: 4.9736s
+2026-01-29 22:13:48,982 - Node_c4 - INFO - Received msg: Real Msg 1769721223.... Latency: 5.0778s
+2026-01-29 22:13:49,044 - Node_c4 - INFO - Sent packet 4d818f69-ff22-4918-b538-d01ca4e84250 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:49,132 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 1.2200s
+2026-01-29 22:13:49,287 - Node_c4 - INFO - Sent packet 505318f2-c098-4e3f-9ec6-69d48cc88eea to p1 (10.0.0.6:8000)
+2026-01-29 22:13:49,365 - Node_c4 - INFO - Sent packet df23b450-0efd-42bf-bc42-2e2a258615bf to p1 (10.0.0.6:8000)
+2026-01-29 22:13:49,446 - Node_c4 - INFO - Sent packet d0caa26d-c71c-4da4-bedb-ca1d43a3f3fe to p1 (10.0.0.6:8000)
+2026-01-29 22:13:49,471 - Node_c4 - INFO - Sent packet 7d9b5fff-da3c-4700-94b7-30227f014dde to p1 (10.0.0.6:8000)
+2026-01-29 22:13:49,480 - Node_c4 - INFO - Sent packet 0fbeed49-6421-40bd-8692-db9775c2587b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:49,535 - Node_c4 - INFO - Received msg: Real Msg 1769721228.... Latency: 0.5414s
+2026-01-29 22:13:49,555 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 2.1337s
+2026-01-29 22:13:49,558 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 1.6454s
+2026-01-29 22:13:49,562 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 1.6580s
+2026-01-29 22:13:49,606 - Node_c4 - INFO - Sent packet 5d6f008c-dffd-420b-8e57-34b890e60e3a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:49,609 - Node_c4 - INFO - Received msg: Real Msg 1769721228.... Latency: 1.5275s
+2026-01-29 22:13:49,727 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 2.6337s
+2026-01-29 22:13:49,771 - Node_c4 - INFO - Received msg: Real Msg 1769721228.... Latency: 1.6895s
+2026-01-29 22:13:49,805 - Node_c4 - INFO - Sent packet 45eab1b5-e5c9-4f73-bcc6-e7e2e01a7238 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:49,811 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 1.8828s
+2026-01-29 22:13:49,834 - Node_c4 - INFO - Sent packet b2c07684-70dc-46eb-8c59-8518378163c3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:49,861 - Node_c4 - INFO - Sent packet f74b9985-4227-420b-bfbf-e14e588c1b6d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,040 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 2.8464s
+2026-01-29 22:13:50,080 - Node_c4 - INFO - Sent packet ef1b2abf-5ac6-4a67-8999-9b941c714c31 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,119 - Node_c4 - INFO - Received msg: Real Msg 1769721225.... Latency: 4.2900s
+2026-01-29 22:13:50,142 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 3.0383s
+2026-01-29 22:13:50,200 - Node_c4 - INFO - Sent packet 5e9785d5-7c49-4b0d-a79e-b98f42c9c662 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,222 - Node_c4 - INFO - Sent packet 6e9f5f01-f066-4413-be8c-4453fc23f60b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,228 - Node_c4 - INFO - Received msg: Real Msg 1769721228.... Latency: 2.1442s
+2026-01-29 22:13:50,228 - Node_c4 - INFO - Sent packet fbfddf26-5a31-4306-9857-59fce23b2d5e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,232 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 3.0383s
+2026-01-29 22:13:50,243 - Node_c4 - INFO - Sent packet 7e04413b-48cc-4417-9db9-ebbdb8b28707 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,255 - Node_c4 - INFO - Sent packet 39a9471a-2337-4ae3-b51c-85ab36eb1d65 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,312 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 3.1775s
+2026-01-29 22:13:50,312 - Node_c4 - INFO - Sent packet d2481c3f-d8a8-4932-83ca-010d0164872e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,319 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 2.4149s
+2026-01-29 22:13:50,386 - Node_c4 - INFO - Sent packet 12567c2c-a470-4d94-a92b-67874173a442 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,494 - Node_c4 - INFO - Sent packet a7f683bb-662d-49d5-ae4e-6df16f2ea81c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,557 - Node_c4 - INFO - Sent packet 6152d76e-57e1-47bb-8b2d-58617f460e32 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,558 - Node_c4 - INFO - Received msg: Real Msg 1769721228.... Latency: 2.0189s
+2026-01-29 22:13:50,582 - Node_c4 - INFO - Received msg: Real Msg 1769721228.... Latency: 2.4982s
+2026-01-29 22:13:50,593 - Node_c4 - INFO - Received msg: Real Msg 1769721229.... Latency: 1.5931s
+2026-01-29 22:13:50,612 - Node_c4 - INFO - Received msg: Real Msg 1769721224.... Latency: 5.8421s
+2026-01-29 22:13:50,614 - Node_c4 - INFO - Received msg: Real Msg 1769721228.... Latency: 1.7688s
+2026-01-29 22:13:50,655 - Node_c4 - INFO - Sent packet 27a36d1e-e7cb-4ff0-aa14-4ba4af2c2e73 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,659 - Node_c4 - INFO - Sent packet c91cee68-4c52-4791-a7ec-8aea7f4a7a9f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,788 - Node_c4 - INFO - Received msg: Real Msg 1769721228.... Latency: 2.3463s
+2026-01-29 22:13:50,806 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 2.8784s
+2026-01-29 22:13:50,807 - Node_c4 - INFO - Sent packet 3f1ae68d-b8c7-49c4-9807-b432756e4184 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,842 - Node_c4 - INFO - Sent packet ae60eb75-47c7-41d8-ae72-e3820d40d541 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,876 - Node_c4 - INFO - Sent packet 202cc7d3-de7d-4ccd-88cc-ba632db0c785 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,886 - Node_c4 - INFO - Sent packet a18835ec-8926-422b-aa2b-5ba6bbf1b3a8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,907 - Node_c4 - INFO - Sent packet ba2cd3dc-fee0-4e4c-834c-fc87e5a6f574 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:50,921 - Node_c4 - INFO - Received msg: Real Msg 1769721229.... Latency: 1.5402s
+2026-01-29 22:13:51,042 - Node_c4 - INFO - Sent packet ebfaab12-9791-46ca-99c8-459e980a49e0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,160 - Node_c4 - INFO - Sent packet 06692f75-05d9-4188-a0d4-f748b5bd4232 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,234 - Node_c4 - INFO - Sent packet b59eb59e-2d91-43ce-860d-f4c8c062390e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,242 - Node_c4 - INFO - Sent packet 679f300d-3bf0-461d-8cce-7c8eeee7f051 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,260 - Node_c4 - INFO - Received msg: Real Msg 1769721228.... Latency: 2.7211s
+2026-01-29 22:13:51,263 - Node_c4 - INFO - Received msg: Real Msg 1769721229.... Latency: 1.4514s
+2026-01-29 22:13:51,274 - Node_c4 - INFO - Sent packet e60c58af-ef2b-4f49-887a-d328d6e64cdb to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,283 - Node_c4 - INFO - Sent packet 02d6ac92-a35d-4dd8-992d-365951b7d624 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,285 - Node_c4 - INFO - Received msg: Real Msg 1769721228.... Latency: 2.8443s
+2026-01-29 22:13:51,293 - Node_c4 - INFO - Sent packet 28c01829-b2f2-406d-9ed6-a7d732a02e7c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,306 - Node_c4 - INFO - Sent packet 85bac3df-fe53-4e0e-a0a3-eaaae08627a7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,383 - Node_c4 - INFO - Sent packet 1c12dd7c-bc6d-463a-aa66-ab283ca4e551 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,451 - Node_c4 - INFO - Sent packet 0c0c3aba-29e7-49ba-8aef-45159c6765ea to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,454 - Node_c4 - INFO - Received msg: Real Msg 1769721229.... Latency: 2.0726s
+2026-01-29 22:13:51,486 - Node_c4 - INFO - Sent packet 1089df5d-26e7-4280-9d98-0bd0b1760105 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,494 - Node_c4 - INFO - Received msg: Real Msg 1769721230.... Latency: 1.0260s
+2026-01-29 22:13:51,513 - Node_c4 - INFO - Sent packet 0cbf3734-622c-439e-916e-14227c52c105 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,648 - Node_c4 - INFO - Sent packet bc3e6ca3-dfc2-4591-9798-82298634c655 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,659 - Node_c4 - INFO - Received msg: Real Msg 1769721228.... Latency: 2.6648s
+2026-01-29 22:13:51,678 - Node_c4 - INFO - Received msg: Real Msg 1769721229.... Latency: 1.8186s
+2026-01-29 22:13:51,683 - Node_c4 - INFO - Sent packet 5aed0d43-54a4-4a01-ac74-7d23cefbeb76 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,701 - Node_c4 - INFO - Received msg: Real Msg 1769721229.... Latency: 2.3725s
+2026-01-29 22:13:51,753 - Node_c4 - INFO - Sent packet c3780f31-a40a-4455-9ade-e45c3ac22be8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,778 - Node_c4 - INFO - Sent packet ac7dd14a-d33b-48a0-8dea-82122d0373e5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,824 - Node_c4 - INFO - Sent packet b7b37456-2c07-49a6-bde8-9adbc16a3f34 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,862 - Node_c4 - INFO - Received msg: Real Msg 1769721228.... Latency: 3.0166s
+2026-01-29 22:13:51,875 - Node_c4 - INFO - Sent packet a21968f2-1b90-495d-962a-caa606221045 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,900 - Node_c4 - INFO - Sent packet 253f05ce-f012-4fc0-bb95-c83bbd3a8d83 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,928 - Node_c4 - INFO - Sent packet df478da3-8f47-4106-97b0-b22333125778 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:51,982 - Node_c4 - INFO - Sent packet e1b74d83-b4f5-4fc6-bc7d-b557e1745755 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:52,089 - Node_c4 - INFO - Received msg: Real Msg 1769721230.... Latency: 1.5594s
+2026-01-29 22:13:52,133 - Node_c4 - INFO - Received msg: Real Msg 1769721229.... Latency: 2.2739s
+2026-01-29 22:13:52,143 - Node_c4 - INFO - Sent packet 9f88ff17-4e1b-4ed2-a491-de8a42fc7cc0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:52,162 - Node_c4 - INFO - Received msg: Real Msg 1769721229.... Latency: 2.3502s
+2026-01-29 22:13:52,196 - Node_c4 - INFO - Received msg: Real Msg 1769721229.... Latency: 2.6306s
+2026-01-29 22:13:52,214 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 5.0802s
+2026-01-29 22:13:52,247 - Node_c4 - INFO - Received msg: Real Msg 1769721230.... Latency: 1.7150s
+2026-01-29 22:13:52,258 - Node_c4 - INFO - Sent packet 78494a2d-078e-4441-a790-6fd4da1a0ed1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:52,261 - Node_c4 - INFO - Sent packet d3df3077-aed8-4ef6-89ea-9a627859c05e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:52,353 - Node_c4 - INFO - Received msg: Real Msg 1769721229.... Latency: 3.0904s
+2026-01-29 22:13:52,589 - Node_c4 - INFO - Sent packet ea039d13-9cef-4f71-aa06-ed04ed46bf92 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:52,631 - Node_c4 - INFO - Sent packet 95d52eab-e82c-4c9e-b4ff-d459c2313f7a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:52,667 - Node_c4 - INFO - Sent packet 80df5ada-7268-4942-8cda-b96b6c67f348 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:52,694 - Node_c4 - INFO - Sent packet f114748f-9829-434e-8ea8-7f13ebf2927e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:52,725 - Node_c4 - INFO - Received msg: Real Msg 1769721230.... Latency: 2.3387s
+2026-01-29 22:13:52,849 - Node_c4 - INFO - Sent packet 0c1ff2aa-a5b5-4ac2-a12a-33e7a71684f1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:52,853 - Node_c4 - INFO - Received msg: Real Msg 1769721230.... Latency: 2.4665s
+2026-01-29 22:13:52,980 - Node_c4 - INFO - Sent packet f269c125-5486-4c64-b9bc-e50e02409de5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,047 - Node_c4 - INFO - Received msg: Real Msg 1769721231.... Latency: 1.9335s
+2026-01-29 22:13:53,086 - Node_c4 - INFO - Sent packet 7570a4b4-adaf-4ec4-a140-679724e5f664 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,126 - Node_c4 - INFO - Sent packet 124e4c7c-7beb-48ad-b486-c24bf9645920 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,150 - Node_c4 - INFO - Received msg: Real Msg 1769721227.... Latency: 5.7284s
+2026-01-29 22:13:53,217 - Node_c4 - INFO - Sent packet 36be8b58-4903-402c-a8c9-a76dbff5ca8a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,226 - Node_c4 - INFO - Sent packet eedd1325-51a8-47b6-8081-9a943912f1c2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,280 - Node_c4 - INFO - Sent packet 6ed4c3c3-47ff-45c8-814e-72571453798c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,290 - Node_c4 - INFO - Received msg: Real Msg 1769721231.... Latency: 1.3652s
+2026-01-29 22:13:53,304 - Node_c4 - INFO - Sent packet 7e4bf1b5-5a8e-4b34-8749-4d9d2e47d51e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,376 - Node_c4 - INFO - Sent packet f0d4f742-5070-4258-b75c-8e251ae8cef4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,391 - Node_c4 - INFO - Sent packet b6432e75-6cc8-4081-9105-554df7e5f271 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,410 - Node_c4 - INFO - Received msg: Real Msg 1769721230.... Latency: 3.0009s
+2026-01-29 22:13:53,457 - Node_c4 - INFO - Sent packet f2636f29-9fb9-41cd-a8f2-b0260d4b3ee7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,460 - Node_c4 - INFO - Sent packet 4a29f1b4-e9a5-4456-9cb1-912ef1435116 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,478 - Node_c4 - INFO - Sent packet 80c7305f-1372-451b-a6d0-2534e9550961 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,532 - Node_c4 - INFO - Received msg: Real Msg 1769721231.... Latency: 1.8744s
+2026-01-29 22:13:53,559 - Node_c4 - INFO - Received msg: Real Msg 1769721229.... Latency: 4.2310s
+2026-01-29 22:13:53,561 - Node_c4 - INFO - Received msg: Real Msg 1769721231.... Latency: 1.7743s
+2026-01-29 22:13:53,676 - Node_c4 - INFO - Sent packet 0b612de4-a17a-4253-97f3-84a9a09192cd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,716 - Node_c4 - INFO - Sent packet 98546712-064c-460a-a906-11e65f3ebe22 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,771 - Node_c4 - INFO - Received msg: Real Msg 1769721231.... Latency: 2.6642s
+2026-01-29 22:13:53,789 - Node_c4 - INFO - Sent packet fccef591-4086-4af6-946d-fcc478eaca2d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,813 - Node_c4 - INFO - Sent packet e56373c5-8678-4e89-952a-dede10fdca74 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:53,907 - Node_c4 - INFO - Sent packet 564e0ab3-8557-4abc-8846-54a46c9b710e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,007 - Node_c4 - INFO - Sent packet 29f26864-8734-4f8a-930a-1f0a6b7322f1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,037 - Node_c4 - INFO - Sent packet 6ee772e5-89e9-4f0c-8c51-c669fd257322 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,038 - Node_c4 - INFO - Received msg: Real Msg 1769721233.... Latency: 1.0287s
+2026-01-29 22:13:54,046 - Node_c4 - INFO - Sent packet cd78017a-7b38-4c1c-a747-d63b92f6fa76 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,060 - Node_c4 - INFO - Received msg: Real Msg 1769721231.... Latency: 2.3508s
+2026-01-29 22:13:54,067 - Node_c4 - INFO - Sent packet 0ee4fa44-54f4-4dca-925a-a9f357e56ad8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,069 - Node_c4 - INFO - Received msg: Real Msg 1769721230.... Latency: 3.5367s
+2026-01-29 22:13:54,092 - Node_c4 - INFO - Received msg: Real Msg 1769721231.... Latency: 2.1674s
+2026-01-29 22:13:54,127 - Node_c4 - INFO - Received msg: Real Msg 1769721232.... Latency: 2.1130s
+2026-01-29 22:13:54,145 - Node_c4 - INFO - Sent packet 341a4cc6-76e0-43f1-ba0a-0ea188b18994 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,215 - Node_c4 - INFO - Received msg: Real Msg 1769721231.... Latency: 2.3894s
+2026-01-29 22:13:54,236 - Node_c4 - INFO - Sent packet f1ac8efd-9eae-4c0e-b2a5-73d669286fb9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,278 - Node_c4 - INFO - Sent packet 95b18922-8690-49da-af8b-e93104f83a5d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,283 - Node_c4 - INFO - Sent packet 0e2ff4e7-9163-403a-803d-b9ed810d4af4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,286 - Node_c4 - INFO - Sent packet be6e65b5-3652-4a79-9df3-0eaf470611a2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,362 - Node_c4 - INFO - Received msg: Real Msg 1769721232.... Latency: 1.8780s
+2026-01-29 22:13:54,392 - Node_c4 - INFO - Sent packet 643e90a8-82a2-474b-9c06-ff0da927f895 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,408 - Node_c4 - INFO - Received msg: Real Msg 1769721232.... Latency: 1.6260s
+2026-01-29 22:13:54,456 - Node_c4 - INFO - Sent packet d1d10729-7e56-425e-818a-16a86bab3f50 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,459 - Node_c4 - INFO - Received msg: Real Msg 1769721231.... Latency: 2.6721s
+2026-01-29 22:13:54,479 - Node_c4 - INFO - Sent packet 7f2379d4-0514-448b-944e-5ed2542f44f2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,491 - Node_c4 - INFO - Received msg: Real Msg 1769721231.... Latency: 3.3842s
+2026-01-29 22:13:54,526 - Node_c4 - INFO - Received msg: Real Msg 1769721232.... Latency: 2.2458s
+2026-01-29 22:13:54,539 - Node_c4 - INFO - Received msg: Real Msg 1769721233.... Latency: 1.1205s
+2026-01-29 22:13:54,577 - Node_c4 - INFO - Sent packet a691b6f5-65a3-40cb-a2a7-19574c7badf6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,625 - Node_c4 - INFO - Sent packet 0efdc497-73cb-4243-adc7-158b02412a81 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,639 - Node_c4 - INFO - Received msg: Real Msg 1769721233.... Latency: 1.4344s
+2026-01-29 22:13:54,642 - Node_c4 - INFO - Sent packet a82415c1-ba2c-495f-8ad1-63af412d0b01 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,646 - Node_c4 - INFO - Sent packet fe52b238-f212-4fa9-a531-1c135b69bde7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,653 - Node_c4 - INFO - Received msg: Real Msg 1769721229.... Latency: 5.2121s
+2026-01-29 22:13:54,684 - Node_c4 - INFO - Sent packet c48c69d1-e9ae-4003-9fff-77c92355dc14 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,706 - Node_c4 - INFO - Sent packet 3721fa1e-2aa0-418e-895b-fb803adeffe8 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,731 - Node_c4 - INFO - Received msg: Real Msg 1769721229.... Latency: 5.2903s
+2026-01-29 22:13:54,744 - Node_c4 - INFO - Sent packet 524ced70-8749-4828-9678-d2fe23fda8f5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,803 - Node_c4 - INFO - Sent packet 541779e7-b7a3-46d0-98e6-e63d427a14bd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,806 - Node_c4 - INFO - Received msg: Real Msg 1769721233.... Latency: 0.9299s
+2026-01-29 22:13:54,861 - Node_c4 - INFO - Sent packet 03cdc8fc-10ce-4abc-8fcb-6304ca6e43eb to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,959 - Node_c4 - INFO - Sent packet d2915028-97cc-41f7-b92e-437bc496d812 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:54,978 - Node_c4 - INFO - Sent packet f7aa15c2-dcd2-4be0-a632-c99dcdcbd1f5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,004 - Node_c4 - INFO - Received msg: Real Msg 1769721233.... Latency: 1.1657s
+2026-01-29 22:13:55,005 - Node_c4 - INFO - Sent packet dbdefa5b-1410-4cb3-88fd-5bb876e3a4d5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,018 - Node_c4 - INFO - Sent packet bd4c41fc-25df-4f08-9427-68a31ce423b5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,061 - Node_c4 - INFO - Sent packet e6e09e2c-f6e3-4834-9e08-782c267fa569 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,093 - Node_c4 - INFO - Received msg: Real Msg 1769721233.... Latency: 1.3196s
+2026-01-29 22:13:55,197 - Node_c4 - INFO - Sent packet 47de5c01-76ca-4110-99bb-3e5cbf1c072f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,239 - Node_c4 - INFO - Sent packet a375107d-a860-479d-b9b3-3db74ca9b770 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,277 - Node_c4 - INFO - Sent packet ed84c6ac-72cb-41b6-9df8-a7655f7ccd70 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,283 - Node_c4 - INFO - Sent packet 518de9f0-2afa-46dc-a6b0-cc956894a541 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,288 - Node_c4 - INFO - Received msg: Real Msg 1769721231.... Latency: 4.1744s
+2026-01-29 22:13:55,305 - Node_c4 - INFO - Sent packet d5d923dc-65a5-46a6-a013-1dd4136e5dbe to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,333 - Node_c4 - INFO - Sent packet 4dced371-7cff-4bfb-96b1-b8b93d262a14 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,344 - Node_c4 - INFO - Sent packet 767facc3-a49e-40e3-a17c-1f1e924ddc12 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,523 - Node_c4 - INFO - Sent packet dbabd442-5053-46df-8f8d-1adc74886718 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,531 - Node_c4 - INFO - Sent packet 1f78471c-987c-42ef-bef4-1e6fa7952440 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,545 - Node_c4 - INFO - Sent packet ea624471-83a0-4751-9ca5-02065ea6fb23 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,559 - Node_c4 - INFO - Sent packet 654f9153-9256-4f8b-b9e3-613c2f712ebd to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,564 - Node_c4 - INFO - Received msg: Real Msg 1769721230.... Latency: 5.0342s
+2026-01-29 22:13:55,572 - Node_c4 - INFO - Received msg: Real Msg 1769721233.... Latency: 2.3669s
+2026-01-29 22:13:55,670 - Node_c4 - INFO - Received msg: Real Msg 1769721232.... Latency: 3.6558s
+2026-01-29 22:13:55,832 - Node_c4 - INFO - Received msg: Real Msg 1769721233.... Latency: 2.8230s
+2026-01-29 22:13:55,862 - Node_c4 - INFO - Sent packet 42a0867d-c90e-4d5f-bc70-ab70e47d2ee7 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:55,944 - Node_c4 - INFO - Received msg: Real Msg 1769721230.... Latency: 5.6020s
+2026-01-29 22:13:55,994 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 1.4564s
+2026-01-29 22:13:56,052 - Node_c4 - INFO - Sent packet d8151aa3-fc55-42c5-a9ac-42ac17ac60f4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,128 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 1.4491s
+2026-01-29 22:13:56,188 - Node_c4 - INFO - Sent packet 8f06c023-23f9-4c3d-822c-6d4101a79d95 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,203 - Node_c4 - INFO - Sent packet 2b89d723-2030-48a8-927f-500d8401b389 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,211 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 1.5668s
+2026-01-29 22:13:56,228 - Node_c4 - INFO - Sent packet f0e79658-9987-4199-8689-7e93285169de to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,237 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 2.2203s
+2026-01-29 22:13:56,331 - Node_c4 - INFO - Sent packet 67a94dae-a721-4ae6-a8ba-9c9d6311cfc2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,352 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 1.4173s
+2026-01-29 22:13:56,432 - Node_c4 - INFO - Sent packet d7a6d389-45de-44ac-9fff-1112732a69a0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,467 - Node_c4 - INFO - Received msg: Real Msg 1769721230.... Latency: 5.9989s
+2026-01-29 22:13:56,483 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 2.4666s
+2026-01-29 22:13:56,520 - Node_c4 - INFO - Sent packet 61841ae2-278c-43ba-b8bb-29145c495be6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,527 - Node_c4 - INFO - Received msg: Real Msg 1769721235.... Latency: 1.3926s
+2026-01-29 22:13:56,546 - Node_c4 - INFO - Sent packet 4e78be44-626b-4551-9aad-09baa01fd5a2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,555 - Node_c4 - INFO - Sent packet a81df32b-630e-4172-a136-b38994321ae6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,573 - Node_c4 - INFO - Received msg: Real Msg 1769721230.... Latency: 6.1633s
+2026-01-29 22:13:56,574 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 1.8210s
+2026-01-29 22:13:56,575 - Node_c4 - INFO - Sent packet 0aad6038-1453-4980-9644-6c544a018ef4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,594 - Node_c4 - INFO - Sent packet f143c2c0-05ad-4871-9b7c-471652a83f9b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,661 - Node_c4 - INFO - Received msg: Real Msg 1769721233.... Latency: 2.8220s
+2026-01-29 22:13:56,736 - Node_c4 - INFO - Sent packet 9a1556b2-c77a-462a-8f28-242775a924f5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,749 - Node_c4 - INFO - Sent packet 52c106cf-e5a8-4938-92ef-8d9d817c9022 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,792 - Node_c4 - INFO - Sent packet 27c305e4-0949-4485-926e-7839e6e15488 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,857 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 2.5122s
+2026-01-29 22:13:56,861 - Node_c4 - INFO - Sent packet 038b007b-607e-4300-95fa-28374abb103b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,872 - Node_c4 - INFO - Received msg: Real Msg 1769721236.... Latency: 0.5680s
+2026-01-29 22:13:56,878 - Node_c4 - INFO - Sent packet 7e9d0eed-8cb3-4a97-8c36-1c8f3d1474b9 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,902 - Node_c4 - INFO - Received msg: Real Msg 1769721233.... Latency: 3.1287s
+2026-01-29 22:13:56,912 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 2.2337s
+2026-01-29 22:13:56,932 - Node_c4 - INFO - Sent packet cdaca4a0-11da-4934-81cc-2f266c05e80d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:56,935 - Node_c4 - INFO - Received msg: Real Msg 1769721235.... Latency: 1.6560s
+2026-01-29 22:13:56,974 - Node_c4 - INFO - Sent packet 53fa4ef8-5dc9-4f22-aaf5-08ffb75685ec to p1 (10.0.0.6:8000)
+2026-01-29 22:13:57,189 - Node_c4 - INFO - Sent packet 096f4e78-7a9d-4053-b31a-40eb42492248 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:57,192 - Node_c4 - INFO - Sent packet 8a7e62bb-0b0a-45e0-aca2-b2fea2a0551a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:57,205 - Node_c4 - INFO - Received msg: Real Msg 1769721235.... Latency: 2.0881s
+2026-01-29 22:13:57,231 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 2.8476s
+2026-01-29 22:13:57,298 - Node_c4 - INFO - Sent packet 6a17c504-c7ca-4983-ace2-918425e68ff4 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:57,327 - Node_c4 - INFO - Received msg: Real Msg 1769721235.... Latency: 1.8251s
+2026-01-29 22:13:57,388 - Node_c4 - INFO - Sent packet 5a7d9634-695b-4b5c-89b8-0ded7013c394 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:57,436 - Node_c4 - INFO - Received msg: Real Msg 1769721236.... Latency: 0.9960s
+2026-01-29 22:13:57,479 - Node_c4 - INFO - Received msg: Real Msg 1769721233.... Latency: 4.0605s
+2026-01-29 22:13:57,514 - Node_c4 - INFO - Sent packet 0ee80806-f5f0-4cec-baf0-62b3c6d544e5 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:57,579 - Node_c4 - INFO - Sent packet 58c4e317-488c-4f4d-ab1f-8de0e3c9c648 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:57,608 - Node_c4 - INFO - Sent packet 95690589-7b70-4f1a-b6f8-04b8da75b595 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:57,665 - Node_c4 - INFO - Sent packet d1076fba-91b6-49c1-8b59-09e3788bfd97 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:57,704 - Node_c4 - INFO - Received msg: Real Msg 1769721236.... Latency: 1.2641s
+2026-01-29 22:13:57,814 - Node_c4 - INFO - Received msg: Real Msg 1769721235.... Latency: 1.9343s
+2026-01-29 22:13:57,816 - Node_c4 - INFO - Received msg: Real Msg 1769721235.... Latency: 2.5362s
+2026-01-29 22:13:57,864 - Node_c4 - INFO - Sent packet 47d1d788-d265-4088-b3ed-345e4ef0d00e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,034 - Node_c4 - INFO - Sent packet 05d45b12-55fc-4d07-b3bb-9e9ef29a9d34 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,063 - Node_c4 - INFO - Sent packet 1439384a-002e-47b7-92e7-e85f701022f3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,090 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 3.8423s
+2026-01-29 22:13:58,139 - Node_c4 - INFO - Sent packet e3648c6a-5971-46cd-8e06-245ab0ebf339 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,147 - Node_c4 - INFO - Sent packet 038a489d-0877-4574-b448-272437b95ac1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,174 - Node_c4 - INFO - Sent packet 5a3e61b5-6bc7-45af-9002-c1bd0ee6af6d to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,221 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 1.2072s
+2026-01-29 22:13:58,235 - Node_c4 - INFO - Received msg: Real Msg 1769721236.... Latency: 1.9309s
+2026-01-29 22:13:58,258 - Node_c4 - INFO - Sent packet 03b93956-7f98-4eab-bdd7-cca408e1bf2b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,307 - Node_c4 - INFO - Sent packet cd725630-a106-4ec5-9913-462b16b59edc to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,365 - Node_c4 - INFO - Received msg: Real Msg 1769721235.... Latency: 2.4849s
+2026-01-29 22:13:58,402 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 3.8637s
+2026-01-29 22:13:58,413 - Node_c4 - INFO - Received msg: Real Msg 1769721236.... Latency: 2.1704s
+2026-01-29 22:13:58,427 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 4.0821s
+2026-01-29 22:13:58,449 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 4.2013s
+2026-01-29 22:13:58,465 - Node_c4 - INFO - Received msg: Real Msg 1769721236.... Latency: 1.4915s
+2026-01-29 22:13:58,508 - Node_c4 - INFO - Received msg: Real Msg 1769721236.... Latency: 1.7086s
+2026-01-29 22:13:58,568 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 3.8151s
+2026-01-29 22:13:58,575 - Node_c4 - INFO - Sent packet c8aae4fe-a59c-45a6-aa2b-4cd25260f530 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,600 - Node_c4 - INFO - Sent packet a29c1c0d-d412-4f79-a851-e663426c3db6 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,717 - Node_c4 - INFO - Sent packet 8de9a4c4-0033-446b-a8c7-32f5d95c48b3 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,723 - Node_c4 - INFO - Sent packet d633dd92-9532-4141-a7d4-1ed892594401 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,732 - Node_c4 - INFO - Sent packet 5501051e-2bc7-407e-866d-e0221c47d377 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,754 - Node_c4 - INFO - Received msg: Real Msg 1769721236.... Latency: 2.5109s
+2026-01-29 22:13:58,786 - Node_c4 - INFO - Sent packet 5271f4fc-5367-4a7c-bb46-529ac19c4bcf to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,788 - Node_c4 - INFO - Received msg: Real Msg 1769721236.... Latency: 2.0281s
+2026-01-29 22:13:58,799 - Node_c4 - INFO - Received msg: Real Msg 1769721236.... Latency: 2.0386s
+2026-01-29 22:13:58,852 - Node_c4 - INFO - Sent packet ec202e53-967a-4e5d-ba68-533f56de85d2 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,890 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 1.4663s
+2026-01-29 22:13:58,930 - Node_c4 - INFO - Sent packet 5515fb43-825c-464a-8c9c-4b1615a8e12c to p1 (10.0.0.6:8000)
+2026-01-29 22:13:58,970 - Node_c4 - INFO - Received msg: Real Msg 1769721235.... Latency: 3.8536s
+2026-01-29 22:13:58,981 - Node_c4 - INFO - Received msg: Real Msg 1769721235.... Latency: 3.8463s
+2026-01-29 22:13:59,056 - Node_c4 - INFO - Sent packet c3fe5a97-f1f4-4590-bd11-6bc49451e18e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,064 - Node_c4 - INFO - Received msg: Real Msg 1769721235.... Latency: 3.5622s
+2026-01-29 22:13:59,112 - Node_c4 - INFO - Sent packet 76420f80-6fdc-4b8c-86d4-65cde2bd4b3e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,175 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 1.1251s
+2026-01-29 22:13:59,200 - Node_c4 - INFO - Sent packet c6a6ceb8-6783-427a-954a-362e4f979ca1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,219 - Node_c4 - INFO - Sent packet 11286b6d-407c-4832-b949-06cabb8890aa to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,244 - Node_c4 - INFO - Sent packet 0fc0518b-f309-42b8-a710-cdbd25f8a26a to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,276 - Node_c4 - INFO - Sent packet a4bcb625-da6c-4b6e-8cea-8d6002057c7f to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,295 - Node_c4 - INFO - Sent packet c1d4f7ed-895e-41b8-81f0-08f61a737a80 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,378 - Node_c4 - INFO - Sent packet a25b60e6-94ef-44f9-ac2e-f58c2754675b to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,389 - Node_c4 - INFO - Sent packet 203fbdad-469f-425e-9d6f-fa8e0f358e0e to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,393 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 1.4733s
+2026-01-29 22:13:59,549 - Node_c4 - INFO - Received msg: Real Msg 1769721231.... Latency: 7.8394s
+2026-01-29 22:13:59,570 - Node_c4 - INFO - Sent packet e367eb7e-ec3d-492f-bc2c-2876b2a350b0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,610 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 1.5601s
+2026-01-29 22:13:59,629 - Node_c4 - INFO - Sent packet edb8d995-1515-4fa1-9916-f2b60365a3b1 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,637 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 2.2093s
+2026-01-29 22:13:59,650 - Node_c4 - INFO - Sent packet 58637e0a-0ea8-4cf7-a214-1d44dc392006 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,687 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 5.3037s
+2026-01-29 22:13:59,788 - Node_c4 - INFO - Sent packet f08d86df-dcba-4318-b7a9-03012a776d99 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,853 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 2.6403s
+2026-01-29 22:13:59,863 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 2.2315s
+2026-01-29 22:13:59,919 - Node_c4 - INFO - Sent packet 29335af3-b7e9-4709-84c4-0d3c4d7b4de0 to p1 (10.0.0.6:8000)
+2026-01-29 22:13:59,922 - Node_c4 - INFO - Received msg: Real Msg 1769721234.... Latency: 5.0584s
+2026-01-29 22:13:59,973 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 1.4636s
+2026-01-29 22:13:59,986 - Node_c4 - INFO - Received msg: Real Msg 1769721236.... Latency: 3.1866s
+2026-01-29 22:14:00,068 - Node_c4 - INFO - Received msg: Real Msg 1769721236.... Latency: 3.0944s
+2026-01-29 22:14:00,080 - Node_c4 - INFO - Sent packet c985d0e3-614d-4739-a16e-61e20bcb9e0a to p1 (10.0.0.6:8000)
+2026-01-29 22:14:00,167 - Node_c4 - INFO - Sent packet 3cd54573-da5b-43f9-bcbf-ed94526f9c3a to p1 (10.0.0.6:8000)
+2026-01-29 22:14:00,192 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 2.5602s
+2026-01-29 22:14:00,278 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 1.5487s
+2026-01-29 22:14:00,284 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 2.8561s
+2026-01-29 22:14:00,328 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 1.8149s
+2026-01-29 22:14:00,366 - Node_c4 - INFO - Sent packet 7f383cc7-83f7-45a6-baac-496a53c03744 to p1 (10.0.0.6:8000)
+2026-01-29 22:14:00,387 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 3.1748s
+2026-01-29 22:14:00,423 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 1.4766s
+2026-01-29 22:14:00,436 - Node_c4 - INFO - Sent packet 015e0c33-6aba-4baa-9efa-bfd980486979 to p1 (10.0.0.6:8000)
+2026-01-29 22:14:00,496 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 3.0723s
+2026-01-29 22:14:00,894 - Node_c4 - INFO - Received msg: Real Msg 1769721239.... Latency: 1.4724s
+2026-01-29 22:14:00,926 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 1.9794s
+2026-01-29 22:14:00,934 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 3.9205s
+2026-01-29 22:14:00,945 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 2.4354s
+2026-01-29 22:14:00,971 - Node_c4 - INFO - Received msg: Real Msg 1769721239.... Latency: 1.5491s
+2026-01-29 22:14:01,077 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 3.9021s
+2026-01-29 22:14:01,136 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 2.6406s
+2026-01-29 22:14:01,141 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 3.2216s
+2026-01-29 22:14:01,160 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 3.4357s
+2026-01-29 22:14:01,216 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 4.0407s
+2026-01-29 22:14:01,241 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 3.2901s
+2026-01-29 22:14:01,244 - Node_c4 - INFO - Received msg: Real Msg 1769721239.... Latency: 2.1535s
+2026-01-29 22:14:01,253 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 2.7579s
+2026-01-29 22:14:01,485 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 2.7731s
+2026-01-29 22:14:01,754 - Node_c4 - INFO - Received msg: Real Msg 1769721239.... Latency: 2.7357s
+2026-01-29 22:14:01,860 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 3.9092s
+2026-01-29 22:14:02,012 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 3.3002s
+2026-01-29 22:14:02,068 - Node_c4 - INFO - Received msg: Real Msg 1769721240.... Latency: 1.8197s
+2026-01-29 22:14:02,300 - Node_c4 - INFO - Received msg: Real Msg 1769721239.... Latency: 3.2101s
+2026-01-29 22:14:02,363 - Node_c4 - INFO - Received msg: Real Msg 1769721239.... Latency: 3.3451s
+2026-01-29 22:14:02,426 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 3.7115s
+2026-01-29 22:14:02,540 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 3.8251s
+2026-01-29 22:14:02,575 - Node_c4 - INFO - Received msg: Real Msg 1769721237.... Latency: 4.8508s
+2026-01-29 22:14:02,758 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 4.2446s
+2026-01-29 22:14:04,399 - Node_c4 - INFO - Received msg: Real Msg 1769721240.... Latency: 4.1510s
+2026-01-29 22:14:04,990 - Node_c4 - INFO - Received msg: Real Msg 1769721238.... Latency: 6.2609s

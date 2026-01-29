@@ -19,9 +19,9 @@
         "mu": 0.5
     },
     "features": {
-        "retransmission": false,
-        "path_reestablishment": false,
-        "backup_mixes": true,
+        "retransmission": true,
+        "path_reestablishment": true,
+        "backup_mixes": false,
         "parallel_paths": false,
         "anonymous_return_addresses": true,
         "layered_encryption": true,

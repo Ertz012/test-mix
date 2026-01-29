@@ -21,8 +21,8 @@
     "features": {
         "retransmission": false,
         "path_reestablishment": false,
-        "backup_mixes": true,
-        "parallel_paths": false,
+        "backup_mixes": false,
+        "parallel_paths": true,
         "anonymous_return_addresses": true,
         "layered_encryption": true,
         "mock_encryption": true,

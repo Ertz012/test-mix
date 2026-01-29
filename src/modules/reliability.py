@@ -13,14 +13,14 @@ class Reliability:
         
         # Settings
         self.timeout = 5.0      # seconds to wait for ack
-        self.timeout = 5.0      # seconds to wait for ack
+
         self.max_retries = 3
         self.lock = threading.Lock()
         
     def start(self):
         if self.retransmission_enabled:
             # Start monitoring thread
-            print("DEBUG: Reliability Thread STARTING", flush=True) 
+
             threading.Thread(target=self._monitor_loop, daemon=True).start()
 
     def track_packet(self, packet):
@@ -28,7 +28,7 @@ class Reliability:
             return
         
         with self.lock:
-            print(f"DEBUG: Tracking packet {packet.packet_id}", flush=True)
+
             self.sent_packets[packet.packet_id] = {
                 "packet": packet,
                 "ts": time.time(),
@@ -45,11 +45,11 @@ class Reliability:
                 self.sender.logger.log(f"ACK received for {packet_id}")
 
     def _monitor_loop(self):
-        print("DEBUG: Monitor Loop ENTERED", flush=True)
+
         try:
             while self.sender.running:
                 time.sleep(1.0)
-                print(f"DEBUG: Heartbeat - Monitoring {len(self.sent_packets)} packets", flush=True)
+
                 now = time.time()
                 to_resend = []
                 

@@ -1,0 +1,93 @@
+2026-01-25 21:43:40,400 - INFO - Updated config.json
+2026-01-25 21:43:40,400 - INFO - === Starting Experiment: 01_baseline_no_errors_no_noise ===
+2026-01-25 21:43:40,400 - INFO - Running: sudo mn -c
+*** Removing excess controllers/ofprotocols/ofdatapaths/pings/noxes
+killall controller ofprotocol ofdatapath ping nox_corelt-nox_core ovs-openflowd ovs-controllerovs-testcontroller udpbwtest mnexec ivs ryu-manager 2> /dev/null
+killall -9 controller ofprotocol ofdatapath ping nox_corelt-nox_core ovs-openflowd ovs-controllerovs-testcontroller udpbwtest mnexec ivs ryu-manager 2> /dev/null
+pkill -9 -f "sudo mnexec"
+*** Removing junk from /tmp
+rm -f /tmp/vconn* /tmp/vlogs* /tmp/*.out /tmp/*.log
+*** Removing old X11 tunnels
+*** Removing excess kernel datapaths
+ps ax | egrep -o 'dp[0-9]+' | sed 's/dp/nl:/'
+***  Removing OVS datapaths
+ovs-vsctl --timeout=1 list-br
+ovs-vsctl --timeout=1 list-br
+*** Removing all links of the pattern foo-ethX
+ip link show | egrep -o '([-_.[:alnum:]]+-eth[[:digit:]]+)'
+ip link show
+*** Killing stale mininet node processes
+pkill -9 -f mininet:
+*** Shutting down stale tunnels
+pkill -9 -f Tunnel=Ethernet
+pkill -9 -f .ssh/mn
+rm -f ~/.ssh/mn/*
+*** Cleanup complete.
+*** Creating network
+*** Adding controller
+*** Adding hosts:
+c1 c2 c3 c4 c5 e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 i1 i2 i3 i4 i5 i6 i7 i8 i9 i10 i11 i12 p1 p2 p3 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 
+*** Adding switches:
+sw1 
+*** Adding links:
+(c1, sw1) (c2, sw1) (c3, sw1) (c4, sw1) (c5, sw1) (e1, sw1) (e2, sw1) (e3, sw1) (e4, sw1) (e5, sw1) (e6, sw1) (e7, sw1) (e8, sw1) (e9, sw1) (e10, sw1) (e11, sw1) (e12, sw1) (i1, sw1) (i2, sw1) (i3, sw1) (i4, sw1) (i5, sw1) (i6, sw1) (i7, sw1) (i8, sw1) (i9, sw1) (i10, sw1) (i11, sw1) (i12, sw1) (p1, sw1) (p2, sw1) (p3, sw1) (x1, sw1) (x2, sw1) (x3, sw1) (x4, sw1) (x5, sw1) (x6, sw1) (x7, sw1) (x8, sw1) (x9, sw1) (x10, sw1) (x11, sw1) (x12, sw1) 
+*** Configuring hosts
+c1 c2 c3 c4 c5 e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 i1 i2 i3 i4 i5 i6 i7 i8 i9 i10 i11 i12 p1 p2 p3 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 
+*** Starting controller
+c0 
+*** Starting 1 switches
+sw1 ...
+Dumping host connections
+c1 c1-eth0:sw1-eth1
+c2 c2-eth0:sw1-eth2
+c3 c3-eth0:sw1-eth3
+c4 c4-eth0:sw1-eth4
+c5 c5-eth0:sw1-eth5
+e1 e1-eth0:sw1-eth9
+e2 e2-eth0:sw1-eth10
+e3 e3-eth0:sw1-eth11
+e4 e4-eth0:sw1-eth12
+e5 e5-eth0:sw1-eth13
+e6 e6-eth0:sw1-eth14
+e7 e7-eth0:sw1-eth15
+e8 e8-eth0:sw1-eth16
+e9 e9-eth0:sw1-eth17
+e10 e10-eth0:sw1-eth18
+e11 e11-eth0:sw1-eth19
+e12 e12-eth0:sw1-eth20
+i1 i1-eth0:sw1-eth21
+i2 i2-eth0:sw1-eth22
+i3 i3-eth0:sw1-eth23
+i4 i4-eth0:sw1-eth24
+i5 i5-eth0:sw1-eth25
+i6 i6-eth0:sw1-eth26
+i7 i7-eth0:sw1-eth27
+i8 i8-eth0:sw1-eth28
+i9 i9-eth0:sw1-eth29
+i10 i10-eth0:sw1-eth30
+i11 i11-eth0:sw1-eth31
+i12 i12-eth0:sw1-eth32
+p1 p1-eth0:sw1-eth6
+p2 p2-eth0:sw1-eth7
+p3 p3-eth0:sw1-eth8
+x1 x1-eth0:sw1-eth33
+x2 x2-eth0:sw1-eth34
+x3 x3-eth0:sw1-eth35
+x4 x4-eth0:sw1-eth36
+x5 x5-eth0:sw1-eth37
+x6 x6-eth0:sw1-eth38
+x7 x7-eth0:sw1-eth39
+x8 x8-eth0:sw1-eth40
+x9 x9-eth0:sw1-eth41
+x10 x10-eth0:sw1-eth42
+x11 x11-eth0:sw1-eth43
+x12 x12-eth0:sw1-eth44
+Generating Network Map...
+Network Map saved to network_map.json
+Logging to logs/Testrun_20260125_214343_01_baseline_no_errors_no_noise
+Copied config.json to log directory
+Starting MixNet Agents...
+Agents running. Traffic generation will be handled by config.
+Running experiment for 600 seconds (plus 10s buffer)...
+*** Stopping 1 controllers
+c0 

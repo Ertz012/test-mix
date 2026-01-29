@@ -30,6 +30,7 @@ def main():
         os.environ["TESTRUN_ID"] = args.testrun_id
         
     config = load_config(args.config)
+    print(f"DEBUG RUN.PY: Loaded Config Features: {config.get('features')}", flush=True)
     
     # Load Network Map
     network_map = {}

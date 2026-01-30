@@ -106,6 +106,14 @@ def run_experiment(exp_name, error_injection_config):
     all_subdirs = [os.path.join(log_root, d) for d in os.listdir(log_root) if os.path.isdir(os.path.join(log_root, d))]
     latest_log_dir = max(all_subdirs, key=os.path.getmtime)
     logger.info(f"Captured logs in: {latest_log_dir}")
+
+    # Move Churn Logs to the experiment folder
+    churn_logs = [f for f in os.listdir(log_root) if f.startswith("churn_") and f.endswith(".out")]
+    for cl in churn_logs:
+        src = os.path.join(log_root, cl)
+        dst = os.path.join(latest_log_dir, cl)
+        shutil.move(src, dst)
+        logger.info(f"Moved {cl} to {latest_log_dir}")
     
     # 4. Analysis Skipped (Run Locally)
     logger.info("Experiment complete. Analysis should be run locally after sync.")

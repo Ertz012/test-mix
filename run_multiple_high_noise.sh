@@ -15,7 +15,7 @@ else
 fi
 
 # Schleife von 1 bis 9
-for i in {1..9}
+for i in {1..5}
 do
     echo "Starte Durchlauf Nr. $i von 9..."
 

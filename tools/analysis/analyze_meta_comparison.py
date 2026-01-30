@@ -92,6 +92,15 @@ def load_run_metrics(log_dir):
                     link_str_2 = str(second_link)
                     if f"->{true_recipient}" in link_str_2 or f"{true_recipient}->" in link_str_2:
                         metrics['attack_success_top2'] = True
+                        
+            # Determine Rank of True Recipient
+            metrics['true_recipient_rank'] = None
+            if 'anonymity' in metrics and 'top_candidates' in metrics['anonymity']:
+                for cand in metrics['anonymity']['top_candidates']:
+                    link_str_cand = str(cand.get('link', ''))
+                    if f"->{true_recipient}" in link_str_cand or f"{true_recipient}->" in link_str_cand:
+                        metrics['true_recipient_rank'] = cand.get('rank')
+                        break
         except Exception as e:
             print(f"Error checking attack success in {csv_files[0]}: {e}")
         
@@ -162,7 +171,8 @@ def plot_boxplot(data_df, metric_col, title, output_path, ylabel="Value"):
     scenarios = get_sorted_scenarios(unique_scenarios)
     
     # Create Boxplot
-    sns.boxplot(x='scenario', y=metric_col, data=data_df, order=scenarios, palette="viridis")
+    # Create Boxplot
+    sns.boxplot(x='scenario', y=metric_col, data=data_df, order=scenarios, hue='scenario', palette="viridis", legend=False)
     
     # Optional: Add strip plot to show individual points (jittered)
     sns.stripplot(x='scenario', y=metric_col, data=data_df, order=scenarios,
@@ -189,7 +199,7 @@ def plot_confidence_boxplot(data_df, output_path):
     unique_scenarios = data_df['scenario'].unique()
     scenarios = get_sorted_scenarios(unique_scenarios)
     
-    sns.boxplot(x='scenario', y='attacker_confidence', data=data_df, order=scenarios, palette="coolwarm")
+    sns.boxplot(x='scenario', y='attacker_confidence', data=data_df, order=scenarios, hue='scenario', palette="coolwarm", legend=False)
     sns.stripplot(x='scenario', y='attacker_confidence', data=data_df, order=scenarios,
                   size=4, color=".3", linewidth=0, alpha=0.6, hue='attack_success', legend=False)
     
@@ -214,7 +224,7 @@ def generate_dashboard_html(csv_path, output_dir):
     display_df = df.copy()
     
     # Select important columns for table
-    cols = ['name', 'loss_rate', 'avg_latency', 'diaz_anonymity', 'shannon_entropy', 'attacker_confidence', 'attack_success', 'attack_success_top2']
+    cols = ['name', 'loss_rate', 'avg_latency', 'diaz_anonymity', 'shannon_entropy', 'attacker_confidence', 'attack_success', 'attack_success_top2', 'true_recipient_rank']
     display_df = display_df[[c for c in cols if c in display_df.columns]]
     
     if 'loss_rate' in display_df.columns:
@@ -235,6 +245,12 @@ def generate_dashboard_html(csv_path, output_dir):
     if 'attack_success_top2' in display_df.columns:
         display_df['attack_success_top2'] = display_df['attack_success_top2'].apply(
             lambda x: "✅ YES" if x is True else ("❌ NO" if x is False else "❓ N/A")
+        )
+        
+    # Format Rank
+    if 'true_recipient_rank' in display_df.columns:
+        display_df['true_recipient_rank'] = display_df['true_recipient_rank'].apply(
+            lambda x: f"<b>#{int(x)}</b>" if pd.notnull(x) else "-"
         )
         
     # Python to HTML Table
@@ -390,6 +406,7 @@ def main():
         
         row['attack_success'] = r.get('attack_success')
         row['attack_success_top2'] = r.get('attack_success_top2')
+        row['true_recipient_rank'] = r.get('true_recipient_rank')
         
         rows.append(row)
         

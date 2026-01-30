@@ -8,7 +8,7 @@
     },
     "target_config": {
         "target": "c1",
-        "detected_ground_truth": "DROP",
+        "detected_ground_truth": "c2",
         "mu": 0.5,
         "lambda_f": 13.171882343076915
     },
@@ -16,52 +16,52 @@
         {
             "link": "p1->e12",
             "llr": 17.779006023978873,
-            "rank": 294
+            "rank": 1
         },
         {
             "link": "p1->e1",
             "llr": 14.135536759426989,
-            "rank": 301
+            "rank": 2
         },
         {
             "link": "p2->e5",
             "llr": 12.210296369295055,
-            "rank": 318
+            "rank": 3
         },
         {
             "link": "i1->x11",
             "llr": 8.104591798933143,
-            "rank": 196
+            "rank": 4
         },
         {
             "link": "e7->i1",
             "llr": 8.004287617005996,
-            "rank": 124
+            "rank": 5
         },
         {
             "link": "p1->e7",
             "llr": 7.944020735108993,
-            "rank": 305
+            "rank": 6
         },
         {
             "link": "e5->i1",
             "llr": 6.813219782756172,
-            "rank": 93
+            "rank": 7
         },
         {
             "link": "e1->i12",
             "llr": 6.519954921241997,
-            "rank": 48
+            "rank": 8
         },
         {
             "link": "p1->e9",
             "llr": 6.4615923946022695,
-            "rank": 303
+            "rank": 9
         },
         {
             "link": "e5->i12",
             "llr": 6.2530969649546,
-            "rank": 97
+            "rank": 10
         }
     ]
 }

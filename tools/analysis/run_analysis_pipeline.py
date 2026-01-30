@@ -21,9 +21,9 @@ def run_command(cmd_list):
         print(f"FAILED: {' '.join(cmd_list)}\nOutput: {e.output.decode()}")
         return False
 
-def analyze_single_run(run_dir):
+def analyze_single_run(run_dir, force=False):
     # 0. Check if already analyzed (Resume Capability)
-    if os.path.exists(os.path.join(run_dir, "analysis_results", "anonymity_stats.json")):
+    if not force and os.path.exists(os.path.join(run_dir, "analysis_results", "anonymity_stats.json")):
         print(f"Skipping: {os.path.basename(run_dir)} (Already Initialized)")
         return
 
@@ -48,7 +48,8 @@ def analyze_single_run(run_dir):
 
 def analyze_wrapper(args):
     """Wrapper for pool map to unpack arguments"""
-    analyze_single_run(args)
+    run_dir, force = args
+    analyze_single_run(run_dir, force)
 
 def main():
     parser = argparse.ArgumentParser(description="Full Analysis Pipeline Wrapper (Parallel)")
@@ -56,6 +57,7 @@ def main():
     parser.add_argument("--meta-only", action="store_true", help="Skip individual analysis and only run meta-comparison.")
     parser.add_argument("--workers", type=int, default=4, help="Number of parallel workers (default: 4)")
     parser.add_argument("--filter", type=str, default=None, help="Only analyze directories containing this string.")
+    parser.add_argument("--force", action="store_true", help="Force re-analysis of already analyzed runs.")
     args = parser.parse_args()
     
     target_path = os.path.abspath(args.path)
@@ -69,7 +71,7 @@ def main():
     
     if is_single_run:
         if not args.meta_only:
-            analyze_single_run(target_path)
+            analyze_single_run(target_path, args.force)
     else:
         # Batch Mode
         print(f"Batch Mode: Scanning {target_path}...")
@@ -89,7 +91,8 @@ def main():
             print(f"Found {count} runs matching filter. Starting analysis with {workers} workers...")
             
             with Pool(workers) as p:
-                p.map(analyze_wrapper, run_dirs)
+                tasks = [(d, args.force) for d in run_dirs]
+                p.map(analyze_wrapper, tasks)
         
         # 4. Meta Analysis (Sequential, after all runs done)
         print("\n=== Running Meta-Analysis (Comparison) ===")

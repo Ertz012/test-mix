@@ -113,6 +113,7 @@ def load_all_traffic_logs(run_dir):
 def detect_ground_truth_target(run_dir, source_node):
     """
     Detects which destination received the most packets from the source_node.
+    Excludes 'DROP' and invalid destinations.
     Returns: detected_target (str) or None
     """
     try:
@@ -130,8 +131,15 @@ def detect_ground_truth_target(run_dir, source_node):
         if sent_df.empty:
             return None
             
+        # Filter out DROP and None
+        valid_dest = sent_df[~sent_df['dst'].isin(['DROP', 'None', '', '?', None])]
+        
+        if valid_dest.empty:
+            logger.warning(f"No valid destinations found for {source_node} (only DROP/None).")
+            return None
+
         # Get most frequent dst
-        counts = sent_df['dst'].value_counts()
+        counts = valid_dest['dst'].value_counts()
         if counts.empty:
             return None
             
@@ -519,9 +527,9 @@ def main():
             {
                 "link": row['link'],
                 "llr": float(row['llr']),
-                "rank": i + 1
+                "rank": rank
             }
-            for i, row in results_df.head(10).iterrows()
+            for rank, (idx, row) in enumerate(results_df.head(10).iterrows(), 1)
         ]
     }
     
